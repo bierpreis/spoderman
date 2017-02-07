@@ -54,5 +54,6 @@ public void setNotCollected(boolean notCollected) {
 	this.notCollected = notCollected;
 }
 
-
+// useless comment
 }
+
