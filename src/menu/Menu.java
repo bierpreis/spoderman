@@ -201,9 +201,18 @@ public class Menu extends JFrame {
 		Map map = new Map(lvl);
 		Player player = new Player(screenX, map);
 		Frame f = new Frame(player, map, screenX, screenY);
+		
+		
+		long nextSecond = System.currentTimeMillis() +1000;
+		int fpsCounter = 0;
 
 		while (true) {
-			System.out.println("menu.game whileschleife" + lvl);
+		    	fpsCounter+=1;
+		    	if(System.currentTimeMillis()>nextSecond){
+		    	    nextSecond = System.currentTimeMillis()+1000;
+		    	    System.out.println(fpsCounter);
+		    	    fpsCounter = 0;
+		    	}
 			checkLvlUp(player);
 			player.update(f.getLeft(), f.getRight(), f.getJump());
 			f.repaintScreen();
