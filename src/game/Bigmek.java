@@ -13,6 +13,10 @@ public class Bigmek extends Rectangle{
 	/**
 	 * id weil sonst warning kommt
 	 */
+
+    //erster kommentar
+    //second comment
+
 	private static final long serialVersionUID = 1L;
 	private boolean notCollected = true;
 	private BufferedImage look;
