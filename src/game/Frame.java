@@ -20,6 +20,9 @@ public class Frame extends JFrame {
     private boolean endFrame = false;
 
     int escapeTime = 0; // esc dialog
+    private int fps = 0;
+    private int fpsCounter = 0;
+    private long timeUntilLastSecond = System.currentTimeMillis() + 1000;
 
     private Screen screen;
     private final Player player;
@@ -88,10 +91,12 @@ public class Frame extends JFrame {
 	// message anzeigen
 	sayMessage(player.isSayMessage(), g);
 	drawUnits(g);
+	calcFps();
 
 	g.drawString("Sweg Count:" + player.getSweg(), 25, 25);
 	g.drawString("Fagits rekt:" + player.getKills(), 150, 25);
 	g.drawString("Sp0der Lyfez :" + player.getLifes(), 300, 25);
+	g.drawString("FPS: " + fps, 600, 25);
 
 	// macht den escape dialog
 	if (escape) {
@@ -108,6 +113,17 @@ public class Frame extends JFrame {
 	    player.unlockMessage();
 	    escapeTime = 0;
 	}
+
+    }
+
+    private void calcFps() {
+	fpsCounter++;
+	if (System.currentTimeMillis() > timeUntilLastSecond) {
+	    timeUntilLastSecond = System.currentTimeMillis() + 1000;
+	    fps = fpsCounter;
+	    fpsCounter = 0;
+	}
+
     }
 
     void sayMessage(boolean isSayMessage, Graphics g) {
