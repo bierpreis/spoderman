@@ -196,36 +196,34 @@ public class Menu extends JFrame {
     }
 
     public void game(int lvl) {
-	
-	int targetFps = 60;
-	
-	int msPerFrame = 1000/targetFps;
-	System.out.println("msPerFrame " + msPerFrame);
-	
+
+	int targetFps = 1000;
+
+	int msPerFrame = 100 / targetFps;
 
 	this.lvl = lvl;
 	Map map = new Map(lvl);
 	Player player = new Player(screenX, map);
 	Frame f = new Frame(player, map, screenX, screenY);
-	
-	long lastTime = System.currentTimeMillis();
-	while (true) {
+	boolean running = true;
+	while (running) {
 	    long startTime = System.currentTimeMillis();
 
-	    lastTime = startTime;
 	    checkLvlUp(player);
 	    player.update(f.getLeft(), f.getRight(), f.getJump());
 	    f.repaintScreen();
 
 	    if (f.getEndFrame()) // geht ni!!!
 		showMenu();
-	    try {
-		System.out.println("sleeptime: " + (startTime + msPerFrame - System.currentTimeMillis()));
-		Thread.sleep(startTime + msPerFrame - System.currentTimeMillis() +1);
-		
-	    } catch (InterruptedException e) {
-		e.printStackTrace();
-	    }
+	    long sleepTime = msPerFrame - (System.currentTimeMillis() - startTime);
+	    if (sleepTime > 0)
+		try {
+		    System.out.println("sleeptime : " + sleepTime);
+		    Thread.sleep(sleepTime);
+
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
+		}
 	}
 
     }
