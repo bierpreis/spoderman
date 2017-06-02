@@ -197,9 +197,9 @@ public class Menu extends JFrame {
 
     public void game(int lvl) {
 
-	int targetFps = 1000;
+	int targetFps = 100;
 
-	int msPerFrame = 100 / targetFps;
+	int msPerFrame = 1000 / targetFps;
 
 	this.lvl = lvl;
 	Map map = new Map(lvl);

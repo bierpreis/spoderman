@@ -127,7 +127,7 @@ public class Player {
 
     void updateBigmek() {
 	if (bigmek != null) {
-	    bigmek.setBounding(bigmek.update(isScrollingLeft(), isScrollingRight()));
+	    bigmek.update(isScrollingLeft(), isScrollingRight());
 	}
     }
 
@@ -256,9 +256,9 @@ public class Player {
     }
 
     void checkBigmek() {
-	if (bigmek != null && bigmek.isNotCollected())
+	if (bigmek != null && !bigmek.getCollected())
 	    if (bounding.intersects(bigmek.getBounding())) {
-		bigmek.setNotCollected(false);
+		bigmek.setCollected();
 		sayMessage("press enter to enter lvl two");
 		setLvlUp(true);
 		lockMessage();
