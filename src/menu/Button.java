@@ -13,7 +13,7 @@ public class Button extends Rectangle {
 
     boolean focus = false;
 
-    String label;
+
 
     BufferedImage[] labelPicArray;
 
@@ -29,7 +29,7 @@ public class Button extends Rectangle {
 	x = 150;
 	y = 400;
 
-	this.label = label;
+
 
     }
 
