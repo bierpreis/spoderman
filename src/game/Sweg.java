@@ -7,46 +7,50 @@ import javax.imageio.ImageIO;
 
 class Sweg extends Rectangle {
 
-	private boolean notCollected = true;
-	private BufferedImage look;
-	private Rectangle bounding;
+    private boolean isCollected = false;
+    private BufferedImage look;
+    private Rectangle bounding;
 
-	public Sweg(int x, int y) {
-		setBounding(new Rectangle(x, y, getLook().getWidth(),
-				getLook().getHeight()));
-	}
-	public BufferedImage getLook() {
-		if (isNotCollected()) {
-			try {
-				look = ImageIO.read(getClass().getClassLoader()
-						.getResourceAsStream("img/gold.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+    public Sweg(int x, int y) {
 
-		} else
-			look = null;
+	try {
+	    look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gold.png"));
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
 
-		return look;
+	bounding = new Rectangle(x, y, look.getWidth(), look.getHeight());
+
+    }
+
+    public BufferedImage getLook() {
+
+	return look;
+    }
+
+    public Rectangle getBounding() {
+	return bounding;
+    }
+
+    public void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
+
+	if (!isCollected) {
+	    if (scrollingLeft)
+		bounding.x += 5;
+	    if (scrollingRight)
+		bounding.x -= 5;
 	}
-	public Rectangle getBounding() {
-		return  bounding;
-	}
-	public Rectangle update(boolean scrollingLeft, boolean scrollingRight) {
-		if (scrollingLeft)
-			getBounding().x += 5;
-		if (scrollingRight)
-			getBounding().x -= 5;
-		return getBounding();
-	}
-	public void setBounding(Rectangle bounding) {
-		this.bounding = bounding;
-	}
-	public boolean isNotCollected() {
-		return notCollected;
-	}
-	public void setNotCollected(boolean notCollected) {
-		this.notCollected = notCollected;
-	}
+
+    }
+
+    public boolean isCollected() {
+	return isCollected;
+    }
+
+    public void setCollected() {
+	isCollected = true;
+	look = null;
+
+    }
 
 }

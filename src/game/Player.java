@@ -54,8 +54,6 @@ public class Player {
     private Sweg[] sweg;
     private Bigmek bigmek;
 
-
-
     // konstruktor
     public Player(int screenX, Map map) {
 	f_posx = startXPos;
@@ -145,7 +143,7 @@ public class Player {
     void updateSweg() {
 	if (sweg != null)
 	    for (int i = 0; i < sweg.length; i++) {
-		sweg[i].setBounding(sweg[i].update(isScrollingLeft(), isScrollingRight()));
+		sweg[i].updateBounding(isScrollingLeft(), isScrollingRight());
 	    }
     }
 
@@ -247,11 +245,12 @@ public class Player {
     void checkSweg() {
 	if (sweg != null)
 	    for (int i = 0; i < sweg.length; i++) {
-		if (bounding.intersects(sweg[i].getBounding()) && sweg[i].isNotCollected() == true) {
-		    sweg[i].setNotCollected(false);
-		    sayMessage("monies");
-		    swegCollected += 1;
-		}
+		if(!sweg[i].isCollected())
+		    if (bounding.intersects(sweg[i].getBounding())) {
+			sweg[i].setCollected();
+			sayMessage("monies");
+			swegCollected += 1;
+		    }
 	    }
     }
 
