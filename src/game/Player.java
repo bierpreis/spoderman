@@ -14,7 +14,7 @@ public class Player {
     private boolean alreadyJumped = false;
     private boolean jumpReleased = true;
     private boolean jumping = false;
-    private boolean lookingRight = true;
+    private boolean isLookingRight = true;
     private boolean scrollingRight = false;
     private boolean scrollingLeft = false;
     private boolean alive = true;
@@ -23,14 +23,10 @@ public class Player {
     private boolean lockMessage = false;
     private boolean lvlUp = false;
 
-    private int moveSpeed;
-    private int schwerkraft;
+
     private int timeSinceJump;
-    private int screenX;
     private int upJumpTime = 190;
     private int jumpTime = 700;
-    private int startXPos = 350;
-    private int startYPos = 300;
     private int x;
     private int y;
     private int swegCollected = 0;
@@ -38,49 +34,42 @@ public class Player {
     private int kills = 0;
     private int lifes = 3;
     private int timeDead = 0;
+    private int screenX;
 
     private float f_posx; // f_ als kennzeichen für float
     private float f_posy;
 
     private Rectangle bounding;
     private Rectangle botBounding;
-    private BufferedImage look;
+    private BufferedImage lookingLeft, lookingRight, lookDead;
 
     private BufferedImage[] messagePicArray;
 
     private Map map;
-    private Cube[] cube;
-    private Enemy[] enemies;
-    private Sweg[] sweg;
-    private Bigmek bigmek;
+
 
     // konstruktor
-    public Player(int screenX, Map map) {
-	f_posx = startXPos;
-	f_posy = startYPos;
-
-	look = getLook();
-
-	bounding = new Rectangle(x, y, look.getWidth(), look.getHeight());
-	botBounding = new Rectangle(x, (y + (look.getHeight())), look.getWidth(), (20));
-
-	sweg = map.getSweg();
-	bigmek = map.getBigmek();
-	cube = map.getCube();
-	enemies = map.getEnemies();
-
-	moveSpeed = map.getMoveSpeed();
-	schwerkraft = map.getSchwerkraft();
-
+    public Player(Map map, int screenX) {
+	f_posx = 350;
+	f_posy = 300;
 	this.screenX = screenX;
+
+	createLook();
+
+	bounding = new Rectangle(x, y, lookingLeft.getWidth(), lookingLeft.getHeight());
+	botBounding = new Rectangle(x, (y + (lookingLeft.getHeight())), lookingLeft.getWidth(), (20));
+
+
+
 	this.map = map;
 
 	sayMessage("nao i need to find teh bikmek");
+
     }
 
     public void update(boolean left, boolean right, boolean jump) {
 
-	cube = map.scrollCube(isScrollingRight(), isScrollingLeft());
+	map.scrollCube(scrollingRight, scrollingLeft);
 	updateCubes(); // macht die hilfsboundings
 
 	updateBigmek();
@@ -92,7 +81,8 @@ public class Player {
 
 	scroll();
 
-	move(left, right, jump);
+	move(left, right);
+	jump(left, right, jump);
 
 	respawn();
 
@@ -100,50 +90,69 @@ public class Player {
 	checkBigmek();
 	checkCubes();
 	checkEnemies();
+	
+    }
+
+    private void createLook() {
+
+	try {
+	    lookingRight = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/spoder_right.png"));
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+
+	try {
+	    lookingLeft = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/spoder_left.png"));
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+
+	try {
+	    lookDead = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/blood.png"));
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
     }
 
     void updateMessage() {
 	// zeitbegrenzung message
 	if (!lockMessage)
-	    if (!isRespawnLock() && isSayMessage())
+	    if (!respawnLock && sayMessage)
 		messageTimer -= 15;
 	if (messageTimer < 0)
-	    setSayMessage(false);
+	    sayMessage = false;
     }
 
     void updateBounding() {
 	bounding.x = (int) f_posx;
 	bounding.y = (int) f_posy;
-	botBounding = new Rectangle((int) f_posx, ((int) f_posy + (30)), look.getWidth(), (look.getHeight() - 30)); /// !!!!!
+	botBounding = new Rectangle((int) f_posx, ((int) f_posy + (30)), lookingLeft.getWidth(),
+		(lookingLeft.getHeight() - 30)); /// !!!!!
     }
 
     public void updateCubes() {
-	for (int i = 0; i < cube.length; i++) {
-	    cube[i].updateBounding();
+	for (int i = 0; i < map.getCube().length; i++) {
+	    map.getCube()[i].updateBounding();
 	}
     }
 
     void updateBigmek() {
-	if (bigmek != null) {
-	    bigmek.update(isScrollingLeft(), isScrollingRight());
+	if (map.getBigmek() != null) {
+	    map.getBigmek().update(scrollingLeft, scrollingRight);
 	}
     }
 
     public void updateEnemies() {
-	if (enemies != null)
-	    for (int i = 0; i < enemies.length; i++) {
-		if (isScrollingLeft())
-		    enemies[i].setScrollingLeft(true);
-		if (isScrollingRight())
-		    enemies[i].setScrollingRight(true);
-		map.getEnemies()[i].update(isScrollingLeft(), isScrollingRight());
+	if (map.getEnemies()!= null)
+	    for (int i = 0; i < map.getEnemies().length; i++) {
+		map.getEnemies()[i].update(scrollingLeft, scrollingRight);
 	    }
     }
 
     void updateSweg() {
-	if (sweg != null)
-	    for (int i = 0; i < sweg.length; i++) {
-		sweg[i].updateBounding(isScrollingLeft(), isScrollingRight());
+	if (map.getSweg() != null)
+	    for (int i = 0; i < map.getSweg().length; i++) {
+		map.getSweg()[i].updateBounding(scrollingLeft, scrollingRight);
 	    }
     }
 
@@ -152,16 +161,12 @@ public class Player {
 	    timeDead += 15;
     }
 
-    public boolean getLookingRight() {
-	return lookingRight;
-    }
-
     public Rectangle getBounding() {
 	return bounding;
     }
 
     void respawn() {
-	if (!isRespawnLock() && !alive && lifes > 0 && timeDead > 2000) {
+	if (!respawnLock && !alive && lifes > 0 && timeDead > 2000) {
 
 	    alive = true;
 	    f_posx = 400;
@@ -176,24 +181,24 @@ public class Player {
 	onLeftSide = false;
 	onBot = false;
 	onTop = false;
-	for (int i = 0; i < cube.length; i++) {
+	for (int i = 0; i < map.getCube().length; i++) {
 	    // überprüft onleftside
-	    if (bounding.intersects(cube[i].getLeftBounding())) {
+	    if (bounding.intersects(map.getCube()[i].getLeftBounding())) {
 		onLeftSide = true;
 
 	    }
 	    // überprüft onrightside
-	    if (bounding.intersects(cube[i].getRightBounding())) {
+	    if (bounding.intersects(map.getCube()[i].getRightBounding())) {
 		onRightSide = true;
 	    }
 
 	    // überprüft onTop
-	    if (botBounding.intersects(cube[i].getTopBounding())) {
+	    if (botBounding.intersects(map.getCube()[i].getTopBounding())) {
 		onTop = true;
 	    }
 
 	    // überprüft ob onBot
-	    if (bounding.intersects(cube[i].getBotBounding())) {
+	    if (bounding.intersects(map.getCube()[i].getBotBounding())) {
 		onBot = true;
 	    }
 
@@ -201,30 +206,34 @@ public class Player {
 
     }
 
-    void move(boolean left, boolean right, boolean jump) {
-	// links
-	if (alive)
-	    if (left && !onRightSide && !isScrollingLeft()) {
-		f_posx -= moveSpeed;
-		lookingRight = false;
+    void move(boolean left, boolean right) {
+
+	if (alive) {
+	    if (left && !onRightSide && !scrollingLeft) {
+		f_posx -= map.getMoveSpeed();
+		isLookingRight = false;
 	    }
-	// rechts
-	if (alive)
-	    if (right && !onLeftSide && !isScrollingRight()) {
-		f_posx += moveSpeed;
-		lookingRight = true;
+
+	    if (right && !onLeftSide && !scrollingRight) {
+		f_posx += map.getMoveSpeed();
+		isLookingRight = true;
 	    }
+	}
 	// schwerkraft
 	if (!onTop)
-	    f_posy += schwerkraft;
+	    f_posy += map.getSchwerkraft();
 
-	// jump
+    }
+
+    void jump(boolean left, boolean right, boolean jump) {
 	if (alive)
 	    if (onTop && (!onBot && jump && !alreadyJumped && jumpReleased)) {
 		jumping = true;
 		alreadyJumped = true;
 		jumpReleased = false;
 	    }
+	
+	
 	if (onBot)
 	    jumping = false;
 	if (timeSinceJump > upJumpTime)
@@ -240,14 +249,15 @@ public class Player {
 	}
 	if (timeSinceJump <= jumpTime)
 	    jumpReleased = true;
+
     }
 
     void checkSweg() {
-	if (sweg != null)
-	    for (int i = 0; i < sweg.length; i++) {
-		if(!sweg[i].isCollected())
-		    if (bounding.intersects(sweg[i].getBounding())) {
-			sweg[i].setCollected();
+	if (map.getSweg() != null)
+	    for (int i = 0; i < map.getSweg().length; i++) {
+		if (!map.getSweg()[i].isCollected())
+		    if (bounding.intersects(map.getSweg()[i].getBounding())) {
+			map.getSweg()[i].setCollected();
 			sayMessage("monies");
 			swegCollected += 1;
 		    }
@@ -255,80 +265,69 @@ public class Player {
     }
 
     void checkBigmek() {
-	if (bigmek != null && !bigmek.getCollected())
-	    if (bounding.intersects(bigmek.getBounding())) {
-		bigmek.setCollected();
+	if (map.getBigmek() != null && !map.getBigmek().getCollected())
+	    if (bounding.intersects(map.getBigmek().getBounding())) {
+		map.getBigmek().setCollected();
 		sayMessage("press enter to enter lvl two");
-		setLvlUp(true);
+		lvlUp = true;
 		lockMessage();
 	    }
     }
 
     void checkEnemies() {
-	if (enemies != null)
-	    for (int i = 0; i < enemies.length; i++) {
+	if (map.getEnemies() != null)
+	    for (int i = 0; i < map.getEnemies() .length; i++) {
 		// gegner töten
-		if (enemies[i].getAlive())
-		    if (alive)
-			if (botBounding.intersects(enemies[i].getTopBounding())) {
-			    enemies[i].kill();
-			    sayMessage("lel");
-			    kills += 1;
-			}
+		if (map.getEnemies() [i].getAlive())
+
+		    if (botBounding.intersects(map.getEnemies() [i].getTopBounding())) {
+			map.getEnemies() [i].kill();
+			sayMessage("lel rekt");
+			kills += 1;
+		    }
 
 		// feststellen ob tot
 		if (alive)
-		    if (bounding.intersects(enemies[i].getBounding()) && enemies[i].getAlive()) {
+		    if (bounding.intersects(map.getEnemies() [i].getBounding()) && map.getEnemies() [i].getAlive()) {
 			alive = false;
 			lifes -= 1;
 			if (lifes > 0)
 			    sayMessage("u got rekt 111  press spaec to respawn");
 			if (lifes < 1)
 			    sayMessage("g8 nao dis is mai end");
-			setRespawnLock(true);
+			respawnLock = true;
 		    }
 
 	    }
     }
 
     public BufferedImage getLook() {
-	if (alive) {
-	    if (lookingRight) {
-		try {
-		    look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/spoder_right.png"));
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-	    }
-	    if (!lookingRight)
-		try {
-		    look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/spoder_left.png"));
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-	} else
-	    try {
-		look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/blood.png"));
-	    } catch (IOException e) {
-		e.printStackTrace();
-	    }
-	return look;
+
+	if (!alive)
+	    return lookDead;
+
+	if (isLookingRight)
+	    return lookingRight;
+	if (!isLookingRight)
+	    return lookingLeft;
+
+	return null; // default
     }
 
     void scroll() {
-	setScrollingRight(false);
-	setScrollingLeft(false);
+	scrollingLeft = false;
+	scrollingRight = false;
 	if (bounding.x > 0.6 * screenX && !onLeftSide && alive) {
-	    setScrollingRight(true);
+	    scrollingRight = true;
 	    f_posx -= 0.2;
 	}
 	if (bounding.x < 0.4 * screenX && !onRightSide && alive) {
-	    setScrollingLeft(true);
+	    scrollingLeft = true;
 	    f_posx += (0.2);
 	}
     }
 
-    public int getSweg() {
+    public int getSwegCount() {
 	return swegCollected;
     }
 
@@ -343,7 +342,7 @@ public class Player {
     public void sayMessage(String messageString) {
 
 	messagePicArray = Letters.createMessage(messageString);
-	setSayMessage(true);
+	sayMessage = true;
 	this.messageTimer = Letters.getMessageTimer();
 
     }
@@ -352,28 +351,12 @@ public class Player {
 	return sayMessage;
     }
 
-    public void setSayMessage(boolean sayMessage) {
-	this.sayMessage = sayMessage;
-    }
-
-    public boolean isRespawnLock() {
+    public boolean getRespawnLock() {
 	return respawnLock;
     }
 
     public void setRespawnLock(boolean respawnLock) {
 	this.respawnLock = respawnLock;
-    }
-
-    public boolean isScrollingLeft() {
-	return scrollingLeft;
-    }
-
-    public void setScrollingLeft(boolean scrollingLeft) {
-	this.scrollingLeft = scrollingLeft;
-    }
-
-    public boolean isScrollingRight() {
-	return scrollingRight;
     }
 
     public void setScrollingRight(boolean scrollingRight) {

@@ -63,6 +63,7 @@ public class Frame extends JFrame {
     // screen zeichnen
     public void repaintScreen() {
 	screen.repaint();
+	
 
     }
 
@@ -86,14 +87,14 @@ public class Frame extends JFrame {
     }
 
     // zeichnen
-    private void draw(Graphics g) {
+    private boolean draw(Graphics g) {
 
 	// message anzeigen
 	sayMessage(player.isSayMessage(), g);
 	drawUnits(g);
 	calcFps();
 
-	g.drawString("Sweg Count:" + player.getSweg(), 25, 25);
+	g.drawString("Sweg Count:" + player.getSwegCount(), 25, 25);
 	g.drawString("Fagits rekt:" + player.getKills(), 150, 25);
 	g.drawString("Sp0der Lyfez :" + player.getLifes(), 300, 25);
 	g.drawString("FPS: " + fps, 600, 25);
@@ -106,13 +107,14 @@ public class Frame extends JFrame {
 	    escapeTime += 15;
 	if (escaping && escape && escapeTime > 600) {
 	    dispose();
-	    endFrame = true;
+	    return false;
 	}
 	if (escaping && enter) {
 	    escaping = false;
 	    player.unlockMessage();
 	    escapeTime = 0;
 	}
+	return true;
 
     }
 
@@ -182,10 +184,10 @@ public class Frame extends JFrame {
 		key_right = true;
 	    if (e.getKeyCode() == KeyEvent.VK_SPACE)
 		key_jump = true;
-	    if (player.isRespawnLock() && (player.getTimeDead() > respawnTime))
+	    if (player.getRespawnLock() && (player.getTimeDead() > respawnTime))
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 		    player.setRespawnLock(false);
-		    player.setSayMessage(false);
+		    //player.setSayMessage(false);
 		}
 	}
 

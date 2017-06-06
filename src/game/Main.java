@@ -11,9 +11,12 @@ public class Main {
 
 		
 		Menu menu = new Menu(screenX, screenY);
-		menu.dispose();  //verhindert leeres fenster, was durch new menu ausgelöst wird
+
 		
 		menu.showMenu();
+		menu.dispose();
+		
+		System.exit(0);
 		
 		
 

@@ -19,15 +19,13 @@ public class Menu extends JFrame {
     boolean menuLock = false;
     int lvl = 0;
 
-    int screenX, screenY;
+    // int screenX, screenY;
     Button[] buttonArray;
     Menu menu;
 
-    boolean firstDraw = true;
+    int screenX, screenY;
 
     private Screen screen;
-    // private CodeInput codeInput;
-    CodeInputWindow codeInput;
 
     public Menu(int screenX, int screenY) {
 
@@ -53,6 +51,8 @@ public class Menu extends JFrame {
 	add(screen);
 
 	addKeyListener(new KeyHandler());
+	buttonArray[0].setFocus();
+
     }
 
     private class Screen extends JLabel {
@@ -67,10 +67,6 @@ public class Menu extends JFrame {
 	g.setColor(Color.BLUE);
 
 	drawButton(buttonArray[0], g, buttonY);
-	if (firstDraw) {
-	    buttonArray[0].setFocus();
-	    firstDraw = false;
-	}
 	drawButton(buttonArray[1], g, buttonY + 100);
 	drawButton(buttonArray[2], g, buttonY + 200);
     }
@@ -132,11 +128,11 @@ public class Menu extends JFrame {
 	}
     }
 
-    void update() {
+    boolean update() {
 	updateFocus();
-	doButtonActions();
-	if (enter)
-	    enter = false; // sonst bleibt es ewig true
+	Boolean escape = doButtonActions();
+
+	return escape;
     }
 
     void updateFocus() {
@@ -163,36 +159,43 @@ public class Menu extends JFrame {
 	}
     }
 
-    void doButtonActions() {
+    boolean doButtonActions() {
 	if (buttonArray[0].getFocus() && enter) {
+	    enter = false;
 	    dispose();
 	    game(1);
+
 	}
 	if (buttonArray[1].getFocus() && enter) {
-	    codeInput = new CodeInputWindow(this);
+	    enter = false;
+	    new CodeInputWindow(this);
 	    if (lvl != 0)
 		game(lvl);
 
 	}
 	if (buttonArray[2].getFocus() && enter) {
+	    System.out.println("ENDEEE");
 	    dispose();
-	    System.exit(0);
+	    return true;
 	}
+	return false;
 
     }
 
     public void showMenu() {
-	if (menu == null)
-	    menu = new Menu(screenX, screenY);
-	while (true) {
+
+	boolean escape = false;
+
+	while (!escape) {
 	    try {
 		Thread.sleep(15);
 	    } catch (InterruptedException e) {
 		e.printStackTrace();
 	    }
-	    menu.repaintScreen();
-	    menu.update();
+	    repaintScreen();
+	    escape = update();
 	}
+
     }
 
     public void game(int lvl) {
@@ -203,7 +206,7 @@ public class Menu extends JFrame {
 
 	this.lvl = lvl;
 	Map map = new Map(lvl);
-	Player player = new Player(screenX, map);
+	Player player = new Player(map, screenX);
 	Frame f = new Frame(player, map, screenX, screenY);
 	boolean running = true;
 	while (running) {
@@ -213,8 +216,6 @@ public class Menu extends JFrame {
 	    player.update(f.getLeft(), f.getRight(), f.getJump());
 	    f.repaintScreen();
 
-	    if (f.getEndFrame()) // geht ni!!!
-		showMenu();
 	    long sleepTime = msPerFrame - (System.currentTimeMillis() - startTime);
 	    if (sleepTime > 0)
 		try {
@@ -224,7 +225,11 @@ public class Menu extends JFrame {
 		} catch (InterruptedException e) {
 		    e.printStackTrace();
 		}
+
 	}
+	
+	showMenu();
+	System.out.println("nach game");
 
     }
 

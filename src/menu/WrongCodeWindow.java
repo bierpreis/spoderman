@@ -15,7 +15,6 @@ class WrongCodeWindow extends JDialog implements ActionListener{
 	WrongCodeWindow wrong;
 
 	void showWrongCode() {
-		System.out.println("wrong code constructor");
 		wrong = new WrongCodeWindow();
 		wrong.setTitle("lol ronk");
 		wrong.setSize(300, 150);

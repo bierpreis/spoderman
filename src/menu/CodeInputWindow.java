@@ -15,120 +15,120 @@ import javax.swing.JTextField;
 
 public class CodeInputWindow extends JDialog implements ActionListener {
 
-	boolean enterKeyPressed = false;
+    boolean enterKeyPressed = false;
 
-	int lvl = 0;
-	int screenX, screenY;
-	JDialog input;
-	JButton buttonOK;
-	JTextField textInput;
-	Menu menu;
-	String code;
+    int lvl = 0;
+    int screenX, screenY;
+    JDialog input;
+    JButton buttonOK;
+    JTextField textInput;
+    Menu menu;
+    String code;
 
-	CodeInputWindow(Menu menu) {
-		this.menu = menu;
+    CodeInputWindow(Menu menu) {
+	this.menu = menu;
 
-		setLayout(new BorderLayout());
+	setLayout(new BorderLayout());
 
-		input = new JDialog();
+	input = new JDialog();
 
-		input.setTitle("lvl coed");
-		input.setSize(300, 150);
-		input.setLocation(250, 250);
+	input.setTitle("lvl coed");
+	input.setSize(300, 150);
+	input.setLocation(250, 250);
 
-		JPanel panel = new JPanel();
+	JPanel panel = new JPanel();
 
-		JLabel label = new JLabel("giff coed");
-		panel.add(label);
+	JLabel label = new JLabel("giff coed");
+	panel.add(label);
 
-		textInput = new InputField(15);
-		textInput.setBackground(Color.YELLOW);
-		panel.add(textInput);
+	textInput = new InputField(15);
+	textInput.setBackground(Color.YELLOW);
+	panel.add(textInput);
 
-		buttonOK = new JButton("  k  ");
-		panel.add(buttonOK);
-		buttonOK.addActionListener(new ButtonListener());
+	buttonOK = new JButton("  k  ");
+	panel.add(buttonOK);
+	buttonOK.addActionListener(new ButtonListener());
 
-		buttonOK.setVisible(true);
+	buttonOK.setVisible(true);
 
-		input.setModal(true);
-		input.add(panel);
-		input.setVisible(true);
+	input.setModal(true);
+	input.add(panel);
+	input.setVisible(true);
 
-		buttonOK.addKeyListener(new KeyHandler());
+	buttonOK.addKeyListener(new KeyHandler());
 
-		addKeyListener(new KeyHandler());
-		setFocusable(true);
+	addKeyListener(new KeyHandler());
+	setFocusable(true);
+    }
+
+    void showCodeInput() {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+	System.out.println("actioon performed method");
+	if (ae.getSource() == buttonOK) {
+	    if (textInput.getText().equals("lol")) {
+		System.out.println("es war lol");
+		menu.setLvl(2);
+		input.dispose();
+	    } else {
+		input.dispose();
+		wrongCode();
+	    }
 	}
+    }
 
-	void showCodeInput() {
+    private void wrongCode() {
+	WrongCodeWindow wrongCode = new WrongCodeWindow();
+	wrongCode.showWrongCode();
+	dispose();
+    }
+
+    private class KeyHandler implements KeyListener {
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+	    if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		System.out.println("Enter was pressed");
+	    enterKeyPressed = true;
 
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent ae) {
-		System.out.println("actioon performed method");
-		if (ae.getSource() == buttonOK) {
-			if (textInput.getText().equals("lol")) {
-				System.out.println("es war lol");
-				menu.setLvl(2);
-				input.dispose();
-			} else {
-				input.dispose();
-				wrongCode();
-			}
-		}
+	public void keyReleased(KeyEvent e) {
+	    if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		enterKeyPressed = false;
 	}
 
-	private void wrongCode() {
-		WrongCodeWindow wrongCode = new WrongCodeWindow();
-		wrongCode.showWrongCode();
-		dispose();
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
 
-	private class KeyHandler implements KeyListener {
+    }
 
-		@Override
-		public void keyPressed(KeyEvent e) {
+    class ButtonListener implements ActionListener {
+	@Override
 
-			if (e.getKeyCode() == KeyEvent.VK_ENTER)
-				System.out.println("Enter was pressed");
-			enterKeyPressed = true;
-
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_ENTER)
-				enterKeyPressed = false;
-		}
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-		}
-
+	public void actionPerformed(ActionEvent e) {
+	    code = textInput.getText();
+	    checkLvlCode(code);
 	}
+    }
 
-	class ButtonListener implements ActionListener {
-		@Override
+    void checkLvlCode(String code) {
 
-		public void actionPerformed(ActionEvent e) {
-			code = textInput.getText();
-			checkLvlCode(code);
-		}
-	}
+	if (code != null)
+	    if (code.equals("lol")) {
+		menu.game(2);
+		menu.dispose();
+	    } else {
+		wrongCode();
+		input.dispose();
+	    }
 
-	void checkLvlCode(String code) {
-
-		if (code != null)
-			if (code.equals("lol")) {
-				menu.game(2);
-				menu.dispose();
-			} else {
-				wrongCode();
-				input.dispose();
-			}
-
-	}
+    }
 
 }
