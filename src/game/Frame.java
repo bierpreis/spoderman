@@ -15,9 +15,10 @@ public class Frame extends JFrame {
     private boolean key_jump = false;
     private boolean escape = false;
     private boolean enter;
+    private boolean lastFrame = false;
 
     private boolean escaping;
-    private boolean endFrame = false;
+
 
     int escapeTime = 0; // esc dialog
     private int fps = 0;
@@ -87,7 +88,7 @@ public class Frame extends JFrame {
     }
 
     // zeichnen
-    private boolean draw(Graphics g) {
+    private void draw(Graphics g) {
 
 	// message anzeigen
 	sayMessage(player.isSayMessage(), g);
@@ -106,15 +107,15 @@ public class Frame extends JFrame {
 	if (escaping)
 	    escapeTime += 15;
 	if (escaping && escape && escapeTime > 600) {
-	    dispose();
-	    return false;
+	    lastFrame = true;
+	   dispose();
 	}
 	if (escaping && enter) {
 	    escaping = false;
 	    player.unlockMessage();
 	    escapeTime = 0;
 	}
-	return true;
+	
 
     }
 
@@ -216,9 +217,8 @@ public class Frame extends JFrame {
 	player.lockMessage();
 	escaping = true;
     }
-
-    public boolean getEndFrame() {
-	return endFrame;
+    public boolean getLastFrame(){
+	return lastFrame;
     }
 
 }

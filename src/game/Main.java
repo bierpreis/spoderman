@@ -15,8 +15,8 @@ public class Main {
 		
 		menu.showMenu();
 		menu.dispose();
-		
 		System.exit(0);
+
 		
 		
 

@@ -174,8 +174,6 @@ public class Menu extends JFrame {
 
 	}
 	if (buttonArray[2].getFocus() && enter) {
-	    System.out.println("ENDEEE");
-	    dispose();
 	    return true;
 	}
 	return false;
@@ -195,7 +193,7 @@ public class Menu extends JFrame {
 	    repaintScreen();
 	    escape = update();
 	}
-
+	dispose();
     }
 
     public void game(int lvl) {
@@ -215,11 +213,12 @@ public class Menu extends JFrame {
 	    checkLvlUp(player);
 	    player.update(f.getLeft(), f.getRight(), f.getJump());
 	    f.repaintScreen();
+	    if (f.getLastFrame())
+		running = false;
 
 	    long sleepTime = msPerFrame - (System.currentTimeMillis() - startTime);
 	    if (sleepTime > 0)
 		try {
-		    System.out.println("sleeptime : " + sleepTime);
 		    Thread.sleep(sleepTime);
 
 		} catch (InterruptedException e) {
@@ -227,9 +226,10 @@ public class Menu extends JFrame {
 		}
 
 	}
-	
-	showMenu();
-	System.out.println("nach game");
+
+	Menu menu = new Menu(screenX, screenY);
+	menu.showMenu();
+	System.out.println("end of menu while(running)");
 
     }
 
