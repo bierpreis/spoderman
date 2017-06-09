@@ -3,7 +3,6 @@ package game;
 public class Map {
 
     private int schwerkraft = 5;
-    private int moveSpeed = 5;
 
     private Lvl lvl;
 
@@ -25,9 +24,6 @@ public class Map {
 	return schwerkraft;
     }
 
-    public int getMoveSpeed() {
-	return moveSpeed;
-    }
 
     public Sweg[] getSweg() {
 	return sweg;
@@ -42,19 +38,6 @@ public class Map {
     }
 
     // cube updaten
-    public Cube[] scrollCube(boolean scrollingRight, boolean scrollingLeft) {
-	if (scrollingRight) {
-	    for (int i = 0; i < getCube().length; i++) {
-		getCube()[i].x -= moveSpeed;
-	    }
-	}
-	if (scrollingLeft) {
-	    for (int i = 0; i < getCube().length; i++) {
-		getCube()[i].x += moveSpeed;
-	    }
-	}
-	return cube;
-    }
 
     public Cube[] getCube() {
 	return cube;

@@ -2,27 +2,30 @@ package game;
 
 import java.awt.Rectangle;
 
-public class Cube extends Rectangle {
+public class Cube extends Bounding {
 
-	Rectangle bounding;
-	Rectangle topBounding;
-	Rectangle botBounding;
-	Rectangle leftBounding;
-	Rectangle rightBounding;
+	
+	Bounding topBounding;
+	Bounding botBounding;
+	Bounding leftBounding;
+	Bounding rightBounding;
 
 	public Cube(int x, int y, int width, int height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+		super(x, y, width, height);
+		
+		topBounding = new Bounding(x, y, width, 15);;
+		botBounding = new Bounding(x, y + 15, 5, height - 15);;
+		leftBounding = new Bounding(x + width - 5, y + 15, 5, height - 15);
+		rightBounding = new Bounding(x + 5, y + height - 3, width - 10, 5);
 	}
 
-	public void updateBounding() {
-		bounding = new Rectangle(x, y + 10, width, height - (10));
-		topBounding = new Rectangle(x, y, width, 15);
-		leftBounding = new Rectangle(x, y + 15, 5, height - 15);
-		rightBounding = new Rectangle(x + width - 5, y + 15, 5, height - 15);
-		botBounding = new Rectangle(x + 5, y + height - 3, width - 10, 5);
+	public void updateBounding(boolean scrollingLeft, boolean scrollingRight, int moveSpeed) {
+	    
+		this.update(scrollingLeft, scrollingRight, moveSpeed);
+		topBounding = topBounding.update(scrollingLeft, scrollingRight, moveSpeed);
+		leftBounding = leftBounding.update(scrollingLeft, scrollingRight, moveSpeed);
+		rightBounding = rightBounding.update(scrollingLeft, scrollingRight, moveSpeed);
+		botBounding = botBounding.update(scrollingLeft, scrollingRight, moveSpeed);
 	}
 
 	public Rectangle getTopBounding() {

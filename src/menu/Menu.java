@@ -192,8 +192,10 @@ public class Menu extends JFrame {
 	    }
 	    repaintScreen();
 	    escape = update();
+
 	}
-	dispose();
+	System.out.println("end of show menu");
+
     }
 
     public void game(int lvl) {

@@ -35,6 +35,7 @@ public class Player {
     private int lifes = 3;
     private int timeDead = 0;
     private int screenX;
+    private int moveSpeed = 5;
 
     private float f_posx; // f_ als kennzeichen für float
     private float f_posy;
@@ -69,7 +70,7 @@ public class Player {
 
     public void update(boolean left, boolean right, boolean jump) {
 
-	map.scrollCube(scrollingRight, scrollingLeft);
+	//map.scrollCube(scrollingRight, scrollingLeft);
 	updateCubes(); // macht die hilfsboundings
 
 	updateBigmek();
@@ -132,7 +133,7 @@ public class Player {
 
     public void updateCubes() {
 	for (int i = 0; i < map.getCube().length; i++) {
-	    map.getCube()[i].updateBounding();
+	    map.getCube()[i].updateBounding(scrollingLeft, scrollingRight, moveSpeed);
 	}
     }
 
@@ -210,12 +211,12 @@ public class Player {
 
 	if (alive) {
 	    if (left && !onRightSide && !scrollingLeft) {
-		f_posx -= map.getMoveSpeed();
+		f_posx -= moveSpeed;
 		isLookingRight = false;
 	    }
 
 	    if (right && !onLeftSide && !scrollingRight) {
-		f_posx += map.getMoveSpeed();
+		f_posx += moveSpeed;
 		isLookingRight = true;
 	    }
 	}

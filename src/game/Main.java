@@ -14,6 +14,7 @@ public class Main {
 
 		
 		menu.showMenu();
+		System.out.println("main: after showMenu");
 		menu.dispose();
 		System.exit(0);
 

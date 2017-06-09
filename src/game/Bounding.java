@@ -8,12 +8,12 @@ public class Bounding extends Rectangle{
     super(x, y, width, height);
     }
     
-    public Bounding update(boolean movingLeft, boolean movingRight, int moveSpeed){
+    public Bounding update(boolean scrollingLeft, boolean scrollingRight, int moveSpeed){
 	
-	if(movingLeft)
+	if(scrollingLeft)
 	    x = x + moveSpeed;
 	
-	if(movingRight)
+	if(scrollingRight)
 	    x = x - moveSpeed;
 	
 	
