@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.Frame;
-import game.Map;
+import game.Lvl;
 import game.Player;
 
 public class Menu extends JFrame {
@@ -17,7 +17,7 @@ public class Menu extends JFrame {
     boolean up, down, enter;
     boolean codeinputLock = false;
     boolean menuLock = false;
-    int lvl = 0;
+    int lvlNumber = 0;
 
     // int screenX, screenY;
     Button[] buttonArray;
@@ -169,8 +169,8 @@ public class Menu extends JFrame {
 	if (buttonArray[1].getFocus() && enter) {
 	    enter = false;
 	    new CodeInputWindow(this);
-	    if (lvl != 0)
-		game(lvl);
+	    if (lvlNumber != 0)
+		game(lvlNumber);
 
 	}
 	if (buttonArray[2].getFocus() && enter) {
@@ -198,16 +198,16 @@ public class Menu extends JFrame {
 
     }
 
-    public void game(int lvl) {
+    public void game(int lvlNumber) {
 
 	int targetFps = 100;
 
 	int msPerFrame = 1000 / targetFps;
 
-	this.lvl = lvl;
-	Map map = new Map(lvl);
-	Player player = new Player(map, screenX);
-	Frame f = new Frame(player, map, screenX, screenY);
+	this.lvlNumber = lvlNumber;
+	Lvl lvl = new Lvl(lvlNumber);
+	Player player = new Player(lvl, screenX);
+	Frame f = new Frame(player, lvl, screenX, screenY);
 	boolean running = true;
 	while (running) {
 	    long startTime = System.currentTimeMillis();
@@ -237,16 +237,16 @@ public class Menu extends JFrame {
 
     void checkLvlUp(Player player) {
 	if (player.getLvlUp()) {
-	    lvl += 1;
+	    lvlNumber += 1;
 	    player.setLvlUp(false);
-	    game(lvl);
+	    game(lvlNumber);
 	    dispose();
 	    // useless comment
 	}
     }
 
     void setLvl(int lvl) {
-	this.lvl = lvl;
+	this.lvlNumber = lvl;
 	dispose();
     }
 

@@ -2,23 +2,23 @@ package game;
 
 public class Lvl {
 	
-	int lvl;
-	
+    private int schwerkraft = 5;
+    	
 	Cube[] cube;
 	Sweg[] sweg;
 	Bigmek bigmek;
 	Enemy[] enemy;
 	
-	Lvl(int lvl){
-		createCube(lvl);
-		createSweg(lvl);
-		createEnemy(lvl);
-		createBigmek(lvl);
+	public Lvl(int lvlNumber){
+		createCube(lvlNumber);
+		createSweg(lvlNumber);
+		createEnemy(lvlNumber);
+		createBigmek(lvlNumber);
 	};
 	
 	
-	void createCube(int lvl){
-	if(lvl == 1){
+	void createCube(int lvlNumber){
+	if(lvlNumber == 1){
 		
 	
 		cube = new Cube[17];  //x, y, width, height ist das format
@@ -43,7 +43,7 @@ public class Lvl {
 	
 	
 	
-	if(lvl == 2){
+	if(lvlNumber == 2){
 		cube = new Cube[5];
 		cube[0] = new Cube(0,550, 3700, 20);
 		cube[1] = new Cube(150, 510, 50, 50);
@@ -55,8 +55,8 @@ public class Lvl {
 
 	}
 	
-	void createSweg(int lvl){
-		if (lvl == 1){
+	void createSweg(int lvlNumber){
+		if (lvlNumber == 1){
 			sweg = new Sweg[6];
 			sweg[0] = new Sweg(500, 500);
 			sweg[1] = new Sweg(550, 500);
@@ -66,7 +66,7 @@ public class Lvl {
 			sweg[5] = new Sweg(1850, 200);
 			
 		}
-		if(lvl == 2){
+		if(lvlNumber == 2){
 			sweg = new Sweg[3];
 			sweg[0]= new Sweg(1000, 500);
 			sweg[1]= new Sweg(1100, 500);
@@ -74,21 +74,21 @@ public class Lvl {
 		}
 
 	}
-	void createBigmek(int lvl){
-		if(lvl == 1){
+	void createBigmek(int lvlNumber){
+		if(lvlNumber == 1){
 			//bigmek = new Bigmek;
 			bigmek = new Bigmek(3650, 150);
 		}
 
 	}
 	
-	void createEnemy(int lvl){
-		if(lvl == 1){
+	void createEnemy(int lvlNumber){
+		if(lvlNumber == 1){
 			enemy = new Enemy[2];
 			enemy[0] = new Enemy(500, 500, "dolan", cube);
 			enemy[1] = new Enemy(1500, 500, "gooby", cube);
 		}
-		if(lvl==2){
+		if(lvlNumber==2){
 			enemy = new Enemy[2];
 			enemy[0] = new Enemy(1000, 500, "dolan", cube);
 			enemy[1] = new Enemy(1100, 500, "gooby", cube);
@@ -108,5 +108,9 @@ public class Lvl {
 	}
 	Enemy[] getEnemy(){
 		return enemy;
+	}
+	
+	public int getSchwerkraft(){
+	    return schwerkraft;
 	}
 }

@@ -46,11 +46,11 @@ public class Player {
 
     private BufferedImage[] messagePicArray;
 
-    private Map map;
+    private Lvl lvl;
 
 
     // konstruktor
-    public Player(Map map, int screenX) {
+    public Player(Lvl lvl, int screenX) {
 	f_posx = 350;
 	f_posy = 300;
 	this.screenX = screenX;
@@ -62,7 +62,7 @@ public class Player {
 
 
 
-	this.map = map;
+	this.lvl = lvl;
 
 	sayMessage("nao i need to find teh bikmek");
 
@@ -132,28 +132,28 @@ public class Player {
     }
 
     public void updateCubes() {
-	for (int i = 0; i < map.getCube().length; i++) {
-	    map.getCube()[i].updateBounding(scrollingLeft, scrollingRight, moveSpeed);
+	for (int i = 0; i < lvl.getCubes().length; i++) {
+	    lvl.getCubes()[i].updateBounding(scrollingLeft, scrollingRight, moveSpeed);
 	}
     }
 
     void updateBigmek() {
-	if (map.getBigmek() != null) {
-	    map.getBigmek().update(scrollingLeft, scrollingRight);
+	if (lvl.getBigmek() != null) {
+	    lvl.getBigmek().update(scrollingLeft, scrollingRight);
 	}
     }
 
     public void updateEnemies() {
-	if (map.getEnemies()!= null)
-	    for (int i = 0; i < map.getEnemies().length; i++) {
-		map.getEnemies()[i].update(scrollingLeft, scrollingRight);
+	if (lvl.getEnemy()!= null)
+	    for (int i = 0; i < lvl.getEnemy().length; i++) {
+		lvl.getEnemy()[i].update(scrollingLeft, scrollingRight);
 	    }
     }
 
     void updateSweg() {
-	if (map.getSweg() != null)
-	    for (int i = 0; i < map.getSweg().length; i++) {
-		map.getSweg()[i].updateBounding(scrollingLeft, scrollingRight);
+	if (lvl.getSweg() != null)
+	    for (int i = 0; i < lvl.getSweg().length; i++) {
+		lvl.getSweg()[i].updateBounding(scrollingLeft, scrollingRight);
 	    }
     }
 
@@ -182,24 +182,24 @@ public class Player {
 	onLeftSide = false;
 	onBot = false;
 	onTop = false;
-	for (int i = 0; i < map.getCube().length; i++) {
+	for (int i = 0; i < lvl.getCubes().length; i++) {
 	    // überprüft onleftside
-	    if (bounding.intersects(map.getCube()[i].getLeftBounding())) {
+	    if (bounding.intersects(lvl.getCubes()[i].getLeftBounding())) {
 		onLeftSide = true;
 
 	    }
 	    // überprüft onrightside
-	    if (bounding.intersects(map.getCube()[i].getRightBounding())) {
+	    if (bounding.intersects(lvl.getCubes()[i].getRightBounding())) {
 		onRightSide = true;
 	    }
 
 	    // überprüft onTop
-	    if (botBounding.intersects(map.getCube()[i].getTopBounding())) {
+	    if (botBounding.intersects(lvl.getCubes()[i].getTopBounding())) {
 		onTop = true;
 	    }
 
 	    // überprüft ob onBot
-	    if (bounding.intersects(map.getCube()[i].getBotBounding())) {
+	    if (bounding.intersects(lvl.getCubes()[i].getBotBounding())) {
 		onBot = true;
 	    }
 
@@ -222,7 +222,7 @@ public class Player {
 	}
 	// schwerkraft
 	if (!onTop)
-	    f_posy += map.getSchwerkraft();
+	    f_posy += lvl.getSchwerkraft();
 
     }
 
@@ -254,11 +254,11 @@ public class Player {
     }
 
     void checkSweg() {
-	if (map.getSweg() != null)
-	    for (int i = 0; i < map.getSweg().length; i++) {
-		if (!map.getSweg()[i].isCollected())
-		    if (bounding.intersects(map.getSweg()[i].getBounding())) {
-			map.getSweg()[i].setCollected();
+	if (lvl.getSweg() != null)
+	    for (int i = 0; i < lvl.getSweg().length; i++) {
+		if (!lvl.getSweg()[i].isCollected())
+		    if (bounding.intersects(lvl.getSweg()[i].getBounding())) {
+			lvl.getSweg()[i].setCollected();
 			sayMessage("monies");
 			swegCollected += 1;
 		    }
@@ -266,9 +266,9 @@ public class Player {
     }
 
     void checkBigmek() {
-	if (map.getBigmek() != null && !map.getBigmek().getCollected())
-	    if (bounding.intersects(map.getBigmek().getBounding())) {
-		map.getBigmek().setCollected();
+	if (lvl.getBigmek() != null && !lvl.getBigmek().getCollected())
+	    if (bounding.intersects(lvl.getBigmek().getBounding())) {
+		lvl.getBigmek().setCollected();
 		sayMessage("press enter to enter lvl two");
 		lvlUp = true;
 		lockMessage();
@@ -276,20 +276,20 @@ public class Player {
     }
 
     void checkEnemies() {
-	if (map.getEnemies() != null)
-	    for (int i = 0; i < map.getEnemies() .length; i++) {
+	if (lvl.getEnemy() != null)
+	    for (int i = 0; i < lvl.getEnemy().length; i++) {
 		// gegner töten
-		if (map.getEnemies() [i].getAlive())
+		if (lvl.getEnemy()[i].getAlive())
 
-		    if (botBounding.intersects(map.getEnemies() [i].getTopBounding())) {
-			map.getEnemies() [i].kill();
+		    if (botBounding.intersects(lvl.getEnemy()[i].getTopBounding())) {
+			lvl.getEnemy()[i].kill();
 			sayMessage("lel rekt");
 			kills += 1;
 		    }
 
 		// feststellen ob tot
 		if (alive)
-		    if (bounding.intersects(map.getEnemies() [i].getBounding()) && map.getEnemies() [i].getAlive()) {
+		    if (bounding.intersects(lvl.getEnemy()[i].getBounding()) && lvl.getEnemy()[i].getAlive()) {
 			alive = false;
 			lifes -= 1;
 			if (lifes > 0)

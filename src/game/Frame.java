@@ -27,9 +27,9 @@ public class Frame extends JFrame {
 
     private Screen screen;
     private final Player player;
-    private Map map;
+    private Lvl lvl;
 
-    public Frame(Player player, Map map, int screenX, int screenY) {
+    public Frame(Player player, Lvl lvl, int screenX, int screenY) {
 	super("spodermens advenshur");
 
 	screen = new Screen();
@@ -38,7 +38,7 @@ public class Frame extends JFrame {
 	addKeyListener(new KeyHandler());
 
 	this.player = player;
-	this.map = map;
+	this.lvl = lvl;
 
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setSize(screenX, screenY);
@@ -76,10 +76,10 @@ public class Frame extends JFrame {
 	    super.paintComponent(g);
 
 	    g.setColor(Color.BLUE);
-	    for (int i = 0; i < map.getCube().length; i++) {
+	    for (int i = 0; i < lvl.getCubes().length; i++) {
 
-		g.fillRect((int) map.getCube()[i].getX(), (int) map.getCube()[i].getY(),
-			(int) map.getCube()[i].getWidth(), (int) map.getCube()[i].getHeight());
+		g.fillRect((int) lvl.getCubes()[i].getX(), (int) lvl.getCubes()[i].getY(),
+			(int) lvl.getCubes()[i].getWidth(), (int) lvl.getCubes()[i].getHeight());
 	    }
 	    g.setColor(Color.BLACK);
 
@@ -153,19 +153,19 @@ public class Frame extends JFrame {
 
     void drawUnits(Graphics g) {
 	g.drawImage(player.getLook(), player.getBounding().x, player.getBounding().y, null);
-	if (map.getSweg() != null)
-	    for (int i = 0; i < map.getSweg().length; i++) {
-		g.drawImage(map.getSweg()[i].getLook(), map.getSweg()[i].getBounding().x,
-			map.getSweg()[i].getBounding().y, null);
+	if (lvl.getSweg() != null)
+	    for (int i = 0; i < lvl.getSweg().length; i++) {
+		g.drawImage(lvl.getSweg()[i].getLook(), lvl.getSweg()[i].getBounding().x,
+			lvl.getSweg()[i].getBounding().y, null);
 	    }
-	if (map.getBigmek() != null) {
-	    g.drawImage(map.getBigmek().getLook(), map.getBigmek().getBounding().x, map.getBigmek().getBounding().y,
+	if (lvl.getBigmek() != null) {
+	    g.drawImage(lvl.getBigmek().getLook(), lvl.getBigmek().getBounding().x, lvl.getBigmek().getBounding().y,
 		    null);
 	}
-	if (map.getEnemies() != null)
-	    for (int i = 0; i < map.getEnemies().length; i++) {
-		g.drawImage(map.getEnemies()[i].getLook(), map.getEnemies()[i].getBounding().x,
-			map.getEnemies()[i].getBounding().y, null);
+	if (lvl.getEnemy() != null)
+	    for (int i = 0; i < lvl.getEnemy().length; i++) {
+		g.drawImage(lvl.getEnemy()[i].getLook(), lvl.getEnemy()[i].getBounding().x,
+			lvl.getEnemy()[i].getBounding().y, null);
 	    }
 
     }
