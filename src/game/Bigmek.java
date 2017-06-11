@@ -11,7 +11,7 @@ public class Bigmek extends Bounding {
     private BufferedImage look;
 
     public Bigmek(int x, int y) {
-	super(x, y); //warum geht das ni?!
+	super(x, y); // warum geht das ni?!
 	this.x = x;
 	this.y = y;
 	look = createLook();
@@ -21,11 +21,7 @@ public class Bigmek extends Bounding {
     }
 
     public BufferedImage getLook() {
-	if (!collected) {
-	    return look;
-	} else
-	    return null;
-
+	return look;	
     }
 
     private BufferedImage createLook() {
@@ -44,6 +40,8 @@ public class Bigmek extends Bounding {
     }
 
     public void setCollected() {
+
 	collected = true;
+	look = null;
     }
 }
