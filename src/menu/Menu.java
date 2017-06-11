@@ -174,7 +174,8 @@ public class Menu extends JFrame {
 
 	}
 	if (buttonArray[2].getFocus() && enter) {
-	    return true;
+	    dispose();
+	    System.exit(0);
 	}
 	return false;
 
@@ -194,7 +195,7 @@ public class Menu extends JFrame {
 	    escape = update();
 
 	}
-	System.out.println("end of show menu");
+	
 
     }
 
