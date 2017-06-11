@@ -19,7 +19,6 @@ public class Frame extends JFrame {
 
     private boolean escaping;
 
-
     int escapeTime = 0; // esc dialog
     private int fps = 0;
     private int fpsCounter = 0;
@@ -64,7 +63,6 @@ public class Frame extends JFrame {
     // screen zeichnen
     public void repaintScreen() {
 	screen.repaint();
-	
 
     }
 
@@ -108,14 +106,13 @@ public class Frame extends JFrame {
 	    escapeTime += 15;
 	if (escaping && escape && escapeTime > 600) {
 	    lastFrame = true;
-	   dispose();
+	    dispose();
 	}
 	if (escaping && enter) {
 	    escaping = false;
 	    player.unlockMessage();
 	    escapeTime = 0;
 	}
-	
 
     }
 
@@ -159,8 +156,7 @@ public class Frame extends JFrame {
 			lvl.getSweg()[i].getBounding().y, null);
 	    }
 	if (lvl.getBigmek() != null) {
-	    g.drawImage(lvl.getBigmek().getLook(), lvl.getBigmek().getBounding().x, lvl.getBigmek().getBounding().y,
-		    null);
+	    g.drawImage(lvl.getBigmek().getLook(), (int) lvl.getBigmek().getX(), (int) lvl.getBigmek().getY(), null);
 	}
 	if (lvl.getEnemy() != null)
 	    for (int i = 0; i < lvl.getEnemy().length; i++) {
@@ -188,7 +184,7 @@ public class Frame extends JFrame {
 	    if (player.getRespawnLock() && (player.getTimeDead() > respawnTime))
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 		    player.setRespawnLock(false);
-		    //player.setSayMessage(false);
+		    // player.setSayMessage(false);
 		}
 	}
 
@@ -217,7 +213,8 @@ public class Frame extends JFrame {
 	player.lockMessage();
 	escaping = true;
     }
-    public boolean getLastFrame(){
+
+    public boolean getLastFrame() {
 	return lastFrame;
     }
 

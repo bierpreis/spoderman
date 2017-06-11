@@ -1,47 +1,42 @@
 package game;
 
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Bigmek extends Rectangle {
+public class Bigmek extends Bounding {
 
     private boolean collected = false;
     private BufferedImage look;
-    private Rectangle bounding;
 
     public Bigmek(int x, int y) {
+	super(x, y); //warum geht das ni?!
 	this.x = x;
 	this.y = y;
-	bounding = new Rectangle(x, y, getLook().getWidth(), getLook().getHeight());
+	look = createLook();
+	width = look.getWidth();
+	height = look.getHeight();
 
     }
 
     public BufferedImage getLook() {
 	if (!collected) {
-	    try {
-		look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/bigmek.png"));
-	    } catch (IOException e) {
-		e.printStackTrace();
-	    }
+	    return look;
 	} else
-	    look = null;
+	    return null;
 
+    }
+
+    private BufferedImage createLook() {
+
+	try {
+	    look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/bigmek.png"));
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
 	return look;
-    }
 
-    public Rectangle update(boolean scrollingLeft, boolean scrollingRight) {
-	if (scrollingLeft)
-	    bounding.x += 5;
-	if (scrollingRight)
-	    bounding.x -= 5;
-	return getBounding();
-    }
-
-    public Rectangle getBounding() {
-	return bounding;
     }
 
     public boolean getCollected() {

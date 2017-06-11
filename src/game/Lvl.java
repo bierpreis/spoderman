@@ -76,7 +76,6 @@ public class Lvl {
 	}
 	void createBigmek(int lvlNumber){
 		if(lvlNumber == 1){
-			//bigmek = new Bigmek;
 			bigmek = new Bigmek(3650, 150);
 		}
 

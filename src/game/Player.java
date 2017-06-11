@@ -70,8 +70,8 @@ public class Player {
 
     public void update(boolean left, boolean right, boolean jump) {
 
-	//map.scrollCube(scrollingRight, scrollingLeft);
-	updateCubes(); // macht die hilfsboundings
+
+	updateCubes(); 
 
 	updateBigmek();
 	updateEnemies();
@@ -139,7 +139,7 @@ public class Player {
 
     void updateBigmek() {
 	if (lvl.getBigmek() != null) {
-	    lvl.getBigmek().update(scrollingLeft, scrollingRight);
+	    lvl.getBigmek().update(scrollingLeft, scrollingRight, moveSpeed);
 	}
     }
 
@@ -267,7 +267,7 @@ public class Player {
 
     void checkBigmek() {
 	if (lvl.getBigmek() != null && !lvl.getBigmek().getCollected())
-	    if (bounding.intersects(lvl.getBigmek().getBounding())) {
+	    if (bounding.intersects(lvl.getBigmek())) {
 		lvl.getBigmek().setCollected();
 		sayMessage("press enter to enter lvl two");
 		lvlUp = true;
