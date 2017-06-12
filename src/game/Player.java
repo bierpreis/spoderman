@@ -35,7 +35,7 @@ public class Player {
     private int lifes = 3;
     private int timeDead = 0;
     private int screenX;
-    private int moveSpeed = 5;
+    private static int moveSpeed = Config.getPlayerMoveSpeed();
 
     private float f_posx; // f_ als kennzeichen für float
     private float f_posy;

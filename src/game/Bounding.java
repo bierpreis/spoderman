@@ -24,5 +24,19 @@ public class Bounding extends Rectangle{
 	
 	return this;
     }
+    
+    public Bounding update(boolean scrollingLeft, boolean scrollingRight, int moveSpeed, int playerMoveSpeed, boolean movingRight){
+	
+	if(scrollingLeft)
+	    x = x + playerMoveSpeed;
+	
+	if(scrollingRight)
+	    x = x - playerMoveSpeed;
+	
+	if(movingRight)
+	    x = x + moveSpeed;
+	x = x - moveSpeed;
+	return this;
+    }
 
 }

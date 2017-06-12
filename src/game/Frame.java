@@ -22,7 +22,7 @@ public class Frame extends JFrame {
     int escapeTime = 0; // esc dialog
     private int fps = 0;
     private int fpsCounter = 0;
-    private long timeUntilLastSecond = System.currentTimeMillis() + 1000;
+    private long timeUntilLastSecond = System.currentTimeMillis() + 500;
 
     private Screen screen;
     private final Player player;
@@ -119,8 +119,8 @@ public class Frame extends JFrame {
     private void calcFps() {
 	fpsCounter++;
 	if (System.currentTimeMillis() > timeUntilLastSecond) {
-	    timeUntilLastSecond = System.currentTimeMillis() + 1000;
-	    fps = fpsCounter;
+	    timeUntilLastSecond = System.currentTimeMillis() + 500;
+	    fps = 2*fpsCounter;
 	    fpsCounter = 0;
 	}
 

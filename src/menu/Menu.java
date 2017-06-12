@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import game.Config;
 import game.Frame;
 import game.Lvl;
 import game.Player;
@@ -201,7 +202,7 @@ public class Menu extends JFrame {
 
     public void game(int lvlNumber) {
 
-	int targetFps = 100;
+	int targetFps = Config.getTargetFps();;
 
 	int msPerFrame = 1000 / targetFps;
 

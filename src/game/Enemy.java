@@ -67,7 +67,7 @@ public class Enemy extends Bounding {
 
 	if (alive)
 	    topBounding = topBounding.update(scrollingLeft, scrollingRight, 5);
-	System.out.println(topBounding.x);
+
 
     }
 
