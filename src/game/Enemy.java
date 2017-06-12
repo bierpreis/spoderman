@@ -46,7 +46,7 @@ public class Enemy extends Bounding {
 	    
 	}
 	for (int i = 0; i < cube.length; i++) {
-	    if (intersects(cube[i]) && movingRight) {
+	    if (intersects(cube[i].getBotBounding()) && movingRight) {
 		movingRight = false;
 
 	    }

@@ -76,8 +76,8 @@ public class Frame extends JFrame {
 	    g.setColor(Color.BLUE);
 	    for (int i = 0; i < lvl.getCubes().length; i++) {
 
-		g.fillRect((int) lvl.getCubes()[i].getX(), (int) lvl.getCubes()[i].getY(),
-			(int) lvl.getCubes()[i].getWidth(), (int) lvl.getCubes()[i].getHeight());
+		g.fillRect((int) lvl.getCubes()[i].getBounding().getX(), (int) lvl.getCubes()[i].getBounding().getY(),
+			(int) lvl.getCubes()[i].getBounding().getWidth(), (int) lvl.getCubes()[i].getBounding().getHeight());
 	    }
 	    g.setColor(Color.BLACK);
 
