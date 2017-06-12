@@ -289,7 +289,7 @@ public class Player {
 
 		// feststellen ob tot
 		if (alive)
-		    if (bounding.intersects(lvl.getEnemy()[i].getBounding()) && lvl.getEnemy()[i].getAlive()) {
+		    if (bounding.intersects(lvl.getEnemy()[i]) && lvl.getEnemy()[i].getAlive()) {
 			alive = false;
 			lifes -= 1;
 			if (lifes > 0)
