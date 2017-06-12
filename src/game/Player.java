@@ -153,7 +153,7 @@ public class Player {
     void updateSweg() {
 	if (lvl.getSweg() != null)
 	    for (int i = 0; i < lvl.getSweg().length; i++) {
-		lvl.getSweg()[i].update(scrollingLeft, scrollingRight);
+		lvl.getSweg()[i].getBounding().update(scrollingLeft, scrollingRight);
 	    }
     }
 

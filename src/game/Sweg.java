@@ -1,18 +1,17 @@
 package game;
 
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-class Sweg extends Bounding {
+class Sweg{
 
     private boolean isCollected = false;
     private BufferedImage look;
-    private Rectangle bounding;
+    private Bounding bounding;
 
     public Sweg(int x, int y) {
-	super(x,y);
+	
 
 	try {
 	    look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gold.png"));
@@ -29,20 +28,20 @@ class Sweg extends Bounding {
 	return look;
     }
 
-    public Rectangle getBounding() {
+    public Bounding getBounding() {
 	return bounding;
     }
 
-//    public void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
-//
-//	if (!isCollected) {
-//	    if (scrollingLeft)
-//		bounding.x += 5;
-//	    if (scrollingRight)
-//		bounding.x -= 5;
-//	}
-//
-//    }
+    public void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
+
+	if (!isCollected) {
+	    if (scrollingLeft)
+		bounding.x += 5;
+	    if (scrollingRight)
+		bounding.x -= 5;
+	}
+
+    }
 
     public boolean getCollected() {
 	return isCollected;
