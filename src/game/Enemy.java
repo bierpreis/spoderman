@@ -31,10 +31,11 @@ public class Enemy {
     }
 
     // update
-    public void updateEnemy(boolean scrollingLeft, boolean scrollingRight) {
+    public void update(boolean scrollingLeft, boolean scrollingRight) {
 
 	// bewegung
 	if (alive) {
+
 	    if (movingRight) {
 		bounding.x += moveSpeed;
 		topBounding.x += moveSpeed;
@@ -44,29 +45,29 @@ public class Enemy {
 		topBounding.x -= moveSpeed;
 	    }
 
-	}
-	for (int i = 0; i < cube.length; i++) {
-	    if (bounding.intersects(cube[i].getBotBounding()) && movingRight) {
-		movingRight = false;
+	    for (int i = 0; i < cube.length; i++) {
+		if (bounding.intersects(cube[i].getBotBounding()) && movingRight) {
+		    movingRight = false;
 
+		}
+		if (bounding.intersects(cube[i].getLeftBounding()) && movingRight) {
+		    movingRight = false;
+
+		}
+		if (bounding.intersects(cube[i].getRightBounding()) && !movingRight) {
+		    movingRight = true;
+
+		}
 	    }
-	    if (bounding.intersects(cube[i].getLeftBounding()) && movingRight) {
-		movingRight = false;
-
-	    }
-	    if (bounding.intersects(cube[i].getRightBounding()) && !movingRight) {
-		movingRight = true;
-
-	    }
-
 	}
 
 	// scrolling
-	bounding.scroll(scrollingLeft, scrollingRight);
+	bounding = bounding.scroll(scrollingLeft, scrollingRight);
 	// Bounding updaten
 
-	if (alive)
-	    topBounding = topBounding.scroll(scrollingLeft, scrollingRight);
+	topBounding = topBounding.scroll(scrollingLeft, scrollingRight);
+	
+	
 
     }
 

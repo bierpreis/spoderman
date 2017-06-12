@@ -147,7 +147,7 @@ public class Player {
     public void updateEnemies() {
 	if (lvl.getEnemy()!= null)
 	    for (int i = 0; i < lvl.getEnemy().length; i++) {
-		lvl.getEnemy()[i].updateEnemy(scrollingLeft, scrollingRight);
+		lvl.getEnemy()[i].update(scrollingLeft, scrollingRight);
 	    }
     }
 
@@ -361,9 +361,6 @@ public class Player {
 	this.respawnLock = respawnLock;
     }
 
-    public void setScrollingRight(boolean scrollingRight) {
-	this.scrollingRight = scrollingRight;
-    }
 
     public void lockMessage() { // wird von escape sequenz genutzt
 	lockMessage = true;
