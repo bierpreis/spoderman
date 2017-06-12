@@ -5,13 +5,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-class Sweg extends Rectangle {
+class Sweg extends Bounding {
 
     private boolean isCollected = false;
     private BufferedImage look;
     private Rectangle bounding;
 
     public Sweg(int x, int y) {
+	super(x,y);
 
 	try {
 	    look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gold.png"));
@@ -19,7 +20,7 @@ class Sweg extends Rectangle {
 	    e.printStackTrace();
 	}
 
-	bounding = new Rectangle(x, y, look.getWidth(), look.getHeight());
+	bounding = new Bounding(x, y, look.getWidth(), look.getHeight());
 
     }
 
@@ -32,18 +33,18 @@ class Sweg extends Rectangle {
 	return bounding;
     }
 
-    public void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
+//    public void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
+//
+//	if (!isCollected) {
+//	    if (scrollingLeft)
+//		bounding.x += 5;
+//	    if (scrollingRight)
+//		bounding.x -= 5;
+//	}
+//
+//    }
 
-	if (!isCollected) {
-	    if (scrollingLeft)
-		bounding.x += 5;
-	    if (scrollingRight)
-		bounding.x -= 5;
-	}
-
-    }
-
-    public boolean isCollected() {
+    public boolean getCollected() {
 	return isCollected;
     }
 

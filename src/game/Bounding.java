@@ -13,29 +13,29 @@ public class Bounding extends Rectangle{
     super(x, y);
     }
     
-    public Bounding update(boolean scrollingLeft, boolean scrollingRight, int moveSpeed){
+    public Bounding update(boolean scrollingLeft, boolean scrollingRight){
 	
 	if(scrollingLeft)
-	    x = x + moveSpeed;
+	    x = x + Config.getPlayerMoveSpeed();
 	
 	if(scrollingRight)
-	    x = x - moveSpeed;
+	    x = x - Config.getPlayerMoveSpeed();
 	
 	
 	return this;
     }
     
-    public Bounding update(boolean scrollingLeft, boolean scrollingRight, int moveSpeed, int playerMoveSpeed, boolean movingRight){
+    public Bounding update(boolean scrollingLeft, boolean scrollingRight, boolean movingRight){
 	
 	if(scrollingLeft)
-	    x = x + playerMoveSpeed;
+	    x = x + Config.getPlayerMoveSpeed();
 	
 	if(scrollingRight)
-	    x = x - playerMoveSpeed;
+	    x = x - Config.getPlayerMoveSpeed();
 	
 	if(movingRight)
-	    x = x + moveSpeed;
-	x = x - moveSpeed;
+	    x = x + Config.getPlayerMoveSpeed();
+	x = x - Config.getPlayerMoveSpeed();
 	return this;
     }
 

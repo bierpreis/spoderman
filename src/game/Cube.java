@@ -21,11 +21,11 @@ public class Cube extends Bounding {
 
 	public void updateBounding(boolean scrollingLeft, boolean scrollingRight, int moveSpeed) {
 	    
-		this.update(scrollingLeft, scrollingRight, moveSpeed);
-		topBounding = topBounding.update(scrollingLeft, scrollingRight, moveSpeed);
-		leftBounding = leftBounding.update(scrollingLeft, scrollingRight, moveSpeed);
-		rightBounding = rightBounding.update(scrollingLeft, scrollingRight, moveSpeed);
-		botBounding = botBounding.update(scrollingLeft, scrollingRight, moveSpeed);
+		this.update(scrollingLeft, scrollingRight);
+		topBounding = topBounding.update(scrollingLeft, scrollingRight);
+		leftBounding = leftBounding.update(scrollingLeft, scrollingRight);
+		rightBounding = rightBounding.update(scrollingLeft, scrollingRight);
+		botBounding = botBounding.update(scrollingLeft, scrollingRight);
 	}
 
 	public Rectangle getTopBounding() {

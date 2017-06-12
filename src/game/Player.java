@@ -139,21 +139,21 @@ public class Player {
 
     void updateBigmek() {
 	if (lvl.getBigmek() != null) {
-	    lvl.getBigmek().update(scrollingLeft, scrollingRight, moveSpeed);
+	    lvl.getBigmek().update(scrollingLeft, scrollingRight);
 	}
     }
 
     public void updateEnemies() {
 	if (lvl.getEnemy()!= null)
 	    for (int i = 0; i < lvl.getEnemy().length; i++) {
-		lvl.getEnemy()[i].update(scrollingLeft, scrollingRight);
+		lvl.getEnemy()[i].updateEnemy(scrollingLeft, scrollingRight);
 	    }
     }
 
     void updateSweg() {
 	if (lvl.getSweg() != null)
 	    for (int i = 0; i < lvl.getSweg().length; i++) {
-		lvl.getSweg()[i].updateBounding(scrollingLeft, scrollingRight);
+		lvl.getSweg()[i].update(scrollingLeft, scrollingRight);
 	    }
     }
 
@@ -256,7 +256,7 @@ public class Player {
     void checkSweg() {
 	if (lvl.getSweg() != null)
 	    for (int i = 0; i < lvl.getSweg().length; i++) {
-		if (!lvl.getSweg()[i].isCollected())
+		if (!lvl.getSweg()[i].getCollected())
 		    if (bounding.intersects(lvl.getSweg()[i].getBounding())) {
 			lvl.getSweg()[i].setCollected();
 			sayMessage("monies");

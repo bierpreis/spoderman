@@ -32,7 +32,7 @@ public class Enemy extends Bounding {
     }
 
     // update
-    public void update(boolean scrollingLeft, boolean scrollingRight) {
+    public void updateEnemy(boolean scrollingLeft, boolean scrollingRight) {
 
 	// bewegung
 	if (alive) {
@@ -62,11 +62,11 @@ public class Enemy extends Bounding {
 	}
 
 	// scrolling
-	update(scrollingLeft, scrollingRight, 5);
+	update(scrollingLeft, scrollingRight);
 	// Bounding updaten
 
 	if (alive)
-	    topBounding = topBounding.update(scrollingLeft, scrollingRight, 5);
+	    topBounding = topBounding.update(scrollingLeft, scrollingRight);
 
 
     }
