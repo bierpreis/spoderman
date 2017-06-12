@@ -109,7 +109,5 @@ public class Lvl {
 		return enemy;
 	}
 	
-	public int getSchwerkraft(){
-	    return gravity;
-	}
+
 }

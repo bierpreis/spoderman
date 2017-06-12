@@ -37,7 +37,7 @@ public class Bounding extends Rectangle {
 	    x = x + Config.getPlayerMoveSpeed();
 	
 	
-	x = x - Config.getPlayerMoveSpeed();
+	//x = x - Config.getPlayerMoveSpeed();
 	return this;
     }
 

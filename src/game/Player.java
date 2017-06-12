@@ -34,7 +34,7 @@ public class Player {
     private int kills = 0;
     private int lifes = 3;
     private int timeDead = 0;
-    private int screenX;
+    private int screenX = Config.getScreenX();
     private static int moveSpeed = Config.getPlayerMoveSpeed();
 
     private float f_posx; // f_ als kennzeichen für float
@@ -50,10 +50,9 @@ public class Player {
 
 
     // konstruktor
-    public Player(Lvl lvl, int screenX) {
+    public Player(Lvl lvl) {
 	f_posx = 350;
 	f_posy = 300;
-	this.screenX = screenX;
 
 	createLook();
 
@@ -124,6 +123,8 @@ public class Player {
 	    sayMessage = false;
     }
 
+    
+   
     void updateBounding() {
 	bounding.x = (int) f_posx;
 	bounding.y = (int) f_posy;
@@ -222,7 +223,7 @@ public class Player {
 	}
 	// schwerkraft
 	if (!onTop)
-	    f_posy += lvl.getSchwerkraft();
+	    f_posy += Config.getGravity();
 
     }
 

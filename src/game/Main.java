@@ -6,15 +6,14 @@ public class Main {
 
 	public static void main(String[] args){
 		
-		int screenX = 800;
-		int screenY = 600;
+		final int screenX = Config.getScreenX();
+		final int screenY = Config.getScreenY();
 
 		
 		Menu menu = new Menu(screenX, screenY);
 
 		
 		menu.showMenu();
-		System.out.println("main: after showMenu");
 		menu.dispose();
 		System.exit(0);
 

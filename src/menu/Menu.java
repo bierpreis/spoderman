@@ -208,7 +208,7 @@ public class Menu extends JFrame {
 
 	this.lvlNumber = lvlNumber;
 	Lvl lvl = new Lvl(lvlNumber);
-	Player player = new Player(lvl, screenX);
+	Player player = new Player(lvl);
 	Frame f = new Frame(player, lvl, screenX, screenY);
 	boolean running = true;
 	while (running) {
