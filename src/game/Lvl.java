@@ -1,9 +1,7 @@
 package game;
 
 public class Lvl {
-	
-    private int gravity = Config.getGravity();;
-    	
+	    	
 	Cube[] cube;
 	Sweg[] sweg;
 	Bigmek bigmek;
@@ -14,7 +12,7 @@ public class Lvl {
 		createSweg(lvlNumber);
 		createEnemy(lvlNumber);
 		createBigmek(lvlNumber);
-	};
+	}
 	
 	
 	void createCube(int lvlNumber){

@@ -14,7 +14,7 @@ public class Cube{
 		
 		bounding = new Bounding(x,y,width, height);
 		topBounding = new Bounding(x, y, width, 15);;
-		botBounding = new Bounding(x, y + 15, 5, height - 15);;
+		botBounding = new Bounding(x, y + 15, width, height - 15);;
 		leftBounding = new Bounding(x + width - 5, y + 15, 5, height - 15);
 		rightBounding = new Bounding(x + 5, y + height - 3, width - 10, 5);
 	}

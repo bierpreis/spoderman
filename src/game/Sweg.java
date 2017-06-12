@@ -24,7 +24,6 @@ class Sweg{
     }
 
     public BufferedImage getLook() {
-
 	return look;
     }
 
@@ -32,16 +31,6 @@ class Sweg{
 	return bounding;
     }
 
-    public void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
-
-	if (!isCollected) {
-	    if (scrollingLeft)
-		bounding.x += 5;
-	    if (scrollingRight)
-		bounding.x -= 5;
-	}
-
-    }
 
     public boolean getCollected() {
 	return isCollected;
