@@ -10,11 +10,11 @@ import javax.swing.JLabel;
 
 public class Frame extends JFrame {
 
-    private boolean key_left = false;
-    private boolean key_right = false;
-    private boolean key_jump = false;
-    private boolean escape = false;
-    private boolean enter;
+    private boolean keyLeft = false;
+    private boolean keyRight = false;
+    private boolean keyJump = false;
+    private boolean keyEscape = false;
+    private boolean keyEnter;
     private boolean lastFrame = false;
 
     private boolean escaping;
@@ -49,15 +49,15 @@ public class Frame extends JFrame {
 
     // steuerung
     public boolean getLeft() {
-	return key_left;
+	return keyLeft;
     }
 
     public boolean getRight() {
-	return key_right;
+	return keyRight;
     }
 
     public boolean getJump() {
-	return key_jump;
+	return keyJump;
     }
 
     // screen zeichnen
@@ -99,16 +99,16 @@ public class Frame extends JFrame {
 	g.drawString("FPS: " + fps, 600, 25);
 
 	// macht den escape dialog
-	if (escape) {
+	if (keyEscape) {
 	    sayEscape();
 	}
 	if (escaping)
 	    escapeTime += 15;
-	if (escaping && escape && escapeTime > 600) {
+	if (escaping && keyEscape && escapeTime > 600) {
 	    lastFrame = true;
 	    dispose();
 	}
-	if (escaping && enter) {
+	if (escaping && keyEnter) {
 	    escaping = false;
 	    player.unlockMessage();
 	    escapeTime = 0;
@@ -172,15 +172,15 @@ public class Frame extends JFrame {
 	@Override
 	public void keyPressed(KeyEvent e) {
 	    if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-		escape = true;
+		keyEscape = true;
 	    if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		enter = true;
+		keyEnter = true;
 	    if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		key_left = true;
+		keyLeft = true;
 	    if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		key_right = true;
+		keyRight = true;
 	    if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		key_jump = true;
+		keyJump = true;
 	    if (player.getRespawnLock() && (player.getTimeDead() > respawnTime))
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 		    player.setRespawnLock(false);
@@ -191,15 +191,15 @@ public class Frame extends JFrame {
 	@Override
 	public void keyReleased(KeyEvent e) {
 	    if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-		escape = false;
+		keyEscape = false;
 	    if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		enter = false;
+		keyEnter = false;
 	    if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		key_left = false;
+		keyLeft = false;
 	    if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		key_right = false;
+		keyRight = false;
 	    if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		key_jump = false;
+		keyJump = false;
 	}
 
 	// Unnötig

@@ -62,11 +62,11 @@ public class Enemy {
 	}
 
 	// scrolling
-	bounding.update(scrollingLeft, scrollingRight);
+	bounding.scroll(scrollingLeft, scrollingRight);
 	// Bounding updaten
 
 	if (alive)
-	    topBounding = topBounding.update(scrollingLeft, scrollingRight);
+	    topBounding = topBounding.scroll(scrollingLeft, scrollingRight);
 
     }
 

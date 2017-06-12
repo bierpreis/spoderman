@@ -140,7 +140,7 @@ public class Player {
 
     void updateBigmek() {
 	if (lvl.getBigmek() != null) {
-	    lvl.getBigmek().getBounding().update(scrollingLeft, scrollingRight);
+	    lvl.getBigmek().getBounding().scroll(scrollingLeft, scrollingRight);
 	}
     }
 
@@ -154,7 +154,7 @@ public class Player {
     void updateSweg() {
 	if (lvl.getSweg() != null)
 	    for (int i = 0; i < lvl.getSweg().length; i++) {
-		lvl.getSweg()[i].getBounding().update(scrollingLeft, scrollingRight);
+		lvl.getSweg()[i].getBounding().scroll(scrollingLeft, scrollingRight);
 	    }
     }
 

@@ -14,18 +14,18 @@ public class Cube{
 		
 		bounding = new Bounding(x,y,width, height);
 		topBounding = new Bounding(x, y, width, 15);;
-		botBounding = new Bounding(x, y + 15, width, height - 15);;
-		leftBounding = new Bounding(x + width - 5, y + 15, 5, height - 15);
-		rightBounding = new Bounding(x + 5, y + height - 3, width - 10, 5);
+		botBounding = new Bounding(x, y + 15, width, height - 25);;
+		rightBounding = new Bounding(x + width - 5, y + 15, 5, height - 15);
+		leftBounding = new Bounding(x + 5, y + height - 3, width - 10, 5);
 	}
 
 	public void updateBounding(boolean scrollingLeft, boolean scrollingRight, int moveSpeed) {
 	    
-		bounding.update(scrollingLeft, scrollingRight);
-		topBounding = topBounding.update(scrollingLeft, scrollingRight);
-		leftBounding = leftBounding.update(scrollingLeft, scrollingRight);
-		rightBounding = rightBounding.update(scrollingLeft, scrollingRight);
-		botBounding = botBounding.update(scrollingLeft, scrollingRight);
+		bounding.scroll(scrollingLeft, scrollingRight);
+		topBounding = topBounding.scroll(scrollingLeft, scrollingRight);
+		leftBounding = leftBounding.scroll(scrollingLeft, scrollingRight);
+		rightBounding = rightBounding.scroll(scrollingLeft, scrollingRight);
+		botBounding = botBounding.scroll(scrollingLeft, scrollingRight);
 	}
 	public Bounding getBounding(){
 	    return bounding;
