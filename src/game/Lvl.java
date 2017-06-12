@@ -2,7 +2,7 @@ package game;
 
 public class Lvl {
 	
-    private int schwerkraft = 5;
+    private int gravity = Config.getGravity();;
     	
 	Cube[] cube;
 	Sweg[] sweg;
@@ -110,6 +110,6 @@ public class Lvl {
 	}
 	
 	public int getSchwerkraft(){
-	    return schwerkraft;
+	    return gravity;
 	}
 }
