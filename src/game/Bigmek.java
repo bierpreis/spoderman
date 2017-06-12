@@ -5,18 +5,18 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Bigmek extends Bounding {
+public class Bigmek{
 
     private boolean collected = false;
     private BufferedImage look;
+    private Bounding bounding;
 
     public Bigmek(int x, int y) {
-	super(x, y); // warum geht das ni?!
-	this.x = x;
-	this.y = y;
+	
+	
 	look = createLook();
-	width = look.getWidth();
-	height = look.getHeight();
+	bounding = new Bounding(x,y,look.getWidth(), look.getHeight());
+
 
     }
 
@@ -43,5 +43,9 @@ public class Bigmek extends Bounding {
 
 	collected = true;
 	look = null;
+    }
+    
+    public Bounding getBounding(){
+	return bounding;
     }
 }

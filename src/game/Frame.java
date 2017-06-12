@@ -156,7 +156,7 @@ public class Frame extends JFrame {
 			lvl.getSweg()[i].getBounding().y, null);
 	    }
 	if (lvl.getBigmek() != null) {
-	    g.drawImage(lvl.getBigmek().getLook(), (int) lvl.getBigmek().getX(), (int) lvl.getBigmek().getY(), null);
+	    g.drawImage(lvl.getBigmek().getLook(), (int) lvl.getBigmek().getBounding().getX(), (int) lvl.getBigmek().getBounding().getY(), null);
 	}
 	if (lvl.getEnemy() != null)
 	    for (int i = 0; i < lvl.getEnemy().length; i++) {
