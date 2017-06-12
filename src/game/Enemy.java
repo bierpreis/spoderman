@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Enemy extends Bounding {
+public class Enemy {
     private boolean movingRight = true;
     private boolean alive = true;
 
@@ -14,21 +14,20 @@ public class Enemy extends Bounding {
 
     private BufferedImage look;
 
+    private Bounding bounding;
     private Bounding topBounding;
 
     Cube[] cube;
 
     // konstruktor
     public Enemy(int x, int y, String type, Cube[] cube) {
-	super(x, y);
+
 	look = createLook(type);
-	this.x = x;
-	this.y = y;
-	this.width = look.getWidth();
-	this.height = look.getHeight();
+
+	bounding = new Bounding(x, y, look.getWidth(), look.getHeight());
+	topBounding = new Bounding(x + 5, y, look.getWidth() - 10, 10);
 	this.cube = cube;
 
-	topBounding = new Bounding(x + 5, y, width - 10, 10);
     }
 
     // update
@@ -36,25 +35,26 @@ public class Enemy extends Bounding {
 
 	// bewegung
 	if (alive) {
-	    if (movingRight){
-		x += moveSpeed;
-	    	topBounding.x+=moveSpeed;
+	    if (movingRight) {
+		bounding.x += moveSpeed;
+		topBounding.x += moveSpeed;
 	    }
-	    if (!movingRight){
-		x -= moveSpeed;
-		topBounding.x-=moveSpeed;}
-	    
+	    if (!movingRight) {
+		bounding.x -= moveSpeed;
+		topBounding.x -= moveSpeed;
+	    }
+
 	}
 	for (int i = 0; i < cube.length; i++) {
-	    if (intersects(cube[i].getBotBounding()) && movingRight) {
+	    if (bounding.intersects(cube[i].getBotBounding()) && movingRight) {
 		movingRight = false;
 
 	    }
-	    if (intersects(cube[i].getLeftBounding()) && movingRight) {
+	    if (bounding.intersects(cube[i].getLeftBounding()) && movingRight) {
 		movingRight = false;
 
 	    }
-	    if (intersects(cube[i].getRightBounding()) && !movingRight) {
+	    if (bounding.intersects(cube[i].getRightBounding()) && !movingRight) {
 		movingRight = true;
 
 	    }
@@ -62,12 +62,11 @@ public class Enemy extends Bounding {
 	}
 
 	// scrolling
-	update(scrollingLeft, scrollingRight);
+	bounding.update(scrollingLeft, scrollingRight);
 	// Bounding updaten
 
 	if (alive)
 	    topBounding = topBounding.update(scrollingLeft, scrollingRight);
-
 
     }
 
@@ -118,5 +117,8 @@ public class Enemy extends Bounding {
 	return alive;
     }
 
+    public Bounding getBounding() {
+	return bounding;
+    }
 
 }

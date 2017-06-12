@@ -160,8 +160,8 @@ public class Frame extends JFrame {
 	}
 	if (lvl.getEnemy() != null)
 	    for (int i = 0; i < lvl.getEnemy().length; i++) {
-		g.drawImage(lvl.getEnemy()[i].getLook(), (int)lvl.getEnemy()[i].getX(),
-			(int)lvl.getEnemy()[i].getY(), null);
+		g.drawImage(lvl.getEnemy()[i].getLook(), (int)lvl.getEnemy()[i].getBounding().getX(),
+			(int)lvl.getEnemy()[i].getBounding().getY(), null);
 	    }
 
     }
