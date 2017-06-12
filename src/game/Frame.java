@@ -16,7 +16,7 @@ public class Frame extends JFrame {
     private boolean keyEscape = false;
     private boolean keyEnter;
     private boolean lastFrame = false;
-
+    boolean firstTime = true;
     private boolean escaping;
 
     int escapeTime = 0; // esc dialog
@@ -75,7 +75,14 @@ public class Frame extends JFrame {
 
 	    g.setColor(Color.BLUE);
 	    for (int i = 0; i < lvl.getCubes().length; i++) {
-
+		if(i == 0 && firstTime){
+		    System.out.println("bounding: " + lvl.getCubes()[1].getBounding());
+		    System.out.println("topBounding: " + lvl.getCubes()[1].getTopBounding());
+		    System.out.println("botBounding: " + lvl.getCubes()[1].getBotBounding());
+		    System.out.println("leftBbounding: " + lvl.getCubes()[1].getLeftBounding());
+		    System.out.println("rightBounding: " + lvl.getCubes()[1].getRightBounding());
+		    firstTime = false;
+		}
 		g.fillRect((int) lvl.getCubes()[i].getBounding().getX(), (int) lvl.getCubes()[i].getBounding().getY(),
 			(int) lvl.getCubes()[i].getBounding().getWidth(), (int) lvl.getCubes()[i].getBounding().getHeight());
 	    }

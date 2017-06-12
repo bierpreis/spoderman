@@ -134,7 +134,7 @@ public class Player {
 
     public void updateCubes() {
 	for (int i = 0; i < lvl.getCubes().length; i++) {
-	    lvl.getCubes()[i].updateBounding(scrollingLeft, scrollingRight, moveSpeed);
+	    lvl.getCubes()[i].updateBounding(scrollingLeft, scrollingRight);
 	}
     }
 
