@@ -220,7 +220,6 @@ public class Menu extends JFrame {
 	    int sleepTime =  (int) (nsPerFrame - (System.nanoTime() - startTime))/1000000;
 	    if (sleepTime > 0)
 		try {
-		    System.out.println("sleepTime :" +  sleepTime);
 		    Thread.sleep(sleepTime);
 
 		} catch (InterruptedException e) {
@@ -231,7 +230,6 @@ public class Menu extends JFrame {
 
 	Menu menu = new Menu(screenX, screenY);
 	menu.showMenu();
-	System.out.println("end of menu while(running)");
 
     }
 

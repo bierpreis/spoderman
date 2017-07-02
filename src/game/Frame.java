@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class Frame extends JFrame {
 
@@ -24,16 +24,14 @@ public class Frame extends JFrame {
     private int fpsCounter = 0;
     private long timeUntilLastSecond = System.currentTimeMillis() + 500;
 
-    private Screen screen;
     private final Player player;
     private Lvl lvl;
+
+    private BufferStrategy bufferStrategy;
 
     public Frame(Player player, Lvl lvl, int screenX, int screenY) {
 	super("spodermens advenshur");
 
-	screen = new Screen();
-	screen.setBounds(100, 0, screenX, screenY);
-	add(screen);
 	addKeyListener(new KeyHandler());
 
 	this.player = player;
@@ -44,6 +42,9 @@ public class Frame extends JFrame {
 
 	setResizable(false);
 	setVisible(true);
+
+	createBufferStrategy(2);
+	bufferStrategy = getBufferStrategy();
 
     }
 
@@ -62,48 +63,40 @@ public class Frame extends JFrame {
 
     // screen zeichnen
     public void repaintScreen() {
-	screen.repaint();
 
-    }
+	Graphics g = bufferStrategy.getDrawGraphics();
 
-    // Fenster
-    private class Screen extends JLabel {
-	@Override
-	protected void paintComponent(Graphics g) {
+	g.setColor(Color.lightGray);
+	g.fillRect(0, 0, getWidth(), getHeight());
 
-	    super.paintComponent(g);
-
-	    g.setColor(Color.BLUE);
-	    for (int i = 0; i < lvl.getCubes().length; i++) {
-//		if(i == 0 && firstTime){
-//		    System.out.println("bounding: " + lvl.getCubes()[1].getBounding());
-//		    System.out.println("topBounding: " + lvl.getCubes()[1].getTopBounding());
-//		    System.out.println("botBounding: " + lvl.getCubes()[1].getBotBounding());
-//		    System.out.println("leftBbounding: " + lvl.getCubes()[1].getLeftBounding());
-//		    System.out.println("rightBounding: " + lvl.getCubes()[1].getRightBounding());
-//		    firstTime = false;
-//		}
-		g.fillRect((int) lvl.getCubes()[i].getBounding().getX(), (int) lvl.getCubes()[i].getBounding().getY(),
-			(int) lvl.getCubes()[i].getBounding().getWidth(), (int) lvl.getCubes()[i].getBounding().getHeight());
-	    }
-	    g.setColor(Color.BLACK);
-
-	    draw(g);
+	g.setColor(Color.BLUE);
+	for (int i = 0; i < lvl.getCubes().length; i++) {
+	    // if(i == 0 && firstTime){
+	    // System.out.println("bounding: " +
+	    // lvl.getCubes()[1].getBounding());
+	    // System.out.println("topBounding: " +
+	    // lvl.getCubes()[1].getTopBounding());
+	    // System.out.println("botBounding: " +
+	    // lvl.getCubes()[1].getBotBounding());
+	    // System.out.println("leftBbounding: " +
+	    // lvl.getCubes()[1].getLeftBounding());
+	    // System.out.println("rightBounding: " +
+	    // lvl.getCubes()[1].getRightBounding());
+	    // firstTime = false;
+	    // }
+	    g.fillRect((int) lvl.getCubes()[i].getBounding().getX(), (int) lvl.getCubes()[i].getBounding().getY(),
+		    (int) lvl.getCubes()[i].getBounding().getWidth(),
+		    (int) lvl.getCubes()[i].getBounding().getHeight());
 	}
-    }
 
-    // zeichnen
-    private void draw(Graphics g) {
-
-	// message anzeigen
 	sayMessage(player.isSayMessage(), g);
 	drawUnits(g);
-	calcFps();
 
-	g.drawString("Sweg Count:" + player.getSwegCount(), 25, 25);
-	g.drawString("Fagits rekt:" + player.getKills(), 150, 25);
-	g.drawString("Sp0der Lyfez :" + player.getLifes(), 300, 25);
-	g.drawString("FPS: " + fps, 600, 25);
+	g.setColor(Color.BLACK);
+	g.drawString("Sweg Count:" + player.getSwegCount(), 25, 50);
+	g.drawString("Fagits rekt:" + player.getKills(), 150, 50);
+	g.drawString("Sp0der Lyfez :" + player.getLifes(), 300, 50);
+	g.drawString("FPS: " + calcFps(), 600, 50);
 
 	// macht den escape dialog
 	if (keyEscape) {
@@ -120,16 +113,21 @@ public class Frame extends JFrame {
 	    player.unlockMessage();
 	    escapeTime = 0;
 	}
+	bufferStrategy.show();
+	g.dispose();
 
     }
 
-    private void calcFps() {
+    // zeichnen
+
+    private int calcFps() {
 	fpsCounter++;
 	if (System.currentTimeMillis() > timeUntilLastSecond) {
 	    timeUntilLastSecond = System.currentTimeMillis() + 500;
-	    fps = 2*fpsCounter;
+	    fps = 2 * fpsCounter;
 	    fpsCounter = 0;
 	}
+	return fps;
 
     }
 
@@ -163,12 +161,13 @@ public class Frame extends JFrame {
 			lvl.getSweg()[i].getBounding().y, null);
 	    }
 	if (lvl.getBigmek() != null) {
-	    g.drawImage(lvl.getBigmek().getLook(), (int) lvl.getBigmek().getBounding().getX(), (int) lvl.getBigmek().getBounding().getY(), null);
+	    g.drawImage(lvl.getBigmek().getLook(), (int) lvl.getBigmek().getBounding().getX(),
+		    (int) lvl.getBigmek().getBounding().getY(), null);
 	}
 	if (lvl.getEnemy() != null)
 	    for (int i = 0; i < lvl.getEnemy().length; i++) {
-		g.drawImage(lvl.getEnemy()[i].getLook(), (int)lvl.getEnemy()[i].getBounding().getX(),
-			(int)lvl.getEnemy()[i].getBounding().getY(), null);
+		g.drawImage(lvl.getEnemy()[i].getLook(), (int) lvl.getEnemy()[i].getBounding().getX(),
+			(int) lvl.getEnemy()[i].getBounding().getY(), null);
 	    }
 
     }
