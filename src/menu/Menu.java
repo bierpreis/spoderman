@@ -201,10 +201,7 @@ public class Menu extends JFrame {
     }
 
     public void game(int lvlNumber) {
-
-	int targetFps = Config.getTargetFps();;
-
-	int msPerFrame = 1000 / targetFps;
+	int nsPerFrame = 1000000000 / Config.getTargetFps();
 
 	this.lvlNumber = lvlNumber;
 	Lvl lvl = new Lvl(lvlNumber);
@@ -212,7 +209,7 @@ public class Menu extends JFrame {
 	Frame f = new Frame(player, lvl, screenX, screenY);
 	boolean running = true;
 	while (running) {
-	    long startTime = System.currentTimeMillis();
+	    long startTime = System.nanoTime();
 
 	    checkLvlUp(player);
 	    player.update(f.getLeft(), f.getRight(), f.getJump());
@@ -220,9 +217,10 @@ public class Menu extends JFrame {
 	    if (f.getLastFrame())
 		running = false;
 
-	    long sleepTime = msPerFrame - (System.currentTimeMillis() - startTime);
+	    int sleepTime =  (int) (nsPerFrame - (System.nanoTime() - startTime))/1000000;
 	    if (sleepTime > 0)
 		try {
+		    System.out.println("sleepTime :" +  sleepTime);
 		    Thread.sleep(sleepTime);
 
 		} catch (InterruptedException e) {
