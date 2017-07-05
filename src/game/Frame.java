@@ -2,19 +2,13 @@ package game;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
 public class Frame extends JFrame {
 
-    private boolean keyLeft = false;
-    private boolean keyRight = false;
-    private boolean keyJump = false;
-    private boolean keyEscape = false;
-    private boolean keyEnter;
     private boolean lastFrame = false;
     boolean firstTime = true;
     private boolean escaping;
@@ -27,12 +21,13 @@ public class Frame extends JFrame {
     private final Player player;
     private Lvl lvl;
 
+    private KeyHandler keyHandler = new KeyHandler();
     private BufferStrategy bufferStrategy;
 
     public Frame(Player player, Lvl lvl, int screenX, int screenY) {
 	super("spodermens advenshur");
 
-	addKeyListener(new KeyHandler());
+	addKeyListener(keyHandler);
 
 	this.player = player;
 	this.lvl = lvl;
@@ -46,19 +41,6 @@ public class Frame extends JFrame {
 	createBufferStrategy(2);
 	bufferStrategy = getBufferStrategy();
 
-    }
-
-    // steuerung
-    public boolean getLeft() {
-	return keyLeft;
-    }
-
-    public boolean getRight() {
-	return keyRight;
-    }
-
-    public boolean getJump() {
-	return keyJump;
     }
 
     // screen zeichnen
@@ -99,22 +81,22 @@ public class Frame extends JFrame {
 	g.drawString("FPS: " + calcFps(), 600, 50);
 
 	// macht den escape dialog
-	if (keyEscape) {
-	    sayEscape();
-	}
-	if (escaping)
-	    escapeTime += 15;
-	if (escaping && keyEscape && escapeTime > 600) {
-	    lastFrame = true;
-	    dispose();
-	}
-	if (escaping && keyEnter) {
-	    escaping = false;
-	    player.unlockMessage();
-	    escapeTime = 0;
-	}
+	// if (getKeyListeners()[0].getEscape()) {
+	// sayEscape();
+	// }
+	// if (escaping)
+	// escapeTime += 15;
+	// if (escaping && keyEscape && escapeTime > 600) {
+	// lastFrame = true;
+	// dispose();
+	// }
+	// if (escaping && keyEnter) {
+	// escaping = false;
+	// player.unlockMessage();
+	// escapeTime = 0;
+	// }
 
-	if (this.getPeer() != null)
+	if (this.isDisplayable())
 	    bufferStrategy.show();
 	g.dispose();
 
@@ -174,48 +156,6 @@ public class Frame extends JFrame {
 
     }
 
-    private class KeyHandler implements KeyListener {
-	private int respawnTime = 2000;
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-	    if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-		keyEscape = true;
-	    if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		keyEnter = true;
-	    if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		keyLeft = true;
-	    if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		keyRight = true;
-	    if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		keyJump = true;
-	    if (player.getRespawnLock() && (player.getTimeDead() > respawnTime))
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-		    player.setRespawnLock(false);
-		    // player.setSayMessage(false);
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-	    if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-		keyEscape = false;
-	    if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		keyEnter = false;
-	    if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		keyLeft = false;
-	    if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		keyRight = false;
-	    if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		keyJump = false;
-	}
-
-	// Unnötig
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
-    }
-
     public void sayEscape() {
 	player.sayMessage("pres esc again to fak awf oder enter to stai");
 	player.lockMessage();
@@ -224,6 +164,10 @@ public class Frame extends JFrame {
 
     public boolean getLastFrame() {
 	return lastFrame;
+    }
+    
+    public KeyHandler getKeyHandler(){
+	return keyHandler;
     }
 
 }

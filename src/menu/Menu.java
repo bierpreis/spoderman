@@ -2,20 +2,18 @@ package menu;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.Config;
 import game.Frame;
+import game.KeyHandler;
 import game.Lvl;
 import game.Player;
 
 public class Menu extends JFrame {
 
-    boolean up, down, enter;
     boolean codeinputLock = false;
     boolean menuLock = false;
     int lvlNumber = 0;
@@ -27,6 +25,8 @@ public class Menu extends JFrame {
     int screenX, screenY;
 
     private Screen screen;
+
+    KeyHandler keyHandler = new KeyHandler();
 
     public Menu(int screenX, int screenY) {
 
@@ -51,7 +51,7 @@ public class Menu extends JFrame {
 
 	add(screen);
 
-	addKeyListener(new KeyHandler());
+	addKeyListener(keyHandler);
 	buttonArray[0].setFocus();
 
     }
@@ -99,36 +99,6 @@ public class Menu extends JFrame {
 	screen.repaint();
     }
 
-    public class KeyHandler implements KeyListener {
-
-	@Override
-
-	public void keyPressed(KeyEvent e) {
-	    if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		enter = true;
-	    if (e.getKeyCode() == KeyEvent.VK_UP)
-		up = true;
-	    if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		down = true;
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-	    if (e.getKeyCode() == KeyEvent.VK_ENTER)
-		enter = false;
-	    if (e.getKeyCode() == KeyEvent.VK_UP)
-		up = false;
-	    if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		down = false;
-	}
-
-	// Unnötig
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
-    }
-
     boolean update() {
 	updateFocus();
 	Boolean escape = doButtonActions();
@@ -141,7 +111,7 @@ public class Menu extends JFrame {
 	    buttonArray[i].update();
 
 	    // pfeil runter
-	    if (buttonArray[i].getFocus() && down && !Button.getLocked()) {
+	    if (buttonArray[i].getFocus() && keyHandler.getDown() && !Button.getLocked()) {
 		Button.setLock();
 		if (i < buttonArray.length - 1) {
 		    buttonArray[i + 1].setFocus();
@@ -150,7 +120,7 @@ public class Menu extends JFrame {
 	    }
 
 	    // pfeil hoch
-	    if (buttonArray[i].getFocus() && up && !Button.getLocked()) {
+	    if (buttonArray[i].getFocus() && keyHandler.getUp() && !Button.getLocked()) {
 		if (i > 0) {
 		    buttonArray[i - 1].setFocus();
 		    Button.setLock();
@@ -161,20 +131,18 @@ public class Menu extends JFrame {
     }
 
     boolean doButtonActions() {
-	if (buttonArray[0].getFocus() && enter) {
-	    enter = false;
+	if (buttonArray[0].getFocus() && keyHandler.getEnter()) {
 	    dispose();
 	    game(1);
 
 	}
-	if (buttonArray[1].getFocus() && enter) {
-	    enter = false;
+	if (buttonArray[1].getFocus() && keyHandler.getEnter()) {
 	    new CodeInputWindow(this);
 	    if (lvlNumber != 0)
 		game(lvlNumber);
 
 	}
-	if (buttonArray[2].getFocus() && enter) {
+	if (buttonArray[2].getFocus() && keyHandler.getEnter()) {
 	    dispose();
 	    System.exit(0);
 	}
@@ -196,7 +164,6 @@ public class Menu extends JFrame {
 	    escape = update();
 
 	}
-	
 
     }
 
@@ -212,12 +179,12 @@ public class Menu extends JFrame {
 	    long startTime = System.nanoTime();
 
 	    checkLvlUp(player);
-	    player.update(f.getLeft(), f.getRight(), f.getJump());
+	    player.update(f.getKeyHandler());
 	    f.repaintScreen();
 	    if (f.getLastFrame())
 		running = false;
 
-	    int sleepTime =  (int) (nsPerFrame - (System.nanoTime() - startTime))/1000000;
+	    int sleepTime = (int) (nsPerFrame - (System.nanoTime() - startTime)) / 1000000;
 	    if (sleepTime > 0)
 		try {
 		    Thread.sleep(sleepTime);

@@ -23,7 +23,6 @@ public class Player {
     private boolean lockMessage = false;
     private boolean lvlUp = false;
 
-
     private int timeSinceJump;
     private int upJumpTime = 190;
     private int jumpTime = 700;
@@ -48,7 +47,6 @@ public class Player {
 
     private Lvl lvl;
 
-
     // konstruktor
     public Player(Lvl lvl) {
 	f_posx = 350;
@@ -59,18 +57,15 @@ public class Player {
 	bounding = new Rectangle(x, y, lookingLeft.getWidth(), lookingLeft.getHeight());
 	botBounding = new Rectangle(x, (y + (lookingLeft.getHeight())), lookingLeft.getWidth(), (20));
 
-
-
 	this.lvl = lvl;
 
 	sayMessage("nao i need to find teh bikmek");
 
     }
 
-    public void update(boolean left, boolean right, boolean jump) {
+    public void update(KeyHandler keyHandler) {
 
-
-	updateCubes(); 
+	updateCubes();
 
 	updateBigmek();
 	updateEnemies();
@@ -81,8 +76,8 @@ public class Player {
 
 	scroll();
 
-	move(left, right);
-	jump(left, right, jump);
+	move(keyHandler);
+	jump(keyHandler);
 
 	respawn();
 
@@ -90,7 +85,7 @@ public class Player {
 	checkBigmek();
 	checkCubes();
 	checkEnemies();
-	
+
     }
 
     private void createLook() {
@@ -123,8 +118,6 @@ public class Player {
 	    sayMessage = false;
     }
 
-    
-   
     void updateBounding() {
 	bounding.x = (int) f_posx;
 	bounding.y = (int) f_posy;
@@ -145,7 +138,7 @@ public class Player {
     }
 
     public void updateEnemies() {
-	if (lvl.getEnemy()!= null)
+	if (lvl.getEnemy() != null)
 	    for (int i = 0; i < lvl.getEnemy().length; i++) {
 		lvl.getEnemy()[i].update(scrollingLeft, scrollingRight);
 	    }
@@ -208,15 +201,15 @@ public class Player {
 
     }
 
-    void move(boolean left, boolean right) {
-
+    void move(KeyHandler keyHandler) {
+	
 	if (alive) {
-	    if (left && !onRightSide && !scrollingLeft) {
+	    if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
 		f_posx -= moveSpeed;
 		isLookingRight = false;
 	    }
 
-	    if (right && !onLeftSide && !scrollingRight) {
+	    if (keyHandler.getRight() && !onLeftSide && !scrollingRight) {
 		f_posx += moveSpeed;
 		isLookingRight = true;
 	    }
@@ -227,15 +220,14 @@ public class Player {
 
     }
 
-    void jump(boolean left, boolean right, boolean jump) {
+    void jump(KeyHandler keyHandler) {
 	if (alive)
-	    if (onTop && (!onBot && jump && !alreadyJumped && jumpReleased)) {
+	    if (onTop && (!onBot && keyHandler.getSpace() && !alreadyJumped && jumpReleased)) {
 		jumping = true;
 		alreadyJumped = true;
 		jumpReleased = false;
 	    }
-	
-	
+
 	if (onBot)
 	    jumping = false;
 	if (timeSinceJump > upJumpTime)
@@ -360,7 +352,6 @@ public class Player {
     public void setRespawnLock(boolean respawnLock) {
 	this.respawnLock = respawnLock;
     }
-
 
     public void lockMessage() { // wird von escape sequenz genutzt
 	lockMessage = true;
