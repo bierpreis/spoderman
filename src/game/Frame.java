@@ -113,7 +113,9 @@ public class Frame extends JFrame {
 	    player.unlockMessage();
 	    escapeTime = 0;
 	}
-	bufferStrategy.show();
+
+	if (this.getPeer() != null)
+	    bufferStrategy.show();
 	g.dispose();
 
     }
