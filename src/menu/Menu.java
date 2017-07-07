@@ -20,26 +20,23 @@ public class Menu extends JFrame {
 
     // int screenX, screenY;
     Button[] buttonArray;
-    Menu menu;
 
-    int screenX, screenY;
 
     private Screen screen;
 
     KeyHandler keyHandler = new KeyHandler();
 
-    public Menu(int screenX, int screenY) {
+    public Menu() {
 
 	super("welcum to spodermens advenshur");
 
-	this.screenX = screenX;
-	this.screenY = screenY;
+
 	screen = new Screen();
 
-	screen.setBounds(100, 100, screenX, screenY);
+	screen.setBounds(100, 100, Config.getScreenX(), Config.getScreenY());
 
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setSize(screenX, screenY);
+	setSize(Config.getScreenX(), Config.getScreenY());
 	setVisible(true);
 	setResizable(false);
 
@@ -173,7 +170,7 @@ public class Menu extends JFrame {
 	this.lvlNumber = lvlNumber;
 	Lvl lvl = new Lvl(lvlNumber);
 	Player player = new Player(lvl);
-	Frame f = new Frame(player, lvl, screenX, screenY);
+	Frame f = new Frame(player, lvl);
 	boolean running = true;
 	while (running) {
 	    long startTime = System.nanoTime();
@@ -195,7 +192,7 @@ public class Menu extends JFrame {
 
 	}
 
-	Menu menu = new Menu(screenX, screenY);
+	Menu menu = new Menu();
 	menu.showMenu();
 
     }

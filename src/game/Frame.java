@@ -16,7 +16,7 @@ public class Frame extends JFrame {
     int escapeTime = 0; // esc dialog
     private int fps = 0;
     private int fpsCounter = 0;
-    private long timeUntilLastSecond = System.currentTimeMillis() + 500;
+    private long timeUntilLastSecond = System.currentTimeMillis() + 1000;
 
     private final Player player;
     private Lvl lvl;
@@ -24,7 +24,7 @@ public class Frame extends JFrame {
     private KeyHandler keyHandler = new KeyHandler();
     private BufferStrategy bufferStrategy;
 
-    public Frame(Player player, Lvl lvl, int screenX, int screenY) {
+    public Frame(Player player, Lvl lvl) {
 	super("spodermens advenshur");
 
 	addKeyListener(keyHandler);
@@ -33,7 +33,7 @@ public class Frame extends JFrame {
 	this.lvl = lvl;
 
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setSize(screenX, screenY);
+	setSize(Config.getScreenX(), Config.getScreenY());
 
 	setResizable(false);
 	setVisible(true);
@@ -73,12 +73,10 @@ public class Frame extends JFrame {
 
 	sayMessage(player.isSayMessage(), g);
 	drawUnits(g);
+	writeInfo(g, player, calcFps());
+	
 
-	g.setColor(Color.BLACK);
-	g.drawString("Sweg Count:" + player.getSwegCount(), 25, 50);
-	g.drawString("Fagits rekt:" + player.getKills(), 150, 50);
-	g.drawString("Sp0der Lyfez :" + player.getLifes(), 300, 50);
-	g.drawString("FPS: " + calcFps(), 600, 50);
+
 
 	// macht den escape dialog
 	// if (getKeyListeners()[0].getEscape()) {
@@ -101,14 +99,22 @@ public class Frame extends JFrame {
 	g.dispose();
 
     }
+    
+    private void writeInfo(Graphics g, Player player, int fps){
+	g.setColor(Color.BLACK);
+	g.drawString("Sweg Count:" + player.getSwegCount(), 25, 50);
+	g.drawString("Fagits rekt:" + player.getKills(), 150, 50);
+	g.drawString("Sp0der Lyfez :" + player.getLifes(), 300, 50);
+	g.drawString("FPS: " + calcFps(), 600, 50);
+    }
 
     // zeichnen
 
     private int calcFps() {
 	fpsCounter++;
 	if (System.currentTimeMillis() > timeUntilLastSecond) {
-	    timeUntilLastSecond = System.currentTimeMillis() + 500;
-	    fps = 2 * fpsCounter;
+	    timeUntilLastSecond = System.currentTimeMillis() + 1000;
+	    fps = fpsCounter;
 	    fpsCounter = 0;
 	}
 	return fps;

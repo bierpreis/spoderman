@@ -6,11 +6,10 @@ public class Main {
 
 	public static void main(String[] args){
 		
-		final int screenX = Config.getScreenX();
-		final int screenY = Config.getScreenY();
+
 
 		
-		Menu menu = new Menu(screenX, screenY);
+		Menu menu = new Menu();
 
 		
 		menu.showMenu();
