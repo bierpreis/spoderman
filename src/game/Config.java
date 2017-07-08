@@ -34,7 +34,7 @@ public class Config {
 	return screenY;
     }
     
-    public int getPlayerRespawnTime(){
+    public static int getPlayerRespawnTime(){
 	return playerRespawnTime;
     }
 

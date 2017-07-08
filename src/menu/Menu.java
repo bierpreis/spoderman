@@ -178,7 +178,7 @@ public class Menu extends JFrame {
 	    checkLvlUp(player);
 	    player.update(f.getKeyHandler());
 	    f.repaintScreen();
-	    if (f.getLastFrame())
+	    if (!f.isDisplayable())
 		running = false;
 
 	    int sleepTime = (int) (nsPerFrame - (System.nanoTime() - startTime)) / 1000000;

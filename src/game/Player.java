@@ -151,9 +151,10 @@ public class Player {
 	    }
     }
 
-    void updateTimeDead() {
+    private int updateTimeDead() {
 	if (!alive && lifes > 0)
 	    timeDead += 15;
+	return timeDead;
     }
 
     public Rectangle getBounding() {
@@ -161,11 +162,11 @@ public class Player {
     }
 
     void respawn() {
-	if (!respawnLock && !alive && lifes > 0 && timeDead > 2000) {
+	if (!respawnLock && !alive && lifes > 0 && updateTimeDead() > Config.getPlayerRespawnTime()) {
 
 	    alive = true;
-	    f_posx = 400;
-	    f_posy = 300;
+//	    f_posx = 400;
+//	    f_posy = 300;
 	    sayMessage("respawn  now am angri as fuk");
 	    timeDead = 0;
 	}
@@ -282,7 +283,7 @@ public class Player {
 
 		// feststellen ob tot
 		if (alive)
-		    if (bounding.intersects(lvl.getEnemy()[i].getTopBounding()) && lvl.getEnemy()[i].getAlive()) {
+		    if (bounding.intersects(lvl.getEnemy()[i].getBounding()) && lvl.getEnemy()[i].getAlive()) {
 			alive = false;
 			lifes -= 1;
 			if (lifes > 0)
@@ -362,9 +363,6 @@ public class Player {
 	sayMessage = false;
     }
 
-    public int getTimeDead() {
-	return timeDead;
-    }
 
     public BufferedImage[] getMessagePics() {
 	return messagePicArray;

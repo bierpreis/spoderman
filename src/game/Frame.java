@@ -9,8 +9,6 @@ import javax.swing.JFrame;
 
 public class Frame extends JFrame {
 
-    private boolean lastFrame = false;
-    boolean firstTime = true;
     private boolean escaping;
 
     int escapeTime = 0; // esc dialog
@@ -51,6 +49,43 @@ public class Frame extends JFrame {
 	g.setColor(Color.lightGray);
 	g.fillRect(0, 0, getWidth(), getHeight());
 
+	drawCubes(g);
+	sayMessage(player.isSayMessage(), g);
+	drawUnits(g);
+	writeInfo(g, player);
+	checkIfEscape();
+
+	if (isDisplayable())
+	    bufferStrategy.show();
+	g.dispose();
+
+    }
+
+    private void checkIfEscape() {
+	if (keyHandler.getEscape()) {
+	    sayEscape();
+	}
+	if (escaping)
+	    escapeTime += 15;
+	if (keyHandler.getEscape() && escapeTime > 600) {
+	    dispose();
+	}
+	if (escaping && keyHandler.getEnter()) {
+	    escaping = false;
+	    player.unlockMessage();
+	    escapeTime = 0;
+	}
+    }
+
+    private void writeInfo(Graphics g, Player player) {
+	g.setColor(Color.BLACK);
+	g.drawString("Sweg Count:" + player.getSwegCount(), 25, 50);
+	g.drawString("Fagits rekt:" + player.getKills(), 150, 50);
+	g.drawString("Sp0der Lyfez :" + player.getLifes(), 300, 50);
+	g.drawString("FPS: " + calcFps(), 600, 50);
+    }
+
+    private void drawCubes(Graphics g) {
 	g.setColor(Color.BLUE);
 	for (int i = 0; i < lvl.getCubes().length; i++) {
 	    // if(i == 0 && firstTime){
@@ -70,42 +105,6 @@ public class Frame extends JFrame {
 		    (int) lvl.getCubes()[i].getBounding().getWidth(),
 		    (int) lvl.getCubes()[i].getBounding().getHeight());
 	}
-
-	sayMessage(player.isSayMessage(), g);
-	drawUnits(g);
-	writeInfo(g, player, calcFps());
-	
-
-
-
-	// macht den escape dialog
-	// if (getKeyListeners()[0].getEscape()) {
-	// sayEscape();
-	// }
-	// if (escaping)
-	// escapeTime += 15;
-	// if (escaping && keyEscape && escapeTime > 600) {
-	// lastFrame = true;
-	// dispose();
-	// }
-	// if (escaping && keyEnter) {
-	// escaping = false;
-	// player.unlockMessage();
-	// escapeTime = 0;
-	// }
-
-	if (this.isDisplayable())
-	    bufferStrategy.show();
-	g.dispose();
-
-    }
-    
-    private void writeInfo(Graphics g, Player player, int fps){
-	g.setColor(Color.BLACK);
-	g.drawString("Sweg Count:" + player.getSwegCount(), 25, 50);
-	g.drawString("Fagits rekt:" + player.getKills(), 150, 50);
-	g.drawString("Sp0der Lyfez :" + player.getLifes(), 300, 50);
-	g.drawString("FPS: " + calcFps(), 600, 50);
     }
 
     // zeichnen
@@ -168,11 +167,9 @@ public class Frame extends JFrame {
 	escaping = true;
     }
 
-    public boolean getLastFrame() {
-	return lastFrame;
-    }
-    
-    public KeyHandler getKeyHandler(){
+
+
+    public KeyHandler getKeyHandler() {
 	return keyHandler;
     }
 
