@@ -19,6 +19,7 @@ public class Frame extends JFrame {
     private final Player player;
     private Lvl lvl;
 
+    private Message message = null;
     private KeyHandler keyHandler = new KeyHandler();
     private BufferStrategy bufferStrategy;
 
@@ -50,7 +51,7 @@ public class Frame extends JFrame {
 	g.fillRect(0, 0, getWidth(), getHeight());
 
 	drawCubes(g);
-	sayMessage(player.getMessage(), g);
+	sayMessage(player.getNewMessage(), g);
 	drawUnits(g);
 	writeInfo(g, player);
 	checkIfEscape();
@@ -75,6 +76,12 @@ public class Frame extends JFrame {
 	    player.unlockMessage();
 	    escapeTime = 0;
 	}
+    }
+
+    public void sayEscape() {
+	player.createMessage("pres esc again to fak awf oder enter to stai");
+	player.lockMessage();
+	escaping = true;
     }
 
     private void writeInfo(Graphics g, Player player) {
@@ -120,8 +127,11 @@ public class Frame extends JFrame {
 
     }
 
-    private Message sayMessage(Message message, Graphics g) {
-	if (message!=null) {
+    private Message sayMessage(Message newIncomingMessage, Graphics g) {
+
+	if (newIncomingMessage != null)
+	    message = newIncomingMessage;
+	if (message != null) {
 	    int letterX[] = new int[message.getMessagePicArray().length];
 	    int letterY[] = new int[message.getMessagePicArray().length];
 	    letterX[0] = 0;
@@ -138,12 +148,12 @@ public class Frame extends JFrame {
 		    }
 		}
 	    }
+	    message.updateTimer(1000 / Config.getTargetFps());
+	    if (message.getTimer() < 0)
+		message = null;
 	}
-	message.updateTimer(1000/Config.getTargetFps());
-	System.out.println(message.getTimer());
-	if(message.getTimer()<0)
-	    message = null;
-	return message;
+
+	return newIncomingMessage;
 
     }
 
@@ -165,14 +175,6 @@ public class Frame extends JFrame {
 	    }
 
     }
-
-    public void sayEscape() {
-	player.sayMessage("pres esc again to fak awf oder enter to stai");
-	player.lockMessage();
-	escaping = true;
-    }
-
-
 
     public KeyHandler getKeyHandler() {
 	return keyHandler;

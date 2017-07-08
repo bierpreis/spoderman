@@ -43,7 +43,7 @@ public class Player {
     private Rectangle botBounding;
     private BufferedImage lookingLeft, lookingRight, lookDead;
 
-    private Message message;
+    private Message message = null;
 
     private Lvl lvl;
 
@@ -59,7 +59,7 @@ public class Player {
 
 	this.lvl = lvl;
 
-	sayMessage("nao i need to find teh bikmek");
+	createMessage("nao i need to find teh bikmek");
 
     }
 
@@ -167,7 +167,7 @@ public class Player {
 	    alive = true;
 	    // f_posx = 400;
 	    // f_posy = 300;
-	    sayMessage("respawn  now am angri as fuk");
+	    createMessage("respawn  now am angri as fuk");
 	    timeDead = 0;
 	}
     }
@@ -253,7 +253,7 @@ public class Player {
 		if (!lvl.getSweg()[i].getCollected())
 		    if (bounding.intersects(lvl.getSweg()[i].getBounding())) {
 			lvl.getSweg()[i].setCollected();
-			sayMessage("monies");
+			createMessage("monies");
 			swegCollected += 1;
 		    }
 	    }
@@ -263,10 +263,19 @@ public class Player {
 	if (lvl.getBigmek() != null && !lvl.getBigmek().getCollected())
 	    if (bounding.intersects(lvl.getBigmek().getBounding())) {
 		lvl.getBigmek().setCollected();
-		sayMessage("press enter to enter lvl two");
+		createMessage("press enter to enter lvl two");
 		lvlUp = true;
 		lockMessage();
 	    }
+    }
+
+    public Message getNewMessage() {
+	Message messageToReturn = null;
+	
+	messageToReturn = message;
+	message = null;
+	return messageToReturn;
+
     }
 
     void checkEnemies() {
@@ -277,7 +286,7 @@ public class Player {
 
 		    if (botBounding.intersects(lvl.getEnemy()[i].getTopBounding())) {
 			lvl.getEnemy()[i].kill();
-			sayMessage("lel rekt");
+			createMessage("lel rekt");
 			kills += 1;
 		    }
 
@@ -287,9 +296,9 @@ public class Player {
 			alive = false;
 			lifes -= 1;
 			if (lifes > 0)
-			    sayMessage("u got rekt 111  press spaec to respawn");
+			    createMessage("u got rekt 111  press spaec to respawn");
 			if (lifes < 1)
-			    sayMessage("g8 nao dis is mai end");
+			    createMessage("g8 nao dis is mai end");
 			respawnLock = true;
 		    }
 
@@ -334,12 +343,8 @@ public class Player {
 	return lifes;
     }
 
-    public void sayMessage(String messageString) {
+    void createMessage(String messageString) {
 	message = new Message(messageString);
-    }
-
-    public Message getMessage() {
-	return message;
     }
 
     public boolean isSayMessage() {

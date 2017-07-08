@@ -12,6 +12,7 @@ public class Message {
     public Message(String messageString){
 	messagePicArray = Letters.createMessageArray(messageString);
 	timer = Config.getMessageBaseTime() + messagePicArray.length * Config.getMessageTimePerLetter();
+	
     }
     
     public int getTimer(){
@@ -32,6 +33,7 @@ public class Message {
     
     public void updateTimer(int elapsedTime){
 	timer -= elapsedTime;
+
 	
 	
     }
