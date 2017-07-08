@@ -50,7 +50,7 @@ public class Frame extends JFrame {
 	g.fillRect(0, 0, getWidth(), getHeight());
 
 	drawCubes(g);
-	sayMessage(player.isSayMessage(), g);
+	sayMessage(player.getMessage(), g);
 	drawUnits(g);
 	writeInfo(g, player);
 	checkIfEscape();
@@ -120,15 +120,15 @@ public class Frame extends JFrame {
 
     }
 
-    void sayMessage(boolean isSayMessage, Graphics g) {
-	if (isSayMessage) {
-	    int letterX[] = new int[player.getMessagePics().length];
-	    int letterY[] = new int[player.getMessagePics().length];
+    private Message sayMessage(Message message, Graphics g) {
+	if (message!=null) {
+	    int letterX[] = new int[message.getMessagePicArray().length];
+	    int letterY[] = new int[message.getMessagePicArray().length];
 	    letterX[0] = 0;
 	    letterY[0] = 40;
-	    for (int i = 0; i < player.getMessagePics().length; i++) {
-		g.drawImage(player.getMessagePics()[i], letterX[i], letterY[i], null);
-		if (i < player.getMessagePics().length - 1) {
+	    for (int i = 0; i < message.getMessagePicArray().length; i++) {
+		g.drawImage(message.getMessagePicArray()[i], letterX[i], letterY[i], null);
+		if (i < message.getMessagePicArray().length - 1) {
 		    if (letterX[i] > 600) {
 			letterX[i + 1] = 40;
 			letterY[i + 1] = letterY[i] + 80;
@@ -139,6 +139,11 @@ public class Frame extends JFrame {
 		}
 	    }
 	}
+	message.updateTimer(1000/Config.getTargetFps());
+	System.out.println(message.getTimer());
+	if(message.getTimer()<0)
+	    message = null;
+	return message;
 
     }
 

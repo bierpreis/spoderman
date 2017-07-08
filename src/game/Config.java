@@ -8,6 +8,9 @@ public class Config {
     private static int targetFps = 80;
     private static int gravity = 5;
     
+    private static int messageBaseTime = 1000;
+    private static int messageTimePerLetter = 50;
+    
     private static int screenX = 800;
     private static int screenY = 600;
 
@@ -37,5 +40,12 @@ public class Config {
     public static int getPlayerRespawnTime(){
 	return playerRespawnTime;
     }
-
+    
+    public static int getMessageBaseTime(){
+	return messageBaseTime;
+    }
+    
+    public static int getMessageTimePerLetter(){
+	return messageTimePerLetter;
+    }
 }

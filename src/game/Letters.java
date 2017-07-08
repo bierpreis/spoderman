@@ -6,8 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public abstract class Letters {
-    static int messageBaseTime = 1000;
-    static int messageTimer;
+
     static String[] buchstaben;
     static BufferedImage[] messagePicArray;
 
@@ -41,7 +40,7 @@ public abstract class Letters {
 	buchstaben[25] = "z";
     }
 
-    public static BufferedImage[] createMessage(String messageString) {
+    public static BufferedImage[] createMessageArray(String messageString) {
 
 	if (buchstaben == null)
 	    createBuchstaben();
@@ -65,12 +64,7 @@ public abstract class Letters {
 	    }
 
 	}
-	messageTimer = messageBaseTime + messagePicArray.length * 50; // setzt
-								      // messagetimer
 	return messagePicArray;
     }
 
-    static int getMessageTimer() {
-	return messageTimer;
-    }
 }

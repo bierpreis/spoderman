@@ -43,7 +43,7 @@ public class Player {
     private Rectangle botBounding;
     private BufferedImage lookingLeft, lookingRight, lookDead;
 
-    private BufferedImage[] messagePicArray;
+    private Message message;
 
     private Lvl lvl;
 
@@ -165,8 +165,8 @@ public class Player {
 	if (!respawnLock && !alive && lifes > 0 && updateTimeDead() > Config.getPlayerRespawnTime()) {
 
 	    alive = true;
-//	    f_posx = 400;
-//	    f_posy = 300;
+	    // f_posx = 400;
+	    // f_posy = 300;
 	    sayMessage("respawn  now am angri as fuk");
 	    timeDead = 0;
 	}
@@ -203,7 +203,7 @@ public class Player {
     }
 
     void move(KeyHandler keyHandler) {
-	
+
 	if (alive) {
 	    if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
 		f_posx -= moveSpeed;
@@ -335,11 +335,11 @@ public class Player {
     }
 
     public void sayMessage(String messageString) {
+	message = new Message(messageString);
+    }
 
-	messagePicArray = Letters.createMessage(messageString);
-	sayMessage = true;
-	this.messageTimer = Letters.getMessageTimer();
-
+    public Message getMessage() {
+	return message;
     }
 
     public boolean isSayMessage() {
@@ -361,11 +361,6 @@ public class Player {
     public void unlockMessage() { // ebenfalls esc
 	lockMessage = false;
 	sayMessage = false;
-    }
-
-
-    public BufferedImage[] getMessagePics() {
-	return messagePicArray;
     }
 
     public boolean getLvlUp() {

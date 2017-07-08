@@ -22,7 +22,7 @@ public class Button extends Rectangle {
 
 
 
-	labelPicArray = Letters.createMessage(label);
+	labelPicArray = Letters.createMessageArray(label);
 
 	width = 400;
 	height = 80;
