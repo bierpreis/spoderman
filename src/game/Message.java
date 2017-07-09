@@ -3,39 +3,37 @@ package game;
 import java.awt.image.BufferedImage;
 
 public class Message {
-    
+
     private BufferedImage[] messagePicArray;
-    
-    private boolean lock = false;
+
+    private boolean escLock = false;
     private int timer;
-    
-    public Message(String messageString){
+
+    public Message(String messageString) {
 	messagePicArray = Letters.createMessageArray(messageString);
 	timer = Config.getMessageBaseTime() + messagePicArray.length * Config.getMessageTimePerLetter();
-	
+
     }
-    
-    public int getTimer(){
+
+    public int getTimer() {
 	return timer;
     }
-    
-    public boolean getLock(){
-	return lock;
+
+    public boolean getEscLock() {
+	return escLock;
     }
-    
-    public void setLock(){
-	lock = true;
+
+    public void setEscLock(boolean lock) {
+	escLock = lock;
     }
-    
-    public BufferedImage[] getMessagePicArray(){
+
+    public BufferedImage[] getMessagePicArray() {
 	return messagePicArray;
     }
-    
-    public void updateTimer(int elapsedTime){
+
+    public void updateTimer(int elapsedTime) {
 	timer -= elapsedTime;
 
-	
-	
     }
 
 }

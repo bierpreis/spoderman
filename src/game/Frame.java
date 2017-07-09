@@ -9,8 +9,6 @@ import javax.swing.JFrame;
 
 public class Frame extends JFrame {
 
-    private boolean escaping;
-
     int escapeTime = 0; // esc dialog
     private int fps = 0;
     private int fpsCounter = 0;
@@ -64,24 +62,21 @@ public class Frame extends JFrame {
 
     private void checkIfEscape() {
 	if (keyHandler.getEscape()) {
-	    sayEscape();
+	    message = player.createMessage("pres esc again to fak awf oder enter to stai");
+	    player.getNewMessage().setEscLock(true);
+	    System.out.println("message: "+ message);
 	}
-	if (escaping)
-	    escapeTime += 15;
-	if (keyHandler.getEscape() && escapeTime > 600) {
-	    dispose();
+	if (message != null) {
+	    if (message.getEscLock())
+		escapeTime += 15;
+	    if (keyHandler.getEscape() && escapeTime > 600) {
+		dispose();
+	    }
+	    if (message.getEscLock() && keyHandler.getEnter()) {
+		message.setEscLock(false);
+		escapeTime = 0;
+	    }
 	}
-	if (escaping && keyHandler.getEnter()) {
-	    escaping = false;
-	    player.unlockMessage();
-	    escapeTime = 0;
-	}
-    }
-
-    public void sayEscape() {
-	player.createMessage("pres esc again to fak awf oder enter to stai");
-	player.lockMessage();
-	escaping = true;
     }
 
     private void writeInfo(Graphics g, Player player) {
@@ -149,7 +144,7 @@ public class Frame extends JFrame {
 		}
 	    }
 	    message.updateTimer(1000 / Config.getTargetFps());
-	    if (message.getTimer() < 0)
+	    if (!message.getEscLock() && message.getTimer() < 0)
 		message = null;
 	}
 

@@ -109,14 +109,7 @@ public class Player {
 	}
     }
 
-    void updateMessage() {
-	// zeitbegrenzung message
-	if (!lockMessage)
-	    if (!respawnLock && sayMessage)
-		messageTimer -= 15;
-	if (messageTimer < 0)
-	    sayMessage = false;
-    }
+
 
     void updateBounding() {
 	bounding.x = (int) f_posx;
@@ -269,21 +262,13 @@ public class Player {
 	    }
     }
 
-    public Message getNewMessage() {
-	Message messageToReturn = null;
-	
-	messageToReturn = message;
-	message = null;
-	return messageToReturn;
 
-    }
 
     void checkEnemies() {
 	if (lvl.getEnemy() != null)
 	    for (int i = 0; i < lvl.getEnemy().length; i++) {
 		// gegner töten
 		if (lvl.getEnemy()[i].getAlive())
-
 		    if (botBounding.intersects(lvl.getEnemy()[i].getTopBounding())) {
 			lvl.getEnemy()[i].kill();
 			createMessage("lel rekt");
@@ -301,7 +286,6 @@ public class Player {
 			    createMessage("g8 nao dis is mai end");
 			respawnLock = true;
 		    }
-
 	    }
     }
 
@@ -315,7 +299,7 @@ public class Player {
 	if (!isLookingRight)
 	    return lookingLeft;
 
-	return null; // default
+	return null;
     }
 
     void scroll() {
@@ -343,14 +327,44 @@ public class Player {
 	return lifes;
     }
 
-    void createMessage(String messageString) {
-	message = new Message(messageString);
+ 
+    
+    
+    
+    
+    
+    public Message createMessage(String messageString) {
+	return message = new Message(messageString);
+    }    
+    public void unlockMessage() { // ebenfalls esc
+	lockMessage = false;
+	sayMessage = false;
     }
-
     public boolean isSayMessage() {
 	return sayMessage;
     }
-
+    public Message getNewMessage() {
+	Message messageToReturn = null;
+	
+	messageToReturn = message;
+	message = null;
+	return messageToReturn;
+   }
+    void updateMessage() {
+	// zeitbegrenzung message
+	if (!lockMessage)
+	    if (!respawnLock && sayMessage)
+		messageTimer -= 15;
+	if (messageTimer < 0)
+	    sayMessage = false;
+    }
+    
+    
+   
+    
+    
+    
+    
     public boolean getRespawnLock() {
 	return respawnLock;
     }
@@ -363,10 +377,7 @@ public class Player {
 	lockMessage = true;
     }
 
-    public void unlockMessage() { // ebenfalls esc
-	lockMessage = false;
-	sayMessage = false;
-    }
+
 
     public boolean getLvlUp() {
 	return lvlUp;
