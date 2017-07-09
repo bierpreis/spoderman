@@ -11,36 +11,36 @@ public class Player {
     private boolean onBot = false;
     private boolean onRightSide;
     private boolean onLeftSide;
-    private boolean alreadyJumped = false;
-    private boolean jumpReleased = true;
-    private boolean jumping = false;
+    
+    
+
     private boolean isLookingRight = true;
     private boolean scrollingRight = false;
     private boolean scrollingLeft = false;
     private boolean alive = true;
-    private boolean sayMessage = false;
+    
     private boolean respawnLock = false;
-    private boolean lockMessage = false;
     private boolean lvlUp = false;
 
     private int timeSinceJump;
     private int upJumpTime = 190;
     private int jumpTime = 700;
-    private int x;
-    private int y;
+    private boolean alreadyJumped = false;
+    private boolean jumpReleased = true;
+    private boolean jumping = false;
+             
     private int swegCollected = 0;
-    private int messageTimer = 0;
     private int kills = 0;
     private int lifes = 3;
+    
     private int timeDead = 0;
-    private int screenX = Config.getScreenX();
-    private static int moveSpeed = Config.getPlayerMoveSpeed();
 
-    private float f_posx; // f_ als kennzeichen für float
-    private float f_posy;
+    private float f_posx = 350; // f_ als kennzeichen für float
+    private float f_posy = 300;
 
     private Rectangle bounding;
     private Rectangle botBounding;
+    
     private BufferedImage lookingLeft, lookingRight, lookDead;
 
     private Message message = null;
@@ -49,13 +49,11 @@ public class Player {
 
     // konstruktor
     public Player(Lvl lvl) {
-	f_posx = 350;
-	f_posy = 300;
 
 	createLook();
 
-	bounding = new Rectangle(x, y, lookingLeft.getWidth(), lookingLeft.getHeight());
-	botBounding = new Rectangle(x, (y + (lookingLeft.getHeight())), lookingLeft.getWidth(), (20));
+	bounding = new Rectangle((int)f_posx, (int)f_posy, lookingLeft.getWidth(), lookingLeft.getHeight());
+	botBounding = new Rectangle((int)f_posx, (int)f_posy, lookingLeft.getWidth(), 20);
 
 	this.lvl = lvl;
 
@@ -66,25 +64,25 @@ public class Player {
     public void update(KeyHandler keyHandler) {
 
 	updateCubes();
-
 	updateBigmek();
 	updateEnemies();
 	updateSweg();
+	
+	checkSweg();
+	checkBigmek();
+	checkCubes();
+	checkEnemies();
+
+	
 	updateTimeDead();
+	
 	updateBounding();
-	updateMessage();
-
 	scroll();
-
 	move(keyHandler);
 	jump(keyHandler);
 
 	respawn();
 
-	checkSweg();
-	checkBigmek();
-	checkCubes();
-	checkEnemies();
 
     }
 
@@ -144,16 +142,21 @@ public class Player {
 	    }
     }
 
+    public Rectangle getBounding() {
+	return bounding;
+    }
+    
+    
+    
+    
+    
+    
+    
     private int updateTimeDead() {
 	if (!alive && lifes > 0)
 	    timeDead += 15;
 	return timeDead;
     }
-
-    public Rectangle getBounding() {
-	return bounding;
-    }
-
     void respawn() {
 	if (!respawnLock && !alive && lifes > 0 && updateTimeDead() > Config.getPlayerRespawnTime()) {
 
@@ -164,6 +167,14 @@ public class Player {
 	    timeDead = 0;
 	}
     }
+    public void setRespawnLock(boolean respawnLock) {
+	this.respawnLock = respawnLock;
+    }
+    
+    
+    
+    
+    
 
     void checkCubes() {
 	onRightSide = false;
@@ -199,12 +210,12 @@ public class Player {
 
 	if (alive) {
 	    if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
-		f_posx -= moveSpeed;
+		f_posx -= Config.getPlayerMoveSpeed();
 		isLookingRight = false;
 	    }
 
 	    if (keyHandler.getRight() && !onLeftSide && !scrollingRight) {
-		f_posx += moveSpeed;
+		f_posx += Config.getPlayerMoveSpeed();
 		isLookingRight = true;
 	    }
 	}
@@ -258,7 +269,6 @@ public class Player {
 		lvl.getBigmek().setCollected();
 		createMessage("press enter to enter lvl two");
 		lvlUp = true;
-		lockMessage();
 	    }
     }
 
@@ -305,11 +315,11 @@ public class Player {
     void scroll() {
 	scrollingLeft = false;
 	scrollingRight = false;
-	if (bounding.x > 0.6 * screenX && !onLeftSide && alive) {
+	if (bounding.x > 0.6 * Config.getScreenX() && !onLeftSide && alive) {
 	    scrollingRight = true;
 	    f_posx -= 0.2;
 	}
-	if (bounding.x < 0.4 * screenX && !onRightSide && alive) {
+	if (bounding.x < 0.4 * Config.getScreenX() && !onRightSide && alive) {
 	    scrollingLeft = true;
 	    f_posx += (0.2);
 	}
@@ -336,13 +346,8 @@ public class Player {
     public Message createMessage(String messageString) {
 	return message = new Message(messageString);
     }    
-    public void unlockMessage() { // ebenfalls esc
-	lockMessage = false;
-	sayMessage = false;
-    }
-    public boolean isSayMessage() {
-	return sayMessage;
-    }
+
+
     public Message getNewMessage() {
 	Message messageToReturn = null;
 	
@@ -350,32 +355,16 @@ public class Player {
 	message = null;
 	return messageToReturn;
    }
-    void updateMessage() {
-	// zeitbegrenzung message
-	if (!lockMessage)
-	    if (!respawnLock && sayMessage)
-		messageTimer -= 15;
-	if (messageTimer < 0)
-	    sayMessage = false;
-    }
-    
+
     
    
     
     
     
     
-    public boolean getRespawnLock() {
-	return respawnLock;
-    }
 
-    public void setRespawnLock(boolean respawnLock) {
-	this.respawnLock = respawnLock;
-    }
 
-    public void lockMessage() { // wird von escape sequenz genutzt
-	lockMessage = true;
-    }
+
 
 
 

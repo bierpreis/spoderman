@@ -62,9 +62,13 @@ public class Frame extends JFrame {
 
     private void checkIfEscape() {
 	if (keyHandler.getEscape()) {
-	    message = player.createMessage("pres esc again to fak awf oder enter to stai");
-	    player.getNewMessage().setEscLock(true);
-	    System.out.println("message: "+ message);
+	    if (message == null){
+		message = player.createMessage("pres esc again to fak awf oder enter to stai");
+		message.setEscLock(true);
+	    }else if(!message.getEscLock()){
+		message = player.createMessage("pres esc again to fak awf oder enter to stai");
+		message.setEscLock(true);
+	    }		    			   	   
 	}
 	if (message != null) {
 	    if (message.getEscLock())
