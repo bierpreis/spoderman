@@ -19,7 +19,6 @@ public class Player {
     private boolean scrollingLeft = false;
     private boolean alive = true;
     
-    private boolean respawnLock = false;
     private boolean lvlUp = false;
 
     private int timeSinceJump;
@@ -81,7 +80,7 @@ public class Player {
 	move(keyHandler);
 	jump(keyHandler);
 
-	respawn();
+	respawn(keyHandler);
 
 
     }
@@ -157,19 +156,19 @@ public class Player {
 	    timeDead += 15;
 	return timeDead;
     }
-    void respawn() {
-	if (!respawnLock && !alive && lifes > 0 && updateTimeDead() > Config.getPlayerRespawnTime()) {
+    void respawn(KeyHandler keyHandler) {
+
+	if (keyHandler.getSpace() && !alive && lifes > 0 && updateTimeDead() > Config.getPlayerRespawnTime()) {
+
 
 	    alive = true;
-	    // f_posx = 400;
-	    // f_posy = 300;
+//	     f_posx = 400;
+//	     f_posy = 300;
 	    createMessage("respawn  now am angri as fuk");
 	    timeDead = 0;
 	}
     }
-    public void setRespawnLock(boolean respawnLock) {
-	this.respawnLock = respawnLock;
-    }
+
     
     
     
@@ -294,7 +293,6 @@ public class Player {
 			    createMessage("u got rekt 111  press spaec to respawn");
 			if (lifes < 1)
 			    createMessage("g8 nao dis is mai end");
-			respawnLock = true;
 		    }
 	    }
     }
