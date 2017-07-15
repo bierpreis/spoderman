@@ -59,7 +59,6 @@ public class Player {
     }
 
     public String update(KeyHandler keyHandler) {
-	
 
 	updateCubes();
 	updateBigmek();
@@ -69,9 +68,7 @@ public class Player {
 	checkSweg();
 	checkCubes();
 	checkEnemies();
-
-	if (getBigMekCollected())
-	    return "LVL_UP";
+	checkBigMek();
 
 	updateTimeDead();
 
@@ -83,8 +80,10 @@ public class Player {
 	if (checkIfEscape(keyHandler))
 	    return "EXIT";
 
-	if(respawn(keyHandler))
+	if (respawn(keyHandler))
 	    return "RESPAWN";
+	if(getBigmekCollected())
+	    return "LVL_UP";
 
 	return "CONTINUE";
 
@@ -94,7 +93,7 @@ public class Player {
 
 	if (showEscDialog) {
 	    long nextActionTime = System.currentTimeMillis() + 2000;
-	    
+
 	    while (System.currentTimeMillis() < nextActionTime) {
 
 		if (keyHandler.getEnter())
@@ -108,7 +107,7 @@ public class Player {
 	    }
 	}
 	showEscDialog = false;
-	if (keyHandler.getEscape()){
+	if (keyHandler.getEscape()) {
 	    showEscDialog = true;
 	    createMessage("press enter to get out and fak awf");
 	}
@@ -180,11 +179,11 @@ public class Player {
 	return timeDead;
     }
 
-   boolean respawn(KeyHandler keyHandler) {
+    boolean respawn(KeyHandler keyHandler) {
 
-//	if (lifes < 0)
-//
-//	    return -1;
+	// if (lifes < 0)
+	//
+	// return -1;
 
 	if (keyHandler.getSpace() && !alive && updateTimeDead() > Config.getPlayerRespawnTime()) {
 
@@ -286,14 +285,20 @@ public class Player {
 	    }
     }
 
-    boolean getBigMekCollected() {
+    void checkBigMek() {
 	if (lvl.getBigmek() != null && !lvl.getBigmek().getCollected())
 	    if (bounding.intersects(lvl.getBigmek().getBounding())) {
 		lvl.getBigmek().setCollected();
 		createMessage("press enter to enter lvl two");
-		return true;
+
 	    }
-	return false;
+
+    }
+    
+    public boolean getBigmekCollected(){
+	if(lvl.getBigmek()==null)
+	    return false;
+	return lvl.getBigmek().getCollected();
     }
 
     void checkEnemies() {

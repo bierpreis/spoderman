@@ -1,36 +1,40 @@
 package game;
 
 public class Game {
-
+    
+    boolean lvlUp = false;
     Lvl lvl;
     int nsPerFrame = 1000000000 / Config.getTargetFps();
     Player player;
     Frame f;
-    boolean lvlUp = false;
 
     public Game(int lvlNumber) {
 	lvl = new Lvl(lvlNumber);
 	player = new Player(lvl);
 	f = new Frame(player, lvl);
 
-	update();
-	System.out.println("nach update");
-	if (lvlUp)
-	    new Game(lvlNumber +1);
-	System.out.println("nach lvlUp");
+	lvlUp = update();
+	System.out.println("lvlup" + lvlUp);
+	if(lvlUp)
+	    new Game(lvlNumber+1);
 	
+	
+
     }
 
-    public void update() {
+    public boolean update() {
 
-
-
-	while (true) {
+	String nextAction = "CONTINUE";
+	while (nextAction == "CONTINUE") {
 	    long startTime = System.nanoTime();
-	    player.update(f.getKeyHandler());
+	    nextAction = player.update(f.getKeyHandler());
 	    f.repaintScreen();
-	    if(player.getBigMekCollected())
-		break;
+
+	    // check iv lvl up
+	    if (player.getBigmekCollected())
+		return true;
+
+	    
 	    if (!f.isDisplayable())
 		break;
 
@@ -53,9 +57,7 @@ public class Game {
 	    e.printStackTrace();
 	}
 
-	
+	return false;
     }
-    
-
 
 }
