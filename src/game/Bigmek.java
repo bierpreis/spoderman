@@ -11,13 +11,9 @@ public class Bigmek{
     private BufferedImage look;
     private Bounding bounding;
 
-    public Bigmek(int x, int y) {
-	
-	
+    public Bigmek(int x, int y) {	
 	look = createLook();
 	bounding = new Bounding(x,y,look.getWidth(), look.getHeight());
-
-
     }
 
     public BufferedImage getLook() {

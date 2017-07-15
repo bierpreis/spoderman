@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import game.Game;
+
 public class CodeInputWindow extends JDialog implements ActionListener {
 
     boolean enterKeyPressed = false;
@@ -69,8 +71,9 @@ public class CodeInputWindow extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
 	if (ae.getSource() == buttonOK) {
 	    if (textInput.getText().equals("lol")) {
-		menu.setLvl(2);
 		input.dispose();
+		new Game(2);
+		
 	    } else {
 		input.dispose();
 		wrongCode();
@@ -120,7 +123,7 @@ public class CodeInputWindow extends JDialog implements ActionListener {
 
 	if (code != null)
 	    if (code.equals("lol")) {
-		menu.game(2);
+//		menu.update(2);
 		menu.dispose();
 	    } else {
 		wrongCode();

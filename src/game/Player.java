@@ -96,7 +96,7 @@ public class Player {
 	    long nextActionTime = System.currentTimeMillis() + 2000;
 	    
 	    while (System.currentTimeMillis() < nextActionTime) {
-		System.out.println("in while");
+
 		if (keyHandler.getEnter())
 		    return true;
 		try {

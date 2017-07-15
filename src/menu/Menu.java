@@ -7,23 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.Config;
-import game.Frame;
+
+import game.Game;
 import game.KeyHandler;
-import game.Lvl;
-import game.Player;
 
 public class Menu extends JFrame {
 
-    boolean codeinputLock = false;
-    boolean menuLock = false;
-    int lvlNumber = 0;
-
-    // int screenX, screenY;
     Button[] buttonArray;
 
     private Screen screen;
 
-    KeyHandler keyHandler = new KeyHandler();
+    private KeyHandler keyHandler = new KeyHandler();
 
     public Menu() {
 
@@ -130,8 +124,6 @@ public class Menu extends JFrame {
 	}
 	if (buttonArray[1].getFocus() && keyHandler.getEnter()) {
 	    new CodeInputWindow(this);
-	    if (lvlNumber != 0)
-		game(lvlNumber);
 
 	}
 	if (buttonArray[2].getFocus() && keyHandler.getEnter()) {
@@ -146,21 +138,21 @@ public class Menu extends JFrame {
     public boolean showMenu() {
 
 	while (true) {
-	    
+
 	    repaintScreen();
 
 	    switch (update()) {
 	    case "CONTINUE":
 		break;
 	    case "NEW_GAME":
-		game(1);
+		new Game(1);
 		return false;
 	    case "EXIT":
 		return true;
 	    default:
 		return false;
 	    }
-	    
+
 	    try {
 		Thread.sleep(15);
 	    } catch (InterruptedException e) {
@@ -169,58 +161,6 @@ public class Menu extends JFrame {
 
 	}
 
-    }
-
-    public String game(int lvlNumber) {
-	int nsPerFrame = 1000000000 / Config.getTargetFps();
-
-	this.lvlNumber = lvlNumber;
-	Lvl lvl = new Lvl(lvlNumber);
-	Player player = new Player(lvl);
-	Frame f = new Frame(player, lvl);
-
-	// returnvalues:
-	// 0 is contuinue game loop
-	// -1 is end game and go back to menu
-	// 1 is lvl up
-	String nextAction = "CONTINUE";
-	while (nextAction.equals("CONTINUE")) {
-
-	    long startTime = System.nanoTime();
-	    nextAction = player.update(f.getKeyHandler());
-	    f.repaintScreen();
-	    if (!f.isDisplayable())
-		nextAction = "EXIT";
-
-	    int sleepTime = (int) (nsPerFrame - (System.nanoTime() - startTime)) / 1000000;
-	    if (sleepTime > 0)
-		try {
-		    Thread.sleep(sleepTime);
-
-		} catch (InterruptedException e) {
-		    e.printStackTrace();
-		}
-
-	}
-	f.dispose();
-	// sleep to avoid to start same lvl again with enter press
-	try {
-	    Thread.sleep(600);
-	} catch (InterruptedException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-
-	return nextAction;
-    }
-
-    void setLvl(int lvl) {
-	this.lvlNumber = lvl;
-	dispose();
-    }
-
-    void unSetMenuLock() {
-	menuLock = false;
     }
 
 }
