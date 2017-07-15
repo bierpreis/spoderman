@@ -21,7 +21,6 @@ public class Menu extends JFrame {
     // int screenX, screenY;
     Button[] buttonArray;
 
-
     private Screen screen;
 
     KeyHandler keyHandler = new KeyHandler();
@@ -29,7 +28,6 @@ public class Menu extends JFrame {
     public Menu() {
 
 	super("welcum to spodermens advenshur");
-
 
 	screen = new Screen();
 
@@ -96,11 +94,10 @@ public class Menu extends JFrame {
 	screen.repaint();
     }
 
-    boolean update() {
+    public String update() {
 	updateFocus();
-	Boolean escape = doButtonActions();
+	return getButtonActions();
 
-	return escape;
     }
 
     void updateFocus() {
@@ -127,11 +124,9 @@ public class Menu extends JFrame {
 	}
     }
 
-    boolean doButtonActions() {
+    String getButtonActions() {
 	if (buttonArray[0].getFocus() && keyHandler.getEnter()) {
-	    dispose();
-	    game(1);
-
+	    return "NEW_GAME";
 	}
 	if (buttonArray[1].getFocus() && keyHandler.getEnter()) {
 	    new CodeInputWindow(this);
@@ -140,46 +135,62 @@ public class Menu extends JFrame {
 
 	}
 	if (buttonArray[2].getFocus() && keyHandler.getEnter()) {
-	    dispose();
-	    System.exit(0);
+	    // dispose();
+
+	    return "EXIT";
 	}
-	return false;
+	return "CONTINUE";
 
     }
 
-    public void showMenu() {
+    public boolean showMenu() {
 
-	boolean escape = false;
+	while (true) {
+	    
+	    repaintScreen();
 
-	while (!escape) {
+	    switch (update()) {
+	    case "CONTINUE":
+		break;
+	    case "NEW_GAME":
+		game(1);
+		return false;
+	    case "EXIT":
+		return true;
+	    default:
+		return false;
+	    }
+	    
 	    try {
 		Thread.sleep(15);
 	    } catch (InterruptedException e) {
 		e.printStackTrace();
 	    }
-	    repaintScreen();
-	    escape = update();
 
 	}
 
     }
 
-    public void game(int lvlNumber) {
+    public String game(int lvlNumber) {
 	int nsPerFrame = 1000000000 / Config.getTargetFps();
 
 	this.lvlNumber = lvlNumber;
 	Lvl lvl = new Lvl(lvlNumber);
 	Player player = new Player(lvl);
 	Frame f = new Frame(player, lvl);
-	boolean running = true;
-	while (running) {
-	    long startTime = System.nanoTime();
 
-	    checkLvlUp(player);
-	    player.update(f.getKeyHandler());
+	// returnvalues:
+	// 0 is contuinue game loop
+	// -1 is end game and go back to menu
+	// 1 is lvl up
+	String nextAction = "CONTINUE";
+	while (nextAction.equals("CONTINUE")) {
+
+	    long startTime = System.nanoTime();
+	    nextAction = player.update(f.getKeyHandler());
 	    f.repaintScreen();
 	    if (!f.isDisplayable())
-		running = false;
+		nextAction = "EXIT";
 
 	    int sleepTime = (int) (nsPerFrame - (System.nanoTime() - startTime)) / 1000000;
 	    if (sleepTime > 0)
@@ -191,20 +202,16 @@ public class Menu extends JFrame {
 		}
 
 	}
-
-	Menu menu = new Menu();
-	menu.showMenu();
-
-    }
-
-    void checkLvlUp(Player player) {
-	if (player.getLvlUp()) {
-	    lvlNumber += 1;
-	    player.setLvlUp(false);
-	    game(lvlNumber);
-	    dispose();
-	    // useless comment
+	f.dispose();
+	// sleep to avoid to start same lvl again with enter press
+	try {
+	    Thread.sleep(600);
+	} catch (InterruptedException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
+
+	return nextAction;
     }
 
     void setLvl(int lvl) {

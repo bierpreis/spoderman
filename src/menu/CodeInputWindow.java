@@ -67,10 +67,8 @@ public class CodeInputWindow extends JDialog implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-	System.out.println("actioon performed method");
 	if (ae.getSource() == buttonOK) {
 	    if (textInput.getText().equals("lol")) {
-		System.out.println("es war lol");
 		menu.setLvl(2);
 		input.dispose();
 	    } else {

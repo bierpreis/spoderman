@@ -11,15 +11,11 @@ public class Player {
     private boolean onBot = false;
     private boolean onRightSide;
     private boolean onLeftSide;
-    
-    
 
     private boolean isLookingRight = true;
     private boolean scrollingRight = false;
     private boolean scrollingLeft = false;
     private boolean alive = true;
-    
-    private boolean lvlUp = false;
 
     private int timeSinceJump;
     private int upJumpTime = 190;
@@ -27,11 +23,13 @@ public class Player {
     private boolean alreadyJumped = false;
     private boolean jumpReleased = true;
     private boolean jumping = false;
-             
+
     private int swegCollected = 0;
     private int kills = 0;
     private int lifes = 3;
-    
+
+    private boolean showEscDialog = false;
+
     private int timeDead = 0;
 
     private float f_posx = 350; // f_ als kennzeichen für float
@@ -39,7 +37,7 @@ public class Player {
 
     private Rectangle bounding;
     private Rectangle botBounding;
-    
+
     private BufferedImage lookingLeft, lookingRight, lookDead;
 
     private Message message = null;
@@ -51,8 +49,8 @@ public class Player {
 
 	createLook();
 
-	bounding = new Rectangle((int)f_posx, (int)f_posy, lookingLeft.getWidth(), lookingLeft.getHeight());
-	botBounding = new Rectangle((int)f_posx, (int)f_posy, lookingLeft.getWidth(), 20);
+	bounding = new Rectangle((int) f_posx, (int) f_posy, lookingLeft.getWidth(), lookingLeft.getHeight());
+	botBounding = new Rectangle((int) f_posx, (int) f_posy, lookingLeft.getWidth(), 20);
 
 	this.lvl = lvl;
 
@@ -60,28 +58,61 @@ public class Player {
 
     }
 
-    public void update(KeyHandler keyHandler) {
+    public String update(KeyHandler keyHandler) {
+	
 
 	updateCubes();
 	updateBigmek();
 	updateEnemies();
 	updateSweg();
-	
+
 	checkSweg();
-	checkBigmek();
 	checkCubes();
 	checkEnemies();
 
-	
+	if (getBigMekCollected())
+	    return "LVL_UP";
+
 	updateTimeDead();
-	
+
 	updateBounding();
 	scroll();
 	move(keyHandler);
 	jump(keyHandler);
 
-	respawn(keyHandler);
+	if (checkIfEscape(keyHandler))
+	    return "EXIT";
 
+	if(respawn(keyHandler))
+	    return "RESPAWN";
+
+	return "CONTINUE";
+
+    }
+
+    private boolean checkIfEscape(KeyHandler keyHandler) {
+
+	if (showEscDialog) {
+	    long nextActionTime = System.currentTimeMillis() + 2000;
+	    
+	    while (System.currentTimeMillis() < nextActionTime) {
+		System.out.println("in while");
+		if (keyHandler.getEnter())
+		    return true;
+		try {
+		    Thread.sleep(10);
+		} catch (InterruptedException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    }
+	}
+	showEscDialog = false;
+	if (keyHandler.getEscape()){
+	    showEscDialog = true;
+	    createMessage("press enter to get out and fak awf");
+	}
+	return false;
 
     }
 
@@ -105,8 +136,6 @@ public class Player {
 	    e.printStackTrace();
 	}
     }
-
-
 
     void updateBounding() {
 	bounding.x = (int) f_posx;
@@ -144,36 +173,31 @@ public class Player {
     public Rectangle getBounding() {
 	return bounding;
     }
-    
-    
-    
-    
-    
-    
-    
+
     private int updateTimeDead() {
 	if (!alive && lifes > 0)
 	    timeDead += 15;
 	return timeDead;
     }
-    void respawn(KeyHandler keyHandler) {
 
-	if (keyHandler.getSpace() && !alive && lifes > 0 && updateTimeDead() > Config.getPlayerRespawnTime()) {
+   boolean respawn(KeyHandler keyHandler) {
 
+//	if (lifes < 0)
+//
+//	    return -1;
+
+	if (keyHandler.getSpace() && !alive && updateTimeDead() > Config.getPlayerRespawnTime()) {
 
 	    alive = true;
-//	     f_posx = 400;
-//	     f_posy = 300;
+	    // f_posx = 400;
+	    // f_posy = 300;
 	    createMessage("respawn  now am angri as fuk");
 	    timeDead = 0;
+	    return true;
 	}
-    }
 
-    
-    
-    
-    
-    
+	return false;
+    }
 
     void checkCubes() {
 	onRightSide = false;
@@ -262,16 +286,15 @@ public class Player {
 	    }
     }
 
-    void checkBigmek() {
+    boolean getBigMekCollected() {
 	if (lvl.getBigmek() != null && !lvl.getBigmek().getCollected())
 	    if (bounding.intersects(lvl.getBigmek().getBounding())) {
 		lvl.getBigmek().setCollected();
 		createMessage("press enter to enter lvl two");
-		lvlUp = true;
+		return true;
 	    }
+	return false;
     }
-
-
 
     void checkEnemies() {
 	if (lvl.getEnemy() != null)
@@ -335,42 +358,16 @@ public class Player {
 	return lifes;
     }
 
- 
-    
-    
-    
-    
-    
     public Message createMessage(String messageString) {
 	return message = new Message(messageString);
-    }    
-
+    }
 
     public Message getNewMessage() {
 	Message messageToReturn = null;
-	
+
 	messageToReturn = message;
 	message = null;
 	return messageToReturn;
-   }
-
-    
-   
-    
-    
-    
-    
-
-
-
-
-
-
-    public boolean getLvlUp() {
-	return lvlUp;
     }
 
-    public void setLvlUp(boolean lvlUp) {
-	this.lvlUp = lvlUp;
-    }
 }
