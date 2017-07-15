@@ -14,9 +14,10 @@ public class Game {
 	f = new Frame(player, lvl);
 
 	lvlUp = update();
-	System.out.println("lvlup" + lvlUp);
-	if(lvlUp)
+	if(lvlUp){
 	    new Game(lvlNumber+1);
+	    lvlUp = false;
+	}
 	
 	
 
@@ -31,12 +32,19 @@ public class Game {
 	    f.repaintScreen();
 
 	    // check iv lvl up
-	    if (player.getBigmekCollected())
+	    if (player.getLvlUp(f.getKeyHandler())){
+		f.dispose();
 		return true;
+	    }
 
 	    
-	    if (!f.isDisplayable())
+	    if (!f.isDisplayable()){
+		System.out.println("f.displayable");
+		f.dispose();
 		break;
+	    }
+		
+	    
 
 	    int sleepTime = (int) (nsPerFrame - (System.nanoTime() - startTime)) / 1000000;
 	    if (sleepTime > 0)

@@ -82,7 +82,7 @@ public class Player {
 
 	if (respawn(keyHandler))
 	    return "RESPAWN";
-	if(getBigmekCollected())
+	if(getLvlUp(keyHandler))
 	    return "LVL_UP";
 
 	return "CONTINUE";
@@ -295,10 +295,10 @@ public class Player {
 
     }
     
-    public boolean getBigmekCollected(){
+    public boolean getLvlUp(KeyHandler keyHandler){
 	if(lvl.getBigmek()==null)
 	    return false;
-	return lvl.getBigmek().getCollected();
+	return (lvl.getBigmek().getCollected()&& keyHandler.getEnter()) ;
     }
 
     void checkEnemies() {
