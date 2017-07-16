@@ -70,8 +70,9 @@ public class Player {
 	checkEnemies();
 	checkBigMek();
 
-	updateTimeDead();
-
+	// already called in checkifrespawn
+	// updateTimeDead();
+	checkRespawn(keyHandler);
 	updateBounding();
 	scroll();
 	move(keyHandler);
@@ -80,9 +81,9 @@ public class Player {
 	if (checkIfEscape(keyHandler))
 	    return "EXIT";
 
-	if (respawn(keyHandler))
-	    return "RESPAWN";
-	if(getLvlUp(keyHandler))
+	
+
+	if (getLvlUp(keyHandler))
 	    return "LVL_UP";
 
 	return "CONTINUE";
@@ -173,23 +174,20 @@ public class Player {
 	return bounding;
     }
 
-    private int updateTimeDead() {
-	if (!alive && lifes > 0)
-	    timeDead += 15;
-	return timeDead;
-    }
+    boolean checkRespawn(KeyHandler keyHandler) {
 
-    boolean respawn(KeyHandler keyHandler) {
+	if (alive)
+	    return false;
 
-	// if (lifes < 0)
-	//
-	// return -1;
+	if (lifes < 0)
+	    return false;
 
-	if (keyHandler.getSpace() && !alive && updateTimeDead() > Config.getPlayerRespawnTime()) {
+	timeDead += 15;
+
+	if (keyHandler.getSpace() && timeDead > Config.getPlayerRespawnTime()) {
 
 	    alive = true;
-	    // f_posx = 400;
-	    // f_posy = 300;
+
 	    createMessage("respawn  now am angri as fuk");
 	    timeDead = 0;
 	    return true;
@@ -294,11 +292,11 @@ public class Player {
 	    }
 
     }
-    
-    public boolean getLvlUp(KeyHandler keyHandler){
-	if(lvl.getBigmek()==null)
+
+    public boolean getLvlUp(KeyHandler keyHandler) {
+	if (lvl.getBigmek() == null)
 	    return false;
-	return (lvl.getBigmek().getCollected()&& keyHandler.getEnter()) ;
+	return (lvl.getBigmek().getCollected() && keyHandler.getEnter());
     }
 
     void checkEnemies() {
