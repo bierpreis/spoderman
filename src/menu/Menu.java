@@ -47,28 +47,26 @@ public class Menu extends JFrame {
 
     private class Screen extends JLabel {
 	protected void paintComponent(Graphics g) {
-	    super.paintComponent(g);
+//	    super.paintComponent(g);
 	    draw(g);
 	}
     }
 
     private void draw(Graphics g) {
 	int buttonY = 100;
-	g.setColor(Color.BLUE);
 
 	drawButton(buttonArray[0], g, buttonY);
 	drawButton(buttonArray[1], g, buttonY + 100);
 	drawButton(buttonArray[2], g, buttonY + 200);
     }
 
-    // button zeichnen
     void drawButton(Button button, Graphics g, int y) {
 
 	if (button.getFocus()) {
 	    g.setColor(Color.RED);
 	} else
 	    g.setColor(Color.BLUE);
-
+	System.out.println((int)button.getX());
 	g.fillRect((int) button.getX(), y, (int) button.getWidth(), (int) button.getHeight());
 
 	int letterX[] = new int[button.getPicArray().length];
@@ -81,17 +79,6 @@ public class Menu extends JFrame {
 		letterX[j + 1] = letterX[j] + 40;
 	    }
 	}
-    }
-
-    // screen zeichnen
-    void repaintScreen() {
-	screen.repaint();
-    }
-
-    public String update() {
-	updateFocus();
-	return getButtonActions();
-
     }
 
     void updateFocus() {
@@ -127,8 +114,6 @@ public class Menu extends JFrame {
 
 	}
 	if (buttonArray[2].getFocus() && keyHandler.getEnter()) {
-	    // dispose();
-
 	    return "EXIT";
 	}
 	return "CONTINUE";
@@ -137,11 +122,14 @@ public class Menu extends JFrame {
 
     public boolean showMenu() {
 
-	while (true) {
+	boolean escMenu = false;
+	while (!escMenu) {
 
-	    repaintScreen();
+	    updateFocus();
+	    screen.repaint();
 
-	    switch (update()) {
+	    switch (getButtonActions()) {
+
 	    case "CONTINUE":
 		break;
 	    case "NEW_GAME":
@@ -160,6 +148,7 @@ public class Menu extends JFrame {
 	    }
 
 	}
+	return false;
 
     }
 

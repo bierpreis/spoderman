@@ -13,23 +13,14 @@ public class Button extends Rectangle {
 
     boolean focus = false;
 
-
-
     BufferedImage[] labelPicArray;
 
-
     public Button(String label) {
-
-
 
 	labelPicArray = Letters.createMessageArray(label);
 
 	width = 400;
 	height = 80;
-	x = 150;
-	y = 400;
-
-
 
     }
 
