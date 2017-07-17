@@ -21,6 +21,7 @@ public class Button extends Rectangle {
 
 	width = 400;
 	height = 80;
+	x = 100;
 
     }
 

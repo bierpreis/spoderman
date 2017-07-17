@@ -25,7 +25,7 @@ public class Menu extends JFrame {
 
 	screen = new Screen();
 
-	screen.setBounds(100, 100, Config.getScreenX(), Config.getScreenY());
+	screen.setBounds(0, 0, Config.getScreenX(), Config.getScreenY());
 
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setSize(Config.getScreenX(), Config.getScreenY());
@@ -47,7 +47,7 @@ public class Menu extends JFrame {
 
     private class Screen extends JLabel {
 	protected void paintComponent(Graphics g) {
-//	    super.paintComponent(g);
+	    // super.paintComponent(g);
 	    draw(g);
 	}
     }
@@ -66,7 +66,7 @@ public class Menu extends JFrame {
 	    g.setColor(Color.RED);
 	} else
 	    g.setColor(Color.BLUE);
-	System.out.println((int)button.getX());
+
 	g.fillRect((int) button.getX(), y, (int) button.getWidth(), (int) button.getHeight());
 
 	int letterX[] = new int[button.getPicArray().length];
@@ -110,7 +110,12 @@ public class Menu extends JFrame {
 	    return "NEW_GAME";
 	}
 	if (buttonArray[1].getFocus() && keyHandler.getEnter()) {
-	    new CodeInputWindow(this);
+
+	    CodeInputWindow codeInput = new CodeInputWindow(this);
+	    if (codeInput.getUnlockedLvl() == 2) {
+
+		new Game(2);
+	    }
 
 	}
 	if (buttonArray[2].getFocus() && keyHandler.getEnter()) {

@@ -20,7 +20,7 @@ public class KeyHandler implements KeyListener {
 	    keyEscape = true;
 	if (e.getKeyCode() == KeyEvent.VK_ENTER)
 	    keyEnter = true;
-	if (e.getKeyCode() == KeyEvent.VK_LEFT) 
+	if (e.getKeyCode() == KeyEvent.VK_LEFT)
 	    keyLeft = true;
 	if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 	    keyRight = true;
@@ -28,9 +28,8 @@ public class KeyHandler implements KeyListener {
 	    keyUp = true;
 	if (e.getKeyCode() == KeyEvent.VK_DOWN)
 	    keyDown = true;
-	if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+	if (e.getKeyCode() == KeyEvent.VK_SPACE)
 	    keySpace = true;
-	}
 
     }
 
@@ -62,10 +61,16 @@ public class KeyHandler implements KeyListener {
     }
 
     public boolean getEnter() {
+	if (keyEnter == true) {
+	    keyEnter = false;
+	    return true;
+	}
+
 	return keyEnter;
     }
 
     public boolean getEscape() {
+
 	return keyEscape;
     }
 

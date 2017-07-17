@@ -15,6 +15,7 @@ public class Game {
 
 	lvlUp = update();
 	if (lvlUp) {
+
 	    new Game(lvlNumber + 1);
 	    lvlUp = false;
 	}
