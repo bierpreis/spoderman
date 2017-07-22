@@ -67,10 +67,7 @@ public class Player {
 
     public String update(KeyHandler keyHandler) {
 
-	updateCubes();
-	updateBigmek();
-	updateEnemies();
-	updateSweg();
+	lvl.update(scrollingLeft, scrollingRight);
 
 	checkSweg();
 	checkCubes();
@@ -148,32 +145,6 @@ public class Player {
 	botBounding.x = (int) f_posx;
 	botBounding.y = (int) f_posy + 20;
 
-    }
-
-    public void updateCubes() {
-	for (int i = 0; i < lvl.getCubes().length; i++) {
-	    lvl.getCubes()[i].updateBounding(scrollingLeft, scrollingRight);
-	}
-    }
-
-    void updateBigmek() {
-	if (lvl.getBigmek() != null) {
-	    lvl.getBigmek().getBounding().scroll(scrollingLeft, scrollingRight);
-	}
-    }
-
-    public void updateEnemies() {
-	if (lvl.getEnemy() != null)
-	    for (int i = 0; i < lvl.getEnemy().length; i++) {
-		lvl.getEnemy()[i].update(scrollingLeft, scrollingRight);
-	    }
-    }
-
-    void updateSweg() {
-	if (lvl.getSweg() != null)
-	    for (int i = 0; i < lvl.getSweg().length; i++) {
-		lvl.getSweg()[i].getBounding().scroll(scrollingLeft, scrollingRight);
-	    }
     }
 
     public Rectangle getBounding() {
