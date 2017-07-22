@@ -28,8 +28,9 @@ class WrongCodeWindow extends JDialog implements ActionListener{
 		buttonOk = new JButton("  k  ");
 		panel.add(buttonOk);
 		buttonOk.addActionListener(this);
+		
 		buttonOk.setVisible(true);
-
+		wrong.getRootPane().setDefaultButton(buttonOk);
 		wrong.add(panel);
 		
 		wrong.setModal(true);

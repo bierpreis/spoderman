@@ -111,7 +111,7 @@ public class Menu extends JFrame {
 	}
 	if (buttonArray[1].getFocus() && keyHandler.getEnter()) {
 
-	    CodeInputWindow codeInput = new CodeInputWindow(this);
+	    CodeInputWindow codeInput = new CodeInputWindow();
 	    if (codeInput.getUnlockedLvl() == 2) {
 
 		new Game(2);

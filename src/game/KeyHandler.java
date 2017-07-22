@@ -18,6 +18,7 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
 	if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
 	    keyEscape = true;
+	
 	if (e.getKeyCode() == KeyEvent.VK_ENTER)
 	    keyEnter = true;
 	if (e.getKeyCode() == KeyEvent.VK_LEFT)

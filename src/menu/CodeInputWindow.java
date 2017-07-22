@@ -19,7 +19,7 @@ public class CodeInputWindow extends JDialog implements ActionListener {
     private JTextField textInput;
     private int unlockedLvl = 0;
 
-    CodeInputWindow(Menu menu) {
+    CodeInputWindow() {
 	setLayout(new BorderLayout());
 
 	input = new JDialog();
@@ -39,7 +39,9 @@ public class CodeInputWindow extends JDialog implements ActionListener {
 
 	buttonOK = new JButton("  k  ");
 	panel.add(buttonOK);
+
 	buttonOK.addActionListener(this);
+	input.getRootPane().setDefaultButton(buttonOK);
 
 	buttonOK.setVisible(true);
 
@@ -49,6 +51,7 @@ public class CodeInputWindow extends JDialog implements ActionListener {
 
 	setFocusable(true);
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
     }
 
     @Override
