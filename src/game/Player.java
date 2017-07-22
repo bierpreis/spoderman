@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import general.Bounding;
 import general.Config;
 import general.KeyHandler;
 import general.Message;
@@ -18,6 +19,7 @@ public class Player {
     private boolean onLeftSide;
 
     private boolean isLookingRight = true;
+    
     private boolean scrollingRight = false;
     private boolean scrollingLeft = false;
     private boolean alive = true;
@@ -40,8 +42,8 @@ public class Player {
     private float f_posx = 350; // f_ als kennzeichen für float
     private float f_posy = 300;
 
-    private Rectangle bounding;
-    private Rectangle botBounding;
+    private Bounding bounding;
+    private Bounding botBounding;
 
     private BufferedImage lookingLeft, lookingRight, lookDead;
 
@@ -54,8 +56,8 @@ public class Player {
 
 	createLook();
 
-	bounding = new Rectangle((int) f_posx, (int) f_posy, lookingLeft.getWidth(), lookingLeft.getHeight());
-	botBounding = new Rectangle((int) f_posx, (int) f_posy, lookingLeft.getWidth(), 20);
+	bounding = new Bounding((int) f_posx, (int) f_posy, lookingLeft.getWidth(), lookingLeft.getHeight());
+	botBounding = new Bounding((int) f_posx, (int) f_posy + 20, lookingLeft.getWidth(), 20);
 
 	this.lvl = lvl;
 
@@ -145,8 +147,9 @@ public class Player {
     void updateBounding() {
 	bounding.x = (int) f_posx;
 	bounding.y = (int) f_posy;
-	botBounding = new Rectangle((int) f_posx, ((int) f_posy + (30)), lookingLeft.getWidth(),
-		(lookingLeft.getHeight() - 30)); /// !!!!!
+	botBounding.x = (int) f_posx;
+	botBounding.y = (int) f_posy + 20;
+
     }
 
     public void updateCubes() {
