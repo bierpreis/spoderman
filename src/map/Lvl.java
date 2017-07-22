@@ -1,4 +1,4 @@
-package game;
+package map;
 
 public class Lvl {
 	    	
@@ -94,16 +94,16 @@ public class Lvl {
 	
 
 	//getter
-	Cube[] getCubes(){
+	public Cube[] getCubes(){
 		return cube;
 	}
-	Sweg[] getSweg(){
+	public Sweg[] getSweg(){
 		return sweg;
 	}
-	Bigmek getBigmek(){
+	public Bigmek getBigmek(){
 		return bigmek;
 	}
-	Enemy[] getEnemy(){
+	public Enemy[] getEnemy(){
 		return enemy;
 	}
 	

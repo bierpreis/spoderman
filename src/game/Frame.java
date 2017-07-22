@@ -7,6 +7,11 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import general.Config;
+import general.KeyHandler;
+import general.Message;
+import map.Lvl;
+
 public class Frame extends JFrame {
 
     int escapeTime = 0; // esc dialog

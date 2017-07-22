@@ -1,10 +1,12 @@
-package game;
+package map;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-class Sweg{
+import general.Bounding;
+
+public class Sweg{
 
     private boolean isCollected = false;
     private BufferedImage look;

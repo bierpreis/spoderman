@@ -6,10 +6,9 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import game.Config;
-
 import game.Game;
-import game.KeyHandler;
+import general.Config;
+import general.KeyHandler;
 
 public class Menu extends JFrame {
 

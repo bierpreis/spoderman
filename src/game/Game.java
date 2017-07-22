@@ -1,5 +1,8 @@
 package game;
 
+import general.Config;
+import map.Lvl;
+
 public class Game {
 
     boolean lvlUp = false;

@@ -1,4 +1,6 @@
-package game;
+package map;
+
+import general.Bounding;
 
 public class Cube {
 

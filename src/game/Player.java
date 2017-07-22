@@ -5,6 +5,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import general.Config;
+import general.KeyHandler;
+import general.Message;
+import map.Lvl;
+
 public class Player {
 
     private boolean onTop = false;
