@@ -13,15 +13,12 @@ import map.Lvl;
 
 public class Player {
 
-    private boolean onTop = false;
-    private boolean onBot = false;
-    private boolean onRightSide;
-    private boolean onLeftSide;
+    private boolean onTop, onBot, onRightSide, onLeftSide;
 
     private boolean isLookingRight = true;
 
-    private boolean scrollingRight = false;
-    private boolean scrollingLeft = false;
+    private boolean scrollingRight, scrollingLeft;
+
     private boolean alive = true;
 
     private int timeSinceJump;
@@ -47,7 +44,7 @@ public class Player {
 
     private BufferedImage lookingLeft, lookingRight, lookDead;
 
-    private Message message = null;
+    private Message message;
 
     private Lvl lvl;
 
@@ -70,13 +67,13 @@ public class Player {
 	lvl.update(scrollingLeft, scrollingRight);
 
 	checkSweg();
-	checkCubes();
+	checkCubeCollisions();
 	checkEnemies();
 	checkBigMek();
 
 	// already called in checkifrespawn
 	// updateTimeDead();
-	checkRespawn(keyHandler);
+	checkIfRespawn(keyHandler);
 	updateBounding();
 	scroll();
 	move(keyHandler);
@@ -151,7 +148,7 @@ public class Player {
 	return bounding;
     }
 
-    boolean checkRespawn(KeyHandler keyHandler) {
+    boolean checkIfRespawn(KeyHandler keyHandler) {
 
 	if (alive)
 	    return false;
@@ -173,7 +170,7 @@ public class Player {
 	return false;
     }
 
-    void checkCubes() {
+    void checkCubeCollisions() {
 	onRightSide = false;
 	onLeftSide = false;
 	onBot = false;
