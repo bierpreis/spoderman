@@ -5,7 +5,6 @@ import map.Lvl;
 
 public class Game {
 
-    boolean lvlUp = false;
     Lvl lvl;
     int nsPerFrame = 1000000000 / Config.getTargetFps();
     Player player;
@@ -16,16 +15,14 @@ public class Game {
 	player = new Player(lvl);
 	f = new Frame(player, lvl);
 
-	lvlUp = update();
-	if (lvlUp) {
-
+	if (update() == "LVL_UP"){
 	    new Game(lvlNumber + 1);
-	    lvlUp = false;
+	    System.out.println("after lvlUp");
 	}
 
     }
 
-    public boolean update() {
+    public String update() {
 
 	String nextAction = "CONTINUE";
 	while (nextAction == "CONTINUE") {
@@ -34,10 +31,6 @@ public class Game {
 	    f.repaintScreen();
 
 	    // check iv lvl up
-	    if (player.getLvlUp(f.getKeyHandler())) {
-		f.dispose();
-		return true;
-	    }
 
 	    if (!f.isDisplayable()) {
 		f.dispose();
@@ -63,7 +56,7 @@ public class Game {
 	    e.printStackTrace();
 	}
 
-	return false;
+	return nextAction;
     }
 
 }

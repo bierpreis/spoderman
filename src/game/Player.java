@@ -19,7 +19,7 @@ public class Player {
     private boolean onLeftSide;
 
     private boolean isLookingRight = true;
-    
+
     private boolean scrollingRight = false;
     private boolean scrollingLeft = false;
     private boolean alive = true;
@@ -87,8 +87,6 @@ public class Player {
 
 	if (checkIfEscape(keyHandler))
 	    return "EXIT";
-
-	
 
 	if (getLvlUp(keyHandler))
 	    return "LVL_UP";

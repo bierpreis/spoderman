@@ -33,7 +33,7 @@ public class Bigmek{
 
     }
 
-    public boolean getCollected() {
+    public boolean getCollected() {	
 	return collected;
     }
 
