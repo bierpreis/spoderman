@@ -18,8 +18,6 @@ public class Message {
 	return timer;
     }
 
-
-
     public BufferedImage[] getMessagePicArray() {
 	return messagePicArray;
     }
