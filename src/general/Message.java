@@ -6,7 +6,6 @@ public class Message {
 
     private BufferedImage[] messagePicArray;
 
-    private boolean escLock = false;
     private int timer;
 
     public Message(String messageString) {
@@ -19,13 +18,7 @@ public class Message {
 	return timer;
     }
 
-    public boolean getEscLock() {
-	return escLock;
-    }
 
-    public void setEscLock(boolean lock) {
-	escLock = lock;
-    }
 
     public BufferedImage[] getMessagePicArray() {
 	return messagePicArray;

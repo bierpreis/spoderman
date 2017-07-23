@@ -153,7 +153,7 @@ public class Frame extends JFrame {
 		}
 	    }
 	    message.updateTimer(1000 / Config.getTargetFps());
-	    if (!message.getEscLock() && message.getTimer() < 0)
+	    if (message.getTimer() < 0)
 		message = null;
 	}
 
