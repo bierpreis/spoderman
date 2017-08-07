@@ -7,12 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import general.Bounding;
+import general.Config;
 
 public class Enemy {
     private boolean movingRight = true;
     private boolean alive = true;
-
-    private int moveSpeed = 1;
 
     private BufferedImage look;
 
@@ -39,12 +38,12 @@ public class Enemy {
 	if (alive) {
 
 	    if (movingRight) {
-		bounding.x += moveSpeed;
-		topBounding.x += moveSpeed;
+		bounding.x += Config.enemyMoveSpeed;
+		topBounding.x += Config.enemyMoveSpeed;
 	    }
 	    if (!movingRight) {
-		bounding.x -= moveSpeed;
-		topBounding.x -= moveSpeed;
+		bounding.x -= Config.enemyMoveSpeed;
+		topBounding.x -= Config.enemyMoveSpeed;
 	    }
 
 	    for (int i = 0; i < cube.length; i++) {

@@ -3,12 +3,12 @@ package menu;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import general.Config;
 import general.Letters;
 
 public class Button extends Rectangle {
 
     static boolean locked = true;
-    static int lockTime = 550;
     static int lockTimer = 0;
 
     boolean focus = false;
@@ -53,7 +53,7 @@ public class Button extends Rectangle {
 	if (locked) {
 	    lockTimer += 15;
 	}
-	if (locked && lockTimer > lockTime) {
+	if (locked && lockTimer > Config.buttonLockTime) {
 	    lockTimer = 0;
 	    locked = false;
 	}

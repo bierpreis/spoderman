@@ -14,7 +14,6 @@ import map.Lvl;
 
 public class Frame extends JFrame {
 
-    int escapeTime = 0; // esc dialog
     private int fps = 0;
     private int fpsCounter = 0;
     private long timeUntilLastSecond = System.currentTimeMillis() + 1000;
@@ -65,29 +64,6 @@ public class Frame extends JFrame {
 
     }
 
-//    private void checkIfEscape() {
-//	if (keyHandler.getEscape()) {
-//	    if (message == null){
-//		message = player.createMessage("pres esc again to fak awf oder enter to stai");
-//		message.setEscLock(true);
-//	    }else if(!message.getEscLock()){
-//		message = player.createMessage("pres esc again to fak awf oder enter to stai");
-//		message.setEscLock(true);
-//	    }		    			   	   
-//	}
-//	if (message != null) {
-//	    if (message.getEscLock())
-//		escapeTime += 15;
-//	    if (keyHandler.getEscape() && escapeTime > 600) {
-//		dispose();
-//	    }
-//	    if (message.getEscLock() && keyHandler.getEnter()) {
-//		message.setEscLock(false);
-//		escapeTime = 0;
-//	    }
-//	}
-//    }
-
     private void writeInfo(Graphics g, Player player) {
 	g.setColor(Color.BLACK);
 	g.drawString("Sweg Count:" + player.getSwegCount(), 25, 50);
@@ -117,8 +93,6 @@ public class Frame extends JFrame {
 		    (int) lvl.getCubes()[i].getBounding().getHeight());
 	}
     }
-
-    // zeichnen
 
     private int calcFps() {
 	fpsCounter++;

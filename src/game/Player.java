@@ -22,8 +22,6 @@ public class Player {
     private boolean alive = true;
 
     private int timeSinceJump;
-    private int upJumpTime = 190;
-    private int jumpTime = 700;
     private boolean alreadyJumped = false;
     private boolean jumpReleased = true;
     private boolean jumping = false;
@@ -92,7 +90,7 @@ public class Player {
     private boolean checkIfEscape(KeyHandler keyHandler) {
 
 	if (showEscDialog) {
-	    long nextActionTime = System.currentTimeMillis() + 2000;
+	    long nextActionTime = System.currentTimeMillis() + Config.escTime;
 
 	    while (System.currentTimeMillis() < nextActionTime) {
 
@@ -156,7 +154,7 @@ public class Player {
 	if (lifes < 0)
 	    return false;
 
-	timeDead += 15;
+	timeDead += Config.getTargetFps()/1000;
 
 	if (keyHandler.getSpace() && timeDead > Config.getPlayerRespawnTime()) {
 
@@ -229,20 +227,20 @@ public class Player {
 
 	if (onBot)
 	    jumping = false;
-	if (timeSinceJump > upJumpTime)
+	if (timeSinceJump > Config.timeJumpingUp)
 	    jumping = false;
 	if (alreadyJumped)
-	    timeSinceJump += 15;
-	if (timeSinceJump > jumpTime) {
+	    timeSinceJump += 1000/Config.getTargetFps();
+	if (timeSinceJump > Config.maxTimeBetweenJumps) {
 	    alreadyJumped = false;
 	    timeSinceJump = 0;
 	}
-	if (jumping && timeSinceJump < upJumpTime && !onBot) {
-	    f_posy -= 19;
+	if (jumping && timeSinceJump < Config.timeJumpingUp && !onBot) {
+		System.out.println("timesinceJump: " +timeSinceJump);
+	    f_posy -= Config.jumpSpeed;
 	}
-	if (timeSinceJump <= jumpTime)
+	if (timeSinceJump <= Config.maxTimeBetweenJumps)
 	    jumpReleased = true;
-
     }
 
     void checkSweg() {
