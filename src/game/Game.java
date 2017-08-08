@@ -17,7 +17,6 @@ public class Game {
 
 	if (update() == "LVL_UP"){
 	    new Game(lvlNumber + 1);
-	    System.out.println("after lvlUp");
 	}
 
     }

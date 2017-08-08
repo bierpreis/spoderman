@@ -236,7 +236,6 @@ public class Player {
 	    timeSinceJump = 0;
 	}
 	if (jumping && timeSinceJump < Config.timeJumpingUp && !onBot) {
-		System.out.println("timesinceJump: " +timeSinceJump);
 	    f_posy -= Config.jumpSpeed;
 	}
 	if (timeSinceJump <= Config.maxTimeBetweenJumps)
