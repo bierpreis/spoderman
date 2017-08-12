@@ -126,7 +126,7 @@ class Frame extends JFrame {
 		    }
 		}
 	    }
-	    message.updateTimer(1000 / Config.getTargetFps());
+	    message.updateTimer(1000 / Config.getMsPerFrame());
 	    if (message.getTimer() < 0)
 		message = null;
 	}

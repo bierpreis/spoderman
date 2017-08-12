@@ -153,7 +153,7 @@ class Player {
 	if (lifes < 0)
 	    return false;
 
-	timeDead += Config.getTargetFps()/1000;
+	timeDead += Config.getMsPerFrame();
 
 	if (keyHandler.getSpace() && timeDead > Config.getPlayerRespawnTime()) {
 		System.out.println("in if cycle");
@@ -229,7 +229,7 @@ class Player {
 	if (timeSinceJump > Config.timeJumpingUp)
 	    jumping = false;
 	if (alreadyJumped)
-	    timeSinceJump += 1000/Config.getTargetFps();
+	    timeSinceJump += Config.getMsPerFrame();
 	if (timeSinceJump > Config.maxTimeBetweenJumps) {
 	    alreadyJumped = false;
 	    timeSinceJump = 0;

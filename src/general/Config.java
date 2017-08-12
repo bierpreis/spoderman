@@ -18,14 +18,14 @@ public class Config {
     public static final int escTime = 2000;
     public static final int enemyMoveSpeed = 1;
     public static final int buttonLockTime = 500;
-    public static final int jumpSpeed = 19;
+    public static final int jumpSpeed = 17;
 
     public static int getPlayerMoveSpeed() {
 	return playerMoveSpeed;
     }
 
-    public static int getTargetFps() {
-	return targetFps;
+    public static int getMsPerFrame() {
+	return 1000/targetFps;
     }
 
     public static int getGravity() {

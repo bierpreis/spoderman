@@ -6,7 +6,7 @@ import map.Lvl;
 public class Game {
 
     private final Lvl lvl;
-    private final int nsPerFrame = 1000000000 / Config.getTargetFps();
+    private final int nsPerFrame = 1000000* Config.getMsPerFrame();
     private final Player player;
     private final Frame f;
 
