@@ -10,7 +10,7 @@ public class Sweg{
 
     private boolean isCollected = false;
     private BufferedImage look;
-    private Bounding bounding;
+    private final Bounding bounding;
 
     public Sweg(int x, int y) {
 	

@@ -12,18 +12,18 @@ import general.KeyHandler;
 import general.Message;
 import map.Lvl;
 
-public class Frame extends JFrame {
+class Frame extends JFrame {
 
     private int fps = 0;
     private int fpsCounter = 0;
     private long timeUntilLastSecond = System.currentTimeMillis() + 1000;
 
     private final Player player;
-    private Lvl lvl;
+    private final Lvl lvl;
 
     private Message message = null;
-    private KeyHandler keyHandler = new KeyHandler();
-    private BufferStrategy bufferStrategy;
+    private final KeyHandler keyHandler = new KeyHandler();
+    private final BufferStrategy bufferStrategy;
 
     public Frame(Player player, Lvl lvl) {
 	super("spodermens advenshur");
@@ -105,7 +105,7 @@ public class Frame extends JFrame {
 
     }
 
-    private Message sayMessage(Message newIncomingMessage, Graphics g) {
+    private void sayMessage(Message newIncomingMessage, Graphics g) {
 
 	if (newIncomingMessage != null)
 	    message = newIncomingMessage;
@@ -130,12 +130,9 @@ public class Frame extends JFrame {
 	    if (message.getTimer() < 0)
 		message = null;
 	}
-
-	return newIncomingMessage;
-
     }
 
-    void drawUnits(Graphics g) {
+    private void drawUnits(Graphics g) {
 	g.drawImage(player.getLook(), player.getBounding().x, player.getBounding().y, null);
 	if (lvl.getSweg() != null)
 	    for (int i = 0; i < lvl.getSweg().length; i++) {

@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Message {
 
-    private BufferedImage[] messagePicArray;
+    private final BufferedImage[] messagePicArray;
 
     private int timer;
 

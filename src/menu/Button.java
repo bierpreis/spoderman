@@ -6,14 +6,14 @@ import java.awt.image.BufferedImage;
 import general.Config;
 import general.Letters;
 
-public class Button extends Rectangle {
+class Button extends Rectangle {
 
-    static boolean locked = true;
-    static int lockTimer = 0;
+    private static boolean locked = true;
+    private static int lockTimer = 0;
 
-    boolean focus = false;
+    private boolean focus = false;
 
-    BufferedImage[] labelPicArray;
+    private final BufferedImage[] labelPicArray;
 
     public Button(String label) {
 
@@ -41,7 +41,7 @@ public class Button extends Rectangle {
 	focus = false;
     }
 
-    public static boolean getLocked() {
+    public static boolean isLocked() {
 	return locked;
     }
 

@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 
 
 class WrongCodeWindow extends JDialog implements ActionListener{
-	JButton buttonOk;
-	WrongCodeWindow wrong;
+	private JButton buttonOk;
+	private WrongCodeWindow wrong;
 
 	void showWrongCode() {
 		wrong = new WrongCodeWindow();

@@ -12,11 +12,11 @@ import general.KeyHandler;
 
 public class Menu extends JFrame {
 
-    Button[] buttonArray;
+    private final Button[] buttonArray;
 
-    private Screen screen;
+    private final Screen screen;
 
-    private KeyHandler keyHandler = new KeyHandler();
+    private final KeyHandler keyHandler = new KeyHandler();
 
     public Menu() {
 
@@ -59,7 +59,7 @@ public class Menu extends JFrame {
 	drawButton(buttonArray[2], g, buttonY + 200);
     }
 
-    void drawButton(Button button, Graphics g, int y) {
+    private void drawButton(Button button, Graphics g, int y) {
 
 	if (button.getFocus()) {
 	    g.setColor(Color.RED);
@@ -80,12 +80,12 @@ public class Menu extends JFrame {
 	}
     }
 
-    void updateFocus() {
+    private void updateFocus() {
 	for (int i = 0; i < buttonArray.length; i++) {
 	    buttonArray[i].update();
 
 	    // pfeil runter
-	    if (buttonArray[i].getFocus() && keyHandler.getDown() && !Button.getLocked()) {
+	    if (buttonArray[i].getFocus() && keyHandler.getDown() && !Button.isLocked()) {
 		Button.setLock();
 		if (i < buttonArray.length - 1) {
 		    buttonArray[i + 1].setFocus();
@@ -94,7 +94,7 @@ public class Menu extends JFrame {
 	    }
 
 	    // pfeil hoch
-	    if (buttonArray[i].getFocus() && keyHandler.getUp() && !Button.getLocked()) {
+	    if (buttonArray[i].getFocus() && keyHandler.getUp() && !Button.isLocked()) {
 		if (i > 0) {
 		    buttonArray[i - 1].setFocus();
 		    Button.setLock();
@@ -104,7 +104,7 @@ public class Menu extends JFrame {
 	}
     }
 
-    String getButtonActions() {
+    private String getButtonActions() {
 	if (buttonArray[0].getFocus() && keyHandler.getEnter()) {
 	    return "NEW_GAME";
 	}
@@ -126,8 +126,7 @@ public class Menu extends JFrame {
 
     public boolean showMenu() {
 
-	boolean escMenu = false;
-	while (!escMenu) {
+	while (true) {
 
 	    updateFocus();
 	    screen.repaint();
@@ -152,8 +151,6 @@ public class Menu extends JFrame {
 	    }
 
 	}
-	return false;
-
     }
 
 }

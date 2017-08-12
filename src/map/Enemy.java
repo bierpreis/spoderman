@@ -18,7 +18,7 @@ public class Enemy {
     private Bounding bounding;
     private Bounding topBounding;
 
-    Cube[] cube;
+    private final Cube[] cube;
 
     // konstruktor
     public Enemy(int x, int y, String type, Cube[] cube) {
@@ -87,7 +87,7 @@ public class Enemy {
 	return look;
     }
 
-    public BufferedImage createLook(String type) {
+    private BufferedImage createLook(String type) {
 	if (type == "dolan") {
 
 	    try {

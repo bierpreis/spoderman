@@ -11,7 +11,7 @@ public class Bigmek{
 
     private boolean collected = false;
     private BufferedImage look;
-    private Bounding bounding;
+    private final Bounding bounding;
 
     public Bigmek(int x, int y) {	
 	look = createLook();

@@ -12,7 +12,7 @@ public class KeyHandler implements KeyListener {
 
     private boolean keySpace = false;
     private boolean keyEscape = false;
-    private boolean keyEnter = false;
+    private boolean keyEnterIsPressed = false;
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -20,7 +20,7 @@ public class KeyHandler implements KeyListener {
 	    keyEscape = true;
 	
 	if (e.getKeyCode() == KeyEvent.VK_ENTER)
-	    keyEnter = true;
+	    keyEnterIsPressed = true;
 	if (e.getKeyCode() == KeyEvent.VK_LEFT)
 	    keyLeft = true;
 	if (e.getKeyCode() == KeyEvent.VK_RIGHT)
@@ -39,7 +39,7 @@ public class KeyHandler implements KeyListener {
 	if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
 	    keyEscape = false;
 	if (e.getKeyCode() == KeyEvent.VK_ENTER)
-	    keyEnter = false;
+	    keyEnterIsPressed = false;
 	if (e.getKeyCode() == KeyEvent.VK_LEFT)
 	    keyLeft = false;
 	if (e.getKeyCode() == KeyEvent.VK_RIGHT)
@@ -62,12 +62,12 @@ public class KeyHandler implements KeyListener {
     }
 
     public boolean getEnter() {
-	if (keyEnter == true) {
-	    keyEnter = false;
+	if (keyEnterIsPressed) {
+	    keyEnterIsPressed = false;
 	    return true;
 	}
 
-	return keyEnter;
+	return false;
     }
 
     public boolean getEscape() {

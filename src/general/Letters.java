@@ -7,10 +7,9 @@ import javax.imageio.ImageIO;
 
 public abstract class Letters {
 
-    static char[] buchstaben;
-    static BufferedImage[] messagePicArray;
+    private static char[] buchstaben;
 
-    static void createBuchstaben() {
+    private static void createBuchstaben() {
 	buchstaben = new char[26];
 	buchstaben[0] = 'a';
 	buchstaben[1] = 'b';
@@ -44,7 +43,7 @@ public abstract class Letters {
 
 	if (buchstaben == null)
 	    createBuchstaben();
-	char[] messageStringArray = (char[])messageString.toCharArray();
+	char[] messageStringArray = messageString.toCharArray();
 	BufferedImage[] messagePicArray = new BufferedImage[messageStringArray.length];
 
 	for (int i = 0; i < messagePicArray.length; i++) {

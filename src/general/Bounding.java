@@ -9,10 +9,6 @@ public class Bounding extends Rectangle {
 	super(x, y, width, height);
     }
 
-    // used by pic objects
-    public Bounding(int x, int y) {
-	super(x, y);
-    }
 
     public Bounding scroll(boolean scrollingLeft, boolean scrollingRight) {
 

@@ -2,10 +2,10 @@ package map;
 
 public class Lvl {
 
-    Cube[] cube;
-    Sweg[] sweg;
-    Bigmek bigmek;
-    Enemy[] enemy;
+    private Cube[] cube;
+    private Sweg[] sweg;
+    private Bigmek bigmek;
+    private Enemy[] enemy;
 
     public Lvl(int lvlNumber) {
 	createCube(lvlNumber);
@@ -14,7 +14,7 @@ public class Lvl {
 	createBigmek(lvlNumber);
     }
 
-    void createCube(int lvlNumber) {
+    private void createCube(int lvlNumber) {
 	if (lvlNumber == 1) {
 
 	    cube = new Cube[17]; // x, y, width, height ist das format
@@ -49,7 +49,7 @@ public class Lvl {
 
     }
 
-    void createSweg(int lvlNumber) {
+    private void createSweg(int lvlNumber) {
 	if (lvlNumber == 1) {
 	    sweg = new Sweg[6];
 	    sweg[0] = new Sweg(500, 500);
@@ -69,14 +69,14 @@ public class Lvl {
 
     }
 
-    void createBigmek(int lvlNumber) {
+    private void createBigmek(int lvlNumber) {
 	if (lvlNumber == 1) {
 	    bigmek = new Bigmek(3650, 150);
 	}
 
     }
 
-    void createEnemy(int lvlNumber) {
+    private void createEnemy(int lvlNumber) {
 	if (lvlNumber == 1) {
 	    enemy = new Enemy[2];
 	    enemy[0] = new Enemy(500, 500, "dolan", cube);

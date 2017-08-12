@@ -12,11 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class CodeInputWindow extends JDialog implements ActionListener {
+class CodeInputWindow extends JDialog implements ActionListener {
 
-    private JDialog input;
-    private JButton buttonOK;
-    private JTextField textInput;
+    private final JDialog input;
+    private final JButton buttonOK;
+    private final JTextField textInput;
     private int unlockedLvl = 0;
 
     CodeInputWindow() {

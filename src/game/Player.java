@@ -11,7 +11,7 @@ import general.KeyHandler;
 import general.Message;
 import map.Lvl;
 
-public class Player {
+class Player {
 
     private boolean onTop, onBot, onRightSide, onLeftSide;
 
@@ -37,14 +37,14 @@ public class Player {
     private float f_posx = 350; // f_ als kennzeichen für float
     private float f_posy = 300;
 
-    private Bounding bounding;
-    private Bounding botBounding;
+    private final Bounding bounding;
+    private final Bounding botBounding;
 
     private BufferedImage lookingLeft, lookingRight, lookDead;
 
     private Message message;
 
-    private Lvl lvl;
+    private final Lvl lvl;
 
     // konstruktor
     public Player(Lvl lvl) {
@@ -69,8 +69,7 @@ public class Player {
 	checkEnemies();
 	checkBigMek();
 
-	// already called in checkifrespawn
-	// updateTimeDead();
+
 	checkIfRespawn(keyHandler);
 	updateBounding();
 	scroll();
@@ -134,7 +133,7 @@ public class Player {
 	}
     }
 
-    void updateBounding() {
+    private void updateBounding() {
 	bounding.x = (int) f_posx;
 	bounding.y = (int) f_posy;
 	botBounding.x = (int) f_posx;
@@ -146,7 +145,7 @@ public class Player {
 	return bounding;
     }
 
-    boolean checkIfRespawn(KeyHandler keyHandler) {
+    private boolean checkIfRespawn(KeyHandler keyHandler) {
 
 	if (alive)
 	    return false;
@@ -157,7 +156,7 @@ public class Player {
 	timeDead += Config.getTargetFps()/1000;
 
 	if (keyHandler.getSpace() && timeDead > Config.getPlayerRespawnTime()) {
-
+		System.out.println("in if cycle");
 	    alive = true;
 
 	    createMessage("respawn  now am angri as fuk");
@@ -168,7 +167,7 @@ public class Player {
 	return false;
     }
 
-    void checkCubeCollisions() {
+    private void checkCubeCollisions() {
 	onRightSide = false;
 	onLeftSide = false;
 	onBot = false;
@@ -198,7 +197,7 @@ public class Player {
 
     }
 
-    void move(KeyHandler keyHandler) {
+    private void move(KeyHandler keyHandler) {
 
 	if (alive) {
 	    if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
@@ -217,7 +216,7 @@ public class Player {
 
     }
 
-    void jump(KeyHandler keyHandler) {
+    private void jump(KeyHandler keyHandler) {
 	if (alive)
 	    if (onTop && (!onBot && keyHandler.getSpace() && !alreadyJumped && jumpReleased)) {
 		jumping = true;
@@ -242,7 +241,7 @@ public class Player {
 	    jumpReleased = true;
     }
 
-    void checkSweg() {
+    private void checkSweg() {
 	if (lvl.getSweg() != null)
 	    for (int i = 0; i < lvl.getSweg().length; i++) {
 		if (!lvl.getSweg()[i].getCollected())
@@ -254,7 +253,7 @@ public class Player {
 	    }
     }
 
-    void checkBigMek() {
+    private void checkBigMek() {
 	if (lvl.getBigmek() != null && !lvl.getBigmek().getCollected())
 	    if (bounding.intersects(lvl.getBigmek().getBounding())) {
 		lvl.getBigmek().setCollected();
@@ -264,13 +263,13 @@ public class Player {
 
     }
 
-    public boolean getLvlUp(KeyHandler keyHandler) {
+    private boolean getLvlUp(KeyHandler keyHandler) {
 	if (lvl.getBigmek() == null)
 	    return false;
 	return (lvl.getBigmek().getCollected() && keyHandler.getEnter());
     }
 
-    void checkEnemies() {
+    private void checkEnemies() {
 	if (lvl.getEnemy() != null)
 	    for (int i = 0; i < lvl.getEnemy().length; i++) {
 		// gegner töten
@@ -307,7 +306,7 @@ public class Player {
 	return null;
     }
 
-    void scroll() {
+    private void scroll() {
 	scrollingLeft = false;
 	scrollingRight = false;
 	if (bounding.x > 0.6 * Config.getScreenX() && !onLeftSide && alive) {
@@ -332,14 +331,12 @@ public class Player {
 	return lifes;
     }
 
-    public Message createMessage(String messageString) {
-	return message = new Message(messageString);
+    private void createMessage(String messageString) {
+	message = new Message(messageString);
     }
 
     public Message getNewMessage() {
-	Message messageToReturn = null;
-
-	messageToReturn = message;
+	Message messageToReturn = message;
 	message = null;
 	return messageToReturn;
     }

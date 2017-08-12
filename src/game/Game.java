@@ -5,10 +5,10 @@ import map.Lvl;
 
 public class Game {
 
-    Lvl lvl;
-    int nsPerFrame = 1000000000 / Config.getTargetFps();
-    Player player;
-    Frame f;
+    private final Lvl lvl;
+    private final int nsPerFrame = 1000000000 / Config.getTargetFps();
+    private final Player player;
+    private final Frame f;
 
     public Game(int lvlNumber) {
 	lvl = new Lvl(lvlNumber);
@@ -21,7 +21,7 @@ public class Game {
 
     }
 
-    public String update() {
+    private String update() {
 
 	String nextAction = "CONTINUE";
 	while (nextAction == "CONTINUE") {
