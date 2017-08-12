@@ -5,33 +5,33 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JTextField;
 
-class InputField extends JTextField implements KeyListener{
+class InputField extends JTextField implements KeyListener {
 
-	public InputField(int cols) {
-		super(cols);
-		
-	}
+    public InputField(int cols) {
+        super(cols);
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		//code= getText();
-		System.out.println("KeyPressed in Inputfield");
-		if(e.getKeyCode() == KeyEvent.VK_ENTER)
-			System.out.println("Es war Enter");
-		
-	}
+    }
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void keyPressed(KeyEvent e) {
+        //code= getText();
+        System.out.println("KeyPressed in Inputfield");
+        if (e.getKeyCode() == KeyEvent.VK_ENTER)
+            System.out.println("Es war Enter");
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // TODO Auto-generated method stub
+
+    }
 
 
 }

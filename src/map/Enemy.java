@@ -23,104 +23,101 @@ public class Enemy {
     // konstruktor
     public Enemy(int x, int y, String type, Cube[] cube) {
 
-	look = createLook(type);
+        look = createLook(type);
 
-	bounding = new Bounding(x, y, look.getWidth(), look.getHeight());
-	topBounding = new Bounding(x + 5, y, look.getWidth() - 10, 10);
-	this.cube = cube;
+        bounding = new Bounding(x, y, look.getWidth(), look.getHeight());
+        topBounding = new Bounding(x + 5, y, look.getWidth() - 10, 10);
+        this.cube = cube;
 
     }
 
     // update
     public void update(boolean scrollingLeft, boolean scrollingRight) {
 
-	// bewegung
-	if (alive) {
+        // bewegung
+        if (alive) {
 
-	    if (movingRight) {
-		bounding.x += Config.enemyMoveSpeed;
-		topBounding.x += Config.enemyMoveSpeed;
-	    }
-	    if (!movingRight) {
-		bounding.x -= Config.enemyMoveSpeed;
-		topBounding.x -= Config.enemyMoveSpeed;
-	    }
+            if (movingRight) {
+                bounding.x += Config.enemyMoveSpeed;
+                topBounding.x += Config.enemyMoveSpeed;
+            }
+            if (!movingRight) {
+                bounding.x -= Config.enemyMoveSpeed;
+                topBounding.x -= Config.enemyMoveSpeed;
+            }
 
-	    for (int i = 0; i < cube.length; i++) {
-		if (bounding.intersects(cube[i].getBotBounding()) && movingRight) {
-		    movingRight = false;
+            for (int i = 0; i < cube.length; i++) {
+                if (bounding.intersects(cube[i].getBotBounding()) && movingRight) {
+                    movingRight = false;
 
-		}
-		if (bounding.intersects(cube[i].getLeftBounding()) && movingRight) {
-		    movingRight = false;
+                }
+                if (bounding.intersects(cube[i].getLeftBounding()) && movingRight) {
+                    movingRight = false;
 
-		}
-		if (bounding.intersects(cube[i].getRightBounding()) && !movingRight) {
-		    movingRight = true;
+                }
+                if (bounding.intersects(cube[i].getRightBounding()) && !movingRight) {
+                    movingRight = true;
 
-		}
-	    }
-	}
+                }
+            }
+        }
 
-	// scrolling
-	bounding = bounding.scroll(scrollingLeft, scrollingRight);
-	// Bounding updaten
+        // scrolling
+        bounding = bounding.scroll(scrollingLeft, scrollingRight);
+        // Bounding updaten
 
-	topBounding = topBounding.scroll(scrollingLeft, scrollingRight);
-	
-	
+        topBounding = topBounding.scroll(scrollingLeft, scrollingRight);
+
 
     }
 
     public void kill() {
-	try {
-	    look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/blood.png"));
-	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-	alive = false;
+        try {
+            look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/blood.png"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        alive = false;
     }
 
     public BufferedImage getLook() {
 
-	return look;
+        return look;
     }
 
     private BufferedImage createLook(String type) {
-	if (type == "dolan") {
+        if (type == "dolan") {
 
-	    try {
-		look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/Dolan.png"));
-	    }
+            try {
+                look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/Dolan.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-	    catch (IOException e) {
-		e.printStackTrace();
-	    }
-	}
+        if (type == "gooby") {
 
-	if (type == "gooby") {
+            try {
+                look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gooby.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-	    try {
-		look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gooby.png"));
-	    } catch (IOException e) {
-		e.printStackTrace();
-	    }
-	}
-
-	return look;
+        return look;
     }
 
     public Rectangle getTopBounding() {
-	return topBounding;
+        return topBounding;
     }
 
     public boolean getAlive() {
-	return alive;
+        return alive;
     }
 
     public Bounding getBounding() {
-	return bounding;
+        return bounding;
     }
 
 }

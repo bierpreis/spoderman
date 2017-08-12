@@ -9,21 +9,21 @@ public class Message {
     private int timer;
 
     public Message(String messageString) {
-	messagePicArray = Letters.createMessageArray(messageString);
-	timer = Config.getMessageBaseTime() + messagePicArray.length * Config.getMessageTimePerLetter();
+        messagePicArray = Letters.createMessageArray(messageString);
+        timer = Config.getMessageBaseTime() + messagePicArray.length * Config.getMessageTimePerLetter();
 
     }
 
     public int getTimer() {
-	return timer;
+        return timer;
     }
 
     public BufferedImage[] getMessagePicArray() {
-	return messagePicArray;
+        return messagePicArray;
     }
 
     public void updateTimer(int elapsedTime) {
-	timer -= elapsedTime;
+        timer -= elapsedTime;
 
     }
 

@@ -20,67 +20,67 @@ class CodeInputWindow extends JDialog implements ActionListener {
     private int unlockedLvl = 0;
 
     CodeInputWindow() {
-	setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
-	input = new JDialog();
+        input = new JDialog();
 
-	input.setTitle("lvl coed");
-	input.setSize(300, 150);
-	input.setLocation(250, 250);
+        input.setTitle("lvl coed");
+        input.setSize(300, 150);
+        input.setLocation(250, 250);
 
-	JPanel panel = new JPanel();
+        JPanel panel = new JPanel();
 
-	JLabel label = new JLabel("giff coed");
-	panel.add(label);
+        JLabel label = new JLabel("giff coed");
+        panel.add(label);
 
-	textInput = new InputField(15);
-	textInput.setBackground(Color.YELLOW);
-	panel.add(textInput);
+        textInput = new InputField(15);
+        textInput.setBackground(Color.YELLOW);
+        panel.add(textInput);
 
-	buttonOK = new JButton("  k  ");
-	panel.add(buttonOK);
+        buttonOK = new JButton("  k  ");
+        panel.add(buttonOK);
 
-	buttonOK.addActionListener(this);
-	input.getRootPane().setDefaultButton(buttonOK);
+        buttonOK.addActionListener(this);
+        input.getRootPane().setDefaultButton(buttonOK);
 
-	buttonOK.setVisible(true);
+        buttonOK.setVisible(true);
 
-	input.setModal(true);
-	input.add(panel);
-	input.setVisible(true);
+        input.setModal(true);
+        input.add(panel);
+        input.setVisible(true);
 
-	setFocusable(true);
-	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setFocusable(true);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
 
-	if (ae.getSource() == buttonOK) {
+        if (ae.getSource() == buttonOK) {
 
-	    if (textInput.getText().equals("lol")) {
+            if (textInput.getText().equals("lol")) {
 
-		input.dispose();
+                input.dispose();
 
-		unlockedLvl = 2;
+                unlockedLvl = 2;
 
-	    } else {
-		input.dispose();
-		wrongCode();
+            } else {
+                input.dispose();
+                wrongCode();
 
-	    }
-	}
+            }
+        }
     }
 
     private void wrongCode() {
-	WrongCodeWindow wrongCode = new WrongCodeWindow();
-	wrongCode.showWrongCode();
-	dispose();
+        WrongCodeWindow wrongCode = new WrongCodeWindow();
+        wrongCode.showWrongCode();
+        dispose();
     }
 
     public int getUnlockedLvl() {
-	return unlockedLvl;
+        return unlockedLvl;
     }
 
 }

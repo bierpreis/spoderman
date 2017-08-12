@@ -16,40 +16,40 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-	if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-	    keyEscape = true;
-	
-	if (e.getKeyCode() == KeyEvent.VK_ENTER)
-	    keyEnterIsPressed = true;
-	if (e.getKeyCode() == KeyEvent.VK_LEFT)
-	    keyLeft = true;
-	if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-	    keyRight = true;
-	if (e.getKeyCode() == KeyEvent.VK_UP)
-	    keyUp = true;
-	if (e.getKeyCode() == KeyEvent.VK_DOWN)
-	    keyDown = true;
-	if (e.getKeyCode() == KeyEvent.VK_SPACE)
-	    keySpace = true;
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+            keyEscape = true;
+
+        if (e.getKeyCode() == KeyEvent.VK_ENTER)
+            keyEnterIsPressed = true;
+        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            keyLeft = true;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            keyRight = true;
+        if (e.getKeyCode() == KeyEvent.VK_UP)
+            keyUp = true;
+        if (e.getKeyCode() == KeyEvent.VK_DOWN)
+            keyDown = true;
+        if (e.getKeyCode() == KeyEvent.VK_SPACE)
+            keySpace = true;
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-	if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-	    keyEscape = false;
-	if (e.getKeyCode() == KeyEvent.VK_ENTER)
-	    keyEnterIsPressed = false;
-	if (e.getKeyCode() == KeyEvent.VK_LEFT)
-	    keyLeft = false;
-	if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-	    keyRight = false;
-	if (e.getKeyCode() == KeyEvent.VK_SPACE)
-	    keySpace = false;
-	if (e.getKeyCode() == KeyEvent.VK_UP)
-	    keyUp = false;
-	if (e.getKeyCode() == KeyEvent.VK_DOWN)
-	    keyDown = false;
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+            keyEscape = false;
+        if (e.getKeyCode() == KeyEvent.VK_ENTER)
+            keyEnterIsPressed = false;
+        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            keyLeft = false;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            keyRight = false;
+        if (e.getKeyCode() == KeyEvent.VK_SPACE)
+            keySpace = false;
+        if (e.getKeyCode() == KeyEvent.VK_UP)
+            keyUp = false;
+        if (e.getKeyCode() == KeyEvent.VK_DOWN)
+            keyDown = false;
     }
 
     // Unnötig
@@ -58,37 +58,37 @@ public class KeyHandler implements KeyListener {
     }
 
     public boolean getSpace() {
-	return keySpace;
+        return keySpace;
     }
 
     public boolean getEnter() {
-	if (keyEnterIsPressed) {
-	    keyEnterIsPressed = false;
-	    return true;
-	}
+        if (keyEnterIsPressed) {
+            keyEnterIsPressed = false;
+            return true;
+        }
 
-	return false;
+        return false;
     }
 
     public boolean getEscape() {
 
-	return keyEscape;
+        return keyEscape;
     }
 
     public boolean getLeft() {
-	return keyLeft;
+        return keyLeft;
 
     }
 
     public boolean getRight() {
-	return keyRight;
+        return keyRight;
     }
 
     public boolean getUp() {
-	return keyUp;
+        return keyUp;
     }
 
     public boolean getDown() {
-	return keyDown;
+        return keyDown;
     }
 }

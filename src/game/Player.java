@@ -68,7 +68,7 @@ class Player {
         checkBigMek();
 
 
-        checkIfRespawn(keyHandler);
+        respawn(keyHandler);
         updateBounding();
         scroll();
         move(keyHandler);
@@ -114,21 +114,12 @@ class Player {
 
         try {
             lookingRight = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/spoder_right.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
             lookingLeft = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/spoder_left.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
             lookDead = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/blood.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private void updateBounding() {
@@ -143,13 +134,11 @@ class Player {
         return bounding;
     }
 
-    private boolean checkIfRespawn(KeyHandler keyHandler) {
-
+    private void respawn(KeyHandler keyHandler) {
         if (alive)
-            return false;
-
+            return;
         if (lifes < 0)
-            return false;
+            return;
 
         timeDead += Config.getMsPerFrame();
 
@@ -158,10 +147,7 @@ class Player {
 
             createMessage("respawn  now am angri as fuk");
             timeDead = 0;
-            return true;
         }
-
-        return false;
     }
 
     private void checkCubeCollisions() {
@@ -214,10 +200,8 @@ class Player {
     }
 
     private void jump(boolean spaceIsPressed) {
-
         if (!alive)
             return;
-
         //start new jump
         if (onTop && !onBot && spaceIsPressed)
             jumping = true;

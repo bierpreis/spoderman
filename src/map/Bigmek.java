@@ -7,43 +7,43 @@ import javax.imageio.ImageIO;
 
 import general.Bounding;
 
-public class Bigmek{
+public class Bigmek {
 
     private boolean collected = false;
     private BufferedImage look;
     private final Bounding bounding;
 
-    public Bigmek(int x, int y) {	
-	look = createLook();
-	bounding = new Bounding(x,y,look.getWidth(), look.getHeight());
+    public Bigmek(int x, int y) {
+        look = createLook();
+        bounding = new Bounding(x, y, look.getWidth(), look.getHeight());
     }
 
     public BufferedImage getLook() {
-	return look;	
+        return look;
     }
 
     private BufferedImage createLook() {
 
-	try {
-	    look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/bigmek.png"));
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-	return look;
+        try {
+            look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/bigmek.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return look;
 
     }
 
-    public boolean getCollected() {	
-	return collected;
+    public boolean getCollected() {
+        return collected;
     }
 
     public void setCollected() {
 
-	collected = true;
-	look = null;
+        collected = true;
+        look = null;
     }
-    
-    public Bounding getBounding(){
-	return bounding;
+
+    public Bounding getBounding() {
+        return bounding;
     }
 }

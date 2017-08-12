@@ -6,17 +6,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-	Menu menu = new Menu();
+        Menu menu = new Menu();
 
-	boolean escape = false;
+        boolean escape = false;
 
-	while (!escape) {
-	    escape = menu.showMenu();
+        while (!escape) {
+            escape = menu.showMenu();
 
-	}
+        }
 
-	menu.dispose();
-	System.exit(0);
+        menu.dispose();
+        System.exit(0);
 
     }
 

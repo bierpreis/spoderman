@@ -12,47 +12,47 @@ public class Cube {
 
     public Cube(int x, int y, int width, int height) {
 
-	bounding = new Bounding(x, y, width, height);
+        bounding = new Bounding(x, y, width, height);
 
-	topBounding = new Bounding(x, y, width, 15);
-	
-	botBounding = new Bounding(x +6, y + 25, width -12, height - 25);
+        topBounding = new Bounding(x, y, width, 15);
 
-	leftBounding = new Bounding(x + 10, y + 10, 5, height - 20);
-	rightBounding = new Bounding(x + width - 10, y + 10, 5, height - 20);
+        botBounding = new Bounding(x + 6, y + 25, width - 12, height - 25);
+
+        leftBounding = new Bounding(x + 10, y + 10, 5, height - 20);
+        rightBounding = new Bounding(x + width - 10, y + 10, 5, height - 20);
 
     }
 
     public void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
 
-	bounding.scroll(scrollingLeft, scrollingRight);
+        bounding.scroll(scrollingLeft, scrollingRight);
 
-	topBounding = topBounding.scroll(scrollingLeft, scrollingRight);
-	botBounding = botBounding.scroll(scrollingLeft, scrollingRight);
+        topBounding = topBounding.scroll(scrollingLeft, scrollingRight);
+        botBounding = botBounding.scroll(scrollingLeft, scrollingRight);
 
-	leftBounding = leftBounding.scroll(scrollingLeft, scrollingRight);
-	rightBounding = rightBounding.scroll(scrollingLeft, scrollingRight);
+        leftBounding = leftBounding.scroll(scrollingLeft, scrollingRight);
+        rightBounding = rightBounding.scroll(scrollingLeft, scrollingRight);
 
     }
 
     public Bounding getBounding() {
-	return bounding;
+        return bounding;
     }
 
     public Bounding getTopBounding() {
-	return topBounding;
+        return topBounding;
     }
 
     public Bounding getLeftBounding() {
-	return leftBounding;
+        return leftBounding;
     }
 
     public Bounding getRightBounding() {
-	return rightBounding;
+        return rightBounding;
     }
 
     public Bounding getBotBounding() {
-	return botBounding;
+        return botBounding;
     }
 
 }

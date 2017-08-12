@@ -6,10 +6,10 @@ public class Config {
     private static final int playerRespawnTime = 2000;
     private static final int targetFps = 80;
     private static final int gravity = 5;
-    
+
     private static final int messageBaseTime = 1000;
     private static final int messageTimePerLetter = 50;
-    
+
     private static final int screenX = 800;
     private static final int screenY = 600;
 
@@ -21,33 +21,34 @@ public class Config {
     public static final int jumpSpeed = 17;
 
     public static int getPlayerMoveSpeed() {
-	return playerMoveSpeed;
+        return playerMoveSpeed;
     }
 
     public static int getMsPerFrame() {
-	return 1000/targetFps;
+        return 1000 / targetFps;
     }
 
     public static int getGravity() {
-	return gravity;
+        return gravity;
     }
-    
-    public static int getScreenX(){
-	return screenX;
+
+    public static int getScreenX() {
+        return screenX;
     }
-    public static  int getScreenY(){
-	return screenY;
+
+    public static int getScreenY() {
+        return screenY;
     }
-    
-    public static int getPlayerRespawnTime(){
-	return playerRespawnTime;
+
+    public static int getPlayerRespawnTime() {
+        return playerRespawnTime;
     }
-    
-    public static int getMessageBaseTime(){
-	return messageBaseTime;
+
+    public static int getMessageBaseTime() {
+        return messageBaseTime;
     }
-    
-    public static int getMessageTimePerLetter(){
-	return messageTimePerLetter;
+
+    public static int getMessageTimePerLetter() {
+        return messageTimePerLetter;
     }
 }

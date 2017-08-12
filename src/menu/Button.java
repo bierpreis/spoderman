@@ -17,46 +17,46 @@ class Button extends Rectangle {
 
     public Button(String label) {
 
-	labelPicArray = Letters.createMessageArray(label);
+        labelPicArray = Letters.createMessageArray(label);
 
-	width = 400;
-	height = 80;
-	x = 100;
+        width = 400;
+        height = 80;
+        x = 100;
 
     }
 
     public BufferedImage[] getPicArray() {
-	return labelPicArray;
+        return labelPicArray;
     }
 
     public boolean getFocus() {
-	return focus;
+        return focus;
     }
 
     public void setFocus() {
-	focus = true;
+        focus = true;
     }
 
     public void unSetFocus() {
-	focus = false;
+        focus = false;
     }
 
     public static boolean isLocked() {
-	return locked;
+        return locked;
     }
 
     static void setLock() {
-	locked = true;
+        locked = true;
     }
 
     public void update() {
-	if (locked) {
-	    lockTimer += 15;
-	}
-	if (locked && lockTimer > Config.buttonLockTime) {
-	    lockTimer = 0;
-	    locked = false;
-	}
+        if (locked) {
+            lockTimer += 15;
+        }
+        if (locked && lockTimer > Config.buttonLockTime) {
+            lockTimer = 0;
+            locked = false;
+        }
     }
 
 }

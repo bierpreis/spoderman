@@ -6,23 +6,20 @@ public class Bounding extends Rectangle {
 
     // uses by cubes
     public Bounding(int x, int y, int width, int height) {
-	super(x, y, width, height);
+        super(x, y, width, height);
     }
 
 
     public Bounding scroll(boolean scrollingLeft, boolean scrollingRight) {
 
-	if (scrollingLeft)
-	    x = x + Config.getPlayerMoveSpeed();
+        if (scrollingLeft)
+            x = x + Config.getPlayerMoveSpeed();
 
-	if (scrollingRight)
-	    x = x - Config.getPlayerMoveSpeed();
+        if (scrollingRight)
+            x = x - Config.getPlayerMoveSpeed();
 
-	return this;
+        return this;
     }
-    
-    
-
 
 
 }
