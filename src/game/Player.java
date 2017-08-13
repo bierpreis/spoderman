@@ -9,7 +9,10 @@ import general.Bounding;
 import general.Config;
 import general.KeyHandler;
 import general.Message;
+import map.Cube;
+import map.Enemy;
 import map.Lvl;
+import map.Sweg;
 
 class Player {
 
@@ -91,9 +94,8 @@ class Player {
                 if (keyHandler.getEnter())
                     return true;
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(Config.msPerFrame);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -152,27 +154,15 @@ class Player {
         onLeftSide = false;
         onBot = false;
         onTop = false;
-        for (int i = 0; i < lvl.getCubes().length; i++) {
-            // überprüft onleftside
-            if (bounding.intersects(lvl.getCubes()[i].getLeftBounding())) {
+        for (Cube cube : lvl.getCubes()) {
+            if (bounding.intersects(cube.getLeftBounding()))
                 onLeftSide = true;
-
-            }
-            // überprüft onrightside
-            if (bounding.intersects(lvl.getCubes()[i].getRightBounding())) {
+            if (bounding.intersects(cube.getRightBounding()))
                 onRightSide = true;
-            }
-
-            // überprüft onTop
-            if (botBounding.intersects(lvl.getCubes()[i].getTopBounding())) {
+            if (botBounding.intersects(cube.getTopBounding()))
                 onTop = true;
-            }
-
-            // überprüft ob onBot
-            if (bounding.intersects(lvl.getCubes()[i].getBotBounding())) {
+            if (bounding.intersects(cube.getBotBounding()))
                 onBot = true;
-            }
-
         }
 
     }
@@ -219,11 +209,11 @@ class Player {
     }
 
     private void checkSweg() {
-        if (lvl.getSweg() != null)
-            for (int i = 0; i < lvl.getSweg().length; i++) {
-                if (!lvl.getSweg()[i].getCollected())
-                    if (bounding.intersects(lvl.getSweg()[i].getBounding())) {
-                        lvl.getSweg()[i].setCollected();
+        if (lvl.getSwegArray() != null)
+            for (Sweg sweg : lvl.getSwegArray()) {
+                if (!sweg.getCollected())
+                    if (bounding.intersects(sweg.getBounding())) {
+                        sweg.setCollected();
                         createMessage("monies");
                         swegCollected += 1;
                     }
@@ -231,9 +221,9 @@ class Player {
     }
 
     private void checkBigMek() {
-        if (lvl.getBigmek() != null && !lvl.getBigmek().getCollected())
-            if (bounding.intersects(lvl.getBigmek().getBounding())) {
-                lvl.getBigmek().setCollected();
+        if (lvl.getBigmekArray() != null && !lvl.getBigmekArray().getCollected())
+            if (bounding.intersects(lvl.getBigmekArray().getBounding())) {
+                lvl.getBigmekArray().setCollected();
                 createMessage("press enter to enter lvl two");
 
             }
@@ -241,25 +231,25 @@ class Player {
     }
 
     private boolean getLvlUp(KeyHandler keyHandler) {
-        if (lvl.getBigmek() == null)
+        if (lvl.getBigmekArray() == null)
             return false;
-        return (lvl.getBigmek().getCollected() && keyHandler.getEnter());
+        return (lvl.getBigmekArray().getCollected() && keyHandler.getEnter());
     }
 
     private void checkEnemies() {
-        if (lvl.getEnemy() != null)
-            for (int i = 0; i < lvl.getEnemy().length; i++) {
+        if (lvl.getEnemyArray() != null)
+            for (Enemy enemy : lvl.getEnemyArray()) {
                 // gegner töten
-                if (lvl.getEnemy()[i].getAlive())
-                    if (botBounding.intersects(lvl.getEnemy()[i].getTopBounding())) {
-                        lvl.getEnemy()[i].kill();
+                if (enemy.getAlive())
+                    if (botBounding.intersects(enemy.getTopBounding())) {
+                        enemy.kill();
                         createMessage("lel rekt");
                         kills += 1;
                     }
 
                 // feststellen ob tot
                 if (alive)
-                    if (bounding.intersects(lvl.getEnemy()[i].getBounding()) && lvl.getEnemy()[i].getAlive()) {
+                    if (bounding.intersects(enemy.getBounding()) && enemy.getAlive()) {
                         alive = false;
                         lifes -= 1;
                         if (lifes > 0)
