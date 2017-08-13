@@ -24,10 +24,10 @@ public class Menu extends JFrame {
 
         screen = new Screen();
 
-        screen.setBounds(0, 0, Config.getScreenX(), Config.getScreenY());
+        screen.setBounds(0, 0, Config.screenX, Config.screenY);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(Config.getScreenX(), Config.getScreenY());
+        setSize(Config.screenX, Config.screenY);
         setVisible(true);
         setResizable(false);
 

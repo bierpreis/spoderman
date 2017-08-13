@@ -137,9 +137,9 @@ class Player {
         if (lifes < 0)
             return;
 
-        timeDead += Config.getMsPerFrame();
+        timeDead += Config.msPerFrame;
 
-        if (keyHandler.getSpace() && timeDead > Config.getPlayerRespawnTime()) {
+        if (keyHandler.getSpace() && timeDead > Config.playerRespawnTime) {
             alive = true;
 
             createMessage("respawn  now am angri as fuk");
@@ -179,17 +179,17 @@ class Player {
 
     private void move(KeyHandler keyHandler) {
         if (!onTop)
-            f_posy += Config.getGravity();
+            f_posy += Config.gravity;
 
         if (!alive) return;
-        
+
         if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
-            f_posx -= Config.getPlayerMoveSpeed();
+            f_posx -= Config.playerMoveSpeed;
             isLookingRight = false;
         }
 
         if (keyHandler.getRight() && !onLeftSide && !scrollingRight) {
-            f_posx += Config.getPlayerMoveSpeed();
+            f_posx += Config.playerMoveSpeed;
             isLookingRight = true;
 
         }
@@ -205,7 +205,7 @@ class Player {
 
         //actual jump
         if (jumping) {
-            timeSinceJump += Config.getMsPerFrame();
+            timeSinceJump += Config.msPerFrame;
 
             if (timeSinceJump < Config.timeJumpingUp)
                 f_posy -= Config.jumpSpeed;
@@ -283,11 +283,11 @@ class Player {
     private void scroll() {
         scrollingLeft = false;
         scrollingRight = false;
-        if (bounding.x > 0.6 * Config.getScreenX() && !onLeftSide && alive) {
+        if (bounding.x > 0.6 * Config.screenX && !onLeftSide && alive) {
             scrollingRight = true;
             f_posx -= 0.2;
         }
-        if (bounding.x < 0.4 * Config.getScreenX() && !onRightSide && alive) {
+        if (bounding.x < 0.4 * Config.screenY && !onRightSide && alive) {
             scrollingLeft = true;
             f_posx += (0.2);
         }

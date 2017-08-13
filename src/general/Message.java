@@ -10,7 +10,7 @@ public class Message {
 
     public Message(String messageString) {
         messagePicArray = Letters.createMessageArray(messageString);
-        timer = Config.getMessageBaseTime() + messagePicArray.length * Config.getMessageTimePerLetter();
+        timer = Config.messageBaseTime + messagePicArray.length * Config.messageTimePerLetter;
 
     }
 

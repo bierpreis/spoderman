@@ -34,7 +34,7 @@ class Frame extends JFrame {
         this.lvl = lvl;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(Config.getScreenX(), Config.getScreenY());
+        setSize(Config.screenX, Config.screenY);
 
         setResizable(false);
         setVisible(true);
@@ -126,7 +126,7 @@ class Frame extends JFrame {
                     }
                 }
             }
-            message.updateTimer(1000 / Config.getMsPerFrame());
+            message.updateTimer(1000 / Config.msPerFrame);
             if (message.getTimer() < 0)
                 message = null;
         }

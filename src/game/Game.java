@@ -6,7 +6,7 @@ import map.Lvl;
 public class Game {
 
     private final Lvl lvl;
-    private final int nsPerFrame = 1000000 * Config.getMsPerFrame();
+    private final int nsPerFrame = 1000000000 / Config.targetFps;
     private final Player player;
     private final Frame f;
 
@@ -35,7 +35,6 @@ public class Game {
                 f.dispose();
                 break;
             }
-
             int sleepTime = (int) (nsPerFrame - (System.nanoTime() - startTime)) / 1000000;
             if (sleepTime > 0)
                 try {
