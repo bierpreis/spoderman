@@ -10,7 +10,10 @@ import javax.swing.JFrame;
 import general.Config;
 import general.KeyHandler;
 import general.Message;
+import map.Cube;
+import map.Enemy;
 import map.Lvl;
+import map.Sweg;
 
 class Frame extends JFrame {
 
@@ -74,23 +77,8 @@ class Frame extends JFrame {
 
     private void drawCubes(Graphics g) {
         g.setColor(Color.BLUE);
-        for (int i = 0; i < lvl.getCubes().length; i++) {
-            // if(i == 0 && firstTime){
-            // System.out.println("bounding: " +
-            // lvl.getCubes()[1].getBounding());
-            // System.out.println("topBounding: " +
-            // lvl.getCubes()[1].getTopBounding());
-            // System.out.println("botBounding: " +
-            // lvl.getCubes()[1].getBotBounding());
-            // System.out.println("leftBbounding: " +
-            // lvl.getCubes()[1].getLeftBounding());
-            // System.out.println("rightBounding: " +
-            // lvl.getCubes()[1].getRightBounding());
-            // firstTime = false;
-            // }
-            g.fillRect((int) lvl.getCubes()[i].getBounding().getX(), (int) lvl.getCubes()[i].getBounding().getY(),
-                    (int) lvl.getCubes()[i].getBounding().getWidth(),
-                    (int) lvl.getCubes()[i].getBounding().getHeight());
+        for (Cube cube : lvl.getCubes()) {
+            g.fillRect((int) cube.getBounding().getX(), (int) cube.getBounding().getY(), (int) cube.getBounding().getWidth(), (int) cube.getBounding().getHeight());
         }
     }
 
@@ -134,19 +122,17 @@ class Frame extends JFrame {
 
     private void drawUnits(Graphics g) {
         g.drawImage(player.getLook(), player.getBounding().x, player.getBounding().y, null);
-        if (lvl.getSweg() != null)
-            for (int i = 0; i < lvl.getSweg().length; i++) {
-                g.drawImage(lvl.getSweg()[i].getLook(), lvl.getSweg()[i].getBounding().x,
-                        lvl.getSweg()[i].getBounding().y, null);
+        if (lvl.getSwegArray() != null)
+            for (Sweg sweg: lvl.getSwegArray()) {
+                g.drawImage(sweg.getLook(), sweg.getBounding().x, sweg.getBounding().y, null);
             }
-        if (lvl.getBigmek() != null) {
-            g.drawImage(lvl.getBigmek().getLook(), (int) lvl.getBigmek().getBounding().getX(),
-                    (int) lvl.getBigmek().getBounding().getY(), null);
+        if (lvl.getBigmekArray() != null) {
+            g.drawImage(lvl.getBigmekArray().getLook(), (int) lvl.getBigmekArray().getBounding().getX(),
+                    (int) lvl.getBigmekArray().getBounding().getY(), null);
         }
-        if (lvl.getEnemy() != null)
-            for (int i = 0; i < lvl.getEnemy().length; i++) {
-                g.drawImage(lvl.getEnemy()[i].getLook(), (int) lvl.getEnemy()[i].getBounding().getX(),
-                        (int) lvl.getEnemy()[i].getBounding().getY(), null);
+        if (lvl.getEnemyArray() != null)
+            for (Enemy enemy: lvl.getEnemyArray()) {
+                g.drawImage(enemy.getLook(), (int) enemy.getBounding().getX(), (int) enemy.getBounding().getY(), null);
             }
 
     }

@@ -15,12 +15,11 @@ public class Enemy {
 
     private BufferedImage look;
 
-    private Bounding bounding;
-    private Bounding topBounding;
+    private final Bounding bounding;
+    private final Bounding topBounding;
 
     private final Cube[] cube;
-
-    // konstruktor
+    
     public Enemy(int x, int y, String type, Cube[] cube) {
 
         look = createLook(type);
@@ -31,7 +30,6 @@ public class Enemy {
 
     }
 
-    // update
     public void update(boolean scrollingLeft, boolean scrollingRight) {
 
         scroll(scrollingLeft, scrollingRight);
@@ -44,15 +42,12 @@ public class Enemy {
     }
 
     private void checkCubeCollisions() {
-        for (int i = 0; i < cube.length; i++) {
-
-            if (bounding.intersects(cube[i].getLeftBounding()) && movingRight) {
+        for (Cube cube : cube) {
+            if (bounding.intersects(cube.getLeftBounding()) && movingRight)
                 movingRight = false;
-
-            }
-            if (bounding.intersects(cube[i].getRightBounding()) && !movingRight) {
+            if (bounding.intersects(cube.getRightBounding()) && !movingRight)
                 movingRight = true;
-            }
+
         }
     }
 

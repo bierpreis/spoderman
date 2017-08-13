@@ -1,6 +1,5 @@
 package general;
 
-import java.util.*;
 
 public class Config {
 

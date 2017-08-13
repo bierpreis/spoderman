@@ -7,54 +7,54 @@ import javax.imageio.ImageIO;
 
 public abstract class Letters {
 
-    private static char[] buchstaben;
+    private static char[] charLetterArray;
 
-    private static void createBuchstaben() {
-        buchstaben = new char[26];
-        buchstaben[0] = 'a';
-        buchstaben[1] = 'b';
-        buchstaben[2] = 'c';
-        buchstaben[3] = 'd';
-        buchstaben[4] = 'e';
-        buchstaben[5] = 'f';
-        buchstaben[6] = 'g';
-        buchstaben[7] = 'h';
-        buchstaben[8] = 'i';
-        buchstaben[9] = 'j';
-        buchstaben[10] = 'k';
-        buchstaben[11] = 'l';
-        buchstaben[12] = 'm';
-        buchstaben[13] = 'n';
-        buchstaben[14] = 'o';
-        buchstaben[15] = 'p';
-        buchstaben[16] = 'q';
-        buchstaben[17] = 'r';
-        buchstaben[18] = 's';
-        buchstaben[19] = 't';
-        buchstaben[20] = 'u';
-        buchstaben[21] = 'v';
-        buchstaben[22] = 'w';
-        buchstaben[23] = 'x';
-        buchstaben[24] = 'y';
-        buchstaben[25] = 'z';
+    private static void createLetterArray() {
+        charLetterArray = new char[26];
+        charLetterArray[0] = 'a';
+        charLetterArray[1] = 'b';
+        charLetterArray[2] = 'c';
+        charLetterArray[3] = 'd';
+        charLetterArray[4] = 'e';
+        charLetterArray[5] = 'f';
+        charLetterArray[6] = 'g';
+        charLetterArray[7] = 'h';
+        charLetterArray[8] = 'i';
+        charLetterArray[9] = 'j';
+        charLetterArray[10] = 'k';
+        charLetterArray[11] = 'l';
+        charLetterArray[12] = 'm';
+        charLetterArray[13] = 'n';
+        charLetterArray[14] = 'o';
+        charLetterArray[15] = 'p';
+        charLetterArray[16] = 'q';
+        charLetterArray[17] = 'r';
+        charLetterArray[18] = 's';
+        charLetterArray[19] = 't';
+        charLetterArray[20] = 'u';
+        charLetterArray[21] = 'v';
+        charLetterArray[22] = 'w';
+        charLetterArray[23] = 'x';
+        charLetterArray[24] = 'y';
+        charLetterArray[25] = 'z';
     }
 
     public static BufferedImage[] createMessageArray(String messageString) {
 
-        if (buchstaben == null)
-            createBuchstaben();
+        if (charLetterArray == null)
+            createLetterArray();
         char[] messageStringArray = messageString.toCharArray();
         BufferedImage[] messagePicArray = new BufferedImage[messageStringArray.length];
 
         for (int i = 0; i < messagePicArray.length; i++) {
 
-            for (int y = 0; y < buchstaben.length; y++) {
+            for (char aCharLetterArray : charLetterArray) {
 
-                if (messageStringArray[i] == (buchstaben[y])) {
+                if (messageStringArray[i] == (aCharLetterArray)) {
 
                     try {
                         messagePicArray[i] = ImageIO
-                                .read(Letters.class.getResource("/letters/" + buchstaben[y] + ".png"));
+                                .read(Letters.class.getResource("/letters/" + aCharLetterArray + ".png"));
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();

@@ -5,10 +5,10 @@ import general.Bounding;
 public class Cube {
 
     private final Bounding bounding;
-    private Bounding topBounding;
-    private Bounding botBounding;
-    private Bounding leftBounding;
-    private Bounding rightBounding;
+    private final Bounding topBounding;
+    private final Bounding botBounding;
+    private final Bounding leftBounding;
+    private final Bounding rightBounding;
 
     public Cube(int x, int y, int width, int height) {
 
