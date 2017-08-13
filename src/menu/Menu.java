@@ -145,7 +145,7 @@ public class Menu extends JFrame {
             }
 
             try {
-                Thread.sleep(15);
+                Thread.sleep(Config.msPerFrame);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

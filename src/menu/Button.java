@@ -51,7 +51,7 @@ class Button extends Rectangle {
 
     public void update() {
         if (locked) {
-            lockTimer += 15;
+            lockTimer += Config.msPerFrame;
         }
         if (locked && lockTimer > Config.buttonLockTime) {
             lockTimer = 0;

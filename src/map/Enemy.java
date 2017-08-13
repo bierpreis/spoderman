@@ -52,8 +52,6 @@ public class Enemy {
             }
             if (bounding.intersects(cube[i].getRightBounding()) && !movingRight) {
                 movingRight = true;
-
-
             }
         }
     }
@@ -70,8 +68,8 @@ public class Enemy {
     }
 
     private void scroll(boolean scrollingLeft, boolean scrollingRight) {
-        bounding = bounding.scroll(scrollingLeft, scrollingRight);
-        topBounding = topBounding.scroll(scrollingLeft, scrollingRight);
+        bounding.scroll(scrollingLeft, scrollingRight);
+        topBounding.scroll(scrollingLeft, scrollingRight);
     }
 
     public void kill() {
