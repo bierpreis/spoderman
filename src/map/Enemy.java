@@ -34,41 +34,44 @@ public class Enemy {
     // update
     public void update(boolean scrollingLeft, boolean scrollingRight) {
 
-        // bewegung
-        if (alive) {
 
-            if (movingRight) {
-                bounding.x += Config.enemyMoveSpeed;
-                topBounding.x += Config.enemyMoveSpeed;
+        if (!alive)
+            return;
+
+        scroll(scrollingLeft, scrollingRight);
+        walk();
+        checkCubeCollisions();
+    }
+
+    private void checkCubeCollisions() {
+        for (int i = 0; i < cube.length; i++) {
+
+            if (bounding.intersects(cube[i].getLeftBounding()) && movingRight) {
+                movingRight = false;
+
             }
-            if (!movingRight) {
-                bounding.x -= Config.enemyMoveSpeed;
-                topBounding.x -= Config.enemyMoveSpeed;
-            }
+            if (bounding.intersects(cube[i].getRightBounding()) && !movingRight) {
+                movingRight = true;
 
-            for (int i = 0; i < cube.length; i++) {
-                if (bounding.intersects(cube[i].getBotBounding()) && movingRight) {
-                    movingRight = false;
 
-                }
-                if (bounding.intersects(cube[i].getLeftBounding()) && movingRight) {
-                    movingRight = false;
-
-                }
-                if (bounding.intersects(cube[i].getRightBounding()) && !movingRight) {
-                    movingRight = true;
-
-                }
             }
         }
+    }
 
-        // scrolling
+    private void walk() {
+        if (movingRight) {
+            bounding.x += Config.enemyMoveSpeed;
+            topBounding.x += Config.enemyMoveSpeed;
+        }
+        if (!movingRight) {
+            bounding.x -= Config.enemyMoveSpeed;
+            topBounding.x -= Config.enemyMoveSpeed;
+        }
+    }
+
+    private void scroll(boolean scrollingLeft, boolean scrollingRight) {
         bounding = bounding.scroll(scrollingLeft, scrollingRight);
-        // Bounding updaten
-
         topBounding = topBounding.scroll(scrollingLeft, scrollingRight);
-
-
     }
 
     public void kill() {
@@ -87,24 +90,15 @@ public class Enemy {
     }
 
     private BufferedImage createLook(String type) {
-        if (type == "dolan") {
 
-            try {
+        try {
+            if (type == "dolan")
                 look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/Dolan.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (type == "gooby") {
-
-            try {
+            if (type == "gooby")
                 look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gooby.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
         return look;
     }
 

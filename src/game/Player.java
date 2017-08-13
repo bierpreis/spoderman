@@ -44,7 +44,6 @@ class Player {
 
     private final Lvl lvl;
 
-    // konstruktor
     public Player(Lvl lvl) {
 
         createLook();
@@ -55,7 +54,6 @@ class Player {
         this.lvl = lvl;
 
         createMessage("nao i need to find teh bikmek");
-
     }
 
     public String update(KeyHandler keyHandler) {
@@ -66,7 +64,6 @@ class Player {
         checkCubeCollisions();
         checkEnemies();
         checkBigMek();
-
 
         respawn(keyHandler);
         updateBounding();
