@@ -178,21 +178,21 @@ class Player {
     }
 
     private void move(KeyHandler keyHandler) {
-
-        if (alive) {
-            if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
-                f_posx -= Config.getPlayerMoveSpeed();
-                isLookingRight = false;
-            }
-
-            if (keyHandler.getRight() && !onLeftSide && !scrollingRight) {
-                f_posx += Config.getPlayerMoveSpeed();
-                isLookingRight = true;
-            }
-        }
-        // schwerkraft
         if (!onTop)
             f_posy += Config.getGravity();
+
+        if (!alive) return;
+        
+        if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
+            f_posx -= Config.getPlayerMoveSpeed();
+            isLookingRight = false;
+        }
+
+        if (keyHandler.getRight() && !onLeftSide && !scrollingRight) {
+            f_posx += Config.getPlayerMoveSpeed();
+            isLookingRight = true;
+
+        }
 
     }
 

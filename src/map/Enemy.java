@@ -34,11 +34,11 @@ public class Enemy {
     // update
     public void update(boolean scrollingLeft, boolean scrollingRight) {
 
+        scroll(scrollingLeft, scrollingRight);
 
         if (!alive)
             return;
 
-        scroll(scrollingLeft, scrollingRight);
         walk();
         checkCubeCollisions();
     }
