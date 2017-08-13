@@ -10,15 +10,13 @@ public class Bounding extends Rectangle {
     }
 
 
-    public Bounding scroll(boolean scrollingLeft, boolean scrollingRight) {
+    public void scroll(boolean scrollingLeft, boolean scrollingRight) {
 
         if (scrollingLeft)
             x = x + Config.playerMoveSpeed;
 
         if (scrollingRight)
             x = x - Config.playerMoveSpeed;
-
-        return this;
     }
 
 
