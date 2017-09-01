@@ -14,6 +14,7 @@ public class Menu extends JFrame {
 
     private final Button[] buttonArray;
 
+
     private final Screen screen;
 
     private final KeyHandler keyHandler = new KeyHandler();
@@ -104,9 +105,9 @@ public class Menu extends JFrame {
         }
     }
 
-    private String getButtonActions() {
+    private void doButtonActions() {
         if (buttonArray[0].getFocus() && keyHandler.getEnter()) {
-            return "NEW_GAME";
+            new Game(1);
         }
         if (buttonArray[1].getFocus() && keyHandler.getEnter()) {
 
@@ -118,30 +119,18 @@ public class Menu extends JFrame {
 
         }
         if (buttonArray[2].getFocus() && keyHandler.getEnter()) {
-            return "EXIT";
+            this.dispose();
         }
-        return "CONTINUE";
 
     }
 
     public void showMenu() {
-        boolean showingMenu = true;
-        while (showingMenu) {
+        while (true) {
 
             updateButtonFocus();
             screen.repaint();
 
-            switch (getButtonActions()) {
-
-                case "CONTINUE":
-                    break;
-                case "NEW_GAME":
-                    new Game(1);
-                    break;
-                case "EXIT":
-                    showingMenu = false;
-                    break;
-            }
+            doButtonActions();
 
             try {
                 Thread.sleep(Config.msPerFrame);
