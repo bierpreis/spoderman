@@ -8,12 +8,7 @@ public class Main {
 
         Menu menu = new Menu();
 
-        boolean escape = false;
-
-        while (!escape) {
-            escape = menu.showMenu();
-
-        }
+        menu.showMenu();
 
         menu.dispose();
         System.exit(0);

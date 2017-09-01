@@ -80,7 +80,7 @@ public class Menu extends JFrame {
         }
     }
 
-    private void updateFocus() {
+    private void updateButtonFocus() {
         for (int i = 0; i < buttonArray.length; i++) {
             buttonArray[i].update();
 
@@ -124,11 +124,11 @@ public class Menu extends JFrame {
 
     }
 
-    public boolean showMenu() {
+    public void showMenu() {
+        boolean showingMenu = true;
+        while (showingMenu) {
 
-        while (true) {
-
-            updateFocus();
+            updateButtonFocus();
             screen.repaint();
 
             switch (getButtonActions()) {
@@ -137,11 +137,10 @@ public class Menu extends JFrame {
                     break;
                 case "NEW_GAME":
                     new Game(1);
-                    return false;
+                    break;
                 case "EXIT":
-                    return true;
-                default:
-                    return false;
+                    showingMenu = false;
+                    break;
             }
 
             try {
