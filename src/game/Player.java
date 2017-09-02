@@ -42,7 +42,7 @@ class Player {
     private final Bounding botBounding;
 
     private BufferedImage lookingLeft, lookingRight, lookDead;
-    private String nextAction = "";
+    private boolean lvlUp = false;
 
     private Message message;
 
@@ -76,12 +76,11 @@ class Player {
         jump(keyHandler.getSpace());
 
         if (checkIfEscape(keyHandler)) {
-            nextAction = "ESCAPE";
             return false;
         }
 
         if (getLvlUp(keyHandler)) {
-            nextAction = "LVLUP";
+            lvlUp = true;
             return false;
         }
 
@@ -310,8 +309,8 @@ class Player {
         return messageToReturn;
     }
 
-    public String getNextAction(){
-        return nextAction;
+    public boolean getLvlUp(){
+        return lvlUp;
     }
 
 }

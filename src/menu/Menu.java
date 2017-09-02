@@ -108,6 +108,7 @@ public class Menu extends JFrame {
     private void doButtonActions() {
         if (buttonArray[0].getFocus() && keyHandler.getEnter()) {
             new Game(1);
+
         }
         if (buttonArray[1].getFocus() && keyHandler.getEnter()) {
 
@@ -115,6 +116,7 @@ public class Menu extends JFrame {
             if (codeInput.getUnlockedLvl() == 2) {
 
                 new Game(2);
+
             }
 
         }

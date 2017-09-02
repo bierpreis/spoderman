@@ -6,12 +6,18 @@ public class Lvl {
     private Sweg[] swegArray;
     private Bigmek bigmekArray;
     private Enemy[] enemyArray;
+    private int lvlNumber;
 
     public Lvl(int lvlNumber) {
         createCube(lvlNumber);
         createSweg(lvlNumber);
         createEnemy(lvlNumber);
         createBigmek(lvlNumber);
+        this.lvlNumber = lvlNumber;
+    }
+
+    public int getLvlNumber(){
+        return lvlNumber;
     }
 
     private void createCube(int lvlNumber) {

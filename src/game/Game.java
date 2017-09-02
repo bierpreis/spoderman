@@ -6,52 +6,43 @@ import map.Lvl;
 public class Game {
 
     private final Lvl lvl;
-    private final int nsPerFrame = 1000000000 / Config.targetFps;
     private final Player player;
-    private final Frame f;
+    private final Frame frame;
 
     public Game(int lvlNumber) {
         lvl = new Lvl(lvlNumber);
         player = new Player(lvl);
-        f = new Frame(player, lvl);
-
-        if (update() == "LVLUP") {
-            new Game(lvlNumber + 1);
-        }
-
+        frame = new Frame(player, lvl);
+        run();
     }
 
-    private String update() {
+    private void run() {
 
         boolean running = true;
         while (running) {
             long startTime = System.nanoTime();
-            running = player.update(f.getKeyHandler());
-            f.repaintScreen();
+            running = player.update(frame.getKeyHandler());
+            frame.repaintScreen();
 
             // check iv lvl up
-            if (!f.isDisplayable()) {
-                f.dispose();
+            if (!frame.isDisplayable()) {
+                frame.dispose();
                 break;
             }
             sleep(startTime);
         }
 
-        f.dispose();
+        frame.dispose();
 
-        // sleep to avoid to start same lvl again with enter press
-        try {
-            Thread.sleep(600);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if(player.getLvlUp()) {
+            new Game(lvl.getLvlNumber()+1);
         }
 
-        return player.getNextAction();
+
     }
 
     private void sleep(long startTime) {
-        int sleepTime = (int) (nsPerFrame - (System.nanoTime() - startTime)) / 1000000;
+        int sleepTime = (int) (1000000000 / Config.targetFps - (System.nanoTime() - startTime)) / 1000000;
         if (sleepTime > 0)
             try {
                 Thread.sleep(sleepTime);
