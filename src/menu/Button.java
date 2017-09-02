@@ -15,7 +15,7 @@ class Button extends Rectangle {
 
     private final BufferedImage[] labelPicArray;
 
-    public Button(String label) {
+    Button(String label) {
 
         labelPicArray = Letters.createMessageArray(label);
 
@@ -25,23 +25,23 @@ class Button extends Rectangle {
 
     }
 
-    public BufferedImage[] getPicArray() {
+    BufferedImage[] getPicArray() {
         return labelPicArray;
     }
 
-    public boolean getFocus() {
+    boolean getFocus() {
         return focus;
     }
 
-    public void setFocus() {
+    void setFocus() {
         focus = true;
     }
 
-    public void unSetFocus() {
+    void unSetFocus() {
         focus = false;
     }
 
-    public static boolean isLocked() {
+    static boolean isLocked() {
         return locked;
     }
 
@@ -49,7 +49,7 @@ class Button extends Rectangle {
         locked = true;
     }
 
-    public void update() {
+    void update() {
         if (locked) {
             lockTimer += Config.msPerFrame;
         }

@@ -105,10 +105,10 @@ public class Menu extends JFrame {
         }
     }
 
-    private void doButtonActions() {
+    private boolean doButtonActions() {
         if (buttonArray[0].getFocus() && keyHandler.getEnter()) {
             new Game(1);
-
+            return true;
         }
         if (buttonArray[1].getFocus() && keyHandler.getEnter()) {
 
@@ -116,23 +116,26 @@ public class Menu extends JFrame {
             if (codeInput.getUnlockedLvl() == 2) {
 
                 new Game(2);
-
+                return true;
             }
 
         }
         if (buttonArray[2].getFocus() && keyHandler.getEnter()) {
-            this.dispose();
+            return false;
         }
+
+        return true;
 
     }
 
     public void showMenu() {
-        while (true) {
+        boolean showingMenu = true;
+        while (showingMenu) {
 
             updateButtonFocus();
             screen.repaint();
 
-            doButtonActions();
+            showingMenu = doButtonActions();
 
             try {
                 Thread.sleep(Config.msPerFrame);

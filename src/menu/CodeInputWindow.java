@@ -79,7 +79,7 @@ class CodeInputWindow extends JDialog implements ActionListener {
         dispose();
     }
 
-    public int getUnlockedLvl() {
+    int getUnlockedLvl() {
         return unlockedLvl;
     }
 

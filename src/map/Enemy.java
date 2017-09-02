@@ -20,7 +20,7 @@ public class Enemy {
 
     private final Cube[] cube;
     
-    public Enemy(int x, int y, String type, Cube[] cube) {
+    Enemy(int x, int y, String type, Cube[] cube) {
 
         look = createLook(type);
 
@@ -30,15 +30,14 @@ public class Enemy {
 
     }
 
-    public void update(boolean scrollingLeft, boolean scrollingRight) {
+    void update(boolean scrollingLeft, boolean scrollingRight) {
 
         scroll(scrollingLeft, scrollingRight);
 
-        if (!alive)
-            return;
-
-        walk();
-        checkCubeCollisions();
+        if(alive) {
+            walk();
+            checkCubeCollisions();
+        }
     }
 
     private void checkCubeCollisions() {
@@ -85,9 +84,9 @@ public class Enemy {
     private BufferedImage createLook(String type) {
 
         try {
-            if (type == "dolan")
+            if (type.equals("dolan"))
                 look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/Dolan.png"));
-            if (type == "gooby")
+            if (type.equals("gooby"))
                 look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gooby.png"));
         } catch (IOException e) {
             e.printStackTrace();

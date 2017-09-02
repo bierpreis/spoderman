@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 
 class InputField extends JTextField implements KeyListener {
 
-    public InputField(int cols) {
+    InputField(int cols) {
         super(cols);
 
     }

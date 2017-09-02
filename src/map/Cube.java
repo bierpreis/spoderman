@@ -10,7 +10,7 @@ public class Cube {
     private final Bounding leftBounding;
     private final Bounding rightBounding;
 
-    public Cube(int x, int y, int width, int height) {
+    Cube(int x, int y, int width, int height) {
 
         bounding = new Bounding(x, y, width, height);
         topBounding = new Bounding(x, y-5, width, 10);
@@ -20,7 +20,7 @@ public class Cube {
 
     }
 
-    public void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
+    void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
 
         bounding.scroll(scrollingLeft, scrollingRight);
         topBounding.scroll(scrollingLeft, scrollingRight);
