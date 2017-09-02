@@ -23,7 +23,7 @@ public class Game {
             long startTime = System.nanoTime();
             running = player.update(frame.getKeyHandler());
             frame.repaintScreen();
-            
+
             sleep(startTime);
         }
 
