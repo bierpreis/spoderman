@@ -48,7 +48,7 @@ class Player {
 
     private final Lvl lvl;
 
-    public Player(Lvl lvl) {
+    Player(Lvl lvl) {
 
         createLook();
 
@@ -60,7 +60,7 @@ class Player {
         createMessage("nao i need to find teh bikmek");
     }
 
-    public boolean update(KeyHandler keyHandler) {
+    boolean update(KeyHandler keyHandler) {
 
         lvl.update(scrollingLeft, scrollingRight);
 
@@ -133,7 +133,7 @@ class Player {
 
     }
 
-    public Rectangle getBounding() {
+    Rectangle getBounding() {
         return bounding;
     }
 
@@ -235,9 +235,10 @@ class Player {
     }
 
     private boolean getLvlUp(KeyHandler keyHandler) {
-        if (lvl.getBigmekArray() == null)
-            return false;
-        return (lvl.getBigmekArray().getCollected() && keyHandler.getEnter());
+        if (lvl.getBigmekArray() != null)
+            if (lvl.getBigmekArray().getCollected())
+                if (keyHandler.getEnter()) return true;
+        return false;
     }
 
     private void checkEnemies() {
@@ -264,7 +265,7 @@ class Player {
             }
     }
 
-    public BufferedImage getLook() {
+    BufferedImage getLook() {
 
         if (!alive)
             return lookDead;
@@ -287,15 +288,15 @@ class Player {
         }
     }
 
-    public int getSwegCount() {
+    int getSwegCount() {
         return swegCollected;
     }
 
-    public int getKills() {
+    int getKills() {
         return kills;
     }
 
-    public int getLifes() {
+    int getLifes() {
         return lifes;
     }
 
@@ -303,13 +304,13 @@ class Player {
         message = new Message(messageString);
     }
 
-    public Message getNewMessage() {
+    Message getNewMessage() {
         Message messageToReturn = message;
         message = null;
         return messageToReturn;
     }
 
-    public boolean getLvlUp(){
+    boolean getLvlUp() {
         return lvlUp;
     }
 

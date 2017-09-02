@@ -28,7 +28,7 @@ class Frame extends JFrame {
     private final KeyHandler keyHandler = new KeyHandler();
     private final BufferStrategy bufferStrategy;
 
-    public Frame(Player player, Lvl lvl) {
+    Frame(Player player, Lvl lvl) {
         super("spodermens advenshur");
 
         addKeyListener(keyHandler);
@@ -48,7 +48,7 @@ class Frame extends JFrame {
     }
 
     // screen zeichnen
-    public void repaintScreen() {
+    void repaintScreen() {
 
         Graphics g = bufferStrategy.getDrawGraphics();
 
@@ -137,7 +137,7 @@ class Frame extends JFrame {
 
     }
 
-    public KeyHandler getKeyHandler() {
+    KeyHandler getKeyHandler() {
         return keyHandler;
     }
 
