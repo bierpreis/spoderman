@@ -48,11 +48,11 @@ public class Menu extends JFrame {
     private class Screen extends JLabel {
         protected void paintComponent(Graphics g) {
             // super.paintComponent(g);
-            draw(g);
+            drawButtons(g);
         }
     }
 
-    private void draw(Graphics g) {
+    private void drawButtons(Graphics g) {
         int buttonY = 100;
 
         drawButton(buttonArray[0], g, buttonY);

@@ -15,7 +15,7 @@ public class Game {
         player = new Player(lvl);
         f = new Frame(player, lvl);
 
-        if (update() == "LVL_UP") {
+        if (update() == "LVLUP") {
             new Game(lvlNumber + 1);
         }
 
@@ -23,29 +23,22 @@ public class Game {
 
     private String update() {
 
-        String nextAction = "CONTINUE";
-        while (nextAction == "CONTINUE") {
+        boolean running = true;
+        while (running) {
             long startTime = System.nanoTime();
-            nextAction = player.update(f.getKeyHandler());
+            running = player.update(f.getKeyHandler());
             f.repaintScreen();
 
             // check iv lvl up
-
             if (!f.isDisplayable()) {
                 f.dispose();
                 break;
             }
-            int sleepTime = (int) (nsPerFrame - (System.nanoTime() - startTime)) / 1000000;
-            if (sleepTime > 0)
-                try {
-                    Thread.sleep(sleepTime);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+            sleep(startTime);
         }
+
         f.dispose();
+
         // sleep to avoid to start same lvl again with enter press
         try {
             Thread.sleep(600);
@@ -54,7 +47,18 @@ public class Game {
             e.printStackTrace();
         }
 
-        return nextAction;
+        return player.getNextAction();
+    }
+
+    private void sleep(long startTime) {
+        int sleepTime = (int) (nsPerFrame - (System.nanoTime() - startTime)) / 1000000;
+        if (sleepTime > 0)
+            try {
+                Thread.sleep(sleepTime);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
     }
 
 }

@@ -42,6 +42,7 @@ class Player {
     private final Bounding botBounding;
 
     private BufferedImage lookingLeft, lookingRight, lookDead;
+    private String nextAction = "";
 
     private Message message;
 
@@ -59,7 +60,7 @@ class Player {
         createMessage("nao i need to find teh bikmek");
     }
 
-    public String update(KeyHandler keyHandler) {
+    public boolean update(KeyHandler keyHandler) {
 
         lvl.update(scrollingLeft, scrollingRight);
 
@@ -74,13 +75,17 @@ class Player {
         move(keyHandler);
         jump(keyHandler.getSpace());
 
-        if (checkIfEscape(keyHandler))
-            return "EXIT";
+        if (checkIfEscape(keyHandler)) {
+            nextAction = "ESCAPE";
+            return false;
+        }
 
-        if (getLvlUp(keyHandler))
-            return "LVL_UP";
+        if (getLvlUp(keyHandler)) {
+            nextAction = "LVLUP";
+            return false;
+        }
 
-        return "CONTINUE";
+        return true;
 
     }
 
@@ -303,6 +308,10 @@ class Player {
         Message messageToReturn = message;
         message = null;
         return messageToReturn;
+    }
+
+    public String getNextAction(){
+        return nextAction;
     }
 
 }
