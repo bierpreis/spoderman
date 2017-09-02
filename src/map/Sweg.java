@@ -12,7 +12,7 @@ public class Sweg {
     private BufferedImage look;
     private final Bounding bounding;
 
-    public Sweg(int x, int y) {
+    Sweg(int x, int y) {
 
 
         try {

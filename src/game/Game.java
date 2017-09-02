@@ -23,12 +23,7 @@ public class Game {
             long startTime = System.nanoTime();
             running = player.update(frame.getKeyHandler());
             frame.repaintScreen();
-
-            // check iv lvl up
-            if (!frame.isDisplayable()) {
-                frame.dispose();
-                break;
-            }
+            
             sleep(startTime);
         }
 
