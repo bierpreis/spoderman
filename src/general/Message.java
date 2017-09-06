@@ -22,8 +22,8 @@ public class Message {
         return messagePicArray;
     }
 
-    public void updateTimer(int elapsedTime) {
-        timer -= elapsedTime;
+    public void updateTimer() {
+        timer -= Config.msPerFrame;
 
     }
 

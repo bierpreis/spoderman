@@ -47,7 +47,6 @@ class Frame extends JFrame {
 
     }
 
-    // screen zeichnen
     void repaintScreen() {
 
         Graphics g = bufferStrategy.getDrawGraphics();
@@ -61,8 +60,7 @@ class Frame extends JFrame {
         writeInfo(g, player);
 
 
-        if (isDisplayable())
-            bufferStrategy.show();
+        bufferStrategy.show();
         g.dispose();
 
     }
@@ -114,7 +112,7 @@ class Frame extends JFrame {
                     }
                 }
             }
-            message.updateTimer(1000 / Config.msPerFrame);
+            message.updateTimer();
             if (message.getTimer() < 0)
                 message = null;
         }
@@ -123,7 +121,7 @@ class Frame extends JFrame {
     private void drawUnits(Graphics g) {
         g.drawImage(player.getLook(), player.getBounding().x, player.getBounding().y, null);
         if (lvl.getSwegArray() != null)
-            for (Sweg sweg: lvl.getSwegArray()) {
+            for (Sweg sweg : lvl.getSwegArray()) {
                 g.drawImage(sweg.getLook(), sweg.getBounding().x, sweg.getBounding().y, null);
             }
         if (lvl.getBigmekArray() != null) {
@@ -131,7 +129,7 @@ class Frame extends JFrame {
                     (int) lvl.getBigmekArray().getBounding().getY(), null);
         }
         if (lvl.getEnemyArray() != null)
-            for (Enemy enemy: lvl.getEnemyArray()) {
+            for (Enemy enemy : lvl.getEnemyArray()) {
                 g.drawImage(enemy.getLook(), (int) enemy.getBounding().getX(), (int) enemy.getBounding().getY(), null);
             }
 
