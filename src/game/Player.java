@@ -62,6 +62,7 @@ class Player {
 
     boolean update(KeyHandler keyHandler) {
 
+
         lvl.update(scrollingLeft, scrollingRight);
 
         checkSweg();
@@ -75,17 +76,8 @@ class Player {
         move(keyHandler);
         jump(keyHandler.getSpace());
 
-        if (checkIfEscape(keyHandler)) {
-            return false;
-        }
-
-        if (getLvlUp(keyHandler)) {
-            lvlUp = true;
-            return false;
-        }
-
-        return true;
-
+        boolean running = (!checkIfEscape(keyHandler) && !checkLvlUp(keyHandler));
+        return running;
     }
 
     private boolean checkIfEscape(KeyHandler keyHandler) {
@@ -234,10 +226,14 @@ class Player {
 
     }
 
-    private boolean getLvlUp(KeyHandler keyHandler) {
+    private boolean checkLvlUp(KeyHandler keyHandler) {
         if (lvl.getBigmekArray() != null)
             if (lvl.getBigmekArray().getCollected())
-                if (keyHandler.getEnter()) return true;
+                if (keyHandler.getEnter()) {
+                    lvlUp = true;
+                    return true;
+
+                }
         return false;
     }
 
@@ -310,7 +306,7 @@ class Player {
         return messageToReturn;
     }
 
-    boolean getLvlUp() {
+    boolean checkLvlUp() {
         return lvlUp;
     }
 

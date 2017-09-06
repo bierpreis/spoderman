@@ -29,7 +29,7 @@ public class Game {
 
         frame.dispose();
 
-        if(player.getLvlUp()) {
+        if(player.checkLvlUp()) {
             new Game(lvl.getLvlNumber()+1);
         }
 
