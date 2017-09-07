@@ -14,7 +14,7 @@ import map.Enemy;
 import map.Lvl;
 import map.Sweg;
 
-class Player {
+class Player implements Runnable {
 
     private boolean onTop, onBot, onRightSide, onLeftSide;
 
@@ -60,24 +60,46 @@ class Player {
         createMessage("nao i need to find teh bikmek");
     }
 
-    boolean update(KeyHandler keyHandler) {
+    @Override
+    public void run() {
 
 
-        lvl.update(scrollingLeft, scrollingRight);
+        KeyHandler keyHandler = new KeyHandler();
+        boolean running = true;
+        while (running) {
+            long startTime = System.nanoTime();
 
-        checkSweg();
-        checkCubeCollisions();
-        checkEnemies();
-        checkBigMek();
+            lvl.update(scrollingLeft, scrollingRight);
 
-        respawn(keyHandler);
-        updateBounding();
-        scroll();
-        move(keyHandler);
-        jump(keyHandler.getSpace());
+            checkSweg();
+            checkCubeCollisions();
+            checkEnemies();
+            checkBigMek();
 
-        boolean running = (!checkIfEscape(keyHandler) && !checkLvlUp(keyHandler));
-        return running;
+            respawn(keyHandler);
+            updateBounding();
+            scroll();
+            move(keyHandler);
+            jump(keyHandler.getSpace());
+
+            running = (!checkIfEscape(keyHandler) && !checkLvlUp(keyHandler));
+
+
+            sleep(startTime);
+
+        }
+
+    }
+
+    private void sleep(long startTime) {
+        long expiredTime = System.nanoTime() - startTime;
+        long sleepTime = Config.msPerFrame - (expiredTime/100_000);
+        //System.out.println("sleeptime in player: " + sleepTime);
+        try {
+            Thread.sleep(sleepTime);
+        } catch (Exception e) {
+            System.out.println("Interrupted while sleeping");
+        }
     }
 
     private boolean checkIfEscape(KeyHandler keyHandler) {

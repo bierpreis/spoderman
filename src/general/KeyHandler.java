@@ -29,8 +29,10 @@ public class KeyHandler implements KeyListener {
             keyUp = true;
         if (e.getKeyCode() == KeyEvent.VK_DOWN)
             keyDown = true;
-        if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             keySpace = true;
+            System.out.println("Space was pressed");
+        }
 
     }
 

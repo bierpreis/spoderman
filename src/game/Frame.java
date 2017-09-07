@@ -15,7 +15,7 @@ import map.Enemy;
 import map.Lvl;
 import map.Sweg;
 
-class Frame extends JFrame {
+class Frame extends JFrame implements Runnable{
 
     private int fps = 0;
     private int fpsCounter = 0;
@@ -47,22 +47,39 @@ class Frame extends JFrame {
 
     }
 
-    void repaintScreen() {
+    @Override
+    public void run() {
+        boolean running = true;
+        while(running) {
+            long startTime = System.nanoTime();
+            Graphics g = bufferStrategy.getDrawGraphics();
 
-        Graphics g = bufferStrategy.getDrawGraphics();
+            g.setColor(Color.lightGray);
+            g.fillRect(0, 0, getWidth(), getHeight());
 
-        g.setColor(Color.lightGray);
-        g.fillRect(0, 0, getWidth(), getHeight());
-
-        drawCubes(g);
-        sayMessage(player.getNewMessage(), g);
-        drawUnits(g);
-        writeInfo(g, player);
+            drawCubes(g);
+            sayMessage(player.getNewMessage(), g);
+            drawUnits(g);
+            writeInfo(g, player);
 
 
-        bufferStrategy.show();
-        g.dispose();
+            bufferStrategy.show();
 
+            sleep(startTime);
+            g.dispose();
+        }
+
+    }
+
+    private void sleep(long startTime) {
+        long expiredTime = System.nanoTime() - startTime;
+        long sleepTime = Config.msPerFrame - (expiredTime/100_000);
+        // System.out.println("sleeptime in frame: " + sleepTime);
+        try {
+            Thread.sleep(sleepTime);
+        } catch (Exception e) {
+            System.out.println("Interrupted while sleeping");
+        }
     }
 
     private void writeInfo(Graphics g, Player player) {

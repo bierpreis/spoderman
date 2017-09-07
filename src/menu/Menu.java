@@ -125,7 +125,7 @@ public class Menu extends JFrame {
 
     private void runGame(int lvl){
         Game game = new Game(lvl);
-        game.run();
+        game.start();
         nextAction = game.getNextAction();
         if(nextAction.equals(NextAction.LVLUP))
             runGame(lvl+1);

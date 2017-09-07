@@ -17,18 +17,24 @@ public class Game {
 
     }
 
-    public void run() {
+    public void start() {
+        Thread graphics = new Thread(frame);
+        Thread logics = new Thread(player);
 
-        boolean running = true;
-        while (running) {
-            long startTime = System.nanoTime();
-            running = player.update(frame.getKeyHandler());
-            frame.repaintScreen();
+        graphics.start();
+        logics.start();
 
-            sleep(startTime);
+        while(!logics.isInterrupted() && !graphics.isInterrupted())
+            try {
+                Thread.sleep(200);
+            } catch (Exception e) {
+            e.printStackTrace();
         }
+        System.out.println("after sleep");
+        graphics.interrupt();
+        logics.interrupt();
+
         setNextAction();
-        frame.dispose();
     }
 
     private void setNextAction(){
