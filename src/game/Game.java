@@ -8,15 +8,16 @@ public class Game {
     private final Lvl lvl;
     private final Player player;
     private final Frame frame;
+    private NextAction nextAction;
 
     public Game(int lvlNumber) {
         lvl = new Lvl(lvlNumber);
         player = new Player(lvl);
         frame = new Frame(player, lvl);
-        run();
+
     }
 
-    private void run() {
+    public void run() {
 
         boolean running = true;
         while (running) {
@@ -26,14 +27,14 @@ public class Game {
 
             sleep(startTime);
         }
-
+        setNextAction();
         frame.dispose();
+    }
 
-        if(player.checkLvlUp()) {
-            new Game(lvl.getLvlNumber()+1);
-        }
-
-
+    private void setNextAction(){
+        if(player.checkLvlUp())
+            nextAction = NextAction.LVLUP;
+        else nextAction = NextAction.EXIT;
     }
 
     private void sleep(long startTime) {
@@ -45,6 +46,10 @@ public class Game {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+    }
+
+    public NextAction getNextAction(){
+        return nextAction;
     }
 
 }

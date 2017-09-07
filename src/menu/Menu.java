@@ -7,13 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.Game;
+import game.NextAction;
 import general.Config;
 import general.KeyHandler;
 
 public class Menu extends JFrame {
 
     private final Button[] buttonArray;
-
+    private boolean showingMenu = true;
+    private NextAction nextAction;
 
     private final Screen screen;
 
@@ -105,37 +107,37 @@ public class Menu extends JFrame {
         }
     }
 
-    private boolean doButtonActions() {
+    private void doButtonActions() {
         if (buttonArray[0].getFocus() && keyHandler.getEnter()) {
-            new Game(1);
-            return true;
+            runGame(1);
         }
         if (buttonArray[1].getFocus() && keyHandler.getEnter()) {
-
             CodeInputWindow codeInput = new CodeInputWindow();
             if (codeInput.getUnlockedLvl() == 2) {
-
-                new Game(2);
-                return true;
+                runGame(2);
             }
 
         }
         if (buttonArray[2].getFocus() && keyHandler.getEnter()) {
-            return false;
+            showingMenu = false;
         }
+    }
 
-        return true;
-
+    private void runGame(int lvl){
+        Game game = new Game(lvl);
+        game.run();
+        nextAction = game.getNextAction();
+        if(nextAction.equals(NextAction.LVLUP))
+            runGame(lvl+1);
     }
 
     public void showMenu() {
-        boolean showingMenu = true;
         while (showingMenu) {
 
             updateButtonFocus();
             screen.repaint();
 
-            showingMenu = doButtonActions();
+            doButtonActions();
 
             try {
                 Thread.sleep(Config.msPerFrame);
@@ -145,5 +147,7 @@ public class Menu extends JFrame {
 
         }
     }
+
+
 
 }
