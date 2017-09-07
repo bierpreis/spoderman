@@ -25,10 +25,10 @@ class Frame extends JFrame implements Runnable{
     private final Lvl lvl;
 
     private Message message = null;
-    private final KeyHandler keyHandler = new KeyHandler();
+    private KeyHandler keyHandler;
     private final BufferStrategy bufferStrategy;
 
-    Frame(Player player, Lvl lvl) {
+    Frame(Player player, Lvl lvl, KeyHandler keyHandler) {
         super("spodermens advenshur");
 
         addKeyListener(keyHandler);
@@ -150,10 +150,6 @@ class Frame extends JFrame implements Runnable{
                 g.drawImage(enemy.getLook(), (int) enemy.getBounding().getX(), (int) enemy.getBounding().getY(), null);
             }
 
-    }
-
-    KeyHandler getKeyHandler() {
-        return keyHandler;
     }
 
 }

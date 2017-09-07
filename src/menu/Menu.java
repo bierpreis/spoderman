@@ -19,7 +19,7 @@ public class Menu extends JFrame {
 
     private final Screen screen;
 
-    private final KeyHandler keyHandler = new KeyHandler();
+    private volatile KeyHandler keyHandler = new KeyHandler();
 
     public Menu() {
 
@@ -124,7 +124,7 @@ public class Menu extends JFrame {
     }
 
     private void runGame(int lvl){
-        Game game = new Game(lvl);
+        Game game = new Game(lvl, keyHandler);
         game.start();
         nextAction = game.getNextAction();
         if(nextAction.equals(NextAction.LVLUP))

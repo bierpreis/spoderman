@@ -45,10 +45,11 @@ class Player implements Runnable {
     private boolean lvlUp = false;
 
     private Message message;
+    private KeyHandler keyHandler;
 
     private final Lvl lvl;
 
-    Player(Lvl lvl) {
+    Player(Lvl lvl, KeyHandler keyHandler) {
 
         createLook();
 
@@ -56,6 +57,7 @@ class Player implements Runnable {
         botBounding = new Bounding((int) f_posx, (int) f_posy + 20, lookingLeft.getWidth(), 20);
 
         this.lvl = lvl;
+        this.keyHandler = keyHandler;
 
         createMessage("nao i need to find teh bikmek");
     }
@@ -63,8 +65,6 @@ class Player implements Runnable {
     @Override
     public void run() {
 
-
-        KeyHandler keyHandler = new KeyHandler();
         boolean running = true;
         while (running) {
             long startTime = System.nanoTime();
