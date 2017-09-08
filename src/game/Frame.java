@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import java.awt.image.BufferStrategy;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.JFrame;
 
@@ -20,6 +21,7 @@ class Frame extends JFrame implements Runnable{
     private int fps = 0;
     private int fpsCounter = 0;
     private long timeUntilLastSecond = System.currentTimeMillis() + 1000;
+    AtomicBoolean running;
 
     private final Player player;
     private final Lvl lvl;
@@ -28,14 +30,14 @@ class Frame extends JFrame implements Runnable{
     private KeyHandler keyHandler;
     private final BufferStrategy bufferStrategy;
 
-    Frame(Player player, Lvl lvl, KeyHandler keyHandler) {
+    Frame(Player player, Lvl lvl, KeyHandler keyHandler, AtomicBoolean running) {
         super("spodermens advenshur");
 
         addKeyListener(keyHandler);
 
         this.player = player;
         this.lvl = lvl;
-
+        this.running = running;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Config.screenX, Config.screenY);
 
@@ -49,8 +51,7 @@ class Frame extends JFrame implements Runnable{
 
     @Override
     public void run() {
-        boolean running = true;
-        while(running) {
+        while(running.get()) {
             long startTime = System.nanoTime();
             Graphics g = bufferStrategy.getDrawGraphics();
 
@@ -68,18 +69,18 @@ class Frame extends JFrame implements Runnable{
             sleep(startTime);
             g.dispose();
         }
+        dispose();
 
     }
 
     private void sleep(long startTime) {
         long expiredTime = System.nanoTime() - startTime;
         long sleepTime = Config.msPerFrame - (expiredTime/100_000);
-        // System.out.println("sleeptime in frame: " + sleepTime);
         if(sleepTime>0)
         try {
             Thread.sleep(sleepTime);
         } catch (Exception e) {
-            System.out.println("Frame Interrupted while sleeping" +  sleepTime);
+            System.out.println("Frame Interrupted while sleeping");
         }
     }
 

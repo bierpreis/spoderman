@@ -3,7 +3,9 @@ package game;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.imageio.ImageIO;
+
 
 import general.Bounding;
 import general.Config;
@@ -21,6 +23,7 @@ class Player implements Runnable {
     private boolean isLookingRight = true;
 
     private boolean scrollingRight, scrollingLeft;
+   AtomicBoolean running;
 
     private boolean alive = true;
 
@@ -38,18 +41,20 @@ class Player implements Runnable {
     private float f_posx = 350; // f_ als kennzeichen für float
     private float f_posy = 300;
 
+    private int escapingTime = 0;
+
     private final Bounding bounding;
     private final Bounding botBounding;
 
     private BufferedImage lookingLeft, lookingRight, lookDead;
-    private boolean lvlUp = false;
+    private NextAction nextAction = null;
 
     private Message message;
     private KeyHandler keyHandler;
 
     private final Lvl lvl;
 
-    Player(Lvl lvl, KeyHandler keyHandler) {
+    Player(Lvl lvl, KeyHandler keyHandler, AtomicBoolean running) {
 
         createLook();
 
@@ -58,6 +63,7 @@ class Player implements Runnable {
 
         this.lvl = lvl;
         this.keyHandler = keyHandler;
+        this.running = running;
 
         createMessage("nao i need to find teh bikmek");
     }
@@ -65,8 +71,7 @@ class Player implements Runnable {
     @Override
     public void run() {
 
-        boolean running = true;
-        while (running) {
+        while (running.get()) {
             long startTime = System.nanoTime();
 
             lvl.update(scrollingLeft, scrollingRight);
@@ -82,7 +87,13 @@ class Player implements Runnable {
             move(keyHandler);
             jump(keyHandler.getSpace());
 
-            running = (!checkIfEscape(keyHandler) && !checkLvlUp(keyHandler));
+            if (checkIfEscape(keyHandler)) {
+                nextAction = NextAction.EXIT;
+                running.set(false);
+            }
+
+           // if(checkLvlUp(keyHandler))
+             //   running = false;
 
 
             sleep(startTime);
@@ -93,34 +104,31 @@ class Player implements Runnable {
 
     private void sleep(long startTime) {
         long expiredTime = System.nanoTime() - startTime;
-        long sleepTime = Config.msPerFrame - (expiredTime/100_000);
+        long sleepTime = Config.msPerFrame - (expiredTime / 100_000);
         //System.out.println("sleeptime in player: " + sleepTime);
-        if(sleepTime>0)
-        try {
-            Thread.sleep(sleepTime);
-        } catch (Exception e) {
-            System.out.println("Interrupted while sleeping");
-        }
+        if (sleepTime > 0)
+            try {
+                Thread.sleep(sleepTime);
+            } catch (Exception e) {
+                System.out.println("Interrupted while sleeping");
+            }
     }
 
     private boolean checkIfEscape(KeyHandler keyHandler) {
-
         if (showEscDialog) {
-            long nextActionTime = System.currentTimeMillis() + Config.escTime;
-
-            while (System.currentTimeMillis() < nextActionTime) {
-
-                if (keyHandler.getEnter())
-                    return true;
+            escapingTime +=Config.msPerFrame;
+            if (keyHandler.getEnter()) return true;
+            if(escapingTime >Config.escTime) {
+                escapingTime = 0;
+                showEscDialog = false;
             }
+
         }
-        showEscDialog = false;
         if (keyHandler.getEscape()) {
             showEscDialog = true;
             createMessage("press enter to get out and fak awf");
         }
         return false;
-
     }
 
     private void createLook() {
@@ -248,7 +256,7 @@ class Player implements Runnable {
         if (lvl.getBigmekArray() != null)
             if (lvl.getBigmekArray().getCollected())
                 if (keyHandler.getEnter()) {
-                    lvlUp = true;
+                    nextAction = NextAction.LVLUP;
                     return true;
 
                 }
@@ -324,8 +332,8 @@ class Player implements Runnable {
         return messageToReturn;
     }
 
-    boolean checkLvlUp() {
-        return lvlUp;
+    NextAction getNextAction() {
+        return nextAction;
     }
 
 }

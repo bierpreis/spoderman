@@ -1,20 +1,21 @@
 package game;
 
-import general.Config;
 import general.KeyHandler;
 import map.Lvl;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class Game {
 
-    private final Lvl lvl;
     private final Player player;
     private final Frame frame;
     private NextAction nextAction;
+    private AtomicBoolean running = new AtomicBoolean(true);
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
-        lvl = new Lvl(lvlNumber);
-        player = new Player(lvl, keyHandler);
-        frame = new Frame(player, lvl, keyHandler);
+        Lvl lvl = new Lvl(lvlNumber);
+        player = new Player(lvl, keyHandler, running);
+        frame = new Frame(player, lvl, keyHandler, running);
     }
 
     public void start() {
@@ -24,24 +25,17 @@ public class Game {
         graphics.start();
         logics.start();
 
-        while(!logics.isInterrupted() && !graphics.isInterrupted())
+        while(running.get()) {
             try {
                 Thread.sleep(200);
             } catch (Exception e) {
-            e.printStackTrace();
+                e.printStackTrace();
+            }
         }
-        System.out.println("after sleep");
-        graphics.interrupt();
-        logics.interrupt();
+        nextAction = player.getNextAction();
 
-        setNextAction();
     }
 
-    private void setNextAction(){
-        if(player.checkLvlUp())
-            nextAction = NextAction.LVLUP;
-        else nextAction = NextAction.EXIT;
-    }
 
 
     public NextAction getNextAction(){
