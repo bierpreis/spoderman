@@ -23,7 +23,7 @@ class Player implements Runnable {
     private boolean isLookingRight = true;
 
     private boolean scrollingRight, scrollingLeft;
-   AtomicBoolean running;
+    AtomicBoolean running;
 
     private boolean alive = true;
 
@@ -92,8 +92,11 @@ class Player implements Runnable {
                 running.set(false);
             }
 
-           // if(checkLvlUp(keyHandler))
-             //   running = false;
+            if (checkLvlUp(keyHandler)) {
+                System.out.println("lvlUp");
+                running.set(false);
+                nextAction = NextAction.LVLUP;
+            }
 
 
             sleep(startTime);
@@ -116,9 +119,9 @@ class Player implements Runnable {
 
     private boolean checkIfEscape(KeyHandler keyHandler) {
         if (showEscDialog) {
-            escapingTime +=Config.msPerFrame;
+            escapingTime += Config.msPerFrame;
             if (keyHandler.getEnter()) return true;
-            if(escapingTime >Config.escTime) {
+            if (escapingTime > Config.escTime) {
                 escapingTime = 0;
                 showEscDialog = false;
             }
