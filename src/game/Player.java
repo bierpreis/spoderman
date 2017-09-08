@@ -95,6 +95,7 @@ class Player implements Runnable {
         long expiredTime = System.nanoTime() - startTime;
         long sleepTime = Config.msPerFrame - (expiredTime/100_000);
         //System.out.println("sleeptime in player: " + sleepTime);
+        if(sleepTime>0)
         try {
             Thread.sleep(sleepTime);
         } catch (Exception e) {
@@ -111,11 +112,6 @@ class Player implements Runnable {
 
                 if (keyHandler.getEnter())
                     return true;
-                try {
-                    Thread.sleep(Config.msPerFrame);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         }
         showEscDialog = false;

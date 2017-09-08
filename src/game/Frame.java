@@ -75,10 +75,11 @@ class Frame extends JFrame implements Runnable{
         long expiredTime = System.nanoTime() - startTime;
         long sleepTime = Config.msPerFrame - (expiredTime/100_000);
         // System.out.println("sleeptime in frame: " + sleepTime);
+        if(sleepTime>0)
         try {
             Thread.sleep(sleepTime);
         } catch (Exception e) {
-            System.out.println("Interrupted while sleeping");
+            System.out.println("Frame Interrupted while sleeping" +  sleepTime);
         }
     }
 
