@@ -107,7 +107,7 @@ class Player implements Runnable {
 
     private void sleep(long startTime) {
         long expiredTime = System.nanoTime() - startTime;
-        long sleepTime = Config.msPerFrame - (expiredTime / 100_000);
+        long sleepTime = Config.msPerTick - (expiredTime / 100_000);
         //System.out.println("sleeptime in player: " + sleepTime);
         if (sleepTime > 0)
             try {
@@ -164,7 +164,7 @@ class Player implements Runnable {
         if (lifes < 0)
             return;
 
-        timeDead += Config.msPerFrame;
+        timeDead += Config.msPerTick;
 
         if (keyHandler.getSpace() && timeDead > Config.playerRespawnTime) {
             alive = true;
@@ -220,7 +220,7 @@ class Player implements Runnable {
 
         //actual jump
         if (jumping) {
-            timeSinceJump += Config.msPerFrame;
+            timeSinceJump += Config.msPerTick;
 
             if (timeSinceJump < Config.timeJumpingUp)
                 f_posy -= Config.jumpSpeed;

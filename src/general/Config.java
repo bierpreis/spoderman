@@ -7,6 +7,8 @@ public class Config {
     public static final int playerMoveSpeed = 5;
     public static final int playerRespawnTime = 2000;
     public static final int targetFps = 80;
+    public static final int ticksPerSecond = 60;
+
     public static final int gravity = 5;
 
     public static final int messageBaseTime = 1000;
@@ -20,8 +22,13 @@ public class Config {
     public static final int escTime = 2000;
     public static final int enemyMoveSpeed = 1;
     public static final int buttonLockTime = 500;
-    public static final int jumpSpeed = 17;
+    public static final int jumpSpeed = 18;
+
+
+
+
     public static final int msPerFrame = 1000/targetFps;
+    public static final int msPerTick = 1000/ticksPerSecond;
 
 
 
