@@ -85,7 +85,7 @@ class Player implements Runnable {
             updateBounding();
             scroll();
             move(keyHandler);
-            jump(keyHandler.getSpace());
+            jump(keyHandler);
 
             if (checkIfEscape(keyHandler)) {
                 nextAction = NextAction.EXIT;
@@ -211,11 +211,11 @@ class Player implements Runnable {
 
     }
 
-    private void jump(boolean spaceIsPressed) {
+    private void jump(KeyHandler keyHandler) {
         if (!alive)
             return;
         //start new jump
-        if (onTop && !onBot && spaceIsPressed)
+        if (onTop && !onBot && keyHandler.getSpace())
             jumping = true;
 
         //actual jump
