@@ -24,6 +24,7 @@ public class Game {
         while (running) {
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
+            System.out.println("update length" + updateLength);
             lastLoopTime = now;
             double delta = updateLength / ((double)Config.msPerFrame*1_000_000);
 

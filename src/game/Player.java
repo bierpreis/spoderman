@@ -83,7 +83,7 @@ class Player {
 
         respawn(keyHandler);
         move(keyHandler, delta);
-        jump(keyHandler);
+        jump(keyHandler, delta);
 
         if (checkIfEscape(keyHandler)) {
             nextAction = NextAction.EXIT;
@@ -91,7 +91,6 @@ class Player {
         }
 
         if (checkLvlUp(keyHandler)) {
-            System.out.println("lvlUp");
             running = false;
             nextAction = NextAction.LVLUP;
         }
@@ -172,7 +171,6 @@ class Player {
     }
 
     private void move(KeyHandler keyHandler, double delta) {
-        System.out.println("onTop: " + onTop);
         if (!onTop)
             bounding.y += Config.gravity*delta;
 
@@ -194,7 +192,7 @@ class Player {
 
     }
 
-    private void jump(KeyHandler keyHandler) {
+    private void jump(KeyHandler keyHandler, double delta) {
         if (!alive)
             return;
         //start new jump
@@ -206,7 +204,7 @@ class Player {
             timeSinceJump += Config.msPerTick;
 
             if (timeSinceJump < Config.timeJumpingUp)
-                bounding.y -= Config.jumpSpeed;
+                bounding.y -= Config.jumpSpeed*delta;
 
             // end jump
             if (onBot || timeSinceJump > Config.timeJumpingUp) {
