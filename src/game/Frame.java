@@ -16,12 +16,12 @@ import map.Enemy;
 import map.Lvl;
 import map.Sweg;
 
-class Frame extends JFrame implements Runnable{
+class Frame extends JFrame{
 
     private int fps = 0;
     private int fpsCounter = 0;
     private long timeUntilLastSecond = System.currentTimeMillis() + 1000;
-    AtomicBoolean running;
+    private Boolean running;
 
     private final Player player;
     private final Lvl lvl;
@@ -30,7 +30,7 @@ class Frame extends JFrame implements Runnable{
     private KeyHandler keyHandler;
     private final BufferStrategy bufferStrategy;
 
-    Frame(Player player, Lvl lvl, KeyHandler keyHandler, AtomicBoolean running) {
+    Frame(Player player, Lvl lvl, KeyHandler keyHandler, Boolean running) {
         super("spodermens advenshur");
 
         addKeyListener(keyHandler);
@@ -49,39 +49,38 @@ class Frame extends JFrame implements Runnable{
 
     }
 
-    @Override
-    public void run() {
-        while(running.get()) {
-            long startTime = System.nanoTime();
-            Graphics g = bufferStrategy.getDrawGraphics();
 
-            g.setColor(Color.lightGray);
-            g.fillRect(0, 0, getWidth(), getHeight());
+    public void draw() {
 
-            drawCubes(g);
-            sayMessage(player.getNewMessage(), g);
-            drawUnits(g);
-            writeInfo(g, player);
+        Graphics g = bufferStrategy.getDrawGraphics();
+
+        g.setColor(Color.lightGray);
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+        drawCubes(g);
+        sayMessage(player.getNewMessage(), g);
+        drawUnits(g);
+        writeInfo(g, player);
 
 
-            bufferStrategy.show();
+        bufferStrategy.show();
 
-            sleep(startTime);
-            g.dispose();
-        }
-        dispose();
+
+        g.dispose();
+
 
     }
 
     private void sleep(long startTime) {
         long expiredTime = System.nanoTime() - startTime;
-        long sleepTime = Config.msPerFrame - (expiredTime/100_000);
-        if(sleepTime>0)
-        try {
-            Thread.sleep(sleepTime);
-        } catch (Exception e) {
-            System.out.println("Frame Interrupted while sleeping");
-        }
+        long sleepTime = Config.msPerFrame - (expiredTime / 100_000);
+        System.out.println("sleeptime in frame: " + sleepTime);
+        if (sleepTime > 0)
+            try {
+                Thread.sleep(sleepTime);
+            } catch (Exception e) {
+                System.out.println("Frame Interrupted while sleeping");
+            }
     }
 
     private void writeInfo(Graphics g, Player player) {

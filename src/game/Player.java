@@ -16,14 +16,14 @@ import map.Enemy;
 import map.Lvl;
 import map.Sweg;
 
-class Player implements Runnable {
+class Player{
 
     private boolean onTop, onBot, onRightSide, onLeftSide;
 
     private boolean isLookingRight = true;
 
     private boolean scrollingRight, scrollingLeft;
-    AtomicBoolean running;
+    private boolean running = true;
 
     private boolean alive = true;
 
@@ -54,7 +54,7 @@ class Player implements Runnable {
 
     private final Lvl lvl;
 
-    Player(Lvl lvl, KeyHandler keyHandler, AtomicBoolean running) {
+    Player(Lvl lvl, KeyHandler keyHandler) {
 
         createLook();
 
@@ -63,52 +63,48 @@ class Player implements Runnable {
 
         this.lvl = lvl;
         this.keyHandler = keyHandler;
-        this.running = running;
 
         createMessage("nao i need to find teh bikmek");
     }
 
-    @Override
-    public void run() {
 
-        while (running.get()) {
-            long startTime = System.nanoTime();
-
-            lvl.update(scrollingLeft, scrollingRight);
-
-            checkSweg();
-            checkCubeCollisions();
-            checkEnemies();
-            checkBigMek();
-
-            respawn(keyHandler);
-            updateBounding();
-            scroll();
-            move(keyHandler);
-            jump(keyHandler);
-
-            if (checkIfEscape(keyHandler)) {
-                nextAction = NextAction.EXIT;
-                running.set(false);
-            }
-
-            if (checkLvlUp(keyHandler)) {
-                System.out.println("lvlUp");
-                running.set(false);
-                nextAction = NextAction.LVLUP;
-            }
+    public void update() {
 
 
-            sleep(startTime);
+        lvl.update(scrollingLeft, scrollingRight);
 
+        checkSweg();
+        checkCubeCollisions();
+        checkEnemies();
+        checkBigMek();
+
+        respawn(keyHandler);
+        updateBounding();
+        scroll();
+        move(keyHandler);
+        jump(keyHandler);
+
+        if (checkIfEscape(keyHandler)) {
+            nextAction = NextAction.EXIT;
+            running = false;
         }
 
+        if (checkLvlUp(keyHandler)) {
+            System.out.println("lvlUp");
+            running = false;
+            nextAction = NextAction.LVLUP;
+        }
     }
+
+
+    public boolean getRunning(){
+        return running;
+}
 
     private void sleep(long startTime) {
         long expiredTime = System.nanoTime() - startTime;
         long sleepTime = Config.msPerTick - (expiredTime / 100_000);
-        //System.out.println("sleeptime in player: " + sleepTime);
+        System.out.println("sleeptime in player: " + sleepTime);
         if (sleepTime > 0)
             try {
                 Thread.sleep(sleepTime);

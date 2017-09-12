@@ -1,44 +1,56 @@
 package game;
 
+import general.Config;
 import general.KeyHandler;
 import map.Lvl;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Game {
 
     private final Player player;
     private final Frame frame;
     private NextAction nextAction;
-    private AtomicBoolean running = new AtomicBoolean(true);
+    private boolean running = true;
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
         Lvl lvl = new Lvl(lvlNumber);
-        player = new Player(lvl, keyHandler, running);
+        player = new Player(lvl, keyHandler);
         frame = new Frame(player, lvl, keyHandler, running);
+        start();
     }
 
     public void start() {
-        Thread graphics = new Thread(frame);
-        Thread logics = new Thread(player);
+        long lastLoopTime = System.nanoTime();
 
-        graphics.start();
-        logics.start();
+        while (running) {
+            long now = System.nanoTime();
+            long updateLength = now - lastLoopTime;
+            lastLoopTime = now;
+            double delta = updateLength / Config.msPerFrame;
 
-        while(running.get()) {
-            try {
-                Thread.sleep(200);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            player.update();
+            frame.draw();
+            running = player.getRunning();
+
+            int sleepTime = (int) (lastLoopTime - System.nanoTime()) / 1_000_000 + Config.msPerFrame;
+            System.out.println("sleeptime: " + sleepTime);
+            if (sleepTime > 0)
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException ie) {
+                    System.out.println("interrupted !");
+                }
+
+
         }
         nextAction = player.getNextAction();
+    }
 
+    public void stop(){
+        frame.dispose();
     }
 
 
-
-    public NextAction getNextAction(){
+    public NextAction getNextAction() {
         return nextAction;
     }
 

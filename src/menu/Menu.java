@@ -125,10 +125,10 @@ public class Menu extends JFrame {
 
     private void runGame(int lvl){
         Game game = new Game(lvl, keyHandler);
-        game.start();
         nextAction = game.getNextAction();
+        game.stop();
         if(nextAction.equals(NextAction.LVLUP))
-            runGame(lvl+1);
+            runGame(lvl + 1);
     }
 
     public void showMenu() {
