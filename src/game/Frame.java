@@ -137,10 +137,10 @@ class Frame extends JFrame{
     }
 
     private void drawUnits(Graphics g) {
-        g.drawImage(player.getLook(), player.getBounding().x, player.getBounding().y, null);
+        g.drawImage(player.getLook(), (int)player.getBounding().x, (int)player.getBounding().y, null);
         if (lvl.getSwegArray() != null)
             for (Sweg sweg : lvl.getSwegArray()) {
-                g.drawImage(sweg.getLook(), sweg.getBounding().x, sweg.getBounding().y, null);
+                g.drawImage(sweg.getLook(), (int)sweg.getBounding().x, (int)sweg.getBounding().y, null);
             }
         if (lvl.getBigmekArray() != null) {
             g.drawImage(lvl.getBigmekArray().getLook(), (int) lvl.getBigmekArray().getBounding().getX(),

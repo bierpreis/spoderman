@@ -112,20 +112,20 @@ public class Lvl {
         return enemyArray;
     }
 
-    public void update(boolean scrollingLeft, boolean scrollingRight) {
+    public void update(boolean scrollingLeft, boolean scrollingRight, double delta) {
         for (Cube cube : cubeArray)
-            cube.updateBounding(scrollingLeft, scrollingRight);
+            cube.updateBounding(scrollingLeft, scrollingRight, delta);
 
         if (bigmekArray != null)
-            bigmekArray.getBounding().scroll(scrollingLeft, scrollingRight);
+            bigmekArray.getBounding().scroll(scrollingLeft, scrollingRight, delta);
 
         if (enemyArray != null)
             for (Enemy enemy : enemyArray)
-                enemy.update(scrollingLeft, scrollingRight);
+                enemy.update(scrollingLeft, scrollingRight, delta);
 
         if (swegArray != null)
             for (Sweg sweg : swegArray)
-                sweg.getBounding().scroll(scrollingLeft, scrollingRight);
+                sweg.getBounding().scroll(scrollingLeft, scrollingRight, delta);
 
     }
 

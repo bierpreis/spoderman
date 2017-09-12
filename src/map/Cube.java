@@ -20,13 +20,13 @@ public class Cube {
 
     }
 
-    void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
+    void updateBounding(boolean scrollingLeft, boolean scrollingRight, double delta) {
 
-        bounding.scroll(scrollingLeft, scrollingRight);
-        topBounding.scroll(scrollingLeft, scrollingRight);
-        botBounding.scroll(scrollingLeft, scrollingRight);
-        leftBounding.scroll(scrollingLeft, scrollingRight);
-        rightBounding.scroll(scrollingLeft, scrollingRight);
+        bounding.scroll(scrollingLeft, scrollingRight, delta);
+        topBounding.scroll(scrollingLeft, scrollingRight, delta);
+        botBounding.scroll(scrollingLeft, scrollingRight, delta);
+        leftBounding.scroll(scrollingLeft, scrollingRight, delta);
+        rightBounding.scroll(scrollingLeft, scrollingRight, delta);
 
     }
 

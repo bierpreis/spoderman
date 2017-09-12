@@ -1,6 +1,7 @@
 package map;
 
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -30,9 +31,9 @@ public class Enemy {
 
     }
 
-    void update(boolean scrollingLeft, boolean scrollingRight) {
+    void update(boolean scrollingLeft, boolean scrollingRight, double delta) {
 
-        scroll(scrollingLeft, scrollingRight);
+        scroll(scrollingLeft, scrollingRight, delta);
 
         if(alive) {
             walk();
@@ -61,9 +62,9 @@ public class Enemy {
         }
     }
 
-    private void scroll(boolean scrollingLeft, boolean scrollingRight) {
-        bounding.scroll(scrollingLeft, scrollingRight);
-        topBounding.scroll(scrollingLeft, scrollingRight);
+    private void scroll(boolean scrollingLeft, boolean scrollingRight, double delta) {
+        bounding.scroll(scrollingLeft, scrollingRight, delta);
+        topBounding.scroll(scrollingLeft, scrollingRight, delta);
     }
 
     public void kill() {
@@ -94,7 +95,7 @@ public class Enemy {
         return look;
     }
 
-    public Rectangle getTopBounding() {
+    public Rectangle2D.Double getTopBounding() {
         return topBounding;
     }
 

@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -68,10 +69,10 @@ class Player{
     }
 
 
-    public void update() {
+    public void update(double delta) {
 
 
-        lvl.update(scrollingLeft, scrollingRight);
+        lvl.update(scrollingLeft, scrollingRight, delta);
 
         checkSweg();
         checkCubeCollisions();
@@ -79,8 +80,8 @@ class Player{
         checkBigMek();
 
         respawn(keyHandler);
-        updateBounding();
-        scroll();
+        updateBounding(delta);
+        scroll(delta);
         move(keyHandler);
         jump(keyHandler);
 
@@ -142,7 +143,7 @@ class Player{
 
     }
 
-    private void updateBounding() {
+    private void updateBounding( double delta) {
         bounding.x = (int) f_posx;
         bounding.y = (int) f_posy;
         botBounding.x = (int) f_posx;
@@ -150,7 +151,7 @@ class Player{
 
     }
 
-    Rectangle getBounding() {
+    Rectangle2D.Double getBounding() {
         return bounding;
     }
 
@@ -296,7 +297,7 @@ class Player{
         else return lookingLeft;
     }
 
-    private void scroll() {
+    private void scroll(double delta) {
         scrollingLeft = false;
         scrollingRight = false;
         if (bounding.x > 0.6 * Config.screenX && !onLeftSide && alive) {
