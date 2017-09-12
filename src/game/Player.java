@@ -141,7 +141,7 @@ class Player {
         if (lifes < 0)
             return;
 
-        timeDead += Config.msPerTick;
+        timeDead += Config.msPerFrame;
 
         if (keyHandler.getSpace() && timeDead > Config.playerRespawnTime) {
             alive = true;
@@ -156,7 +156,6 @@ class Player {
         onLeftSide = false;
         onBot = false;
         onTop = false;
-        System.out.println(botBounding);
         for (Cube cube : lvl.getCubes()) {
             if (bounding.intersects(cube.getLeftBounding()))
                 onLeftSide = true;
@@ -171,10 +170,12 @@ class Player {
     }
 
     private void move(KeyHandler keyHandler, double delta) {
-        if (!onTop)
-            bounding.y += Config.gravity*delta;
+
 
         if (!alive) return;
+
+        if (!onTop)
+            bounding.y += Config.gravity*delta;
 
         if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
             bounding.x -= Config.playerMoveSpeed*delta;
@@ -188,7 +189,7 @@ class Player {
         }
 
         botBounding.x = bounding.x;
-        botBounding.y = bounding.y+15;
+        botBounding.y = bounding.y+20;
 
     }
 
@@ -201,7 +202,7 @@ class Player {
 
         //actual jump
         if (jumping) {
-            timeSinceJump += Config.msPerTick;
+            timeSinceJump += Config.msPerFrame;
 
             if (timeSinceJump < Config.timeJumpingUp)
                 bounding.y -= Config.jumpSpeed*delta;

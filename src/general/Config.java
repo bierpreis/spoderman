@@ -28,7 +28,7 @@ public class Config {
 
 
     public static final int msPerFrame = 1000/targetFps;
-    public static final int msPerTick = 1000/ticksPerSecond;
+
 
 
 
