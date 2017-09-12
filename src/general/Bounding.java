@@ -6,8 +6,8 @@ import java.awt.geom.Rectangle2D;
 public class Bounding extends Rectangle2D.Double {
 
     // uses by cubes
-    public Bounding(int x, int y, int width, int height) {
-        super((double)x, (double)y, (double)width, (double)height);
+    public Bounding(double x, double y, double width, double height) {
+        super(x, y, width, height);
     }
 
 

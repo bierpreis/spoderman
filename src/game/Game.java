@@ -26,7 +26,6 @@ public class Game {
             long updateLength = now - lastLoopTime;
             lastLoopTime = now;
             double delta = updateLength / ((double)Config.msPerFrame*1_000_000);
-            System.out.println("delta: " + delta);
 
             player.update(delta);
             frame.draw();
