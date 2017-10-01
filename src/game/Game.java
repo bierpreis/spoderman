@@ -33,16 +33,21 @@ public class Game {
 
             int sleepTime = (int) (lastLoopTime - System.nanoTime()) / 1_000_000 + Config.msPerFrame;
 
-            if (sleepTime > 0)
-                try {
-                    Thread.sleep(sleepTime);
-                } catch (InterruptedException ie) {
-                    System.out.println("interrupted !");
-                }
+            sleep(sleepTime);
 
 
         }
         nextAction = player.getNextAction();
+    }
+
+    private void sleep(int sleepTime){
+        if (sleepTime > 0)
+            try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException ie) {
+                System.out.println("interrupted !");
+            }
+
     }
 
     public void stop(){
