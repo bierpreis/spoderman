@@ -46,6 +46,7 @@ class Frame extends JFrame{
 
         createBufferStrategy(2);
         bufferStrategy = getBufferStrategy();
+        requestFocus();
 
     }
 
