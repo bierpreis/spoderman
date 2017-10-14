@@ -19,20 +19,22 @@ public class Game {
     }
 
     public void start() {
-        long lastLoopTime = System.nanoTime();
 
         while (player.getRunning()) {
-            long now = System.nanoTime();
-            long updateLength = now - lastLoopTime;
-            System.out.println("update length" + updateLength);
-            lastLoopTime = now;
-            double delta = updateLength / ((double)Config.msPerFrame*1_000_000);
+            long startTime = System.nanoTime();
+
+
+
+            double delta = 1;
 
             player.update(delta);
             frame.draw();
 
-            int sleepTime = (int) (lastLoopTime - System.nanoTime()) / 1_000_000 + Config.msPerFrame;
+            long updateLength = startTime - System.nanoTime();
+            
 
+            int sleepTime = (int) (Config.msPerFrame-(updateLength/1_000_000));
+            System.out.println("sleeptime " + sleepTime);
             sleep(sleepTime);
 
 
