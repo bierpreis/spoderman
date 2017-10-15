@@ -10,22 +10,21 @@ import javax.imageio.ImageIO;
 import general.Bounding;
 import general.Config;
 
-public class Enemy {
+public class Enemy extends Bounding {
     private boolean movingRight = true;
     private boolean alive = true;
 
     private BufferedImage look;
 
-    private final Bounding bounding;
     private final Bounding topBounding;
 
     private final Cube[] cube;
-    
+
     Enemy(int x, int y, String type, Cube[] cube) {
-
+        super(x, y);
         look = createLook(type);
-
-        bounding = new Bounding(x, y, look.getWidth(), look.getHeight());
+        this.width = look.getWidth();
+        this.height = look.getHeight();
         topBounding = new Bounding(x + 5, y, look.getWidth() - 10, 10);
         this.cube = cube;
 
@@ -35,7 +34,7 @@ public class Enemy {
 
         scroll(scrollingLeft, scrollingRight, delta);
 
-        if(alive) {
+        if (alive) {
             walk();
             checkCubeCollisions();
         }
@@ -43,9 +42,9 @@ public class Enemy {
 
     private void checkCubeCollisions() {
         for (Cube cube : cube) {
-            if (bounding.intersects(cube.getLeftBounding()) && movingRight)
+            if (intersects(cube.getLeftBounding()) && movingRight)
                 movingRight = false;
-            if (bounding.intersects(cube.getRightBounding()) && !movingRight)
+            if (intersects(cube.getRightBounding()) && !movingRight)
                 movingRight = true;
 
         }
@@ -53,17 +52,18 @@ public class Enemy {
 
     private void walk() {
         if (movingRight) {
-            bounding.x += Config.enemyMoveSpeed;
+            x += Config.enemyMoveSpeed;
             topBounding.x += Config.enemyMoveSpeed;
         }
         if (!movingRight) {
-            bounding.x -= Config.enemyMoveSpeed;
+            x -= Config.enemyMoveSpeed;
             topBounding.x -= Config.enemyMoveSpeed;
         }
     }
 
-    private void scroll(boolean scrollingLeft, boolean scrollingRight, double delta) {
-        bounding.scroll(scrollingLeft, scrollingRight, delta);
+    public void scroll(boolean scrollingLeft, boolean scrollingRight, double delta) {
+
+        super.scroll(scrollingLeft, scrollingRight, delta);
         topBounding.scroll(scrollingLeft, scrollingRight, delta);
     }
 
@@ -103,8 +103,5 @@ public class Enemy {
         return alive;
     }
 
-    public Bounding getBounding() {
-        return bounding;
-    }
 
 }

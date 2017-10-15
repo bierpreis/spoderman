@@ -6,22 +6,22 @@ import javax.imageio.ImageIO;
 
 import general.Bounding;
 
-public class Sweg {
+public class Sweg extends Bounding{
 
     private boolean isCollected = false;
     private BufferedImage look;
-    private final Bounding bounding;
 
     Sweg(int x, int y) {
-
+        super(x,y);
 
         try {
             look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gold.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.width = look.getWidth();
+        this.height = look.getHeight();
 
-        bounding = new Bounding(x, y, look.getWidth(), look.getHeight());
 
     }
 
@@ -29,9 +29,6 @@ public class Sweg {
         return look;
     }
 
-    public Bounding getBounding() {
-        return bounding;
-    }
 
 
     public boolean getCollected() {

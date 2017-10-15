@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
+import Interfaces.Movable;
 import general.Bounding;
 import general.Config;
 import general.KeyHandler;
@@ -15,7 +16,7 @@ import map.Enemy;
 import map.Lvl;
 import map.Sweg;
 
-class Player {
+class Player implements Movable{
 
     private boolean onTop, onBot, onRightSide, onLeftSide;
 
@@ -169,7 +170,7 @@ class Player {
 
     }
 
-    private void move(KeyHandler keyHandler, double delta) {
+    public void move(KeyHandler keyHandler, double delta) {
 
 
         if (!alive) return;
@@ -219,7 +220,7 @@ class Player {
         if (lvl.getSwegArray() != null)
             for (Sweg sweg : lvl.getSwegArray()) {
                 if (!sweg.getCollected())
-                    if (bounding.intersects(sweg.getBounding())) {
+                    if (bounding.intersects(sweg)) {
                         sweg.setCollected();
                         createMessage("monies");
                         swegCollected += 1;
@@ -229,7 +230,7 @@ class Player {
 
     private void checkBigMek() {
         if (lvl.getBigmekArray() != null && !lvl.getBigmekArray().getCollected())
-            if (bounding.intersects(lvl.getBigmekArray().getBounding())) {
+            if (bounding.intersects(lvl.getBigmekArray())) {
                 lvl.getBigmekArray().setCollected();
                 createMessage("press enter to enter lvl two");
 
@@ -261,7 +262,7 @@ class Player {
 
                 // feststellen ob tot
                 if (alive)
-                    if (bounding.intersects(enemy.getBounding()) && enemy.getAlive()) {
+                    if (bounding.intersects(enemy) && enemy.getAlive()) {
                         alive = false;
                         lifes -= 1;
                         if (lifes > 0)

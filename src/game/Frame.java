@@ -16,7 +16,7 @@ import map.Enemy;
 import map.Lvl;
 import map.Sweg;
 
-class Frame extends JFrame{
+class Frame extends JFrame {
 
     private int fps = 0;
     private int fpsCounter = 0;
@@ -95,7 +95,7 @@ class Frame extends JFrame{
     private void drawCubes(Graphics g) {
         g.setColor(Color.BLUE);
         for (Cube cube : lvl.getCubes()) {
-            g.fillRect((int) cube.getBounding().getX(), (int) cube.getBounding().getY(), (int) cube.getBounding().getWidth(), (int) cube.getBounding().getHeight());
+            g.fillRect((int) cube.getX(), (int) cube.getY(), (int) cube.getWidth(), (int) cube.getHeight());
         }
     }
 
@@ -138,18 +138,18 @@ class Frame extends JFrame{
     }
 
     private void drawUnits(Graphics g) {
-        g.drawImage(player.getLook(), (int)player.getBounding().x, (int)player.getBounding().y, null);
+        g.drawImage(player.getLook(), (int) player.getBounding().x, (int) player.getBounding().y, null);
         if (lvl.getSwegArray() != null)
             for (Sweg sweg : lvl.getSwegArray()) {
-                g.drawImage(sweg.getLook(), (int)sweg.getBounding().x, (int)sweg.getBounding().y, null);
+                g.drawImage(sweg.getLook(), (int) sweg.x, (int) sweg.y, null);
             }
         if (lvl.getBigmekArray() != null) {
-            g.drawImage(lvl.getBigmekArray().getLook(), (int) lvl.getBigmekArray().getBounding().getX(),
-                    (int) lvl.getBigmekArray().getBounding().getY(), null);
+            g.drawImage(lvl.getBigmekArray().getLook(), (int) lvl.getBigmekArray().getX(),
+                    (int) lvl.getBigmekArray().getY(), null);
         }
         if (lvl.getEnemyArray() != null)
             for (Enemy enemy : lvl.getEnemyArray()) {
-                g.drawImage(enemy.getLook(), (int) enemy.getBounding().getX(), (int) enemy.getBounding().getY(), null);
+                g.drawImage(enemy.getLook(), (int) enemy.getX(), (int) enemy.getY(), null);
             }
 
     }

@@ -34,7 +34,6 @@ public class Game {
             
 
             int sleepTime = (int) (Config.msPerFrame-(updateLength/1_000_000));
-            System.out.println("sleeptime " + sleepTime);
             sleep(sleepTime);
 
 

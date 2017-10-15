@@ -7,15 +7,17 @@ import javax.imageio.ImageIO;
 
 import general.Bounding;
 
-public class Bigmek {
+public class Bigmek extends Bounding{
 
     private boolean collected = false;
     private BufferedImage look;
-    private final Bounding bounding;
+
 
     Bigmek(int x, int y) {
+        super(x, y);
         look = createLook();
-        bounding = new Bounding(x, y, look.getWidth(), look.getHeight());
+        this.width = look.getWidth(); this.height = look.getHeight();
+
     }
 
     public BufferedImage getLook() {
@@ -41,9 +43,5 @@ public class Bigmek {
 
         collected = true;
         look = null;
-    }
-
-    public Bounding getBounding() {
-        return bounding;
     }
 }

@@ -6,18 +6,12 @@ public class Lvl {
     private Sweg[] swegArray;
     private Bigmek bigmekArray;
     private Enemy[] enemyArray;
-    private int lvlNumber;
 
     public Lvl(int lvlNumber) {
         createCube(lvlNumber);
         createSweg(lvlNumber);
         createEnemy(lvlNumber);
         createBigmek(lvlNumber);
-        this.lvlNumber = lvlNumber;
-    }
-
-    public int getLvlNumber(){
-        return lvlNumber;
     }
 
     private void createCube(int lvlNumber) {
@@ -117,7 +111,7 @@ public class Lvl {
             cube.updateBounding(scrollingLeft, scrollingRight, delta);
 
         if (bigmekArray != null)
-            bigmekArray.getBounding().scroll(scrollingLeft, scrollingRight, delta);
+            bigmekArray.scroll(scrollingLeft, scrollingRight, delta);
 
         if (enemyArray != null)
             for (Enemy enemy : enemyArray)
@@ -125,7 +119,7 @@ public class Lvl {
 
         if (swegArray != null)
             for (Sweg sweg : swegArray)
-                sweg.getBounding().scroll(scrollingLeft, scrollingRight, delta);
+                sweg.scroll(scrollingLeft, scrollingRight, delta);
 
     }
 

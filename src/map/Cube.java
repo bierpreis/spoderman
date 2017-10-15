@@ -2,17 +2,16 @@ package map;
 
 import general.Bounding;
 
-public class Cube {
+public class Cube extends  Bounding{
 
-    private final Bounding bounding;
+
     private final Bounding topBounding;
     private final Bounding botBounding;
     private final Bounding leftBounding;
     private final Bounding rightBounding;
 
     Cube(int x, int y, int width, int height) {
-
-        bounding = new Bounding(x, y, width, height);
+        super(x,y, width, height);
         topBounding = new Bounding(x, y-5, width, 10);
         botBounding = new Bounding(x + 6, y + 30, width - 12, height - 30);
         leftBounding = new Bounding(x + 5, y + 10, 5, height - 20);
@@ -22,7 +21,7 @@ public class Cube {
 
     void updateBounding(boolean scrollingLeft, boolean scrollingRight, double delta) {
 
-        bounding.scroll(scrollingLeft, scrollingRight, delta);
+        scroll(scrollingLeft, scrollingRight, delta);
         topBounding.scroll(scrollingLeft, scrollingRight, delta);
         botBounding.scroll(scrollingLeft, scrollingRight, delta);
         leftBounding.scroll(scrollingLeft, scrollingRight, delta);
@@ -30,9 +29,6 @@ public class Cube {
 
     }
 
-    public Bounding getBounding() {
-        return bounding;
-    }
 
     public Bounding getTopBounding() {
         return topBounding;
