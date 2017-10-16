@@ -4,24 +4,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import java.awt.image.BufferStrategy;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.JFrame;
 
 import general.Config;
 import general.KeyHandler;
 import general.Message;
-import map.Cube;
-import map.Enemy;
-import map.Lvl;
-import map.Sweg;
+import map.*;
 
 class Frame extends JFrame {
 
     private int fps = 0;
     private int fpsCounter = 0;
     private long timeUntilLastSecond = System.currentTimeMillis() + 1000;
-    private Boolean running;
 
     private final Player player;
     private final Lvl lvl;
@@ -30,14 +25,13 @@ class Frame extends JFrame {
     private KeyHandler keyHandler;
     private final BufferStrategy bufferStrategy;
 
-    Frame(Player player, Lvl lvl, KeyHandler keyHandler, Boolean running) {
+    Frame(Player player, Lvl lvl, KeyHandler keyHandler) {
         super("spodermens advenshur");
 
         addKeyListener(keyHandler);
 
         this.player = player;
         this.lvl = lvl;
-        this.running = running;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(Config.screenX, Config.screenY);
 
@@ -51,7 +45,7 @@ class Frame extends JFrame {
     }
 
 
-    public void draw() {
+    void draw() {
 
         Graphics g = bufferStrategy.getDrawGraphics();
 
@@ -59,7 +53,7 @@ class Frame extends JFrame {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         drawCubes(g);
-        sayMessage(player.getNewMessage(), g);
+        displayMessage(player.pollNewMessage(), g);
         drawUnits(g);
         writeInfo(g, player);
 
@@ -72,17 +66,6 @@ class Frame extends JFrame {
 
     }
 
-    private void sleep(long startTime) {
-        long expiredTime = System.nanoTime() - startTime;
-        long sleepTime = Config.msPerFrame - (expiredTime / 100_000);
-        System.out.println("sleeptime in frame: " + sleepTime);
-        if (sleepTime > 0)
-            try {
-                Thread.sleep(sleepTime);
-            } catch (Exception e) {
-                System.out.println("Frame Interrupted while sleeping");
-            }
-    }
 
     private void writeInfo(Graphics g, Player player) {
         g.setColor(Color.BLACK);
@@ -110,7 +93,7 @@ class Frame extends JFrame {
 
     }
 
-    private void sayMessage(Message newIncomingMessage, Graphics g) {
+    private void displayMessage(Message newIncomingMessage, Graphics g) {
 
         if (newIncomingMessage != null)
             message = newIncomingMessage;

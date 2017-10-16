@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.Game;
-import game.NextAction;
+import game.Action;
 import general.Config;
 import general.KeyHandler;
 
@@ -15,7 +15,7 @@ public class Menu extends JFrame {
 
     private final Button[] buttonArray;
     private boolean showingMenu = true;
-    private NextAction nextAction;
+    private Action nextAction;
 
     private final Screen screen;
 
@@ -127,7 +127,7 @@ public class Menu extends JFrame {
         Game game = new Game(lvl, keyHandler);
         nextAction = game.getNextAction();
         game.stop();
-        if(nextAction.equals(NextAction.LVLUP))
+        if(nextAction.equals(Action.LVLUP))
             runGame(lvl + 1);
     }
 
