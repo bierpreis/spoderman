@@ -22,7 +22,6 @@ class Frame extends JFrame {
     private final Lvl lvl;
 
     private Message message = null;
-    private KeyHandler keyHandler;
     private final BufferStrategy bufferStrategy;
 
     Frame(Player player, Lvl lvl, KeyHandler keyHandler) {
@@ -121,7 +120,7 @@ class Frame extends JFrame {
     }
 
     private void drawUnits(Graphics g) {
-        g.drawImage(player.getLook(), (int) player.getBounding().x, (int) player.getBounding().y, null);
+        g.drawImage(player.getLook(), (int) player.x, (int) player.y, null);
         if (lvl.getSwegArray() != null)
             for (Sweg sweg : lvl.getSwegArray()) {
                 g.drawImage(sweg.getLook(), (int) sweg.x, (int) sweg.y, null);

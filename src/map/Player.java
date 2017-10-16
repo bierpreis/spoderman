@@ -12,7 +12,7 @@ import general.Config;
 import general.KeyHandler;
 import general.Message;
 
-public class Player implements Movable {
+public class Player extends Bounding implements Movable {
 
     private boolean onTop, onBot, onRightSide, onLeftSide;
 
@@ -29,13 +29,8 @@ public class Player implements Movable {
     private int kills = 0;
     private int lifes = 3;
 
-
-
     private int timeDead = 0;
 
-
-
-    private final Bounding bounding;
     private final Bounding botBounding;
 
     private BufferedImage lookingLeft, lookingRight, lookDead;
@@ -46,14 +41,13 @@ public class Player implements Movable {
     private final Lvl lvl;
 
     public Player(Lvl lvl, KeyHandler keyHandler) {
-
-        double startX = 300;
-        double startY = 300;
-
+        super(300, 300);
         createLook();
 
-        bounding = new Bounding(startX, startY, lookingLeft.getWidth(), lookingLeft.getHeight());
-        botBounding = new Bounding(startX, startY + 20, lookingLeft.getWidth(), 20);
+        width = lookingLeft.getWidth();
+        height = lookingLeft.getHeight();
+
+        botBounding = new Bounding(x, y + 20, lookingLeft.getWidth(), 20);
 
         this.lvl = lvl;
         this.keyHandler = keyHandler;
@@ -98,9 +92,6 @@ public class Player implements Movable {
     }
 
 
-    public Bounding getBounding() {
-        return bounding;
-    }
 
     private void respawn(KeyHandler keyHandler) {
         if (!alive && lifes > 0) {
@@ -122,13 +113,13 @@ public class Player implements Movable {
         onBot = false;
         onTop = false;
         for (Cube cube : lvl.getCubes()) {
-            if (bounding.intersects(cube.getLeftBounding()))
+            if (intersects(cube.getLeftBounding()))
                 onLeftSide = true;
-            if (bounding.intersects(cube.getRightBounding()))
+            if (intersects(cube.getRightBounding()))
                 onRightSide = true;
             if (botBounding.intersects(cube.getTopBounding()))
                 onTop = true;
-            if (bounding.intersects(cube.getBotBounding()))
+            if (intersects(cube.getBotBounding()))
                 onBot = true;
         }
 
@@ -140,21 +131,21 @@ public class Player implements Movable {
         if (!alive) return;
 
         if (!onTop)
-            bounding.y += Config.gravity * delta;
+            y += Config.gravity * delta;
 
         if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
-            bounding.x -= Config.playerMoveSpeed * delta;
+            x -= Config.playerMoveSpeed * delta;
             isLookingRight = false;
         }
 
         if (keyHandler.getRight() && !onLeftSide && !scrollingRight) {
-            bounding.x += Config.playerMoveSpeed * delta;
+            x += Config.playerMoveSpeed * delta;
             isLookingRight = true;
 
         }
 
-        botBounding.x = bounding.x;
-        botBounding.y = bounding.y + 20;
+        botBounding.x = x;
+        botBounding.y = y + 20;
 
     }
 
@@ -170,7 +161,7 @@ public class Player implements Movable {
             timeSinceJump += Config.msPerFrame;
 
             if (timeSinceJump < Config.timeJumpingUp)
-                bounding.y -= Config.jumpSpeed * delta;
+                y -= Config.jumpSpeed * delta;
 
             // end jump
             if (onBot || timeSinceJump > Config.timeJumpingUp) {
@@ -184,7 +175,7 @@ public class Player implements Movable {
         if (lvl.getSwegArray() != null)
             for (Sweg sweg : lvl.getSwegArray()) {
                 if (!sweg.getCollected())
-                    if (bounding.intersects(sweg)) {
+                    if (intersects(sweg)) {
                         sweg.setCollected();
                         createMessage("monies");
                         swegCollected += 1;
@@ -194,7 +185,7 @@ public class Player implements Movable {
 
     private void checkBigMek() {
         if (lvl.getBigmekArray() != null && !lvl.getBigmekArray().getCollected())
-            if (bounding.intersects(lvl.getBigmekArray())) {
+            if (intersects(lvl.getBigmekArray())) {
                 lvl.getBigmekArray().setCollected();
                 createMessage("press enter to enter lvl two");
 
@@ -216,7 +207,7 @@ public class Player implements Movable {
 
                 // feststellen ob tot
                 if (alive)
-                    if (bounding.intersects(enemy) && enemy.getAlive()) {
+                    if (intersects(enemy) && enemy.getAlive()) {
                         alive = false;
                         lifes -= 1;
                         if (lifes > 0)
@@ -240,13 +231,13 @@ public class Player implements Movable {
     private void scroll(double delta) {
         scrollingLeft = false;
         scrollingRight = false;
-        if (bounding.x > 0.6 * Config.screenX && !onLeftSide && alive) {
+        if (x > 0.6 * Config.screenX && !onLeftSide && alive) {
             scrollingRight = true;
-            bounding.x -= 0.2 * delta;
+            x -= 0.2 * delta;
         }
-        if (bounding.x < 0.4 * Config.screenY && !onRightSide && alive) {
+        if (x < 0.4 * Config.screenY && !onRightSide && alive) {
             scrollingLeft = true;
-            bounding.x += 0.2 * delta;
+            x += 0.2 * delta;
         }
     }
 
