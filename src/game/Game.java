@@ -9,8 +9,8 @@ public class Game {
 
     private final Player player;
     private final Frame frame;
-    private Lvl lvl;
-    private KeyHandler keyHandler;
+    private final Lvl lvl;
+    private final KeyHandler keyHandler;
     private Action action = Action.RUNNING;
     private boolean showEscDialog = false;
     private int escapingTime = 0;

@@ -36,7 +36,7 @@ public class Player extends Bounding implements Movable {
     private BufferedImage lookingLeft, lookingRight, lookDead;
 
     private Message message;
-    private KeyHandler keyHandler;
+    private final KeyHandler keyHandler;
 
     private final Lvl lvl;
 

@@ -7,7 +7,6 @@ public class Config {
     public static final int playerMoveSpeed = 5;
     public static final int playerRespawnTime = 2000;
     public static final int targetFps = 60;
-    public static final int ticksPerSecond = 60;
 
     public static final int gravity = 5;
 
