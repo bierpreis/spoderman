@@ -1,5 +1,9 @@
 package map;
 
+import map.enemies.Dolan;
+import map.enemies.Enemy;
+import map.enemies.Gooby;
+
 public class Lvl {
 
     private Cube[] cubeArray;
@@ -79,13 +83,13 @@ public class Lvl {
     private void createEnemy(int lvlNumber) {
         if (lvlNumber == 1) {
             enemyArray = new Enemy[2];
-            enemyArray[0] = new Enemy(500, 500, "dolan", cubeArray);
-            enemyArray[1] = new Enemy(1500, 500, "gooby", cubeArray);
+            enemyArray[0] = new Dolan(500, 500, cubeArray);
+            enemyArray[1] = new Gooby(1500, 500, cubeArray);
         }
         if (lvlNumber == 2) {
             enemyArray = new Enemy[2];
-            enemyArray[0] = new Enemy(1000, 500, "dolan", cubeArray);
-            enemyArray[1] = new Enemy(1100, 500, "gooby", cubeArray);
+            enemyArray[0] = new Dolan(1000, 500, cubeArray);
+            enemyArray[1] = new Gooby(1100, 500, cubeArray);
         }
     }
 

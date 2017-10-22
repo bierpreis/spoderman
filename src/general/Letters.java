@@ -54,7 +54,7 @@ public abstract class Letters {
 
                     try {
                         messagePicArray[i] = ImageIO
-                                .read(Letters.class.getResource("/letters/" + aCharLetterArray + ".png"));
+                                .read(Letters.class.getResource("/img/letters/" + aCharLetterArray + ".png"));
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();

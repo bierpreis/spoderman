@@ -11,6 +11,7 @@ import general.Bounding;
 import general.Config;
 import general.KeyHandler;
 import general.Message;
+import map.enemies.Enemy;
 
 public class Player extends Bounding implements Movable {
 

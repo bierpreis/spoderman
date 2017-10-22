@@ -11,6 +11,7 @@ import general.Config;
 import general.KeyHandler;
 import general.Message;
 import map.*;
+import map.enemies.Enemy;
 
 class Frame extends JFrame {
 

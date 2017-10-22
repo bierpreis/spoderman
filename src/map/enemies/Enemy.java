@@ -1,4 +1,4 @@
-package map;
+package map.enemies;
 
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -8,28 +8,26 @@ import javax.imageio.ImageIO;
 
 import general.Bounding;
 import general.Config;
+import map.Cube;
 
-public class Enemy extends Bounding {
+public abstract class Enemy extends Bounding {
     private boolean movingRight = true;
     private boolean alive = true;
 
-    private BufferedImage look;
+    protected BufferedImage look;
 
-    private final Bounding topBounding;
+    protected Bounding topBounding;
 
     private final Cube[] cube;
 
-    Enemy(int x, int y, String type, Cube[] cube) {
+    Enemy(int x, int y, Cube[] cube) {
         super(x, y);
-        look = createLook(type);
-        this.width = look.getWidth();
-        this.height = look.getHeight();
-        topBounding = new Bounding(x + 5, y, look.getWidth() - 10, 10);
+
         this.cube = cube;
 
     }
 
-    void update(boolean scrollingLeft, boolean scrollingRight, double delta) {
+    public void update(boolean scrollingLeft, boolean scrollingRight, double delta) {
 
         scroll(scrollingLeft, scrollingRight, delta);
 
@@ -70,7 +68,6 @@ public class Enemy extends Bounding {
         try {
             look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/blood.png"));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         alive = false;
@@ -81,18 +78,7 @@ public class Enemy extends Bounding {
         return look;
     }
 
-    private BufferedImage createLook(String type) {
 
-        try {
-            if (type.equals("dolan"))
-                look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/Dolan.png"));
-            if (type.equals("gooby"))
-                look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gooby.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return look;
-    }
 
     public Rectangle2D.Double getTopBounding() {
         return topBounding;
