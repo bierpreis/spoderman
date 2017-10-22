@@ -3,8 +3,8 @@ package menu;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import Helpers.Config;
-import Helpers.Letters;
+import helpers.Config;
+import helpers.Letters;
 
 class Button extends Rectangle {
 

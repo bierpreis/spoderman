@@ -1,6 +1,6 @@
 package map;
 
-import Helpers.Bounding;
+import helpers.Bounding;
 
 public class Cube extends Bounding {
 
@@ -19,13 +19,13 @@ public class Cube extends Bounding {
 
     }
 
-    void updateBounding(boolean scrollingLeft, boolean scrollingRight, double delta) {
+    void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
 
-        scroll(scrollingLeft, scrollingRight, delta);
-        topBounding.scroll(scrollingLeft, scrollingRight, delta);
-        botBounding.scroll(scrollingLeft, scrollingRight, delta);
-        leftBounding.scroll(scrollingLeft, scrollingRight, delta);
-        rightBounding.scroll(scrollingLeft, scrollingRight, delta);
+        scroll(scrollingLeft, scrollingRight);
+        topBounding.scroll(scrollingLeft, scrollingRight);
+        botBounding.scroll(scrollingLeft, scrollingRight);
+        leftBounding.scroll(scrollingLeft, scrollingRight);
+        rightBounding.scroll(scrollingLeft, scrollingRight);
 
     }
 

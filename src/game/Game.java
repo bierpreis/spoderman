@@ -1,8 +1,8 @@
 package game;
 
-import Helpers.Action;
-import Helpers.Config;
-import Helpers.KeyHandler;
+import helpers.Action;
+import helpers.Config;
+import helpers.KeyHandler;
 import map.Lvl;
 import map.Player;
 import menu.Menu;
@@ -42,11 +42,10 @@ public class Game {
             long startTime = System.nanoTime();
 
 
-            double delta = 1;
 
-            lvl.update(player.getScrollingLeft(), player.getScrollingRight(), delta);
+            lvl.update(player.getScrollingLeft(), player.getScrollingRight());
 
-            player.update(delta);
+            player.update();
             frame.draw();
             action = checkNextAction();
 

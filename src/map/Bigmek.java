@@ -1,6 +1,6 @@
 package map;
 
-import Helpers.Bounding;
+import helpers.Bounding;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

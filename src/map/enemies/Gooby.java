@@ -1,13 +1,13 @@
 package map.enemies;
 
-import Helpers.Bounding;
+import helpers.Bounding;
 import map.Cube;
 
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-public class Gooby extends Enemy {
+public class Gooby extends AbstractEnemy {
     public Gooby(int x, int y, Cube[] cube){
         super(x,y,cube);
         try {

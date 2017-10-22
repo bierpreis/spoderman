@@ -7,9 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.Game;
-import Helpers.Action;
-import Helpers.Config;
-import Helpers.KeyHandler;
+import helpers.Action;
+import helpers.Config;
+import helpers.KeyHandler;
 
 public class Menu extends JFrame {
 

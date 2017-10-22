@@ -6,11 +6,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import Helpers.Bounding;
-import Helpers.Config;
+import helpers.Bounding;
+import helpers.Config;
 import map.Cube;
 
-public abstract class Enemy extends Bounding {
+public abstract class AbstractEnemy extends Bounding {
     private boolean movingRight = true;
     private boolean alive = true;
 
@@ -20,16 +20,16 @@ public abstract class Enemy extends Bounding {
 
     private final Cube[] cube;
 
-    Enemy(int x, int y, Cube[] cube) {
+    AbstractEnemy(int x, int y, Cube[] cube) {
         super(x, y);
 
         this.cube = cube;
 
     }
 
-    public void update(boolean scrollingLeft, boolean scrollingRight, double delta) {
+    public void update(boolean scrollingLeft, boolean scrollingRight) {
 
-        scroll(scrollingLeft, scrollingRight, delta);
+        scroll(scrollingLeft, scrollingRight);
 
         if (alive) {
             walk();
@@ -58,10 +58,10 @@ public abstract class Enemy extends Bounding {
         }
     }
 
-    public void scroll(boolean scrollingLeft, boolean scrollingRight, double delta) {
+    public void scroll(boolean scrollingLeft, boolean scrollingRight) {
 
-        super.scroll(scrollingLeft, scrollingRight, delta);
-        topBounding.scroll(scrollingLeft, scrollingRight, delta);
+        super.scroll(scrollingLeft, scrollingRight);
+        topBounding.scroll(scrollingLeft, scrollingRight);
     }
 
     public void kill() {

@@ -7,11 +7,11 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
-import Helpers.Config;
-import Helpers.KeyHandler;
-import Helpers.Message;
+import helpers.Config;
+import helpers.KeyHandler;
+import helpers.Message;
 import map.*;
-import map.enemies.Enemy;
+import map.enemies.AbstractEnemy;
 
 class Frame extends JFrame {
 
@@ -131,7 +131,7 @@ class Frame extends JFrame {
                     (int) lvl.getBigmekArray().getY(), null);
         }
         if (lvl.getEnemyArray() != null)
-            for (Enemy enemy : lvl.getEnemyArray()) {
+            for (AbstractEnemy enemy : lvl.getEnemyArray()) {
                 g.drawImage(enemy.getLook(), (int) enemy.getX(), (int) enemy.getY(), null);
             }
 

@@ -1,7 +1,7 @@
 package map;
 
 import map.enemies.Dolan;
-import map.enemies.Enemy;
+import map.enemies.AbstractEnemy;
 import map.enemies.Gooby;
 
 public class Lvl {
@@ -9,7 +9,7 @@ public class Lvl {
     private Cube[] cubeArray;
     private Sweg[] swegArray;
     private Bigmek bigmekArray;
-    private Enemy[] enemyArray;
+    private AbstractEnemy[] enemyArray;
 
     public Lvl(int lvlNumber) {
         createCube(lvlNumber);
@@ -82,12 +82,12 @@ public class Lvl {
 
     private void createEnemy(int lvlNumber) {
         if (lvlNumber == 1) {
-            enemyArray = new Enemy[2];
+            enemyArray = new AbstractEnemy[2];
             enemyArray[0] = new Dolan(500, 500, cubeArray);
             enemyArray[1] = new Gooby(1500, 500, cubeArray);
         }
         if (lvlNumber == 2) {
-            enemyArray = new Enemy[2];
+            enemyArray = new AbstractEnemy[2];
             enemyArray[0] = new Dolan(1000, 500, cubeArray);
             enemyArray[1] = new Gooby(1100, 500, cubeArray);
         }
@@ -106,24 +106,24 @@ public class Lvl {
         return bigmekArray;
     }
 
-    public Enemy[] getEnemyArray() {
+    public AbstractEnemy[] getEnemyArray() {
         return enemyArray;
     }
 
-    public void update(boolean scrollingLeft, boolean scrollingRight, double delta) {
+    public void update(boolean scrollingLeft, boolean scrollingRight) {
         for (Cube cube : cubeArray)
-            cube.updateBounding(scrollingLeft, scrollingRight, delta);
+            cube.updateBounding(scrollingLeft, scrollingRight);
 
         if (bigmekArray != null)
-            bigmekArray.scroll(scrollingLeft, scrollingRight, delta);
+            bigmekArray.scroll(scrollingLeft, scrollingRight);
 
         if (enemyArray != null)
-            for (Enemy enemy : enemyArray)
-                enemy.update(scrollingLeft, scrollingRight, delta);
+            for (AbstractEnemy enemy : enemyArray)
+                enemy.update(scrollingLeft, scrollingRight);
 
         if (swegArray != null)
             for (Sweg sweg : swegArray)
-                sweg.scroll(scrollingLeft, scrollingRight, delta);
+                sweg.scroll(scrollingLeft, scrollingRight);
 
     }
 

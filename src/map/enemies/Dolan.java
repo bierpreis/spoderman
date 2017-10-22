@@ -1,12 +1,12 @@
 package map.enemies;
 
-import Helpers.Bounding;
+import helpers.Bounding;
 import map.Cube;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-public class Dolan extends Enemy {
+public class Dolan extends AbstractEnemy {
     public Dolan(int x, int y, Cube[] cube){
         super(x,y,cube);
         try {

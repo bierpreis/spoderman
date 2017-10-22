@@ -6,8 +6,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
-import Helpers.*;
-import map.enemies.Enemy;
+import helpers.*;
+import map.enemies.AbstractEnemy;
 
 public class Player extends Bounding implements Movable {
 
@@ -52,17 +52,17 @@ public class Player extends Bounding implements Movable {
         createMessage("nao i need to find teh bikmek");
     }
 
-    public void update(double delta) {
+    public void update() {
 
-        scroll(delta);
+        scroll();
 
         checkSweg();
         checkCubeCollisions();
         checkEnemies();
         checkBigMek();
 
-        move(keyHandler, delta);
-        jump(keyHandler, delta);
+        move(keyHandler);
+        jump(keyHandler);
 
         respawn(keyHandler);
     }
@@ -122,21 +122,21 @@ public class Player extends Bounding implements Movable {
 
     }
 
-    public void move(KeyHandler keyHandler, double delta) {
+    public void move(KeyHandler keyHandler) {
 
 
         if (!alive) return;
 
         if (!onTop)
-            y += Config.gravity * delta;
+            y += Config.gravity;
 
         if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
-            x -= Config.playerMoveSpeed * delta;
+            x -= Config.playerMoveSpeed;
             isLookingRight = false;
         }
 
         if (keyHandler.getRight() && !onLeftSide && !scrollingRight) {
-            x += Config.playerMoveSpeed * delta;
+            x += Config.playerMoveSpeed;
             isLookingRight = true;
 
         }
@@ -146,7 +146,7 @@ public class Player extends Bounding implements Movable {
 
     }
 
-    private void jump(KeyHandler keyHandler, double delta) {
+    private void jump(KeyHandler keyHandler) {
         if (!alive)
             return;
         //start new jump
@@ -158,7 +158,7 @@ public class Player extends Bounding implements Movable {
             timeSinceJump += Config.msPerFrame;
 
             if (timeSinceJump < Config.timeJumpingUp)
-                y -= Config.jumpSpeed * delta;
+                y -= Config.jumpSpeed;
 
             // end jump
             if (onBot || timeSinceJump > Config.timeJumpingUp) {
@@ -193,7 +193,7 @@ public class Player extends Bounding implements Movable {
 
     private void checkEnemies() {
         if (lvl.getEnemyArray() != null)
-            for (Enemy enemy : lvl.getEnemyArray()) {
+            for (AbstractEnemy enemy : lvl.getEnemyArray()) {
                 // gegner töten
                 if (enemy.getAlive())
                     if (botBounding.intersects(enemy.getTopBounding())) {
@@ -225,16 +225,16 @@ public class Player extends Bounding implements Movable {
         else return lookingLeft;
     }
 
-    private void scroll(double delta) {
+    private void scroll() {
         scrollingLeft = false;
         scrollingRight = false;
         if (x > 0.6 * Config.screenX && !onLeftSide && alive) {
             scrollingRight = true;
-            x -= 0.2 * delta;
+            x -= 1;
         }
         if (x < 0.4 * Config.screenY && !onRightSide && alive) {
             scrollingLeft = true;
-            x += 0.2 * delta;
+            x += 1;
         }
     }
 
