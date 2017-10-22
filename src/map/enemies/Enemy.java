@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import general.Bounding;
-import general.Config;
+import Helpers.Bounding;
+import Helpers.Config;
 import map.Cube;
 
 public abstract class Enemy extends Bounding {
@@ -80,7 +80,7 @@ public abstract class Enemy extends Bounding {
 
 
 
-    public Rectangle2D.Double getTopBounding() {
+    public Rectangle2D getTopBounding() {
         return topBounding;
     }
 

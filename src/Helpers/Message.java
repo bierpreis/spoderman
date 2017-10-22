@@ -1,4 +1,7 @@
-package general;
+package Helpers;
+
+import Helpers.Config;
+import Helpers.Letters;
 
 import java.awt.image.BufferedImage;
 

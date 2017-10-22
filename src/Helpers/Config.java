@@ -1,4 +1,4 @@
-package general;
+package Helpers;
 
 
 public class Config {

@@ -1,12 +1,12 @@
 package map;
 
+import Helpers.Bounding;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-import general.Bounding;
-
-public class Sweg extends Bounding{
+public class Sweg extends Bounding {
 
     private boolean isCollected = false;
     private BufferedImage look;

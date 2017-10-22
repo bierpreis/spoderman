@@ -1,6 +1,4 @@
-package Interfaces;
-
-import general.KeyHandler;
+package Helpers;
 
 public interface Movable {
 

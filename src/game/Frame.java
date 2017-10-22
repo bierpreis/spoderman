@@ -7,9 +7,9 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
-import general.Config;
-import general.KeyHandler;
-import general.Message;
+import Helpers.Config;
+import Helpers.KeyHandler;
+import Helpers.Message;
 import map.*;
 import map.enemies.Enemy;
 

@@ -1,9 +1,11 @@
 package game;
 
-import general.Config;
-import general.KeyHandler;
+import Helpers.Action;
+import Helpers.Config;
+import Helpers.KeyHandler;
 import map.Lvl;
 import map.Player;
+import menu.Menu;
 
 public class Game {
 
@@ -21,6 +23,17 @@ public class Game {
         frame = new Frame(player, lvl, keyHandler);
         this.keyHandler = keyHandler;
         start();
+    }
+
+    public static void main(String[] args) {
+
+        Menu menu = new Menu();
+
+        menu.showMenu();
+
+        menu.dispose();
+        System.exit(0);
+
     }
 
     private void start() {

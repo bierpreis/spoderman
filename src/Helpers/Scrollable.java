@@ -1,4 +1,4 @@
-package Interfaces;
+package Helpers;
 
 public interface Scrollable {
 

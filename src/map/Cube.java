@@ -1,8 +1,8 @@
 package map;
 
-import general.Bounding;
+import Helpers.Bounding;
 
-public class Cube extends  Bounding{
+public class Cube extends Bounding {
 
 
     private final Bounding topBounding;

@@ -1,6 +1,6 @@
 package map.enemies;
 
-import general.Bounding;
+import Helpers.Bounding;
 import map.Cube;
 
 

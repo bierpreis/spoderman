@@ -6,11 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
-import Interfaces.Movable;
-import general.Bounding;
-import general.Config;
-import general.KeyHandler;
-import general.Message;
+import Helpers.*;
 import map.enemies.Enemy;
 
 public class Player extends Bounding implements Movable {
