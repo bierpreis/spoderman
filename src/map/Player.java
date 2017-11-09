@@ -54,7 +54,7 @@ public class Player extends Bounding implements Movable {
 
     public void update() {
 
-        scroll();
+        checkIfScroll();
 
         checkSweg();
         checkCubeCollisions();
@@ -225,17 +225,14 @@ public class Player extends Bounding implements Movable {
         else return lookingLeft;
     }
 
-    private void scroll() {
+    private void checkIfScroll() {
         scrollingLeft = false;
         scrollingRight = false;
-        if (x > 0.6 * Config.screenX && !onLeftSide && alive) {
+        if (x > 0.6 * Config.screenX && !onLeftSide && alive)
             scrollingRight = true;
-            x -= 1;
-        }
-        if (x < 0.4 * Config.screenY && !onRightSide && alive) {
+
+        if (x < 0.4 * Config.screenY && !onRightSide && alive)
             scrollingLeft = true;
-            x += 1;
-        }
     }
 
     public int getSwegCount() {
