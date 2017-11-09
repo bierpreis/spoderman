@@ -14,6 +14,8 @@ public class Dolan extends AbstractEnemy {
         }catch (IOException ioe){
             System.out.println("/img/Dolan.png not found!");
         }
+        width = look.getWidth();
+        height = look.getHeight();
         topBounding = new Bounding(x + 5, y, look.getWidth() - 10, 10);
     }
 }

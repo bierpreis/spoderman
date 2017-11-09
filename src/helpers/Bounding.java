@@ -11,12 +11,12 @@ public class Bounding extends Rectangle implements Scrollable{
         this.x = x;
         this.y = y;
     }
-    // uses by cubes
+
     public Bounding(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
 
-    //@Override
+
     public void scroll(boolean scrollingLeft, boolean scrollingRight) {
 
         if (scrollingLeft)

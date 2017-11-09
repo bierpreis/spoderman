@@ -44,7 +44,7 @@ public class Player extends Bounding implements Movable {
         width = lookingLeft.getWidth();
         height = lookingLeft.getHeight();
 
-        botBounding = new Bounding(x, y + 20, lookingLeft.getWidth(), 20);
+        botBounding = new Bounding(x -5, y + 20, lookingLeft.getWidth() + 10, 20);
 
         this.lvl = lvl;
         this.keyHandler = keyHandler;
@@ -54,7 +54,7 @@ public class Player extends Bounding implements Movable {
 
     public void update() {
 
-        scroll();
+        checkIfScroll();
 
         checkSweg();
         checkCubeCollisions();
@@ -80,14 +80,13 @@ public class Player extends Bounding implements Movable {
 
     }
 
-    public boolean getScrollingRight(){
+    public boolean getScrollingRight() {
         return scrollingRight;
     }
 
-    public boolean getScrollingLeft(){
+    public boolean getScrollingLeft() {
         return scrollingLeft;
     }
-
 
 
     private void respawn(KeyHandler keyHandler) {
@@ -194,17 +193,20 @@ public class Player extends Bounding implements Movable {
     private void checkEnemies() {
         if (lvl.getEnemyArray() != null)
             for (AbstractEnemy enemy : lvl.getEnemyArray()) {
-                // gegner töten
-                if (enemy.getAlive())
+
+                if (enemy.getAlive() && alive) {
+
+                    // gegner töten
                     if (botBounding.intersects(enemy.getTopBounding())) {
                         enemy.kill();
                         createMessage("lel rekt");
                         kills += 1;
+                        return; //this ensures player wont be killed after he killed enemy
                     }
 
-                // feststellen ob tot
-                if (alive)
-                    if (intersects(enemy) && enemy.getAlive()) {
+                    // feststellen ob tot
+
+                    if (intersects(enemy)) {
                         alive = false;
                         lifes -= 1;
                         if (lifes > 0)
@@ -212,6 +214,7 @@ public class Player extends Bounding implements Movable {
                         if (lifes < 1)
                             createMessage("g8 nao dis is mai end");
                     }
+                }
             }
     }
 
@@ -225,17 +228,14 @@ public class Player extends Bounding implements Movable {
         else return lookingLeft;
     }
 
-    private void scroll() {
+    private void checkIfScroll() {
         scrollingLeft = false;
         scrollingRight = false;
-        if (x > 0.6 * Config.screenX && !onLeftSide && alive) {
+        if (x > 0.6 * Config.screenX && !onLeftSide && alive)
             scrollingRight = true;
-            x -= 1;
-        }
-        if (x < 0.4 * Config.screenY && !onRightSide && alive) {
+
+        if (x < 0.4 * Config.screenY && !onRightSide && alive)
             scrollingLeft = true;
-            x += 1;
-        }
     }
 
     public int getSwegCount() {
@@ -259,7 +259,6 @@ public class Player extends Bounding implements Movable {
         message = null;
         return messageToReturn;
     }
-
 
 
 }
