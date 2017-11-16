@@ -122,6 +122,7 @@ class Frame extends JFrame {
 
     private void drawUnits(Graphics g) {
         g.drawImage(player.getLook(),  player.x,  player.y, null);
+        System.out.println("player x: " + player.x);
         if (lvl.getSwegArray() != null)
             for (Sweg sweg : lvl.getSwegArray()) {
                 g.drawImage(sweg.getLook(),  sweg.x,  sweg.y, null);
