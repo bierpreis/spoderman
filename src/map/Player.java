@@ -44,7 +44,7 @@ public class Player extends Bounding implements Movable {
         width = lookingLeft.getWidth();
         height = lookingLeft.getHeight();
 
-        botBounding = new Bounding(x -5, y + 20, lookingLeft.getWidth() + 10, 20);
+        botBounding = new Bounding(x - 5, y + 20, lookingLeft.getWidth() + 10, 20);
 
         this.lvl = lvl;
         this.keyHandler = keyHandler;
@@ -180,13 +180,15 @@ public class Player extends Bounding implements Movable {
     }
 
     private void checkBigMek() {
-        if (lvl.getBigmekArray() != null && !lvl.getBigmekArray().getCollected())
-            if (intersects(lvl.getBigmekArray())) {
-                lvl.getBigmekArray().setCollected();
-                createMessage("press enter to enter lvl two");
+        if (lvl.getBigmekArray() != null)
+            for (Bigmek bigmek : lvl.getBigmekArray()) {
+                if (!bigmek.getCollected())
+                    if (intersects(bigmek)) {
+                        bigmek.setCollected();
+                        createMessage("press enter to enter lvl two");
 
+                    }
             }
-
     }
 
 

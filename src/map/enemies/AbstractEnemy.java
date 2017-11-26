@@ -18,27 +18,25 @@ public abstract class AbstractEnemy extends Bounding {
 
     protected Bounding topBounding;
 
-    private final Cube[] cube;
 
-    AbstractEnemy(int x, int y, Cube[] cube) {
+    AbstractEnemy(int x, int y) {
         super(x, y);
 
-        this.cube = cube;
 
     }
 
-    public void update(boolean scrollingLeft, boolean scrollingRight) {
+    public void update(boolean scrollingLeft, boolean scrollingRight, Cube[] cube) {
 
         scroll(scrollingLeft, scrollingRight);
 
         if (alive) {
             walk();
-            checkCubeCollisions();
+            checkCubeCollisions(cube);
         }
     }
 
-    private void checkCubeCollisions() {
-        for (Cube cube : cube) {
+    private void checkCubeCollisions(Cube[] cubes) {
+        for (Cube cube : cubes) {
             if (intersects(cube.getLeftBounding()) && movingRight)
                 movingRight = false;
             if (intersects(cube.getRightBounding()) && !movingRight)

@@ -7,8 +7,8 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 
 public class Dolan extends AbstractEnemy {
-    public Dolan(int x, int y, Cube[] cube){
-        super(x,y,cube);
+    public Dolan(int x, int y){
+        super(x,y);
         try {
             this.look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/Dolan.png"));
         }catch (IOException ioe){

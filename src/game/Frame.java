@@ -127,8 +127,9 @@ class Frame extends JFrame {
                 g.drawImage(sweg.getLook(),  sweg.x,  sweg.y, null);
             }
         if (lvl.getBigmekArray() != null) {
-            g.drawImage(lvl.getBigmekArray().getLook(),  lvl.getBigmekArray().x,
-                     lvl.getBigmekArray().y, null);
+            for(Bigmek bigmek: lvl.getBigmekArray())
+            g.drawImage(bigmek.getLook(),  bigmek.x,
+                     bigmek.y, null);
         }
         if (lvl.getEnemyArray() != null)
             for (AbstractEnemy enemy : lvl.getEnemyArray()) {

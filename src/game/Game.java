@@ -75,8 +75,9 @@ public class Game {
 
     private Action checkNextAction() {
 
-        if (lvl.getBigmekArray() != null)
-            if (lvl.getBigmekArray().getCollected())
+        if (lvl.getBigmekArray()
+                != null)
+            if (lvl.getBigmekArray()[0].getCollected())
                 if (keyHandler.getEnter()) {
                     System.out.println("action lvl up returned!");
                     return Action.LVLUP;

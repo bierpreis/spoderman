@@ -4,93 +4,130 @@ import map.enemies.Dolan;
 import map.enemies.AbstractEnemy;
 import map.enemies.Gooby;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Lvl {
 
     private Cube[] cubeArray;
     private Sweg[] swegArray;
-    private Bigmek bigmekArray;
+    private Bigmek[] bigmekArray;
     private AbstractEnemy[] enemyArray;
 
     public Lvl(int lvlNumber) {
-        createCube(lvlNumber);
-        createSweg(lvlNumber);
-        createEnemy(lvlNumber);
-        createBigmek(lvlNumber);
-    }
 
-    private void createCube(int lvlNumber) {
-        if (lvlNumber == 1) {
 
-            cubeArray = new Cube[17]; // x, y, width, height ist das format
-            cubeArray[0] = new Cube(0, 550, 3700, 20); // boden
-            cubeArray[1] = new Cube(150, 510, 50, 50);
-            cubeArray[2] = new Cube(250, 510, 50, 50);
-            cubeArray[3] = new Cube(300, 460, 50, 50);
-            cubeArray[4] = new Cube(350, 410, 50, 50);
-            cubeArray[5] = new Cube(400, 450, 50, 50);
-            cubeArray[6] = new Cube(450, 450, 50, 50);
-            cubeArray[7] = new Cube(-50, -100, 50, 1500); // linke aussengrenze
-            cubeArray[8] = new Cube(3700, -100, 50, 1500); // rechte ausssengrenze
-            cubeArray[9] = new Cube(800, 650, 50, 50);
-            cubeArray[10] = new Cube(1200, 400, 600, 50);
-            cubeArray[11] = new Cube(1000, 510, 50, 50);
-            cubeArray[12] = new Cube(1850, 250, 50, 50);
-            cubeArray[13] = new Cube(2100, 400, 500, 50);
-            cubeArray[14] = new Cube(2700, 300, 400, 50);
-            cubeArray[15] = new Cube(3200, 200, 300, 50);
-            cubeArray[16] = new Cube(3650, 200, 50, 50);
+        String pathToFile = "lvl" + Integer.toString(lvlNumber) + ".txt";
+        FileReader fr;
+        try {
+            fr = new FileReader(pathToFile);
+        } catch (FileNotFoundException e) {
+            System.out.println("could not find lvl file");
+            return;
         }
 
-        if (lvlNumber == 2) {
-            cubeArray = new Cube[5];
-            cubeArray[0] = new Cube(0, 550, 3700, 20);
-            cubeArray[1] = new Cube(150, 510, 50, 50);
-            cubeArray[2] = new Cube(250, 510, 50, 50);
-            cubeArray[3] = new Cube(950, 400, 50, 300);
-            cubeArray[4] = new Cube(1250, 400, 50, 300);
+        BufferedReader br = new BufferedReader(fr);
+        LinkedList<String> cubeStringList = new LinkedList();
+        LinkedList<String> enemyStringList = new LinkedList();
+        LinkedList<String> swegStringList = new LinkedList();
+        LinkedList<String> bigmekStringList = new LinkedList();
+        int lineNumber = 0;
+        try {
 
+            while (true) {
+                String newLine = br.readLine();
+                if (!newLine.equals("END_CUBES")) {
+                    cubeStringList.add(newLine);
+                } else break;
+                lineNumber++;
+            }
+
+            while (true) {
+                String newLine = br.readLine();
+                if (!newLine.equals("END_ENEMIES")) {
+                    enemyStringList.add(newLine);
+                } else break;
+                lineNumber++;
+            }
+
+            while (true) {
+                String newLine = br.readLine();
+                if (!newLine.equals("END_SWEG")) {
+                    swegStringList.add(newLine);
+                } else break;
+                lineNumber++;
+            }
+
+            while (true) {
+                String newLine = br.readLine();
+                if (!newLine.equals("END_BIGMEK")) {
+                    bigmekStringList.add(newLine);
+                } else break;
+                lineNumber++;
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("error in map file line " + lineNumber);
         }
 
-    }
-
-    private void createSweg(int lvlNumber) {
-        if (lvlNumber == 1) {
-            swegArray = new Sweg[6];
-            swegArray[0] = new Sweg(500, 500);
-            swegArray[1] = new Sweg(550, 500);
-            swegArray[2] = new Sweg(600, 500);
-            swegArray[3] = new Sweg(3300, 150);
-            swegArray[4] = new Sweg(3330, 150);
-            swegArray[5] = new Sweg(1850, 200);
-
-        }
-        if (lvlNumber == 2) {
-            swegArray = new Sweg[3];
-            swegArray[0] = new Sweg(1000, 500);
-            swegArray[1] = new Sweg(1100, 500);
-            swegArray[2] = new Sweg(1200, 500);
-        }
-
-    }
-
-    private void createBigmek(int lvlNumber) {
-        if (lvlNumber == 1) {
-            bigmekArray = new Bigmek(3650, 150);
-        }
+        cubeArray = createCubes(cubeStringList);
+        enemyArray = createEnemies(enemyStringList);
+        swegArray = createSweg(swegStringList);
+        bigmekArray = createBigmek(bigmekStringList);
 
     }
 
-    private void createEnemy(int lvlNumber) {
-        if (lvlNumber == 1) {
-            enemyArray = new AbstractEnemy[2];
-            enemyArray[0] = new Dolan(500, 500, cubeArray);
-            enemyArray[1] = new Gooby(1500, 500, cubeArray);
+
+    static Cube[] createCubes(List<String> cubeStringList) {
+
+        Cube[] cubeArray = new Cube[cubeStringList.size()];
+
+        for (int i = 0; i < cubeStringList.size(); i++) {
+            Scanner scanner = new Scanner(cubeStringList.get(i));
+            cubeArray[i] = new Cube(scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
         }
-        if (lvlNumber == 2) {
-            enemyArray = new AbstractEnemy[2];
-            enemyArray[0] = new Dolan(1000, 500, cubeArray);
-            enemyArray[1] = new Gooby(1100, 500, cubeArray);
+
+        return cubeArray;
+    }
+
+    static AbstractEnemy[] createEnemies(List<String> enemyString) {
+        AbstractEnemy[] enemyArray = new AbstractEnemy[enemyString.size()];
+        for (int i = 0; i < enemyString.size(); i++) {
+            Scanner scanner = new Scanner(enemyString.get(i));
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+            String type = scanner.next();
+            if (type.equals("dolan"))
+                enemyArray[i] = new Dolan(x, y);
+            if (type.equals("gooby"))
+                enemyArray[i] = new Gooby(x, y);
+
         }
+        return enemyArray;
+    }
+
+    static Sweg[] createSweg(List<String> swegString) {
+        Sweg[] swegs = new Sweg[swegString.size()];
+        for (int i = 0; i < swegs.length; i++) {
+            Scanner scanner = new Scanner(swegString.get(i));
+            swegs[i] = new Sweg(scanner.nextInt(), scanner.nextInt());
+        }
+
+        return swegs;
+    }
+
+    static Bigmek[] createBigmek(List<String> bigmekString) {
+        Bigmek[] bigmeks = new Bigmek[bigmekString.size()];
+        for (int i = 0; i < bigmeks.length; i++) {
+            Scanner scanner = new Scanner(bigmekString.get(i));
+            bigmeks[i] = new Bigmek(scanner.nextInt(), scanner.nextInt());
+        }
+        return bigmeks;
     }
 
     // getter
@@ -102,7 +139,7 @@ public class Lvl {
         return swegArray;
     }
 
-    public Bigmek getBigmekArray() {
+    public Bigmek[] getBigmekArray() {
         return bigmekArray;
     }
 
@@ -115,11 +152,12 @@ public class Lvl {
             cube.updateBounding(scrollingLeft, scrollingRight);
 
         if (bigmekArray != null)
-            bigmekArray.scroll(scrollingLeft, scrollingRight);
+            for (Bigmek bigmek : bigmekArray)
+                bigmek.scroll(scrollingLeft, scrollingRight);
 
         if (enemyArray != null)
             for (AbstractEnemy enemy : enemyArray)
-                enemy.update(scrollingLeft, scrollingRight);
+                enemy.update(scrollingLeft, scrollingRight, cubeArray);
 
         if (swegArray != null)
             for (Sweg sweg : swegArray)
