@@ -12,7 +12,7 @@ public class Sweg extends Bounding {
     private BufferedImage look;
 
     Sweg(int x, int y) {
-        super(x,y);
+        super(x,y,0,0);
 
         try {
             look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gold.png"));

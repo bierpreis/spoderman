@@ -20,7 +20,7 @@ public abstract class AbstractEnemy extends Bounding {
 
 
     AbstractEnemy(int x, int y) {
-        super(x, y);
+        super(x, y,0,0);
 
 
     }
@@ -55,7 +55,7 @@ public abstract class AbstractEnemy extends Bounding {
             topBounding.x -= Config.enemyMoveSpeed;
         }
     }
-
+    @Override
     public void scroll(boolean scrollingLeft, boolean scrollingRight) {
 
         super.scroll(scrollingLeft, scrollingRight);

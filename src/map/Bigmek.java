@@ -14,7 +14,7 @@ public class Bigmek extends Bounding {
 
 
     Bigmek(int x, int y) {
-        super(x, y);
+        super(x, y,0,0);
         look = createLook();
         this.width = look.getWidth(); this.height = look.getHeight();
 

@@ -38,7 +38,7 @@ public class Player extends Bounding implements Movable {
     private final Lvl lvl;
 
     public Player(Lvl lvl, KeyHandler keyHandler) {
-        super(300, 300);
+        super(300, 300,0,0);
         createLook();
 
         width = lookingLeft.getWidth();
