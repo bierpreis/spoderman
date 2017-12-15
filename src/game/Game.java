@@ -16,6 +16,7 @@ public class Game {
     private Action action = Action.RUNNING;
     private boolean showEscDialog = false;
     private int escapingTime = 0;
+    private Sound sound = Sound.MONEY;
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
         lvl = new Lvl(lvlNumber);
@@ -28,10 +29,10 @@ public class Game {
     public static void main(String[] args) {
 
         Menu menu = new Menu();
-
         menu.showMenu();
 
         menu.dispose();
+
         System.exit(0);
 
     }

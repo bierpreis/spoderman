@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
+import game.Sound;
 import helpers.*;
 import map.enemies.AbstractEnemy;
 
@@ -175,6 +176,7 @@ public class Player extends Bounding implements Movable {
                         sweg.setCollected();
                         createMessage("monies");
                         swegCollected += 1;
+                        Sound.MONEY.play();
                     }
             }
     }
