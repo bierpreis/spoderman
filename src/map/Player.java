@@ -211,6 +211,7 @@ public class Player extends Bounding implements Movable {
                     // feststellen ob tot
 
                     if (intersects(enemy)) {
+                        Sound.PLAYER_DEAD.play();
                         alive = false;
                         lifes -= 1;
                         if (lifes > 0)
