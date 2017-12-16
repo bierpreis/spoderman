@@ -5,7 +5,7 @@ import java.io.File;
 
 
 public enum Sound {
-    MONEY, PLAYER_KILLED, PLAYER_DEAD;
+    MONEY, PLAYER_KILLED, PLAYER_DEAD, ENEMY_KILLED, BIGMEK;
 
     File ringSoundFile;
     AudioInputStream soundStream;

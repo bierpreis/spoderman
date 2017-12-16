@@ -187,6 +187,7 @@ public class Player extends Bounding implements Movable {
                 if (!bigmek.getCollected())
                     if (intersects(bigmek)) {
                         bigmek.setCollected();
+                        Sound.BIGMEK.play();
                         createMessage("press enter to enter lvl two");
 
                     }
@@ -205,6 +206,7 @@ public class Player extends Bounding implements Movable {
                         enemy.kill();
                         createMessage("lel rekt");
                         kills += 1;
+                        Sound.ENEMY_KILLED.play();
                         return; //this ensures player wont be killed after he killed enemy
                     }
 
