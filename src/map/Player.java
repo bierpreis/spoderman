@@ -39,7 +39,7 @@ public class Player extends Bounding implements Movable {
     private final Lvl lvl;
 
     public Player(Lvl lvl, KeyHandler keyHandler) {
-        super(300, 300,0,0);
+        super(300, 300, 0, 0);
         createLook();
 
         width = lookingLeft.getWidth();
@@ -211,13 +211,18 @@ public class Player extends Bounding implements Movable {
                     // feststellen ob tot
 
                     if (intersects(enemy)) {
-                        Sound.PLAYER_DEAD.play();
+
                         alive = false;
                         lifes -= 1;
-                        if (lifes > 0)
+                        if (lifes > 0) {
                             createMessage("u got rekt 111  press spaec to respawn");
-                        if (lifes < 1)
+                            Sound.PLAYER_KILLED.play();
+                        }
+                        if (lifes < 1) {
+                            Sound.PLAYER_KILLED.play();
+                            Sound.PLAYER_DEAD.play();
                             createMessage("g8 nao dis is mai end");
+                        }
                     }
                 }
             }
