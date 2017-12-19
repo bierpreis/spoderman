@@ -211,7 +211,6 @@ public class Player extends Bounding implements Movable {
                     }
 
                     // feststellen ob tot
-
                     if (intersects(enemy)) {
 
                         alive = false;

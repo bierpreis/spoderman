@@ -15,6 +15,8 @@ public class Gooby extends AbstractEnemy {
         }catch (Exception e){
             System.out.println("/img/Gooby.png not found!");
         }
+        width = look.getWidth();
+        height = look.getHeight();
         topBounding = new Bounding(x + 5, y, look.getWidth() - 10, 10);
     }
 }
