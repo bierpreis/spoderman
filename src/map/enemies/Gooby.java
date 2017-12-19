@@ -11,9 +11,9 @@ public class Gooby extends AbstractEnemy {
     public Gooby(int x, int y){
         super(x,y);
         try {
-            this.look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/Dolan.png"));
-        }catch (IOException ioe){
-            System.out.println("/img/Dolan.png not found!");
+            this.look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gooby.png"));
+        }catch (Exception e){
+            System.out.println("/img/Gooby.png not found!");
         }
         topBounding = new Bounding(x + 5, y, look.getWidth() - 10, 10);
     }
