@@ -33,7 +33,7 @@ class Frame extends JFrame {
         this.player = player;
         this.lvl = lvl;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(Config.screenX, Config.screenY);
+        setBounds(Config.windowX, Config.windowY, Config.screenX, Config.screenY);
 
         setResizable(false);
         setVisible(true);

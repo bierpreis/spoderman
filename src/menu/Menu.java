@@ -15,7 +15,7 @@ public class Menu extends JFrame {
 
     private final Button[] buttonArray;
     private boolean showingMenu = true;
-    private Action nextAction;
+
 
     private final Screen screen;
 
@@ -30,7 +30,7 @@ public class Menu extends JFrame {
         screen.setBounds(0, 0, Config.screenX, Config.screenY);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(Config.screenX, Config.screenY);
+        setBounds(Config.windowX, Config.windowY, Config.screenX, Config.screenY);
         setVisible(true);
         setResizable(false);
 
@@ -48,6 +48,7 @@ public class Menu extends JFrame {
     }
 
     private class Screen extends JLabel {
+
         protected void paintComponent(Graphics g) {
             // super.paintComponent(g);
             drawButtons(g);
@@ -69,7 +70,7 @@ public class Menu extends JFrame {
         } else
             g.setColor(Color.BLUE);
 
-        g.fillRect((int) button.getX(), y, (int) button.getWidth(), (int) button.getHeight());
+        g.fillRect(button.x, y, button.width, button.height);
 
         int letterX[] = new int[button.getPicArray().length];
 
@@ -123,11 +124,12 @@ public class Menu extends JFrame {
         }
     }
 
-    private void runGame(int lvl){
+    private void runGame(int lvl) {
+        Action nextAction;
         Game game = new Game(lvl, keyHandler);
         nextAction = game.getNextAction();
         game.stop();
-        if(nextAction.equals(Action.LVLUP))
+        if (nextAction.equals(Action.LVLUP))
             runGame(lvl + 1);
     }
 
@@ -147,7 +149,6 @@ public class Menu extends JFrame {
 
         }
     }
-
 
 
 }

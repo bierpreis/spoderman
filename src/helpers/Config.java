@@ -23,6 +23,9 @@ public class Config {
     public static final int buttonLockTime = 500;
     public static final int jumpSpeed = 18;
 
+    public static final int windowX = 200;
+    public static final int windowY = 200;
+
 
 
 
