@@ -44,6 +44,7 @@ public class Menu extends JFrame {
 
         addKeyListener(keyHandler);
         buttonArray[0].setFocus();
+        requestFocus();
 
     }
 

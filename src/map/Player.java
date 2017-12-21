@@ -182,7 +182,7 @@ public class Player extends Bounding implements Movable {
                     if (intersects(bigmek)) {
                         bigmek.setCollected();
                         Sound.BIGMEK.play();
-                        createMessage("press enter to enter lvl two");
+                        createMessage("press enter to enter lvl two", true);
 
                     }
             }
@@ -257,6 +257,9 @@ public class Player extends Bounding implements Movable {
 
     public void createMessage(String messageString) {
         message = new Message(messageString);
+    }
+    public void createMessage(String messageString, boolean isMessageFinal) {
+        message = new Message(messageString, isMessageFinal);
     }
 
     public Message pollNewMessage() {

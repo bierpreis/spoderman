@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 public class Message {
 
     private final BufferedImage[] messagePicArray;
+    private boolean isMessageFinal = false;
 
     private int timer;
 
@@ -12,6 +13,12 @@ public class Message {
         messagePicArray = Letters.createMessageArray(messageString);
         timer = Config.messageBaseTime + messagePicArray.length * Config.messageTimePerLetter;
 
+    }
+
+    public Message(String messageString, boolean finalMessageValue) {
+        messagePicArray = Letters.createMessageArray(messageString);
+        isMessageFinal = finalMessageValue;
+        timer = Config.messageBaseTime + messagePicArray.length * Config.messageTimePerLetter;
     }
 
     public int getTimer() {
@@ -23,8 +30,8 @@ public class Message {
     }
 
     public void updateTimer() {
-        timer -= Config.msPerFrame;
-
+        if (!isMessageFinal)
+            timer -= Config.msPerFrame;
     }
 
 }
