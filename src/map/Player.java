@@ -54,18 +54,17 @@ public class Player extends Bounding implements Movable {
     }
 
     public void update() {
-
+        respawn();
         checkIfScroll();
+        if (alive) {
+            checkSweg();
+            checkCubeCollisions();
+            checkEnemies();
+            checkBigMek();
+            move();
+            jump();
+        }
 
-        checkSweg();
-        checkCubeCollisions();
-        checkEnemies();
-        checkBigMek();
-
-        move(keyHandler);
-        jump(keyHandler);
-
-        respawn(keyHandler);
     }
 
 
@@ -90,7 +89,7 @@ public class Player extends Bounding implements Movable {
     }
 
 
-    private void respawn(KeyHandler keyHandler) {
+    private void respawn() {
         if (!alive && lifes > 0) {
 
             timeDead += Config.msPerFrame;
@@ -122,13 +121,9 @@ public class Player extends Bounding implements Movable {
 
     }
 
-    public void move(KeyHandler keyHandler) {
+    public void move() {
 
-
-        if (!alive) return;
-
-        if (!onTop)
-            y += Config.gravity;
+        if (!onTop) y += Config.gravity;
 
         if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
             x -= Config.playerMoveSpeed;
@@ -146,9 +141,8 @@ public class Player extends Bounding implements Movable {
 
     }
 
-    private void jump(KeyHandler keyHandler) {
-        if (!alive)
-            return;
+    private void jump() {
+
         //start new jump
         if (onTop && !onBot && keyHandler.getSpace())
             jumping = true;
@@ -199,7 +193,7 @@ public class Player extends Bounding implements Movable {
         if (lvl.getEnemyArray() != null)
             for (AbstractEnemy enemy : lvl.getEnemyArray()) {
 
-                if (enemy.getAlive() && alive) {
+                if (enemy.getAlive()) {
 
                     // gegner töten
                     if (botBounding.intersects(enemy.getTopBounding())) {

@@ -16,7 +16,6 @@ public class Game {
     private Action action = Action.RUNNING;
     private boolean showEscDialog = false;
     private int escapingTime = 0;
-    private Sound sound = Sound.MONEY;
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
         lvl = new Lvl(lvlNumber);
@@ -42,8 +41,6 @@ public class Game {
         while (action == Action.RUNNING) {
             long startTime = System.nanoTime();
 
-
-
             lvl.update(player.getScrollingLeft(), player.getScrollingRight());
 
             player.update();
@@ -52,9 +49,7 @@ public class Game {
 
             long updateLength = System.nanoTime() - startTime;
 
-
-            int sleepTime = (int) (Config.msPerFrame - (updateLength / 1_000_000));
-            sleep(sleepTime);
+            sleep((int) (Config.msPerFrame - (updateLength / 1_000_000)));
         }
     }
 
@@ -76,18 +71,17 @@ public class Game {
 
     private Action checkNextAction() {
 
-        if (lvl.getBigmekArray()
-                != null)
+        if (lvl.getBigmekArray()!= null)
             if (lvl.getBigmekArray()[0].getCollected())
-                if (keyHandler.getEnter()) {
+                if (keyHandler.getEnter())
                     return Action.LVLUP;
-                }
+
 
         if (keyHandler.getEscape())
             showEscDialog = true;
         if (showEscDialog) {
             player.createMessage("press enter to exit");
-            if(keyHandler.getEnter())
+            if (keyHandler.getEnter())
                 return Action.EXIT;
 
             escapingTime += Config.msPerFrame;
