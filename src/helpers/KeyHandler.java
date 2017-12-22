@@ -16,41 +16,60 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-            keyEscape = true;
 
-        if (e.getKeyCode() == KeyEvent.VK_ENTER)
-            keyEnterIsPressed = true;
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            keyLeft = true;
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            keyRight = true;
-        if (e.getKeyCode() == KeyEvent.VK_UP)
-            keyUp = true;
-        if (e.getKeyCode() == KeyEvent.VK_DOWN)
-            keyDown = true;
-        if (e.getKeyCode() == KeyEvent.VK_SPACE)
-            keySpace = true;
-
+        switch (e.getKeyCode()) {
+            case (KeyEvent.VK_ESCAPE):
+                keyEscape = true;
+                break;
+            case (KeyEvent.VK_ENTER):
+                keyEnterIsPressed = true;
+                break;
+            case (KeyEvent.VK_LEFT):
+                keyLeft = true;
+                break;
+            case (KeyEvent.VK_RIGHT):
+                keyRight = true;
+                break;
+            case (KeyEvent.VK_UP):
+                keyUp = true;
+                break;
+            case (KeyEvent.VK_DOWN):
+                keyDown = true;
+                break;
+            case (KeyEvent.VK_SPACE):
+                keySpace = true;
+                break;
+        }
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-            keyEscape = false;
-        if (e.getKeyCode() == KeyEvent.VK_ENTER)
-            keyEnterIsPressed = false;
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            keyLeft = false;
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            keyRight = false;
-        if (e.getKeyCode() == KeyEvent.VK_SPACE)
-            keySpace = false;
-        if (e.getKeyCode() == KeyEvent.VK_UP)
-            keyUp = false;
-        if (e.getKeyCode() == KeyEvent.VK_DOWN)
-            keyDown = false;
+
+        switch (e.getKeyCode()) {
+            case (KeyEvent.VK_ESCAPE):
+                keyEscape = false;
+                break;
+            case (KeyEvent.VK_ENTER):
+                keyEnterIsPressed = false;
+                break;
+            case (KeyEvent.VK_LEFT):
+                keyLeft = false;
+                break;
+            case (KeyEvent.VK_RIGHT):
+                keyRight = false;
+                break;
+            case (KeyEvent.VK_UP):
+                keyUp = false;
+                break;
+            case (KeyEvent.VK_DOWN):
+                keyDown = false;
+                break;
+            case (KeyEvent.VK_SPACE):
+                keySpace = false;
+                break;
+        }
+
     }
 
     // Unnötig
