@@ -111,7 +111,9 @@ public class Menu extends JFrame {
 
     private void doButtonActions() {
         if (buttonArray[0].getFocus() && keyHandler.getEnter()) {
+
             runGame(1);
+
         }
         if (buttonArray[1].getFocus() && keyHandler.getEnter()) {
             CodeInputWindow codeInput = new CodeInputWindow();
@@ -126,12 +128,14 @@ public class Menu extends JFrame {
     }
 
     private void runGame(int lvl) {
+        setVisible(false);
         Action nextAction;
         Game game = new Game(lvl, keyHandler);
         nextAction = game.getNextAction();
         game.stop();
         if (nextAction.equals(Action.LVLUP))
             runGame(lvl + 1);
+        setVisible(true);
     }
 
     public void showMenu() {
