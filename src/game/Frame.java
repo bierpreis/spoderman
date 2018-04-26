@@ -38,7 +38,7 @@ class Frame extends JFrame {
         setResizable(false);
         setVisible(true);
 
-        createBufferStrategy(2);
+        createBufferStrategy(3);
         bufferStrategy = getBufferStrategy();
         requestFocus();
 
