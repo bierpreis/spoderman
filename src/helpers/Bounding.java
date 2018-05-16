@@ -22,5 +22,9 @@ public class Bounding extends Rectangle implements Scrollable{
             x = x - Config.playerMoveSpeed;
     }
 
+    public void jump(){
+        y = y-Config.jumpSpeed;
+    }
+
 
 }

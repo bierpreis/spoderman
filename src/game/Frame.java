@@ -12,6 +12,7 @@ import helpers.KeyHandler;
 import helpers.Message;
 import map.*;
 import map.enemies.AbstractEnemy;
+import player.Player;
 
 class Frame extends JFrame {
 
@@ -121,7 +122,7 @@ class Frame extends JFrame {
     }
 
     private void drawUnits(Graphics g) {
-        g.drawImage(player.getLook(),  player.x,  player.y, null);
+        g.drawImage(player.getLook(),  player.getBounding().x,  player.getBounding().y, null);
         if (lvl.getSwegArray() != null)
             for (Sweg sweg : lvl.getSwegArray()) {
                 g.drawImage(sweg.getLook(),  sweg.x,  sweg.y, null);

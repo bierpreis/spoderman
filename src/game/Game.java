@@ -4,7 +4,7 @@ import helpers.Action;
 import helpers.Config;
 import helpers.KeyHandler;
 import map.Lvl;
-import map.Player;
+import player.Player;
 import menu.Menu;
 
 public class Game {

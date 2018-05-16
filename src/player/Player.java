@@ -1,4 +1,4 @@
-package map;
+package player;
 
 
 import java.awt.image.BufferedImage;
@@ -8,9 +8,15 @@ import javax.imageio.ImageIO;
 
 import game.Sound;
 import helpers.*;
+import map.Bigmek;
+import map.Cube;
+import map.Lvl;
+import map.Sweg;
 import map.enemies.AbstractEnemy;
 
-public class Player extends Bounding implements Movable {
+public class Player implements Movable {
+
+    private Bounding bounding;
 
     private boolean onTop, onBot, onRightSide, onLeftSide;
 
@@ -19,9 +25,6 @@ public class Player extends Bounding implements Movable {
     private boolean scrollingRight, scrollingLeft;
 
     private boolean alive = true;
-
-    private int timeSinceJump;
-    private boolean jumping = false;
 
     private int swegCollected = 0;
     private int kills = 0;
@@ -37,32 +40,34 @@ public class Player extends Bounding implements Movable {
     private final KeyHandler keyHandler;
 
     private final Lvl lvl;
+    private Jump jump;
 
     public Player(Lvl lvl, KeyHandler keyHandler) {
-        super(300, 300, 0, 0);
         createLook();
+        bounding = new Bounding(300, 300, lookingLeft.getWidth(), lookingLeft.getHeight());
 
-        width = lookingLeft.getWidth();
-        height = lookingLeft.getHeight();
 
-        botBounding = new Bounding(x - 5, y + 20, lookingLeft.getWidth() + 10, 20);
+        botBounding = new Bounding(bounding.x - 5, bounding.y + 20, lookingLeft.getWidth() + 10, 20);
 
         this.lvl = lvl;
         this.keyHandler = keyHandler;
 
         createMessage("nao i need to find teh bikmek");
+        jump = new Jump();
     }
 
     public void update() {
         respawn();
         checkIfScroll();
         if (alive) {
+
             checkSweg();
             checkCubeCollisions();
             checkEnemies();
             checkBigMek();
             move();
-            jump();
+            if (jump.checkIfJump(keyHandler.getSpace(), onBot, onTop))
+                jump.performJump(bounding);
         }
 
     }
@@ -88,7 +93,6 @@ public class Player extends Bounding implements Movable {
         return scrollingLeft;
     }
 
-
     private void respawn() {
         if (!alive && lifes > 0) {
 
@@ -109,13 +113,13 @@ public class Player extends Bounding implements Movable {
         onBot = false;
         onTop = false;
         for (Cube cube : lvl.getCubes()) {
-            if (intersects(cube.getLeftBounding()))
+            if (bounding.intersects(cube.getLeftBounding()))
                 onLeftSide = true;
-            if (intersects(cube.getRightBounding()))
+            if (bounding.intersects(cube.getRightBounding()))
                 onRightSide = true;
             if (botBounding.intersects(cube.getTopBounding()))
                 onTop = true;
-            if (intersects(cube.getBotBounding()))
+            if (bounding.intersects(cube.getBotBounding()))
                 onBot = true;
         }
 
@@ -123,50 +127,30 @@ public class Player extends Bounding implements Movable {
 
     public void move() {
 
-        if (!onTop) y += Config.gravity;
+        if (!onTop) bounding.y += Config.gravity;
 
         if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
-            x -= Config.playerMoveSpeed;
+            bounding.x -= Config.playerMoveSpeed;
             isLookingRight = false;
         }
 
         if (keyHandler.getRight() && !onLeftSide && !scrollingRight) {
-            x += Config.playerMoveSpeed;
+            bounding.x += Config.playerMoveSpeed;
             isLookingRight = true;
 
         }
 
-        botBounding.x = x;
-        botBounding.y = y + 20;
+        botBounding.x = bounding.x;
+        botBounding.y = bounding.y + 20;
 
     }
 
-    private void jump() {
-
-        //start new jump
-        if (onTop && !onBot && keyHandler.getSpace())
-            jumping = true;
-
-        //actual jump
-        if (jumping) {
-            timeSinceJump += Config.msPerFrame;
-
-            if (timeSinceJump < Config.timeJumpingUp)
-                y -= Config.jumpSpeed;
-
-            // end jump
-            if (onBot || timeSinceJump > Config.timeJumpingUp) {
-                jumping = false;
-                timeSinceJump = 0;
-            }
-        }
-    }
 
     private void checkSweg() {
         if (lvl.getSwegArray() != null)
             for (Sweg sweg : lvl.getSwegArray()) {
                 if (!sweg.getCollected())
-                    if (intersects(sweg)) {
+                    if (bounding.intersects(sweg)) {
                         sweg.setCollected();
                         createMessage("monies");
                         swegCollected += 1;
@@ -179,7 +163,7 @@ public class Player extends Bounding implements Movable {
         if (lvl.getBigmekArray() != null)
             for (Bigmek bigmek : lvl.getBigmekArray()) {
                 if (!bigmek.getCollected())
-                    if (intersects(bigmek)) {
+                    if (bounding.intersects(bigmek)) {
                         bigmek.setCollected();
                         Sound.BIGMEK.play();
                         createMessage("press enter to enter lvl two", true);
@@ -205,7 +189,7 @@ public class Player extends Bounding implements Movable {
                     }
 
                     // feststellen ob tot
-                    if (intersects(enemy)) {
+                    if (bounding.intersects(enemy)) {
 
                         alive = false;
                         lifes -= 1;
@@ -223,6 +207,10 @@ public class Player extends Bounding implements Movable {
             }
     }
 
+    public Bounding getBounding() {
+        return bounding;
+    }
+
     public BufferedImage getLook() {
 
         if (!alive)
@@ -236,10 +224,10 @@ public class Player extends Bounding implements Movable {
     private void checkIfScroll() {
         scrollingLeft = false;
         scrollingRight = false;
-        if (x > 0.6 * Config.screenX && !onLeftSide && alive)
+        if (bounding.x > 0.6 * Config.screenX && !onLeftSide && alive)
             scrollingRight = true;
 
-        if (x < 0.4 * Config.screenY && !onRightSide && alive)
+        if (bounding.x < 0.4 * Config.screenY && !onRightSide && alive)
             scrollingLeft = true;
     }
 
@@ -258,7 +246,8 @@ public class Player extends Bounding implements Movable {
     public void createMessage(String messageString) {
         message = new Message(messageString);
     }
-    public void createMessage(String messageString, boolean isMessageFinal) {
+
+    private void createMessage(String messageString, boolean isMessageFinal) {
         message = new Message(messageString, isMessageFinal);
     }
 
