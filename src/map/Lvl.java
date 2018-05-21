@@ -13,10 +13,10 @@ import java.util.Scanner;
 
 public class Lvl {
 
-    private Cube[] cubeArray;
-    private Sweg[] swegArray;
-    private Bigmek[] bigmekArray;
-    private AbstractEnemy[] enemyArray;
+    private List<Cube> cubeList;
+    private List<Sweg> swegList;
+    private List<Bigmek> bigmekList;
+    private List<AbstractEnemy> enemyList;
 
     public Lvl(int lvlNumber) {
 
@@ -75,93 +75,91 @@ public class Lvl {
             System.out.println("error in map file line " + lineNumber);
         }
 
-        cubeArray = createCubes(cubeStringList);
-        enemyArray = createEnemies(enemyStringList);
-        swegArray = createSweg(swegStringList);
-        bigmekArray = createBigmek(bigmekStringList);
+        cubeList = createCubes(cubeStringList);
+        enemyList = createEnemies(enemyStringList);
+        swegList = createSweg(swegStringList);
+        bigmekList = createBigmek(bigmekStringList);
 
     }
 
 
-    static Cube[] createCubes(List<String> cubeStringList) {
+    static List<Cube> createCubes(List<String> cubeStringList) {
 
-        Cube[] cubeArray = new Cube[cubeStringList.size()];
+        List<Cube> cubeList = new LinkedList<>();
 
         for (int i = 0; i < cubeStringList.size(); i++) {
             Scanner scanner = new Scanner(cubeStringList.get(i));
-            cubeArray[i] = new Cube(scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
+            cubeList.add(new Cube(scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt()));
         }
 
-        return cubeArray;
+        return cubeList;
     }
 
-    static AbstractEnemy[] createEnemies(List<String> enemyString) {
-        AbstractEnemy[] enemyArray = new AbstractEnemy[enemyString.size()];
+    static List<AbstractEnemy> createEnemies(List<String> enemyString) {
+        List<AbstractEnemy> enemyList = new LinkedList<>();
         for (int i = 0; i < enemyString.size(); i++) {
             Scanner scanner = new Scanner(enemyString.get(i));
             int x = scanner.nextInt();
             int y = scanner.nextInt();
             String type = scanner.next();
             if (type.equals("dolan"))
-                enemyArray[i] = new Dolan(x, y);
+                enemyList.add(new Dolan(x, y));
             if (type.equals("gooby"))
-                enemyArray[i] = new Gooby(x, y);
+                enemyList.add(new Gooby(x, y));
 
         }
-        return enemyArray;
+        return enemyList;
     }
 
-    static Sweg[] createSweg(List<String> swegString) {
-        Sweg[] swegs = new Sweg[swegString.size()];
-        for (int i = 0; i < swegs.length; i++) {
+    static List<Sweg> createSweg(List<String> swegString) {
+        List<Sweg> swegList = new LinkedList<>();
+        for (int i = 0; i < swegString.size(); i++) {
             Scanner scanner = new Scanner(swegString.get(i));
-            swegs[i] = new Sweg(scanner.nextInt(), scanner.nextInt());
+            swegList.add(new Sweg(scanner.nextInt(), scanner.nextInt()));
         }
 
-        return swegs;
+        return swegList;
     }
 
-    static Bigmek[] createBigmek(List<String> bigmekString) {
-        Bigmek[] bigmeks = new Bigmek[bigmekString.size()];
-        for (int i = 0; i < bigmeks.length; i++) {
+    static List<Bigmek> createBigmek(List<String> bigmekString) {
+        List bigmekList = new LinkedList<Bigmek>();
+        for (int i = 0; i < bigmekString.size(); i++) {
             Scanner scanner = new Scanner(bigmekString.get(i));
-            bigmeks[i] = new Bigmek(scanner.nextInt(), scanner.nextInt());
+            bigmekList.add(new Bigmek(scanner.nextInt(), scanner.nextInt()));
         }
-        return bigmeks;
+        return bigmekList;
     }
 
     // getter
-    public Cube[] getCubes() {
-        return cubeArray;
+    public List<Cube> getCubes() {
+        return cubeList;
     }
 
-    public Sweg[] getSwegArray() {
-        return swegArray;
+    public List<Sweg> getSwegList() {
+        return swegList;
     }
 
-    public Bigmek[] getBigmekArray() {
-        return bigmekArray;
+    public List<Bigmek> getBigmekList() {
+        return bigmekList;
     }
 
-    public AbstractEnemy[] getEnemyArray() {
-        return enemyArray;
+    public List<AbstractEnemy> getEnemyArray() {
+        return enemyList;
     }
 
     public void update(boolean scrollingLeft, boolean scrollingRight) {
-        for (Cube cube : cubeArray)
+        for (Cube cube : cubeList)
             cube.updateBounding(scrollingLeft, scrollingRight);
 
-        if (bigmekArray != null)
-            for (Bigmek bigmek : bigmekArray)
-                bigmek.scroll(scrollingLeft, scrollingRight);
+        for (Bigmek bigmek : bigmekList)
+            bigmek.scroll(scrollingLeft, scrollingRight);
 
-        if (enemyArray != null)
-            for (AbstractEnemy enemy : enemyArray)
-                enemy.update(scrollingLeft, scrollingRight, cubeArray);
+        for (AbstractEnemy enemy : enemyList)
+            enemy.update(scrollingLeft, scrollingRight, cubeList);
 
-        if (swegArray != null)
-            for (Sweg sweg : swegArray)
-                sweg.scroll(scrollingLeft, scrollingRight);
+
+        for (Sweg sweg : swegList)
+            sweg.scroll(scrollingLeft, scrollingRight);
 
     }
 

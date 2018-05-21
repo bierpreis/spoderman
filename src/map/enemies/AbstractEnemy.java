@@ -3,6 +3,7 @@ package map.enemies;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -25,18 +26,18 @@ public abstract class AbstractEnemy extends Bounding {
 
     }
 
-    public void update(boolean scrollingLeft, boolean scrollingRight, Cube[] cube) {
+    public void update(boolean scrollingLeft, boolean scrollingRight, List<Cube> cubeList) {
 
         scroll(scrollingLeft, scrollingRight);
 
         if (alive) {
             walk();
-            checkCubeCollisions(cube);
+            checkCubeCollisions(cubeList);
         }
     }
 
-    private void checkCubeCollisions(Cube[] cubes) {
-        for (Cube cube : cubes) {
+    private void checkCubeCollisions(List<Cube> cubeList){
+        for (Cube cube : cubeList) {
             if (intersects(cube.getLeftBounding()) && movingRight)
                 movingRight = false;
             if (intersects(cube.getRightBounding()) && !movingRight)

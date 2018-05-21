@@ -147,29 +147,28 @@ public class Player implements Movable {
 
 
     private void checkSweg() {
-        if (lvl.getSwegArray() != null)
-            for (Sweg sweg : lvl.getSwegArray()) {
-                if (!sweg.getCollected())
-                    if (bounding.intersects(sweg)) {
-                        sweg.setCollected();
-                        createMessage("monies");
-                        swegCollected += 1;
-                        Sound.MONEY.play();
-                    }
-            }
+
+        for (Sweg sweg : lvl.getSwegList()) {
+            if (!sweg.getCollected())
+                if (bounding.intersects(sweg)) {
+                    sweg.setCollected();
+                    createMessage("monies");
+                    swegCollected += 1;
+                    Sound.MONEY.play();
+                }
+        }
     }
 
     private void checkBigMek() {
-        if (lvl.getBigmekArray() != null)
-            for (Bigmek bigmek : lvl.getBigmekArray()) {
-                if (!bigmek.getCollected())
-                    if (bounding.intersects(bigmek)) {
-                        bigmek.setCollected();
-                        Sound.BIGMEK.play();
-                        createMessage("press enter to enter lvl two", true);
+        for (Bigmek bigmek : lvl.getBigmekList()) {
+            if (!bigmek.getCollected())
+                if (bounding.intersects(bigmek)) {
+                    bigmek.setCollected();
+                    Sound.BIGMEK.play();
+                    createMessage("press enter to enter lvl two", true);
 
-                    }
-            }
+                }
+        }
     }
 
 

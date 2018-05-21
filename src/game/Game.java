@@ -71,10 +71,10 @@ public class Game {
 
     private Action checkNextAction() {
 
-        if (lvl.getBigmekArray()!= null)
-            if (lvl.getBigmekArray()[0].getCollected())
-                if (keyHandler.getEnter())
-                    return Action.LVLUP;
+
+        if (lvl.getBigmekList().get(0).getCollected())
+            if (keyHandler.getEnter())
+                return Action.LVLUP;
 
 
         if (keyHandler.getEscape())
