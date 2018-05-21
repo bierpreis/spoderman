@@ -16,10 +16,7 @@ import player.Player;
 
 class Frame extends JFrame {
 
-    private int fps = 0;
-    private int fpsCounter = 0;
-    private long timeUntilLastSecond = System.currentTimeMillis() + 1000;
-
+    private final FpsCounter fpsCounter;
     private final Player player;
     private final Lvl lvl;
 
@@ -42,6 +39,7 @@ class Frame extends JFrame {
         createBufferStrategy(3);
         bufferStrategy = getBufferStrategy();
         requestFocus();
+        fpsCounter = new FpsCounter();
 
     }
 
@@ -73,7 +71,7 @@ class Frame extends JFrame {
         g.drawString("Sweg Count:" + player.getSwegCount(), 25, 50);
         g.drawString("Fagits rekt:" + player.getKills(), 150, 50);
         g.drawString("Sp0der Lyfez :" + player.getLifes(), 300, 50);
-        g.drawString("FPS: " + calcFps(), 600, 50);
+        g.drawString("FPS: " + fpsCounter.calcFps(), 600, 50);
     }
 
     private void drawCubes(Graphics g) {
@@ -83,16 +81,7 @@ class Frame extends JFrame {
         }
     }
 
-    private int calcFps() {
-        fpsCounter++;
-        if (System.currentTimeMillis() > timeUntilLastSecond) {
-            timeUntilLastSecond = System.currentTimeMillis() + 1000;
-            fps = fpsCounter;
-            fpsCounter = 0;
-        }
-        return fps;
 
-    }
 
     private void displayMessage(Message newIncomingMessage, Graphics g) {
 
