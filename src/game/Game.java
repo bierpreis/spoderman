@@ -20,7 +20,7 @@ public class Game {
     public Game(int lvlNumber, KeyHandler keyHandler) {
         lvl = new Lvl(lvlNumber);
         player = new Player(lvl, keyHandler);
-        frame = new Frame(player, lvl, keyHandler);
+        frame = new Frame(keyHandler);
         this.keyHandler = keyHandler;
         start();
     }
@@ -44,7 +44,7 @@ public class Game {
             lvl.update(player.getScrollingLeft(), player.getScrollingRight());
 
             player.update();
-            frame.draw();
+            frame.draw(player, lvl);
             action = checkNextAction();
 
             long updateLength = System.nanoTime() - startTime;

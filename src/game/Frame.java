@@ -17,19 +17,15 @@ import player.Player;
 class Frame extends JFrame {
 
     private final FpsCounter fpsCounter;
-    private final Player player;
-    private final Lvl lvl;
 
     private Message message = null;
     private final BufferStrategy bufferStrategy;
 
-    Frame(Player player, Lvl lvl, KeyHandler keyHandler) {
+    Frame(KeyHandler keyHandler) {
         super("spodermens advenshur");
 
         addKeyListener(keyHandler);
 
-        this.player = player;
-        this.lvl = lvl;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(Config.windowX, Config.windowY, Config.screenX, Config.screenY);
 
@@ -44,16 +40,16 @@ class Frame extends JFrame {
     }
 
 
-    void draw() {
+    void draw(Player player, Lvl lvl) {
 
         Graphics g = bufferStrategy.getDrawGraphics();
 
         g.setColor(Color.lightGray);
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        drawCubes(g);
+        drawCubes(g, lvl);
         displayMessage(player.pollNewMessage(), g);
-        drawUnits(g);
+        drawUnits(g, player, lvl);
         writeInfo(g, player);
 
 
@@ -74,13 +70,12 @@ class Frame extends JFrame {
         g.drawString("FPS: " + fpsCounter.calcFps(), 600, 50);
     }
 
-    private void drawCubes(Graphics g) {
+    private void drawCubes(Graphics g, Lvl lvl) {
         g.setColor(Color.BLUE);
         for (Cube cube : lvl.getCubes()) {
             g.fillRect((int) cube.getX(), (int) cube.getY(), (int) cube.getWidth(), (int) cube.getHeight());
         }
     }
-
 
 
     private void displayMessage(Message newIncomingMessage, Graphics g) {
@@ -110,20 +105,20 @@ class Frame extends JFrame {
         }
     }
 
-    private void drawUnits(Graphics g) {
-        g.drawImage(player.getLook(),  player.getBounding().x,  player.getBounding().y, null);
+    private void drawUnits(Graphics g, Player player, Lvl lvl) {
+        g.drawImage(player.getLook(), player.getBounding().x, player.getBounding().y, null);
         if (lvl.getSwegArray() != null)
             for (Sweg sweg : lvl.getSwegArray()) {
-                g.drawImage(sweg.getLook(),  sweg.x,  sweg.y, null);
+                g.drawImage(sweg.getLook(), sweg.x, sweg.y, null);
             }
         if (lvl.getBigmekArray() != null) {
-            for(Bigmek bigmek: lvl.getBigmekArray())
-            g.drawImage(bigmek.getLook(),  bigmek.x,
-                     bigmek.y, null);
+            for (Bigmek bigmek : lvl.getBigmekArray())
+                g.drawImage(bigmek.getLook(), bigmek.x,
+                        bigmek.y, null);
         }
         if (lvl.getEnemyArray() != null)
             for (AbstractEnemy enemy : lvl.getEnemyArray()) {
-                g.drawImage(enemy.getLook(),  enemy.x,  enemy.y, null);
+                g.drawImage(enemy.getLook(), enemy.x, enemy.y, null);
             }
 
     }
