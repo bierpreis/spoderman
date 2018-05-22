@@ -173,37 +173,37 @@ public class Player implements Movable {
 
 
     private void checkEnemies() {
-        if (lvl.getEnemyArray() != null)
-            for (AbstractEnemy enemy : lvl.getEnemyArray()) {
 
-                if (enemy.getAlive()) {
+        for (AbstractEnemy enemy : lvl.getEnemyList()) {
 
-                    // gegner töten
-                    if (botBounding.intersects(enemy.getTopBounding())) {
-                        enemy.kill();
-                        createMessage("lel rekt");
-                        kills += 1;
-                        Sound.ENEMY_KILLED.play();
-                        return; //this ensures player wont be killed after he killed enemy
+            if (enemy.getAlive()) {
+
+                // gegner töten
+                if (botBounding.intersects(enemy.getTopBounding())) {
+                    enemy.kill();
+                    createMessage("lel rekt");
+                    kills += 1;
+                    Sound.ENEMY_KILLED.play();
+                    return; //this ensures player wont be killed after he killed enemy
+                }
+
+                // feststellen ob tot
+                if (bounding.intersects(enemy)) {
+
+                    alive = false;
+                    lifes -= 1;
+                    if (lifes > 0) {
+                        createMessage("u got rekt 111  press spaec to respawn");
+                        Sound.PLAYER_KILLED.play();
                     }
-
-                    // feststellen ob tot
-                    if (bounding.intersects(enemy)) {
-
-                        alive = false;
-                        lifes -= 1;
-                        if (lifes > 0) {
-                            createMessage("u got rekt 111  press spaec to respawn");
-                            Sound.PLAYER_KILLED.play();
-                        }
-                        if (lifes < 1) {
-                            Sound.PLAYER_KILLED.play();
-                            Sound.PLAYER_DEAD.play();
-                            createMessage("g8 nao dis is mai end");
-                        }
+                    if (lifes < 1) {
+                        Sound.PLAYER_KILLED.play();
+                        Sound.PLAYER_DEAD.play();
+                        createMessage("g8 nao dis is mai end");
                     }
                 }
             }
+        }
     }
 
     public Bounding getBounding() {

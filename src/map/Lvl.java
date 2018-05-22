@@ -143,7 +143,7 @@ public class Lvl {
         return bigmekList;
     }
 
-    public List<AbstractEnemy> getEnemyArray() {
+    public List<AbstractEnemy> getEnemyList() {
         return enemyList;
     }
 
