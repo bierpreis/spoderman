@@ -14,7 +14,7 @@ import map.Lvl;
 import map.Sweg;
 import map.enemies.AbstractEnemy;
 
-public class Player implements Movable {
+public class Player implements Movable, Drawable {
 
     private Bounding bounding;
 
@@ -71,7 +71,13 @@ public class Player implements Movable {
         }
 
     }
+    public int getY(){
+        return bounding.y;
+    }
 
+    public int getX(){
+        return bounding.x;
+    }
 
     private void createLook() {
 
