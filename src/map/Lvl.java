@@ -148,11 +148,13 @@ public class Lvl {
     }
 
     public void update(boolean scrollingLeft, boolean scrollingRight) {
+        //TODO: improve this. scrollable?
         for (Cube cube : cubeList)
             cube.updateBounding(scrollingLeft, scrollingRight);
 
         for (Bigmek bigmek : bigmekList)
-            bigmek.scroll(scrollingLeft, scrollingRight);
+            //TODO this does not with with law of demeter
+            bigmek.getBounding().scroll(scrollingLeft, scrollingRight);
 
         for (AbstractEnemy enemy : enemyList)
             enemy.update(scrollingLeft, scrollingRight, cubeList);

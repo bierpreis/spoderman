@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 import helpers.Config;
+import helpers.Drawable;
 import helpers.KeyHandler;
 import helpers.Message;
 import map.*;
@@ -109,17 +110,22 @@ class Frame extends JFrame {
         g.drawImage(player.getLook(), player.getBounding().x, player.getBounding().y, null);
 
         for (Sweg sweg : lvl.getSwegList()) {
-            g.drawImage(sweg.getLook(), sweg.x, sweg.y, null);
+            newDrawUnits(g, sweg);
         }
 
         for (Bigmek bigmek : lvl.getBigmekList())
-            g.drawImage(bigmek.getLook(), bigmek.x,
-                    bigmek.y, null);
+            newDrawUnits(g, bigmek);
 
 
         for (AbstractEnemy enemy : lvl.getEnemyList()) {
-            g.drawImage(enemy.getLook(), enemy.x, enemy.y, null);
+            newDrawUnits(g, enemy);
         }
+
+    }
+
+    private void newDrawUnits(Graphics g, Drawable drawable) {
+
+        g.drawImage(drawable.getLook(), drawable.getX(), drawable.getY(), null);
 
     }
 

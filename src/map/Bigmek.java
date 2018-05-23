@@ -1,28 +1,27 @@
 package map;
 
 import helpers.Bounding;
+import helpers.Drawable;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Bigmek extends Bounding {
+public class Bigmek implements Drawable {
 
     private boolean collected = false;
     private BufferedImage look;
+    private Bounding bounding;
 
 
     Bigmek(int x, int y) {
-        super(x, y,0,0);
         look = createLook();
-        this.width = look.getWidth(); this.height = look.getHeight();
+        bounding = new Bounding(x,y,look.getWidth(), look.getHeight());
+
 
     }
 
-    public BufferedImage getLook() {
-        return look;
-    }
 
     private BufferedImage createLook() {
 
@@ -43,5 +42,22 @@ public class Bigmek extends Bounding {
 
         collected = true;
         look = null;
+    }
+
+
+    public int getX(){
+        return bounding.x;
+    }
+
+    public int getY(){
+        return bounding.y;
+    }
+
+    public BufferedImage getLook(){
+        return look;
+    }
+
+    public Bounding getBounding(){
+        return bounding;
     }
 }

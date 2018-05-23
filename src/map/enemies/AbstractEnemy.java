@@ -9,19 +9,21 @@ import javax.imageio.ImageIO;
 
 import helpers.Bounding;
 import helpers.Config;
+import helpers.Drawable;
 import map.Cube;
 
-public abstract class AbstractEnemy extends Bounding {
+public abstract class AbstractEnemy implements Drawable {
     private boolean movingRight = true;
     private boolean alive = true;
 
     protected BufferedImage look;
 
     protected Bounding topBounding;
+    protected Bounding bounding;
 
 
     AbstractEnemy(int x, int y) {
-        super(x, y,0,0);
+        bounding = new Bounding(x, y, 0, 0);
 
 
     }
@@ -36,11 +38,24 @@ public abstract class AbstractEnemy extends Bounding {
         }
     }
 
-    private void checkCubeCollisions(List<Cube> cubeList){
+    public int getX() {
+        return bounding.x;
+    }
+
+    public int getY() {
+        return bounding.y;
+    }
+
+    public Bounding getBounding() {
+        return bounding;
+    }
+
+
+    private void checkCubeCollisions(List<Cube> cubeList) {
         for (Cube cube : cubeList) {
-            if (intersects(cube.getLeftBounding()) && movingRight)
+            if (bounding.intersects(cube.getLeftBounding()) && movingRight)
                 movingRight = false;
-            if (intersects(cube.getRightBounding()) && !movingRight)
+            if (bounding.intersects(cube.getRightBounding()) && !movingRight)
                 movingRight = true;
 
         }
@@ -48,18 +63,18 @@ public abstract class AbstractEnemy extends Bounding {
 
     private void walk() {
         if (movingRight) {
-            x += Config.enemyMoveSpeed;
+            bounding.x += Config.enemyMoveSpeed;
             topBounding.x += Config.enemyMoveSpeed;
         }
         if (!movingRight) {
-            x -= Config.enemyMoveSpeed;
+            bounding.x -= Config.enemyMoveSpeed;
             topBounding.x -= Config.enemyMoveSpeed;
         }
     }
-    @Override
+
     public void scroll(boolean scrollingLeft, boolean scrollingRight) {
 
-        super.scroll(scrollingLeft, scrollingRight);
+        bounding.scroll(scrollingLeft, scrollingRight);
         topBounding.scroll(scrollingLeft, scrollingRight);
     }
 
@@ -78,13 +93,24 @@ public abstract class AbstractEnemy extends Bounding {
     }
 
 
-
     public Rectangle2D getTopBounding() {
         return topBounding;
     }
 
     public boolean getAlive() {
         return alive;
+    }
+
+    String pathToImage = "img/" + this.getClass().getSimpleName() + ".png";
+
+    protected void createLook() {
+        try {
+            this.look = ImageIO.read(getClass().getClassLoader().getResourceAsStream(pathToImage));
+        } catch (IOException ioe) {
+            System.out.println(pathToImage + " not found!");
+        }
+        bounding.width = look.getWidth();
+        bounding.height = look.getHeight();
     }
 
 

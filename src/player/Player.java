@@ -150,7 +150,7 @@ public class Player implements Movable {
 
         for (Sweg sweg : lvl.getSwegList()) {
             if (!sweg.getCollected())
-                if (bounding.intersects(sweg)) {
+                if (bounding.intersects(sweg.getBounding())) {
                     sweg.setCollected();
                     createMessage("monies");
                     swegCollected += 1;
@@ -162,7 +162,7 @@ public class Player implements Movable {
     private void checkBigMek() {
         for (Bigmek bigmek : lvl.getBigmekList()) {
             if (!bigmek.getCollected())
-                if (bounding.intersects(bigmek)) {
+                if (bounding.intersects(bigmek.getBounding())) {
                     bigmek.setCollected();
                     Sound.BIGMEK.play();
                     createMessage("press enter to enter lvl two", true);
@@ -188,7 +188,7 @@ public class Player implements Movable {
                 }
 
                 // feststellen ob tot
-                if (bounding.intersects(enemy)) {
+                if (bounding.intersects(enemy.getBounding())) {
 
                     alive = false;
                     lifes -= 1;
