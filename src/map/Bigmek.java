@@ -1,18 +1,16 @@
 package map;
 
 import helpers.Bounding;
-import helpers.Drawable;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Bigmek implements Drawable {
+public class Bigmek extends AbstractMapObject {
 
     private boolean collected = false;
     private BufferedImage look;
-    private Bounding bounding;
 
 
     Bigmek(int x, int y) {

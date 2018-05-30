@@ -7,6 +7,7 @@ import map.enemies.Gooby;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -31,49 +32,11 @@ public class Lvl {
         }
 
         BufferedReader br = new BufferedReader(fr);
-        LinkedList<String> cubeStringList = new LinkedList();
-        LinkedList<String> enemyStringList = new LinkedList();
-        LinkedList<String> swegStringList = new LinkedList();
-        LinkedList<String> bigmekStringList = new LinkedList();
-        int lineNumber = 0;
-        try {
+        List<String> cubeStringList = readFile(br, Cube.class);
+        List<String> enemyStringList = readFile(br, AbstractEnemy.class);
+        List<String> swegStringList = readFile(br, Sweg.class);
+        List<String> bigmekStringList = readFile(br, Bigmek.class);
 
-            while (true) {
-                String newLine = br.readLine();
-                if (!newLine.equals("END_CUBES")) {
-                    cubeStringList.add(newLine);
-                } else break;
-                lineNumber++;
-            }
-
-            while (true) {
-                String newLine = br.readLine();
-                if (!newLine.equals("END_ENEMIES")) {
-                    enemyStringList.add(newLine);
-                } else break;
-                lineNumber++;
-            }
-
-            while (true) {
-                String newLine = br.readLine();
-                if (!newLine.equals("END_SWEG")) {
-                    swegStringList.add(newLine);
-                } else break;
-                lineNumber++;
-            }
-
-            while (true) {
-                String newLine = br.readLine();
-                if (!newLine.equals("END_BIGMEK")) {
-                    bigmekStringList.add(newLine);
-                } else break;
-                lineNumber++;
-            }
-
-
-        } catch (Exception e) {
-            System.out.println("error in map file line " + lineNumber);
-        }
 
         cubeList = createCubes(cubeStringList);
         enemyList = createEnemies(enemyStringList);
@@ -82,8 +45,24 @@ public class Lvl {
 
     }
 
+    private List<String> readFile(BufferedReader reader, Class<? extends AbstractMapObject> classType) {
+        List<String> listFromFile = new LinkedList<>();
 
-    static List<Cube> createCubes(List<String> cubeStringList) {
+        try {
+            String newLine = reader.readLine();
+            String className = classType.getSimpleName();
+            while (!newLine.equals("END_" + className)) {
+                listFromFile.add(newLine);
+                newLine = reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listFromFile;
+    }
+
+
+    private static List<Cube> createCubes(List<String> cubeStringList) {
 
         List<Cube> cubeList = new LinkedList<>();
 
@@ -95,7 +74,7 @@ public class Lvl {
         return cubeList;
     }
 
-    static List<AbstractEnemy> createEnemies(List<String> enemyString) {
+    private static List<AbstractEnemy> createEnemies(List<String> enemyString) {
         List<AbstractEnemy> enemyList = new LinkedList<>();
         for (int i = 0; i < enemyString.size(); i++) {
             Scanner scanner = new Scanner(enemyString.get(i));
@@ -111,7 +90,7 @@ public class Lvl {
         return enemyList;
     }
 
-    static List<Sweg> createSweg(List<String> swegString) {
+    private static List<Sweg> createSweg(List<String> swegString) {
         List<Sweg> swegList = new LinkedList<>();
         for (int i = 0; i < swegString.size(); i++) {
             Scanner scanner = new Scanner(swegString.get(i));
@@ -121,7 +100,7 @@ public class Lvl {
         return swegList;
     }
 
-    static List<Bigmek> createBigmek(List<String> bigmekString) {
+    private static List<Bigmek> createBigmek(List<String> bigmekString) {
         List bigmekList = new LinkedList<Bigmek>();
         for (int i = 0; i < bigmekString.size(); i++) {
             Scanner scanner = new Scanner(bigmekString.get(i));
@@ -153,8 +132,8 @@ public class Lvl {
             cube.updateBounding(scrollingLeft, scrollingRight);
 
         for (Bigmek bigmek : bigmekList)
-            //TODO this does not with with law of demeter
-            bigmek.getBounding().scroll(scrollingLeft, scrollingRight);
+
+            bigmek.scroll(scrollingLeft, scrollingRight);
 
         for (AbstractEnemy enemy : enemyList)
             enemy.update(scrollingLeft, scrollingRight, cubeList);

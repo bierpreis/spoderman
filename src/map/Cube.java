@@ -2,7 +2,7 @@ package map;
 
 import helpers.Bounding;
 
-public class Cube extends Bounding {
+public class Cube extends AbstractMapObject {
 
 
     private final Bounding topBounding;
@@ -11,7 +11,7 @@ public class Cube extends Bounding {
     private final Bounding rightBounding;
 
     Cube(int x, int y, int width, int height) {
-        super(x,y, width, height);
+        bounding = new Bounding(x,y,width, height);
         topBounding = new Bounding(x, y-5, width, 10);
         botBounding = new Bounding(x + 6, y + 30, width - 12, height - 30);
         leftBounding = new Bounding(x + 5, y + 10, 5, height - 20);
@@ -21,7 +21,7 @@ public class Cube extends Bounding {
 
     void updateBounding(boolean scrollingLeft, boolean scrollingRight) {
 
-        scroll(scrollingLeft, scrollingRight);
+        bounding.scroll(scrollingLeft, scrollingRight);
         topBounding.scroll(scrollingLeft, scrollingRight);
         botBounding.scroll(scrollingLeft, scrollingRight);
         leftBounding.scroll(scrollingLeft, scrollingRight);

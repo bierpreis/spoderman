@@ -8,7 +8,6 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 import helpers.Config;
-import helpers.Drawable;
 import helpers.KeyHandler;
 import helpers.Message;
 import map.*;
@@ -74,7 +73,7 @@ class Frame extends JFrame {
     private void drawCubes(Graphics g, Lvl lvl) {
         g.setColor(Color.BLUE);
         for (Cube cube : lvl.getCubes()) {
-            g.fillRect((int) cube.getX(), (int) cube.getY(), (int) cube.getWidth(), (int) cube.getHeight());
+            g.fillRect((int) cube.getX(), (int) cube.getY(), (int) cube.getBounding().getWidth(), (int) cube.getBounding().getHeight());
         }
     }
 
@@ -123,9 +122,9 @@ class Frame extends JFrame {
 
     }
 
-    private void newDrawUnits(Graphics g, Drawable drawable) {
+    private void newDrawUnits(Graphics g, AbstractMapObject mapObject) {
 
-        g.drawImage(drawable.getLook(), drawable.getX(), drawable.getY(), null);
+        g.drawImage(mapObject.getLook(), mapObject.getX(), mapObject.getY(), null);
 
     }
 

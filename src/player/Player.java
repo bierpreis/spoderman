@@ -8,15 +8,10 @@ import javax.imageio.ImageIO;
 
 import game.Sound;
 import helpers.*;
-import map.Bigmek;
-import map.Cube;
-import map.Lvl;
-import map.Sweg;
+import map.*;
 import map.enemies.AbstractEnemy;
 
-public class Player implements Movable, Drawable {
-
-    private Bounding bounding;
+public class Player extends AbstractMapObject implements Movable {
 
     private boolean onTop, onBot, onRightSide, onLeftSide;
 
