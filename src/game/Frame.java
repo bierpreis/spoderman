@@ -107,6 +107,7 @@ class Frame extends JFrame {
 
     private void drawUnits(Graphics g, Player player, Lvl lvl) {
         newDrawUnits(g, player);
+        newDrawUnits(g, player.getHat());
 
         for (Sweg sweg : lvl.getSwegList()) {
             newDrawUnits(g, sweg);

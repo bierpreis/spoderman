@@ -16,6 +16,7 @@ public class Player extends AbstractMapObject implements Movable {
     private boolean onTop, onBot, onRightSide, onLeftSide;
 
     private boolean isLookingRight = true;
+    private AbstractHat hat;
 
     private boolean scrollingRight, scrollingLeft;
 
@@ -49,9 +50,11 @@ public class Player extends AbstractMapObject implements Movable {
 
         createMessage("nao i need to find teh bikmek");
         jump = new Jump();
+        hat = new Snepbek(bounding);
     }
 
     public void update() {
+        hat.updateBounding(bounding);
         respawn();
         checkIfScroll();
         if (alive) {
@@ -65,6 +68,9 @@ public class Player extends AbstractMapObject implements Movable {
                 jump.performJump(bounding);
         }
 
+    }
+    public AbstractHat getHat(){
+        return hat;
     }
     public int getY(){
         return bounding.y;
