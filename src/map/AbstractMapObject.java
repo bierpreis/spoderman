@@ -13,6 +13,12 @@ public class AbstractMapObject {
         return bounding.x;
     }
 
+    public AbstractMapObject(){
+
+    }
+
+
+
 
     public int getY() {
         return bounding.y;

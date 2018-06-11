@@ -50,7 +50,7 @@ public class Player extends AbstractMapObject implements Movable {
 
         createMessage("nao i need to find teh bikmek");
         jump = new Jump();
-        hat = new Snepbek(bounding);
+        hat = new NoHat(bounding);
     }
 
     public void update() {

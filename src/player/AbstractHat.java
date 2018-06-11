@@ -25,19 +25,20 @@ public class AbstractHat extends AbstractMapObject {
     private void createLook() {
         try {
             this.look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/" + this.getClass().getSimpleName().toLowerCase() + ".png"));
-        } catch (IOException e) {
-            System.out.println("Image not found!");
+        } catch (Exception e) {
+            System.out.println("Hat image not found!");
             e.printStackTrace();
         }
 
     }
-    protected void createBounding(Bounding playerBounding){
-        this.bounding = new Bounding(playerBounding.x, playerBounding.y-100, playerBounding.width, playerBounding.height);
+
+    protected void createBounding(Bounding playerBounding) {
+        this.bounding = new Bounding(playerBounding.x, playerBounding.y - 100, playerBounding.width, playerBounding.height);
     }
 
-    public void updateBounding(Bounding playerBounding){
+    public void updateBounding(Bounding playerBounding) {
         bounding.x = playerBounding.x;
-        bounding.y = playerBounding.y - look.getHeight()+10;
+        bounding.y = playerBounding.y - look.getHeight() + 10;
     }
 
 
