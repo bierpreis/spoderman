@@ -29,3 +29,5 @@ END_AbstractEnemy
 END_Sweg
 3650 150
 END_Bigmek
+100 400 Snepbek
+END_AbstractHat

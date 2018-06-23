@@ -1,8 +1,11 @@
 package map;
 
+import helpers.Bounding;
 import map.enemies.Dolan;
 import map.enemies.AbstractEnemy;
 import map.enemies.Gooby;
+import player.AbstractHat;
+import player.Snepbek;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -18,6 +21,7 @@ public class Lvl {
     private List<Sweg> swegList;
     private List<Bigmek> bigmekList;
     private List<AbstractEnemy> enemyList;
+    private List<AbstractHat> hatList;
 
     public Lvl(int lvlNumber) {
 
@@ -36,13 +40,30 @@ public class Lvl {
         List<String> enemyStringList = readFile(br, AbstractEnemy.class);
         List<String> swegStringList = readFile(br, Sweg.class);
         List<String> bigmekStringList = readFile(br, Bigmek.class);
+        List<String> hatStringList = readFile(br, AbstractHat.class);
 
 
         cubeList = createCubes(cubeStringList);
         enemyList = createEnemies(enemyStringList);
         swegList = createSweg(swegStringList);
         bigmekList = createBigmek(bigmekStringList);
+        hatList = createHats(hatStringList);
 
+    }
+
+    public List<AbstractHat> createHats(List<String> hatStringList) {
+        List<AbstractHat> hatList = new LinkedList<>();
+        for (int i = 0; i < hatStringList.size(); i++) {
+            Scanner scanner = new Scanner(hatStringList.get(i));
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+
+            String type = scanner.next();
+            if (type.equals("Snepbek"))
+                hatList.add(new Snepbek(x, y));
+        }
+
+        return hatList;
     }
 
     private List<String> readFile(BufferedReader reader, Class<? extends AbstractMapObject> classType) {
@@ -72,6 +93,10 @@ public class Lvl {
         }
 
         return cubeList;
+    }
+
+    public List<AbstractHat> getHatList() {
+        return hatList;
     }
 
     private static List<AbstractEnemy> createEnemies(List<String> enemyString) {
@@ -141,6 +166,9 @@ public class Lvl {
 
         for (Sweg sweg : swegList)
             sweg.scroll(scrollingLeft, scrollingRight);
+
+        for (AbstractHat hat : hatList)
+            hat.scroll(scrollingLeft, scrollingRight);
 
     }
 

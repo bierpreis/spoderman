@@ -63,11 +63,17 @@ public class Player extends AbstractMapObject implements Movable {
             checkCubeCollisions();
             checkEnemies();
             checkBigMek();
+            checkHats();
             move();
             if (jump.checkIfJump(keyHandler.getSpace(), onBot, onTop))
                 jump.performJump(bounding);
         }
 
+    }
+    private void checkHats(){
+        for (AbstractHat hat: lvl.getHatList())
+            if(hat.checkIfCollected(bounding))
+                this.hat = hat;
     }
     public AbstractHat getHat(){
         return hat;

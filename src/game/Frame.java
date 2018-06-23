@@ -12,6 +12,7 @@ import helpers.KeyHandler;
 import helpers.Message;
 import map.*;
 import map.enemies.AbstractEnemy;
+import player.AbstractHat;
 import player.Player;
 
 class Frame extends JFrame {
@@ -120,11 +121,15 @@ class Frame extends JFrame {
         for (AbstractEnemy enemy : lvl.getEnemyList()) {
             newDrawUnits(g, enemy);
         }
+        for(AbstractHat hat: lvl.getHatList()){
+            newDrawUnits(g,hat);
+        }
 
     }
 
     private void newDrawUnits(Graphics g, AbstractMapObject mapObject) {
-
+        if(mapObject.getClass()==AbstractHat.class)
+            System.out.println("abstract hat was in newDrawUnits");
         g.drawImage(mapObject.getLook(), mapObject.getX(), mapObject.getY(), null);
 
     }

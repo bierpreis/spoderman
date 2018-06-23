@@ -1,12 +1,13 @@
 package map;
 
 import helpers.Bounding;
+import helpers.Collectable;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Sweg extends AbstractMapObject{
+public class Sweg extends AbstractMapObject implements Collectable {
 
     private boolean isCollected = false;
     private BufferedImage look;
@@ -19,7 +20,7 @@ public class Sweg extends AbstractMapObject{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        bounding = new Bounding(x,y,look.getWidth(), look.getHeight());
+        bounding = new Bounding(x, y, look.getWidth(), look.getHeight());
 
 
     }
@@ -28,7 +29,15 @@ public class Sweg extends AbstractMapObject{
         return look;
     }
 
+    public boolean checkIfCollected(Bounding playerBounding) {
+        if (playerBounding.intersects(bounding)) {
+            isCollected = true;
+            System.out.println("sweg was collected!!");
+            return true;
+        }
+        return false;
 
+    }
 
     public boolean getCollected() {
         return isCollected;
@@ -47,7 +56,7 @@ public class Sweg extends AbstractMapObject{
     //TODO: this should be in superclass?
 
 
-    public Bounding getBounding(){
+    public Bounding getBounding() {
         return bounding;
     }
 }

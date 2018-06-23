@@ -17,6 +17,13 @@ public class AbstractMapObject {
 
     }
 
+    public AbstractMapObject(int x, int y){
+        bounding = new Bounding(x,y,0,0);
+
+    }
+
+
+
 
 
 
