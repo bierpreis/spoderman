@@ -10,9 +10,10 @@ public class Jump {
 
     boolean checkIfJump(boolean isSpacePressed, boolean isPlayerOnTop, boolean isPlayerOnBot) {
         timeSinceLastJump = +timeSinceLastJump + Config.msPerFrame;
-        if (!isPlayerOnTop && isPlayerOnBot && isSpacePressed && timeSinceLastJump > Config.minTimeBetweenJumps)
+        if (isPlayerOnBot && isSpacePressed && timeSinceLastJump > Config.minTimeBetweenJumps)
             jumping = true;
-
+        if(isPlayerOnTop)
+            jumping = false;
 
         return jumping;
     }
