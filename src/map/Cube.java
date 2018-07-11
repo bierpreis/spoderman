@@ -14,7 +14,7 @@ public class Cube extends AbstractMapObject {
         bounding = new Bounding(x,y,width, height);
         topBounding = new Bounding(x, y-5, width, 10);
         botBounding = new Bounding(x + 6, y + 30, width - 12, height - 30);
-        leftBounding = new Bounding(x + 5, y + 10, 5, height - 20);
+        leftBounding = new Bounding(x - 5, y + 10, 5, height - 20);
         rightBounding = new Bounding(x + width - 5, y + 10, 5, height - 20);
 
     }
