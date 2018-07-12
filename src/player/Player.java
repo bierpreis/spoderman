@@ -11,7 +11,7 @@ import helpers.*;
 import map.*;
 import map.enemies.AbstractEnemy;
 
-public class Player extends AbstractMapObject implements Movable {
+public class Player extends GameObject implements Movable {
 
     private boolean onTop, onBot, onRightSide, onLeftSide;
 
@@ -70,19 +70,22 @@ public class Player extends AbstractMapObject implements Movable {
         }
 
     }
-    private void checkHats(){
-        for (AbstractHat hat: lvl.getHatList())
-            if(hat.checkIfCollected(bounding))
+
+    private void checkHats() {
+        for (AbstractHat hat : lvl.getHatList())
+            if (hat.checkIfCollected(bounding))
                 this.hat = hat;
     }
-    public AbstractHat getHat(){
+
+    public AbstractHat getHat() {
         return hat;
     }
-    public int getY(){
+
+    public int getY() {
         return bounding.y;
     }
 
-    public int getX(){
+    public int getX() {
         return bounding.x;
     }
 
@@ -219,10 +222,8 @@ public class Player extends AbstractMapObject implements Movable {
         }
     }
 
-    public Bounding getBounding() {
-        return bounding;
-    }
 
+    @Override
     public BufferedImage getLook() {
 
         if (!alive)

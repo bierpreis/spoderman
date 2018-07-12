@@ -2,27 +2,27 @@ package player;
 
 import helpers.Bounding;
 import helpers.Collectable;
-import map.AbstractMapObject;
+import map.GameObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 
-public class AbstractHat extends AbstractMapObject implements Collectable {
+public class AbstractHat extends GameObject implements Collectable {
 
     protected BufferedImage look;
 
     public AbstractHat(Bounding playerBounding) {
-        super(playerBounding.x,playerBounding.y);
+        super(playerBounding.x, playerBounding.y);
         createLook();
         bounding.width = look.getWidth();
         bounding.height = look.getHeight();
 
     }
 
-    public AbstractHat(int x, int y){
+    public AbstractHat(int x, int y) {
 
-        super(x,y);
+        super(x, y);
         createLook();
         bounding.width = look.getWidth();
         bounding.height = look.getHeight();
@@ -30,10 +30,8 @@ public class AbstractHat extends AbstractMapObject implements Collectable {
 
     @Override
     public boolean checkIfCollected(Bounding playerBounding) {
-        if(playerBounding.intersects(bounding)) {
-            return true;
-        }
-        else return false;
+        return (playerBounding.intersects(bounding));
+
     }
 
     public BufferedImage getLook() {

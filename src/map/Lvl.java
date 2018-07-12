@@ -1,6 +1,5 @@
 package map;
 
-import helpers.Bounding;
 import map.enemies.Dolan;
 import map.enemies.AbstractEnemy;
 import map.enemies.Gooby;
@@ -51,7 +50,7 @@ public class Lvl {
 
     }
 
-    public List<AbstractHat> createHats(List<String> hatStringList) {
+    private List<AbstractHat> createHats(List<String> hatStringList) {
         List<AbstractHat> hatList = new LinkedList<>();
         for (int i = 0; i < hatStringList.size(); i++) {
             Scanner scanner = new Scanner(hatStringList.get(i));
@@ -66,7 +65,7 @@ public class Lvl {
         return hatList;
     }
 
-    private List<String> readFile(BufferedReader reader, Class<? extends AbstractMapObject> classType) {
+    private List<String> readFile(BufferedReader reader, Class<? extends GameObject> classType) {
         List<String> listFromFile = new LinkedList<>();
 
         try {
@@ -152,7 +151,7 @@ public class Lvl {
     }
 
     public void update(boolean scrollingLeft, boolean scrollingRight) {
-        //TODO: improve this. scrollable?
+        //TODO: improve this.
         for (Cube cube : cubeList)
             cube.updateBounding(scrollingLeft, scrollingRight);
 

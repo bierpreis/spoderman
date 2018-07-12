@@ -2,7 +2,7 @@ package map;
 
 import helpers.Bounding;
 
-public class Cube extends AbstractMapObject {
+public class Cube extends GameObject {
 
 
     private final Bounding topBounding;

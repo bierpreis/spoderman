@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Bigmek extends AbstractMapObject {
+public class Bigmek extends GameObject {
 
     private boolean collected = false;
     private BufferedImage look;

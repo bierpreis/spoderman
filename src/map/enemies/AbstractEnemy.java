@@ -9,10 +9,10 @@ import javax.imageio.ImageIO;
 
 import helpers.Bounding;
 import helpers.Config;
-import map.AbstractMapObject;
+import map.GameObject;
 import map.Cube;
 
-public abstract class AbstractEnemy extends AbstractMapObject {
+public abstract class AbstractEnemy extends GameObject {
     private boolean movingRight = true;
     private boolean alive = true;
 

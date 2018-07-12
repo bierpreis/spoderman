@@ -127,7 +127,7 @@ class Frame extends JFrame {
 
     }
 
-    private void newDrawUnits(Graphics g, AbstractMapObject mapObject) {
+    private void newDrawUnits(Graphics g, GameObject mapObject) {
         if(mapObject.getClass()==AbstractHat.class)
             System.out.println("abstract hat was in newDrawUnits");
         g.drawImage(mapObject.getLook(), mapObject.getX(), mapObject.getY(), null);
