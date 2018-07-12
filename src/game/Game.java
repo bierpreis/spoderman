@@ -40,7 +40,7 @@ public class Game {
         Sound.MONEY.play();
 
         while (action == Action.RUNNING) {
-            long startTime = System.nanoTime();
+            long startTime = System.currentTimeMillis();
 
             lvl.update(player.getScrollingLeft(), player.getScrollingRight());
 
@@ -48,9 +48,9 @@ public class Game {
             frame.draw(player, lvl);
             action = checkNextAction();
 
-            long updateLength = System.nanoTime() - startTime;
+            long updateLength = System.currentTimeMillis() - startTime;
 
-            sleep((int) (Config.msPerFrame - (updateLength / 1_000_000)));
+            sleep((int) (Config.msPerFrame - updateLength));
         }
     }
 
