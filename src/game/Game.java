@@ -37,6 +37,7 @@ public class Game {
     }
 
     private void start() {
+        Sound.MONEY.play();
 
         while (action == Action.RUNNING) {
             long startTime = System.nanoTime();
