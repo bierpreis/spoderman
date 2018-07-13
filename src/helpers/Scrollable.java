@@ -1,6 +1,8 @@
 package helpers;
 
+import player.Scrolling;
+
 public interface Scrollable {
 
-    void scroll(boolean scrollingLeft, boolean scrollingRight);
+    void scroll(Scrolling scrolling);
 }

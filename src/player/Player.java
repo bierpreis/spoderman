@@ -18,7 +18,7 @@ public class Player extends GameObject implements Movable {
     private boolean isLookingRight = true;
     private AbstractHat hat;
 
-    private boolean scrollingRight, scrollingLeft;
+    private Scrolling scrolling = Scrolling.NONE;
 
     private boolean alive = true;
 
@@ -101,13 +101,10 @@ public class Player extends GameObject implements Movable {
 
     }
 
-    public boolean getScrollingRight() {
-        return scrollingRight;
+    public Scrolling getScrolling() {
+        return scrolling;
     }
 
-    public boolean getScrollingLeft() {
-        return scrollingLeft;
-    }
 
     private void respawn() {
         if (!alive && lifes > 0) {
@@ -145,12 +142,12 @@ public class Player extends GameObject implements Movable {
 
         if (!onTop) bounding.y += Config.gravity;
 
-        if (keyHandler.getLeft() && !onRightSide && !scrollingLeft) {
+        if (keyHandler.getLeft() && !onRightSide && !scrolling.equals(Scrolling.LEFT)) {
             bounding.x -= Config.playerMoveSpeed;
             isLookingRight = false;
         }
 
-        if (keyHandler.getRight() && !onLeftSide && !scrollingRight) {
+        if (keyHandler.getRight() && !onLeftSide && !scrolling.equals(Scrolling.RIGHT)) {
             bounding.x += Config.playerMoveSpeed;
             isLookingRight = true;
 
@@ -235,13 +232,12 @@ public class Player extends GameObject implements Movable {
     }
 
     private void checkIfScroll() {
-        scrollingLeft = false;
-        scrollingRight = false;
-        if (bounding.x > 0.6 * Config.screenX && !onLeftSide && alive)
-            scrollingRight = true;
 
-        if (bounding.x < 0.4 * Config.screenY && !onRightSide && alive)
-            scrollingLeft = true;
+        if (bounding.x > 0.6 * Config.screenX && !onLeftSide && alive)
+            scrolling = Scrolling.RIGHT;
+        else if (bounding.x < 0.4 * Config.screenY && !onRightSide && alive)
+            scrolling = Scrolling.LEFT;
+        else scrolling = Scrolling.NONE;
     }
 
     public int getSwegCount() {

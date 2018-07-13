@@ -1,6 +1,7 @@
 package map;
 
 import helpers.Bounding;
+import player.Scrolling;
 
 import java.awt.image.BufferedImage;
 
@@ -36,7 +37,7 @@ public class GameObject {
         return bounding;
     }
 
-    public void scroll(boolean scrollingLeft, boolean scrollingRight) {
-        bounding.scroll(scrollingLeft, scrollingRight);
+    public void scroll(Scrolling scrolling) {
+        bounding.scroll(scrolling);
     }
 }

@@ -11,6 +11,7 @@ import helpers.Bounding;
 import helpers.Config;
 import map.GameObject;
 import map.Cube;
+import player.Scrolling;
 
 public abstract class AbstractEnemy extends GameObject {
     private boolean movingRight = true;
@@ -28,9 +29,9 @@ public abstract class AbstractEnemy extends GameObject {
 
     }
 
-    public void update(boolean scrollingLeft, boolean scrollingRight, List<Cube> cubeList) {
+    public void update(Scrolling scrolling, List<Cube> cubeList) {
 
-        scroll(scrollingLeft, scrollingRight);
+        scroll(scrolling);
 
         if (alive) {
             walk();
@@ -72,10 +73,10 @@ public abstract class AbstractEnemy extends GameObject {
         }
     }
 
-    public void scroll(boolean scrollingLeft, boolean scrollingRight) {
+    public void scroll(Scrolling scrolling) {
 
-        bounding.scroll(scrollingLeft, scrollingRight);
-        topBounding.scroll(scrollingLeft, scrollingRight);
+        bounding.scroll(scrolling);
+        topBounding.scroll(scrolling);
     }
 
     public void kill() {

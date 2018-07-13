@@ -1,11 +1,11 @@
 package helpers;
 
 
-
+import player.Scrolling;
 
 import java.awt.Rectangle;
 
-public class Bounding extends Rectangle implements Scrollable{
+public class Bounding extends Rectangle implements Scrollable {
 
 
     public Bounding(int x, int y, int width, int height) {
@@ -13,17 +13,17 @@ public class Bounding extends Rectangle implements Scrollable{
     }
 
     @Override
-    public void scroll(boolean scrollingLeft, boolean scrollingRight) {
+    public void scroll(Scrolling scrolling) {
 
-        if (scrollingLeft)
+        if (scrolling.equals(Scrolling.LEFT))
             x = x + Config.playerMoveSpeed;
 
-        if (scrollingRight)
+        if (scrolling.equals(Scrolling.RIGHT))
             x = x - Config.playerMoveSpeed;
     }
 
-    public void jump(){
-        y = y-Config.jumpSpeed;
+    public void jump() {
+        y = y - Config.jumpSpeed;
     }
 
 

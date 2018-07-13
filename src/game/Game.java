@@ -42,7 +42,7 @@ public class Game {
         while (action == Action.RUNNING) {
             long startTime = System.currentTimeMillis();
 
-            lvl.update(player.getScrollingLeft(), player.getScrollingRight());
+            lvl.update(player.getScrolling());
 
             player.update();
             frame.draw(player, lvl);
