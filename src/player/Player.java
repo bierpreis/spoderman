@@ -58,23 +58,25 @@ public class Player extends GameObject implements Movable {
         respawn();
         checkIfScroll();
         if (alive) {
-
             checkSweg();
             checkCubeCollisions();
             checkEnemies();
             checkBigMek();
             checkHats();
             move();
-            if (jump.checkIfJump(keyHandler.getSpace(), onBot, onTop))
-                jump.performJump(bounding);
+            jump();
         }
-
     }
 
     private void checkHats() {
         for (AbstractHat hat : lvl.getHatList())
             if (hat.checkIfCollected(bounding))
                 this.hat = hat;
+    }
+
+    private void jump(){
+        if (jump.checkIfJump(keyHandler.getSpace(), onBot, onTop))
+            jump.performJump(bounding);
     }
 
     public AbstractHat getHat() {
