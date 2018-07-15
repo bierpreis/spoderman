@@ -17,14 +17,14 @@ public class Game {
     private Action action = Action.RUNNING;
     private boolean showEscDialog = false;
     private int escapingTime = 0;
-    Camera camera;
+    private Camera camera;
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
         lvl = new Lvl(lvlNumber);
         player = new Player(lvl, keyHandler);
         frame = new Frame(keyHandler);
         this.keyHandler = keyHandler;
-        camera = new Camera(0,0);
+        camera = new Camera(0, 0);
         start();
     }
 
@@ -47,6 +47,7 @@ public class Game {
 
 
             player.update();
+            lvl.updateEnemies();
             frame.draw(player, lvl, camera);
             action = checkNextAction();
             camera.tick(player);

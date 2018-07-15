@@ -53,6 +53,7 @@ public class Player extends GameObject implements Movable {
 
     public void update() {
         hat.updateBounding(bounding);
+
         respawn();
         if (alive) {
             checkSweg();

@@ -150,6 +150,11 @@ public class Lvl {
         return enemyList;
     }
 
+    public void updateEnemies() {
+        for (AbstractEnemy enemy : enemyList) {
+            enemy.update(cubeList);
+        }
+    }
 
 
 }
