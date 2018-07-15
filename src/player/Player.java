@@ -18,8 +18,6 @@ public class Player extends GameObject implements Movable {
     private boolean isLookingRight = true;
     private AbstractHat hat;
 
-    private Scrolling scrolling = Scrolling.NONE;
-
     private boolean alive = true;
 
     private int swegCollected = 0;
@@ -56,7 +54,6 @@ public class Player extends GameObject implements Movable {
     public void update() {
         hat.updateBounding(bounding);
         respawn();
-        checkIfScroll();
         if (alive) {
             checkSweg();
             checkCubeCollisions();
@@ -103,9 +100,6 @@ public class Player extends GameObject implements Movable {
 
     }
 
-    public Scrolling getScrolling() {
-        return scrolling;
-    }
 
 
     private void respawn() {
@@ -144,12 +138,12 @@ public class Player extends GameObject implements Movable {
 
         if (!onTop) bounding.y += Config.gravity;
 
-        if (keyHandler.getLeft() && !onRightSide && !scrolling.equals(Scrolling.LEFT)) {
+        if (keyHandler.getLeft() && !onRightSide ) {
             bounding.x -= Config.playerMoveSpeed;
             isLookingRight = false;
         }
 
-        if (keyHandler.getRight() && !onLeftSide && !scrolling.equals(Scrolling.RIGHT)) {
+        if (keyHandler.getRight() && !onLeftSide ) {
             bounding.x += Config.playerMoveSpeed;
             isLookingRight = true;
 
@@ -231,15 +225,6 @@ public class Player extends GameObject implements Movable {
         if (isLookingRight)
             return lookingRight;
         else return lookingLeft;
-    }
-
-    private void checkIfScroll() {
-
-        if (bounding.x > 0.6 * Config.screenX && !onLeftSide && alive)
-            scrolling = Scrolling.RIGHT;
-        else if (bounding.x < 0.4 * Config.screenY && !onRightSide && alive)
-            scrolling = Scrolling.LEFT;
-        else scrolling = Scrolling.NONE;
     }
 
     public int getSwegCount() {

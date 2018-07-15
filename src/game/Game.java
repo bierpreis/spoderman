@@ -4,6 +4,7 @@ import helpers.Action;
 import helpers.Config;
 import helpers.KeyHandler;
 import map.Lvl;
+import player.Camera;
 import player.Player;
 import menu.Menu;
 
@@ -16,12 +17,14 @@ public class Game {
     private Action action = Action.RUNNING;
     private boolean showEscDialog = false;
     private int escapingTime = 0;
+    Camera camera;
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
         lvl = new Lvl(lvlNumber);
         player = new Player(lvl, keyHandler);
         frame = new Frame(keyHandler);
         this.keyHandler = keyHandler;
+        camera = new Camera(0,0);
         start();
     }
 
@@ -42,11 +45,11 @@ public class Game {
         while (action == Action.RUNNING) {
             long startTime = System.currentTimeMillis();
 
-            lvl.update(player.getScrolling());
 
             player.update();
-            frame.draw(player, lvl);
+            frame.draw(player, lvl, camera);
             action = checkNextAction();
+            camera.tick(player);
 
             long updateLength = System.currentTimeMillis() - startTime;
 

@@ -4,7 +4,6 @@ import map.enemies.Dolan;
 import map.enemies.AbstractEnemy;
 import map.enemies.Gooby;
 import player.AbstractHat;
-import player.Scrolling;
 import player.Snepbek;
 
 import java.io.BufferedReader;
@@ -151,25 +150,6 @@ public class Lvl {
         return enemyList;
     }
 
-    public void update(Scrolling scrolling) {
-        //TODO: improve this.
-        for (Cube cube : cubeList)
-            cube.updateBounding(scrolling);
 
-        for (Bigmek bigmek : bigmekList)
-
-            bigmek.scroll(scrolling);
-
-        for (AbstractEnemy enemy : enemyList)
-            enemy.update(scrolling, cubeList);
-
-
-        for (Sweg sweg : swegList)
-            sweg.scroll(scrolling);
-
-        for (AbstractHat hat : hatList)
-            hat.scroll(scrolling);
-
-    }
 
 }

@@ -1,7 +1,6 @@
 package game;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 
 import java.awt.image.BufferStrategy;
 
@@ -13,6 +12,7 @@ import helpers.Message;
 import map.*;
 import map.enemies.AbstractEnemy;
 import player.AbstractHat;
+import player.Camera;
 import player.Player;
 
 class Frame extends JFrame {
@@ -41,18 +41,22 @@ class Frame extends JFrame {
     }
 
 
-    void draw(Player player, Lvl lvl) {
+    void draw(Player player, Lvl lvl, Camera camera) {
 
         Graphics g = bufferStrategy.getDrawGraphics();
+        Graphics2D graphics2D = (Graphics2D) g;
 
         g.setColor(Color.lightGray);
         g.fillRect(0, 0, getWidth(), getHeight());
 
+        g.translate((int) camera.getX(), (int) camera.getY());
         drawCubes(g, lvl);
-        displayMessage(player.pollNewMessage(), g);
-        drawUnits(g, player, lvl);
-        writeInfo(g, player);
 
+        drawUnits(g, player, lvl);
+        g.translate(-(int) camera.getX(), -(int) camera.getY());
+
+        writeInfo(g, player);
+        displayMessage(player.pollNewMessage(), g);
 
         bufferStrategy.show();
 
@@ -121,14 +125,14 @@ class Frame extends JFrame {
         for (AbstractEnemy enemy : lvl.getEnemyList()) {
             newDrawUnits(g, enemy);
         }
-        for(AbstractHat hat: lvl.getHatList()){
-            newDrawUnits(g,hat);
+        for (AbstractHat hat : lvl.getHatList()) {
+            newDrawUnits(g, hat);
         }
 
     }
 
     private void newDrawUnits(Graphics g, GameObject mapObject) {
-        if(mapObject.getClass()==AbstractHat.class)
+        if (mapObject.getClass() == AbstractHat.class)
             System.out.println("abstract hat was in newDrawUnits");
         g.drawImage(mapObject.getLook(), mapObject.getX(), mapObject.getY(), null);
 

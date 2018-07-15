@@ -1,7 +1,6 @@
 package map;
 
 import helpers.Bounding;
-import player.Scrolling;
 
 public class Cube extends GameObject {
 
@@ -17,16 +16,6 @@ public class Cube extends GameObject {
         botBounding = new Bounding(x + 6, y + 30, width - 12, height - 30);
         leftBounding = new Bounding(x - 5, y + 10, 5, height - 20);
         rightBounding = new Bounding(x + width - 5, y + 10, 5, height - 20);
-
-    }
-
-    void updateBounding(Scrolling scrolling) {
-
-        bounding.scroll(scrolling);
-        topBounding.scroll(scrolling);
-        botBounding.scroll(scrolling);
-        leftBounding.scroll(scrolling);
-        rightBounding.scroll(scrolling);
 
     }
 
