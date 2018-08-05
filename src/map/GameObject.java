@@ -9,7 +9,7 @@ public abstract class GameObject {
 
     int speed = 0;
     protected Rectangle bounding;
-    protected Rectangle topBouding;
+    protected Rectangle topBounding;
     protected Rectangle botBounding;
     protected Rectangle leftBounding;
     protected Rectangle rightBounding;

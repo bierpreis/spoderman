@@ -1,8 +1,8 @@
 package map;
 
-import helpers.Bounding;
 import helpers.Collectable;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -20,7 +20,7 @@ public class Sweg extends GameObject implements Collectable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        bounding = new Bounding(x, y, look.getWidth(), look.getHeight());
+        bounding = new Rectangle(x, y, look.getWidth(), look.getHeight());
 
 
     }
@@ -29,7 +29,7 @@ public class Sweg extends GameObject implements Collectable {
         return look;
     }
 
-    public boolean checkIfCollected(Bounding playerBounding) {
+    public boolean checkIfCollected(Rectangle playerBounding) {
         if (playerBounding.intersects(bounding)) {
             isCollected = true;
             System.out.println("sweg was collected!!");
@@ -56,7 +56,7 @@ public class Sweg extends GameObject implements Collectable {
     //TODO: this should be in superclass?
 
 
-    public Bounding getBounding() {
+    public Rectangle getBounding() {
         return bounding;
     }
 }

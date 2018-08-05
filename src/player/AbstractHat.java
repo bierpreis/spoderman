@@ -1,10 +1,10 @@
 package player;
 
-import helpers.Bounding;
 import helpers.Collectable;
 import map.GameObject;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
@@ -12,7 +12,7 @@ public class AbstractHat extends GameObject implements Collectable {
 
     protected BufferedImage look;
 
-    public AbstractHat(Bounding playerBounding) {
+    public AbstractHat(Rectangle playerBounding) {
         super(playerBounding.x, playerBounding.y);
         createLook();
         bounding.width = look.getWidth();
@@ -29,7 +29,7 @@ public class AbstractHat extends GameObject implements Collectable {
     }
 
     @Override
-    public boolean checkIfCollected(Bounding playerBounding) {
+    public boolean checkIfCollected(Rectangle playerBounding) {
         return (playerBounding.intersects(bounding));
 
     }
@@ -48,11 +48,11 @@ public class AbstractHat extends GameObject implements Collectable {
 
     }
 
-    protected void createBounding(Bounding playerBounding, BufferedImage look) {
-        this.bounding = new Bounding(playerBounding.x, playerBounding.y - 100, look.getWidth(), look.getHeight());
+    protected void createBounding(Rectangle playerBounding, BufferedImage look) {
+        this.bounding = new Rectangle(playerBounding.x, playerBounding.y - 100, look.getWidth(), look.getHeight());
     }
 
-    public void updateBounding(Bounding playerBounding) {
+    public void updateBounding(Rectangle playerBounding) {
         bounding.x = playerBounding.x;
         bounding.y = playerBounding.y - look.getHeight() + 10;
     }

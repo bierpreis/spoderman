@@ -1,10 +1,10 @@
 package player;
 
-import helpers.Bounding;
+import java.awt.*;
 
 public class NoHat extends AbstractHat {
 
-    public NoHat(Bounding playerBounding) {
+    public NoHat(Rectangle playerBounding) {
         super(playerBounding);
 
     }

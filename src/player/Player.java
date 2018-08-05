@@ -1,6 +1,7 @@
 package player;
 
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -26,8 +27,6 @@ public class Player extends GameObject implements Movable {
 
     private int timeDead = 0;
 
-    private final Bounding botBounding;
-
     private BufferedImage lookingLeft, lookingRight, lookDead;
 
     private Message message;
@@ -38,10 +37,10 @@ public class Player extends GameObject implements Movable {
 
     public Player(Lvl lvl, KeyHandler keyHandler) {
         createLook();
-        bounding = new Bounding(300, 300, lookingLeft.getWidth(), lookingLeft.getHeight());
+        bounding = new Rectangle(300, 300, lookingLeft.getWidth(), lookingLeft.getHeight());
 
 
-        botBounding = new Bounding(bounding.x - 5, bounding.y + 20, lookingLeft.getWidth() + 10, 20);
+        botBounding = new Rectangle(bounding.x - 5, bounding.y + 20, lookingLeft.getWidth() + 10, 20);
 
         this.lvl = lvl;
         this.keyHandler = keyHandler;

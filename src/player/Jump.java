@@ -1,7 +1,8 @@
 package player;
 
-import helpers.Bounding;
 import helpers.Config;
+
+import java.awt.*;
 
 public class Jump {
     boolean jumping = false;
@@ -18,13 +19,13 @@ public class Jump {
         return jumping;
     }
 
-    Bounding performJump(Bounding playerBounding) {
+    Rectangle performJump(Rectangle playerBounding) {
         timeAlreadyJumping += Config.msPerFrame;
         if (timeAlreadyJumping > Config.timeJumpingUp) {
             jumping = false;
             timeAlreadyJumping = 0;
         }
-        playerBounding.jump();
+        playerBounding.y = playerBounding.y - Config.jumpSpeed;
         return playerBounding;
 
     }

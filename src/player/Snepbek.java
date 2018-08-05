@@ -1,10 +1,10 @@
 package player;
 
-import helpers.Bounding;
+import java.awt.*;
 
 public class Snepbek extends AbstractHat {
 
-    public Snepbek(Bounding playerBounding) {
+    public Snepbek(Rectangle playerBounding) {
         super(playerBounding);
         createLook();
         createBounding(playerBounding, look);

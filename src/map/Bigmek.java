@@ -1,7 +1,6 @@
 package map;
 
-import helpers.Bounding;
-
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -15,7 +14,7 @@ public class Bigmek extends GameObject {
 
     Bigmek(int x, int y) {
         look = createLook();
-        bounding = new Bounding(x,y,look.getWidth(), look.getHeight());
+        bounding = new Rectangle(x,y,look.getWidth(), look.getHeight());
 
 
     }
@@ -55,7 +54,7 @@ public class Bigmek extends GameObject {
         return look;
     }
 
-    public Bounding getBounding(){
+    public Rectangle getBounding(){
         return bounding;
     }
 }

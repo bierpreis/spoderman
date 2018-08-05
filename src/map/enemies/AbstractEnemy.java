@@ -1,5 +1,6 @@
 package map.enemies;
 
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -7,7 +8,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import helpers.Bounding;
 import helpers.Config;
 import map.GameObject;
 import map.Cube;
@@ -18,12 +18,10 @@ public abstract class AbstractEnemy extends GameObject {
 
     protected BufferedImage look;
 
-    protected Bounding topBounding;
-    protected Bounding bounding;
 
 
     AbstractEnemy(int x, int y) {
-        bounding = new Bounding(x, y, 0, 0);
+        bounding = new Rectangle(x, y, 0, 0);
 
 
     }
@@ -45,7 +43,7 @@ public abstract class AbstractEnemy extends GameObject {
         return bounding.y;
     }
 
-    public Bounding getBounding() {
+    public Rectangle getBounding() {
         return bounding;
     }
 
