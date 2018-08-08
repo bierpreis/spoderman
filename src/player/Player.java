@@ -70,7 +70,7 @@ public class Player extends GameObject implements Movable {
 
     private void jump() {
         if (jump.checkIfJump(keyHandler.getSpace(), onGround, onTop))
-            jump.performJump(bounding);
+            jump.performJump(bounding, onTop);
     }
 
     public AbstractHat getHat() {

@@ -134,6 +134,10 @@ class Frame extends JFrame {
     private void newDrawUnits(Graphics g, GameObject mapObject) {
 
         g.drawImage(mapObject.getLook(), mapObject.getX(), mapObject.getY(), null);
+        if (mapObject.getClass().equals(Player.class)) {
+            g.setColor(Color.RED);
+            g.drawRect(mapObject.topBounding.x, mapObject.topBounding.y, mapObject.topBounding.width, mapObject.topBounding.height);
+        }
     }
 
 }

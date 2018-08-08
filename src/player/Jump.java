@@ -15,13 +15,12 @@ public class Jump {
             jumping = true;
         if (isPlayerOnTop)
             jumping = false;
-
         return jumping;
     }
 
-    Rectangle performJump(Rectangle playerBounding) {
+    Rectangle performJump(Rectangle playerBounding, boolean onTop) {
         timeAlreadyJumping += Config.msPerFrame;
-        if (timeAlreadyJumping > Config.timeJumpingUp) {
+        if (timeAlreadyJumping > Config.timeJumpingUp || onTop) {
             jumping = false;
             timeAlreadyJumping = 0;
         }

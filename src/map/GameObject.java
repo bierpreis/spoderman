@@ -14,7 +14,7 @@ public abstract class GameObject implements Readable {
 
     int speed = 0;
     protected Rectangle bounding;
-    protected Rectangle topBounding;
+    public Rectangle topBounding;
     protected Rectangle botBounding;
     protected Rectangle leftBounding;
     protected Rectangle rightBounding;
@@ -34,7 +34,7 @@ public abstract class GameObject implements Readable {
 
     protected void createBoundings() {
         bounding = new Rectangle(bounding.x, bounding.y, look.getWidth(), look.getHeight());
-        topBounding = new Rectangle(bounding.x + 5, bounding.y, bounding.width - 10, bounding.height / 2);
+        topBounding = new Rectangle(bounding.x + 5, bounding.y-5, bounding.width - 10, bounding.height / 2);
         botBounding = new Rectangle(bounding.x + 5, bounding.y + bounding.height / 2, bounding.width - 10, bounding.height / 2);
         leftBounding = new Rectangle(bounding.x, bounding.y + 5, bounding.width / 2, bounding.height - 10);
         rightBounding = new Rectangle(bounding.x + bounding.width / 2, bounding.y + 5, bounding.width / 2, bounding.height - 10);
@@ -47,6 +47,8 @@ public abstract class GameObject implements Readable {
         rightBounding.y = bounding.y + 5;
         leftBounding.x = bounding.x;
         leftBounding.y = bounding.y + 5;
+        topBounding.x = bounding.x;
+        topBounding.y = bounding.y-10;
     }
 
 
