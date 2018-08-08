@@ -65,7 +65,7 @@ public class Lvl {
         return hatList;
     }
 
-    private List<String> readFile(BufferedReader reader, Class<? extends GameObject> classType) {
+    private List<String> readFile(BufferedReader reader, Class<? extends Readable> classType) {
         List<String> listFromFile = new LinkedList<>();
 
         try {

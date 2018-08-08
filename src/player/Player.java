@@ -1,7 +1,5 @@
 package player;
 
-
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -36,11 +34,11 @@ public class Player extends GameObject implements Movable {
     private Jump jump;
 
     public Player(Lvl lvl, KeyHandler keyHandler) {
+        super(300, 300);
         createLook();
-        bounding = new Rectangle(300, 300, lookingLeft.getWidth(), lookingLeft.getHeight());
 
+        createBoundings();
 
-        botBounding = new Rectangle(bounding.x - 5, bounding.y + 20, lookingLeft.getWidth() + 10, 20);
 
         this.lvl = lvl;
         this.keyHandler = keyHandler;
@@ -52,7 +50,6 @@ public class Player extends GameObject implements Movable {
 
     public void update() {
         hat.updateBounding(bounding);
-
         respawn();
         if (alive) {
             checkSweg();
@@ -71,21 +68,13 @@ public class Player extends GameObject implements Movable {
                 this.hat = hat;
     }
 
-    private void jump(){
+    private void jump() {
         if (jump.checkIfJump(keyHandler.getSpace(), onBot, onTop))
             jump.performJump(bounding);
     }
 
     public AbstractHat getHat() {
         return hat;
-    }
-
-    public int getY() {
-        return bounding.y;
-    }
-
-    public int getX() {
-        return bounding.x;
     }
 
     private void createLook() {
@@ -98,8 +87,10 @@ public class Player extends GameObject implements Movable {
             e.printStackTrace();
         }
 
-    }
+        //to init look
+        getLook();
 
+    }
 
 
     private void respawn() {
@@ -122,13 +113,13 @@ public class Player extends GameObject implements Movable {
         onBot = false;
         onTop = false;
         for (Cube cube : lvl.getCubes()) {
-            if (bounding.intersects(cube.getLeftBounding()))
+            if (leftBounding.intersects(cube.getBounding()))
                 onLeftSide = true;
-            if (bounding.intersects(cube.getRightBounding()))
+            if (rightBounding.intersects(cube.getBounding()))
                 onRightSide = true;
-            if (botBounding.intersects(cube.getTopBounding()))
+            if (topBounding.intersects(cube.getBounding()))
                 onTop = true;
-            if (bounding.intersects(cube.getBotBounding()))
+            if (botBounding.intersects(cube.getBounding()))
                 onBot = true;
         }
 
@@ -136,14 +127,14 @@ public class Player extends GameObject implements Movable {
 
     public void move() {
 
-        if (!onTop) bounding.y += Config.gravity;
+        gravity(lvl.getCubes());
 
-        if (keyHandler.getLeft() && !onRightSide ) {
+        if (keyHandler.getLeft() && !onRightSide) {
             bounding.x -= Config.playerMoveSpeed;
             isLookingRight = false;
         }
 
-        if (keyHandler.getRight() && !onLeftSide ) {
+        if (keyHandler.getRight() && !onLeftSide) {
             bounding.x += Config.playerMoveSpeed;
             isLookingRight = true;
 
@@ -220,11 +211,13 @@ public class Player extends GameObject implements Movable {
     public BufferedImage getLook() {
 
         if (!alive)
-            return lookDead;
+            look = lookDead;
 
         if (isLookingRight)
-            return lookingRight;
-        else return lookingLeft;
+            look = lookingRight;
+        else look = lookingLeft;
+
+        return look;
     }
 
     public int getSwegCount() {

@@ -9,12 +9,12 @@ import javax.imageio.ImageIO;
 public class Bigmek extends GameObject {
 
     private boolean collected = false;
-    private BufferedImage look;
 
 
     Bigmek(int x, int y) {
-        look = createLook();
-        bounding = new Rectangle(x,y,look.getWidth(), look.getHeight());
+        super(x, y);
+        createLook();
+        createBoundings();
 
 
     }
@@ -42,19 +42,4 @@ public class Bigmek extends GameObject {
     }
 
 
-    public int getX(){
-        return bounding.x;
-    }
-
-    public int getY(){
-        return bounding.y;
-    }
-
-    public BufferedImage getLook(){
-        return look;
-    }
-
-    public Rectangle getBounding(){
-        return bounding;
-    }
 }

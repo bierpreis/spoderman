@@ -1,8 +1,8 @@
 package map.enemies;
 
-import java.awt.*;
+
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -11,20 +11,11 @@ import javax.imageio.ImageIO;
 import helpers.Config;
 import map.GameObject;
 import map.Cube;
+import map.Readable;
 
-public abstract class AbstractEnemy extends GameObject {
+public abstract class AbstractEnemy extends GameObject implements Readable {
     private boolean movingRight = true;
     private boolean alive = true;
-
-    protected BufferedImage look;
-
-
-
-    AbstractEnemy(int x, int y) {
-        bounding = new Rectangle(x, y, 0, 0);
-
-
-    }
 
     public void update(List<Cube> cubeList) {
 
@@ -35,24 +26,17 @@ public abstract class AbstractEnemy extends GameObject {
         }
     }
 
-    public int getX() {
-        return bounding.x;
-    }
+    public AbstractEnemy(int x, int y) {
+        super(x, y);
 
-    public int getY() {
-        return bounding.y;
-    }
-
-    public Rectangle getBounding() {
-        return bounding;
     }
 
 
     private void checkCubeCollisions(List<Cube> cubeList) {
         for (Cube cube : cubeList) {
-            if (bounding.intersects(cube.getLeftBounding()) && movingRight)
+            if (rightBounding.intersects(cube.getBounding()) && movingRight)
                 movingRight = false;
-            if (bounding.intersects(cube.getRightBounding()) && !movingRight)
+            if (leftBounding.intersects(cube.getBounding()) && !movingRight)
                 movingRight = true;
 
         }
@@ -77,11 +61,6 @@ public abstract class AbstractEnemy extends GameObject {
             e.printStackTrace();
         }
         alive = false;
-    }
-
-    public BufferedImage getLook() {
-
-        return look;
     }
 
 

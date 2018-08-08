@@ -2,10 +2,13 @@ package map;
 
 import helpers.Config;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
-public abstract class GameObject {
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.util.List;
+
+public abstract class GameObject implements Readable {
+
 
     int speed = 0;
     protected Rectangle bounding;
@@ -16,18 +19,23 @@ public abstract class GameObject {
     protected BufferedImage look;
 
 
-    protected GameObject() {
-
-    }
-
     public GameObject(int x, int y) {
         bounding = new Rectangle(x, y, 0, 0);
 
     }
 
-    public void tick(Cube[] cubes) {
+    public void tick(List<Cube> cubes) {
         gravity(cubes);
         move(cubes);
+    }
+
+    protected void createBoundings() {
+        bounding = new Rectangle(bounding.x, bounding.y, look.getWidth(), look.getHeight());
+        topBounding = new Rectangle(bounding.x + 5, bounding.y, bounding.width - 10, bounding.height / 2);
+        botBounding = new Rectangle(bounding.x + 5, bounding.y + bounding.height / 2, bounding.width - 10, bounding.height / 2);
+        leftBounding = new Rectangle(bounding.x, bounding.y + 5, bounding.width / 2, bounding.height - 10);
+        rightBounding = new Rectangle(bounding.x + bounding.width / 2, bounding.y + 5, bounding.width / 2, bounding.height - 10);
+
     }
 
 
@@ -48,19 +56,23 @@ public abstract class GameObject {
         return bounding;
     }
 
-    private void gravity(Cube[] cubes) {
+    protected void gravity(List<Cube> cubes) {
+        boolean falling = true;
         for (Cube cube : cubes) {
-            if (botBounding.intersects(cube.bounding))
-                bounding.y = bounding.y + Config.gravity;
+            if (botBounding.intersects(cube.getBounding()))
+                falling = false;
         }
+
+        if (falling)
+            bounding.y = bounding.y + Config.gravity;
 
     }
 
-    private void move(Cube[] cubes) {
+    private void move(List<Cube> cubes) {
         if (speed != 0) {
             bounding.x = bounding.x + speed;
             for (Cube cube : cubes) {
-                if (leftBounding.intersects(cube.bounding) || rightBounding.intersects(cube.bounding))
+                if (leftBounding.intersects(cube.getBounding()) || rightBounding.intersects(cube.getBounding()))
                     speed = speed * -1;
             }
         }
