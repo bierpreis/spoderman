@@ -12,7 +12,7 @@ import map.enemies.AbstractEnemy;
 
 public class Player extends GameObject implements Movable {
 
-    private boolean onTop, onBot, onRightSide, onLeftSide;
+
 
     private boolean isLookingRight = true;
     private AbstractHat hat;
@@ -53,7 +53,7 @@ public class Player extends GameObject implements Movable {
         respawn();
         if (alive) {
             checkSweg();
-            checkCubeCollisions();
+            checkCubeCollisions(lvl.getCubes());
             checkEnemies();
             checkBigMek();
             checkHats();
@@ -107,34 +107,17 @@ public class Player extends GameObject implements Movable {
         }
     }
 
-    private void checkCubeCollisions() {
-        onRightSide = false;
-        onLeftSide = false;
-        onBot = false;
-        onTop = false;
-        for (Cube cube : lvl.getCubes()) {
-            if (leftBounding.intersects(cube.getBounding()))
-                onLeftSide = true;
-            if (rightBounding.intersects(cube.getBounding()))
-                onRightSide = true;
-            if (topBounding.intersects(cube.getBounding()))
-                onTop = true;
-            if (botBounding.intersects(cube.getBounding()))
-                onBot = true;
-        }
-
-    }
 
     public void move() {
 
         gravity(lvl.getCubes());
 
-        if (keyHandler.getLeft() && !onRightSide) {
+        if (keyHandler.getLeft() && !onLeftSide) {
             bounding.x -= Config.playerMoveSpeed;
             isLookingRight = false;
         }
 
-        if (keyHandler.getRight() && !onLeftSide) {
+        if (keyHandler.getRight() && !onRightSide) {
             bounding.x += Config.playerMoveSpeed;
             isLookingRight = true;
 
@@ -142,6 +125,9 @@ public class Player extends GameObject implements Movable {
 
         botBounding.x = bounding.x;
         botBounding.y = bounding.y + 20;
+
+        updateHelpBoundings();
+
 
     }
 

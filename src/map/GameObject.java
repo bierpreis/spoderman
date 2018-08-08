@@ -9,21 +9,24 @@ import java.util.List;
 
 public abstract class GameObject implements Readable {
 
+    protected boolean onTop, onBot, onRightSide, onLeftSide;
+
 
     int speed = 0;
     protected Rectangle bounding;
     protected Rectangle topBounding;
     protected Rectangle botBounding;
     protected Rectangle leftBounding;
-    protected Rectangle rightBounding;
+    public Rectangle rightBounding;
     protected BufferedImage look;
 
 
     public GameObject(int x, int y) {
+        //TODO remove
         bounding = new Rectangle(x, y, 0, 0);
 
     }
-
+    //todo implement or remove
     public void tick(List<Cube> cubes) {
         gravity(cubes);
         move(cubes);
@@ -36,6 +39,14 @@ public abstract class GameObject implements Readable {
         leftBounding = new Rectangle(bounding.x, bounding.y + 5, bounding.width / 2, bounding.height - 10);
         rightBounding = new Rectangle(bounding.x + bounding.width / 2, bounding.y + 5, bounding.width / 2, bounding.height - 10);
 
+
+    }
+
+    protected void updateHelpBoundings(){
+        rightBounding.x = bounding.x + bounding.width/2;
+        rightBounding.y = bounding.y + 5;
+        leftBounding.x = bounding.x;
+        leftBounding.y = bounding.y + 5;
     }
 
 
@@ -68,7 +79,8 @@ public abstract class GameObject implements Readable {
 
     }
 
-    private void move(List<Cube> cubes) {
+    protected void move(List<Cube> cubes) {
+
         if (speed != 0) {
             bounding.x = bounding.x + speed;
             for (Cube cube : cubes) {
@@ -77,5 +89,24 @@ public abstract class GameObject implements Readable {
             }
         }
     }
+
+    protected void checkCubeCollisions(List<Cube> cubes) {
+        onRightSide = false;
+        onLeftSide = false;
+        onBot = false;
+        onTop = false;
+        for (Cube cube : cubes) {
+            if (leftBounding.intersects(cube.getBounding()))
+                onLeftSide = true;
+            if (rightBounding.intersects(cube.getBounding()))
+                onRightSide = true;
+            if (topBounding.intersects(cube.getBounding()))
+                onTop = true;
+            if (botBounding.intersects(cube.getBounding()))
+                onBot = true;
+        }
+
+    }
+
 
 }

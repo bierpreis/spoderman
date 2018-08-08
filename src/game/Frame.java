@@ -78,7 +78,7 @@ class Frame extends JFrame {
     private void drawCubes(Graphics g, Lvl lvl) {
         g.setColor(Color.BLUE);
         for (Cube cube : lvl.getCubes()) {
-            g.fillRect((int)cube.getBounding().getX(), (int)cube.getBounding().getY(), (int) cube.getBounding().getWidth(), (int) cube.getBounding().getHeight());
+            g.fillRect((int) cube.getBounding().getX(), (int) cube.getBounding().getY(), (int) cube.getBounding().getWidth(), (int) cube.getBounding().getHeight());
         }
     }
 
@@ -132,10 +132,8 @@ class Frame extends JFrame {
     }
 
     private void newDrawUnits(Graphics g, GameObject mapObject) {
-        if (mapObject.getClass() == AbstractHat.class)
-            System.out.println("abstract hat was in newDrawUnits");
-        g.drawImage(mapObject.getLook(), mapObject.getX(), mapObject.getY(), null);
 
+        g.drawImage(mapObject.getLook(), mapObject.getX(), mapObject.getY(), null);
     }
 
 }

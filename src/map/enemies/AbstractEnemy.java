@@ -21,8 +21,8 @@ public abstract class AbstractEnemy extends GameObject implements Readable {
 
 
         if (alive) {
-            walk();
             checkCubeCollisions(cubeList);
+            walk();
         }
     }
 
@@ -31,18 +31,16 @@ public abstract class AbstractEnemy extends GameObject implements Readable {
 
     }
 
-
-    private void checkCubeCollisions(List<Cube> cubeList) {
-        for (Cube cube : cubeList) {
-            if (rightBounding.intersects(cube.getBounding()) && movingRight)
-                movingRight = false;
-            if (leftBounding.intersects(cube.getBounding()) && !movingRight)
-                movingRight = true;
-
-        }
+    private void setMoveDirection() {
+        if (onRightSide && movingRight)
+            movingRight = false;
+        if (onLeftSide && !movingRight)
+            movingRight = true;
     }
 
+
     private void walk() {
+        setMoveDirection();
         if (movingRight) {
             bounding.x += Config.enemyMoveSpeed;
             topBounding.x += Config.enemyMoveSpeed;
