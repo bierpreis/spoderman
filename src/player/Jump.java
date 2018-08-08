@@ -5,15 +5,15 @@ import helpers.Config;
 import java.awt.*;
 
 public class Jump {
-    boolean jumping = false;
-    int timeAlreadyJumping = 0;
-    int timeSinceLastJump = 200;
+    private boolean jumping = false;
+    private int timeAlreadyJumping = 0;
+    private int timeSinceLastJump = 200;
 
-    boolean checkIfJump(boolean isSpacePressed, boolean isPlayerOnTop, boolean isPlayerOnBot) {
+    boolean checkIfJump(boolean isSpacePressed, boolean isPlayerOnGround, boolean isPlayerOnTop) {
         timeSinceLastJump = +timeSinceLastJump + Config.msPerFrame;
-        if (isPlayerOnBot && isSpacePressed && timeSinceLastJump > Config.minTimeBetweenJumps)
+        if (isPlayerOnGround && isSpacePressed && timeSinceLastJump > Config.minTimeBetweenJumps)
             jumping = true;
-        if(isPlayerOnTop)
+        if (isPlayerOnTop)
             jumping = false;
 
         return jumping;

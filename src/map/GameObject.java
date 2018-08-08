@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class GameObject implements Readable {
 
-    protected boolean onTop, onBot, onRightSide, onLeftSide;
+    protected boolean onTop, onGround, onRightSide, onLeftSide;
 
 
     int speed = 0;
@@ -17,7 +17,7 @@ public abstract class GameObject implements Readable {
     protected Rectangle topBounding;
     protected Rectangle botBounding;
     protected Rectangle leftBounding;
-    public Rectangle rightBounding;
+    protected Rectangle rightBounding;
     protected BufferedImage look;
 
 
@@ -93,7 +93,7 @@ public abstract class GameObject implements Readable {
     protected void checkCubeCollisions(List<Cube> cubes) {
         onRightSide = false;
         onLeftSide = false;
-        onBot = false;
+        onGround = false;
         onTop = false;
         for (Cube cube : cubes) {
             if (leftBounding.intersects(cube.getBounding()))
@@ -103,7 +103,7 @@ public abstract class GameObject implements Readable {
             if (topBounding.intersects(cube.getBounding()))
                 onTop = true;
             if (botBounding.intersects(cube.getBounding()))
-                onBot = true;
+                onGround = true;
         }
 
     }

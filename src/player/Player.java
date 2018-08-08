@@ -69,7 +69,7 @@ public class Player extends GameObject implements Movable {
     }
 
     private void jump() {
-        if (jump.checkIfJump(keyHandler.getSpace(), onBot, onTop))
+        if (jump.checkIfJump(keyHandler.getSpace(), onGround, onTop))
             jump.performJump(bounding);
     }
 
