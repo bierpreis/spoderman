@@ -44,7 +44,6 @@ class Frame extends JFrame {
     void draw(Player player, Lvl lvl, Camera camera) {
 
         Graphics g = bufferStrategy.getDrawGraphics();
-        Graphics2D graphics2D = (Graphics2D) g;
 
         g.setColor(Color.lightGray);
         g.fillRect(0, 0, getWidth(), getHeight());
