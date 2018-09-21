@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SizeDialogue extends JDialog {
+public class SizeDialogue extends JDialog implements ActionListener{
     private int requestedWidth = -1;
     private int requestedHeight = -1;
 
@@ -65,8 +65,12 @@ public class SizeDialogue extends JDialog {
         add(errorPanel);
         errorLabel.setVisible(false);
 
+        getRootPane().setDefaultButton(okButton);
+
 
     }
+
+
 
     public Dimension askForDimension() {
         setVisible(true);
@@ -83,6 +87,11 @@ public class SizeDialogue extends JDialog {
         }
         dispose();
         return new Dimension(requestedWidth, requestedHeight);
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae){
 
     }
 

@@ -8,29 +8,29 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class MainFrame extends Frame {
-    private JScrollPane menuPanel = new MenuPanel();
-    private JScrollPane mapPane = new MapPanel();
-    private JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,menuPanel, mapPane);
+    private JScrollPane menuPanel;
+    private JScrollPane mapPane;
+    private JSplitPane splitPane;
 
     Cube[][] cubeArray;
     public MainFrame(Dimension requestedDimension){
         setTitle("Spoderman Lvl Editor");
 
-
+        System.out.println("requested height" + requestedDimension.height);
         cubeArray = new Cube[requestedDimension.width][ requestedDimension.height];
 
-        mapPane.setSize(requestedDimension.width*Cube.size,requestedDimension.height*Cube.size);
-        //mapPane.getViewport().setBackground(Color.BLUE);
-        mapPane.setVisible(true);
+        menuPanel = new MenuPanel(requestedDimension.height);
+        mapPane = new MapPane(requestedDimension);
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,menuPanel, mapPane);
+
         System.out.println("size: " + mapPane.getSize());
 
-        menuPanel.setSize(250, mapPane.getHeight());
         menuPanel.getViewport().setBackground(Color.RED);
 
         splitPane.setOneTouchExpandable(true);
         add(splitPane);
 
-        splitPane.setDividerLocation(150);
+        splitPane.setDividerLocation(100);
         splitPane.setVisible(true);
 
 
