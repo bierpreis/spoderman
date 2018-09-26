@@ -11,8 +11,6 @@ public class SizeDialogue extends JDialog implements ActionListener{
 
     private JLabel errorLabel;
 
-    private boolean areValuesReady = false;
-
     JTextField widthInput;
     JTextField heightInput;
 
@@ -106,7 +104,6 @@ public class SizeDialogue extends JDialog implements ActionListener{
     }
 
     public Dimension getRequestedDimension() {
-        System.out.println("returned dimension: " + requestedWidth + " " + requestedHeight);
         return new Dimension(requestedWidth, requestedHeight);
     }
 

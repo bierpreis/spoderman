@@ -1,21 +1,20 @@
 package LvlEditor;
 
-import map.Cube;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class MenuPanel extends JScrollPane {
+public class MenuPanel extends JPanel {
+    private JLabel testLabel;
 
-    public MenuPanel(int requestedHeight){
-        setSize(250, requestedHeight* Cube.size);
+    public MenuPanel(Dimension requestedDimension){
+        setSize(requestedDimension);
 
+        setLayout(new FlowLayout());
+        testLabel = new JLabel("testLabel");
+        testLabel.setVisible(true);
+        add(testLabel);
+
+        System.out.println("MenuPanel constructor was called");
+        setVisible(true);
     }
-
-    private JPanel menuPanel;
-
-
-
-
-
 }

@@ -9,36 +9,35 @@ import java.awt.event.WindowEvent;
 
 public class MainFrame extends Frame {
     private JScrollPane menuPanel;
-    private JScrollPane mapPane;
+    private JScrollPane mapScrollPane;
     private JSplitPane splitPane;
 
     Cube[][] cubeArray;
     public MainFrame(Dimension requestedDimension){
         setTitle("Spoderman Lvl Editor");
 
-        System.out.println("requested height" + requestedDimension.height);
         cubeArray = new Cube[requestedDimension.width][ requestedDimension.height];
 
-        menuPanel = new MenuPanel(requestedDimension.height);
-        mapPane = new MapPane(requestedDimension);
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,menuPanel, mapPane);
+        menuPanel = new MenuScrollPane(requestedDimension);
+        mapScrollPane = new MapScrollPane(requestedDimension);
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,menuPanel, mapScrollPane);
 
-        System.out.println("size: " + mapPane.getSize());
+        System.out.println("size: " + mapScrollPane.getSize());
 
-        menuPanel.getViewport().setBackground(Color.RED);
+        //menuPanel.getViewport().setBackground(Color.RED);
 
         splitPane.setOneTouchExpandable(true);
         add(splitPane);
 
-        splitPane.setDividerLocation(100);
-        splitPane.setVisible(true);
+        splitPane.setDividerLocation(menuPanel.getWidth());
+
 
 
 
         addWindowListener(new MainFrameListener());
-        setSize(menuPanel.getWidth() + mapPane.getWidth(), menuPanel.getHeight());
+        setSize(menuPanel.getWidth() + mapScrollPane.getWidth(), menuPanel.getHeight());
         setVisible(true);
-        System.out.println("map pane size: " + mapPane.size());
+        System.out.println("map pane size: " + mapScrollPane.size());
 
 
     }
