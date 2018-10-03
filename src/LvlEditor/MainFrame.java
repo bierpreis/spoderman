@@ -12,14 +12,14 @@ public class MainFrame extends Frame {
     private JScrollPane mapScrollPane;
     private JSplitPane splitPane;
 
-    Cube[][] cubeArray;
+    MapObject mapObject;
     public MainFrame(Dimension requestedDimension){
         setTitle("Spoderman Lvl Editor");
 
-        cubeArray = new Cube[requestedDimension.width][ requestedDimension.height];
+        mapObject = new MapObject(requestedDimension);
 
-        menuPanel = new MenuScrollPane(requestedDimension);
-        mapScrollPane = new MapScrollPane(requestedDimension);
+        menuPanel = new MenuScrollPane(requestedDimension.height);
+        mapScrollPane = new MapScrollPane(mapObject);
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,menuPanel, mapScrollPane);
 
         System.out.println("size: " + mapScrollPane.getSize());

@@ -6,8 +6,8 @@ import java.awt.*;
 public class MenuPanel extends JPanel {
     private JLabel testLabel;
 
-    public MenuPanel(Dimension requestedDimension){
-        setSize(requestedDimension);
+    public MenuPanel(int minYSize){
+        setSize(200, minYSize);
 
         setLayout(new FlowLayout());
         testLabel = new JLabel("testLabel");

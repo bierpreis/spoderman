@@ -9,13 +9,13 @@ public class MapScrollPane extends JScrollPane {
 
     private JPanel mapPanel;
 
-    public MapScrollPane(Dimension requestedDimension){
+    public MapScrollPane(MapObject mapObject){
         setLayout(new ScrollPaneLayout());
-        setSize(requestedDimension.width* Cube.size,requestedDimension.height*Cube.size);
-        //getViewport().setBackground(Color.BLUE);
+        setSize(new Dimension (mapObject.getDimension().width* Cube.size,mapObject.getDimension().height*Cube.size));
 
 
-        mapPanel = new MapPanel(requestedDimension);
+
+        mapPanel = new MapPanel(mapObject);
         setViewportView(mapPanel);
         mapPanel.setVisible(true);
         setVisible(true);
