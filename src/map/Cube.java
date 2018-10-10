@@ -2,15 +2,15 @@ package map;
 
 import java.awt.Rectangle;
 
-public class Cube implements Readable{
+public class Cube implements Readable {
 
 
     private final Rectangle bounding;
-    public static int size = 32; //todo improve this!
+    private final static int size = 32;
     private boolean active = false;
 
-    public Cube(int x, int y){
-        bounding = new Rectangle(x,y,size, size);
+    public Cube(int x, int y) {
+        bounding = new Rectangle(x * size, y * size, size, size);
     }
 
     Cube(int x, int y, int width, int height) {
@@ -24,14 +24,17 @@ public class Cube implements Readable{
         return bounding;
     }
 
-    public boolean isActive(){
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean isActive){
+    public void setActive(boolean isActive) {
         this.active = isActive;
     }
 
+    public static int getSize() {
+        return size;
+    }
 
 
 }

@@ -1,5 +1,7 @@
-package LvlEditor;
+package LvlEditor.MapArea;
 
+import LvlEditor.LvlEditor;
+import LvlEditor.MapArea.MapObject;
 import map.Cube;
 
 import javax.swing.*;
@@ -10,7 +12,7 @@ public class MapPanel extends JPanel {
 
     public MapPanel(MapObject mapObject){
         this.mapObject = mapObject;
-        setPreferredSize(new Dimension(mapObject.getDimension().width* Cube.size, mapObject.getDimension().height*Cube.size));
+        setPreferredSize(new Dimension(mapObject.getDimension().width* Cube.getSize(), mapObject.getDimension().height*Cube.getSize()));
         setLayout(new FlowLayout());
     }
 
@@ -19,15 +21,16 @@ public class MapPanel extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.setColor(Color.BLUE);
+        drawCubes(g);
 
     }
 
-    private void DrawCubes(Graphics g){
+    private void drawCubes(Graphics g){
         g.setColor(Color.BLUE);
         for(int cubeX = 0; cubeX<mapObject.getDimension().width; cubeX++){
             for(int cubeY = 0; cubeY<mapObject.getDimension().height; cubeY++){
                 Cube currentCube = mapObject.getCube(cubeX, cubeY);
-                g.drawRect(currentCube.g);
+                g.drawRect(currentCube.getBounding().x, currentCube.getBounding().y, currentCube.getBounding().width, currentCube.getBounding().height);
             }
 
         }

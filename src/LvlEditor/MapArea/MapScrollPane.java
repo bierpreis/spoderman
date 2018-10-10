@@ -1,5 +1,8 @@
-package LvlEditor;
+package LvlEditor.MapArea;
 
+import LvlEditor.LvlEditor;
+import LvlEditor.MapArea.MapObject;
+import LvlEditor.MapArea.MapPanel;
 import map.Cube;
 
 import javax.swing.*;
@@ -11,7 +14,7 @@ public class MapScrollPane extends JScrollPane {
 
     public MapScrollPane(MapObject mapObject){
         setLayout(new ScrollPaneLayout());
-        setSize(new Dimension (mapObject.getDimension().width* Cube.size,mapObject.getDimension().height*Cube.size));
+        setSize(new Dimension (mapObject.getDimension().width* Cube.getSize(),mapObject.getDimension().height*Cube.getSize()));
 
 
 

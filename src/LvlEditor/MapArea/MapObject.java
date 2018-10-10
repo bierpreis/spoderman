@@ -1,5 +1,6 @@
-package LvlEditor;
+package LvlEditor.MapArea;
 
+import LvlEditor.LvlEditor;
 import map.Cube;
 
 import java.awt.*;

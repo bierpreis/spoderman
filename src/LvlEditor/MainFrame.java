@@ -1,6 +1,8 @@
 package LvlEditor;
 
-import map.Cube;
+import LvlEditor.MapArea.MapObject;
+import LvlEditor.MapArea.MapScrollPane;
+import LvlEditor.SideMenu.MenuScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
