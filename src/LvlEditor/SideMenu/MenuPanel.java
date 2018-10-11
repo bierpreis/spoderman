@@ -16,7 +16,6 @@ public class MenuPanel extends JPanel {
         testLabel.setVisible(true);
         add(testLabel);
 
-        System.out.println("MenuPanel constructor was called");
         setVisible(true);
     }
 }

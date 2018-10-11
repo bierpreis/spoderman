@@ -15,18 +15,15 @@ public class MainFrame extends Frame {
     private JSplitPane splitPane;
 
     MapObject mapObject;
-    public MainFrame(Dimension requestedDimension){
+
+    public MainFrame(Dimension requestedDimension) {
         setTitle("Spoderman Lvl Editor");
 
         mapObject = new MapObject(requestedDimension);
 
         menuPanel = new MenuScrollPane(requestedDimension.height);
         mapScrollPane = new MapScrollPane(mapObject);
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,menuPanel, mapScrollPane);
-
-        System.out.println("size: " + mapScrollPane.getSize());
-
-        //menuPanel.getViewport().setBackground(Color.RED);
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, menuPanel, mapScrollPane);
 
         splitPane.setOneTouchExpandable(true);
         add(splitPane);
@@ -34,19 +31,16 @@ public class MainFrame extends Frame {
         splitPane.setDividerLocation(menuPanel.getWidth());
 
 
-
-
         addWindowListener(new MainFrameListener());
         setSize(menuPanel.getWidth() + mapScrollPane.getWidth(), menuPanel.getHeight());
         setVisible(true);
-        System.out.println("map pane size: " + mapScrollPane.size());
 
 
     }
 
     class MainFrameListener extends WindowAdapter {
         @Override
-        public void windowClosing(WindowEvent e){
+        public void windowClosing(WindowEvent e) {
             e.getWindow().dispose();
             System.exit(0);
         }
