@@ -1,6 +1,5 @@
 package LvlEditor.SideMenu;
 
-import LvlEditor.LvlEditor;
 
 import javax.swing.*;
 import java.awt.*;

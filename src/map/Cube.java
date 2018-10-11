@@ -1,6 +1,6 @@
 package map;
 
-import java.awt.Rectangle;
+import java.awt.*;
 
 public class Cube implements Readable {
 
@@ -36,5 +36,15 @@ public class Cube implements Readable {
         return size;
     }
 
+    @Override
+    public String toString() {
+        return "Cube: " + bounding;
+    }
 
+    public void draw(Graphics g) {
+        g.setColor(Color.BLUE);
+        if (active)
+            g.fillRect(bounding.x, bounding.y, size, size);
+        else g.drawRect(bounding.x, bounding.y, size, size);
+    }
 }
