@@ -6,6 +6,9 @@ import map.Cube;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 public class MapPanel extends JPanel {
     MapObject mapObject;
@@ -14,6 +17,23 @@ public class MapPanel extends JPanel {
         this.mapObject = mapObject;
         setPreferredSize(new Dimension(mapObject.getDimension().width* Cube.getSize(), mapObject.getDimension().height*Cube.getSize()));
         setLayout(new FlowLayout());
+
+
+
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
+                //jPanel2MousePressed(evt);
+                System.out.println("mouse pressed!!!!!!!!!!!!!");
+            }
+            public void mouseReleased(MouseEvent evt) {
+                System.out.println("mouse released");
+            }
+        });
+        addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent evt) {
+                System.out.println("mouse dragged");
+            }
+        });
     }
 
 
@@ -35,5 +55,7 @@ public class MapPanel extends JPanel {
 
         }
     }
+
+
 
 }
