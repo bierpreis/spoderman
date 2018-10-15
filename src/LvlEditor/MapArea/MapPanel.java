@@ -25,6 +25,7 @@ public class MapPanel extends JPanel {
 
             public void mouseReleased(MouseEvent evt) {
                 System.out.println("mouse released on: " + evt.getPoint());
+
             }
         });
         addMouseMotionListener(new MouseMotionAdapter() {
@@ -32,17 +33,9 @@ public class MapPanel extends JPanel {
                 System.out.println("mouse dragged");
             }
         });
-    }
-
-    private void startActivateCube(Point point) {
-
 
     }
-
-    private void finishActivateCube(Point point) {
-
-    }
-
+    
 
     @Override
     public void paintComponent(Graphics g) {
@@ -61,6 +54,5 @@ public class MapPanel extends JPanel {
 
         }
     }
-
 
 }
