@@ -10,7 +10,6 @@ import java.awt.event.MouseMotionAdapter;
 
 public class MapPanel extends JPanel {
     MapObject mapObject;
-    private Cube currentCube;
 
     public MapPanel(MapObject mapObject) {
         this.mapObject = mapObject;
@@ -21,10 +20,12 @@ public class MapPanel extends JPanel {
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
                 mapObject.setCubeActive(evt.getX(), evt.getY());
+
+
             }
 
             public void mouseReleased(MouseEvent evt) {
-                System.out.println("mouse released on: " + evt.getPoint());
+                repaint();
 
             }
         });
@@ -35,21 +36,21 @@ public class MapPanel extends JPanel {
         });
 
     }
-    
+
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.BLUE);
         drawCubes(g);
 
     }
 
     private void drawCubes(Graphics g) {
-        g.setColor(Color.BLUE);
+        System.out.println("redraw..");
         for (int cubeX = 0; cubeX < mapObject.getDimension().width; cubeX++) {
             for (int cubeY = 0; cubeY < mapObject.getDimension().height; cubeY++) {
                 mapObject.getCube(cubeX, cubeY).draw(g);
+
             }
 
         }
