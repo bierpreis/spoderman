@@ -30,5 +30,4 @@ class InputField extends JTextField implements KeyListener {
 
     }
 
-
 }

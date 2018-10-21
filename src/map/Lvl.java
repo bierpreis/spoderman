@@ -1,15 +1,13 @@
 package map;
 
+import LvlEditor.FileAlreadyExistsWindow;
 import map.enemies.Dolan;
 import map.enemies.AbstractEnemy;
 import map.enemies.Gooby;
 import player.AbstractHat;
 import player.Snepbek;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -154,6 +152,52 @@ public class Lvl {
         for (AbstractEnemy enemy : enemyList) {
             enemy.update(cubeList);
         }
+    }
+
+    public void writeToFile(String filenName) {
+
+        String pathToFile = filenName + ".txt";
+
+        File f = new File(pathToFile);
+        if (f.exists() && !f.isDirectory()) {
+            new FileAlreadyExistsWindow(filenName);
+            return;
+        }
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            fw = new FileWriter(pathToFile);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        bw = new BufferedWriter(fw);
+
+
+        writeGameObjects(bw, cubeList);
+        writeGameObjects(bw, enemyList);
+        writeGameObjects(bw, swegList);
+        writeGameObjects(bw, bigmekList);
+        writeGameObjects(bw, hatList);
+
+        try {
+            bw.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+    private void writeGameObjects(BufferedWriter bw, List gameObjectList) {
+        try {
+            bw.write(gameObjectList.toString());
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+    }
+
+    public static void main(String[] args){
+        Lvl lvl = new Lvl(1);
+        lvl.writeToFile("newFile");
     }
 
 
