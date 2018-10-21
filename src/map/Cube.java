@@ -28,8 +28,8 @@ public class Cube implements Readable {
         return active;
     }
 
-    public void setActive(boolean isActive) {
-        this.active = isActive;
+    public void setActive() {
+        this.active = !this.active;
     }
 
     public static int getSize() {

@@ -38,7 +38,7 @@ public class MapObject {
     public void setCubeActive(int xPixel, int yPixel) {
         int cubeXNumber = xPixel / Cube.getSize();
         int cubeYNumber = yPixel / Cube.getSize();
-        cubeArray[cubeXNumber][cubeYNumber].setActive(true);
+        cubeArray[cubeXNumber][cubeYNumber].setActive();
     }
 
 
