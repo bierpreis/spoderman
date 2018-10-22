@@ -47,4 +47,8 @@ public class Cube implements Readable {
             g.fillRect(bounding.x, bounding.y, size, size);
         else g.drawRect(bounding.x, bounding.y, size, size);
     }
+    @Override
+    public String toText(){
+        return bounding.x + " " + bounding.y;
+    }
 }

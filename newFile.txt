@@ -1,1 +1,33 @@
-[Cube: java.awt.Rectangle[x=0,y=550,width=3700,height=20], Cube: java.awt.Rectangle[x=150,y=510,width=50,height=50], Cube: java.awt.Rectangle[x=250,y=510,width=50,height=50], Cube: java.awt.Rectangle[x=300,y=460,width=50,height=50], Cube: java.awt.Rectangle[x=300,y=460,width=50,height=50], Cube: java.awt.Rectangle[x=350,y=410,width=50,height=50], Cube: java.awt.Rectangle[x=400,y=450,width=50,height=50], Cube: java.awt.Rectangle[x=450,y=450,width=50,height=50], Cube: java.awt.Rectangle[x=-50,y=-100,width=50,height=1500], Cube: java.awt.Rectangle[x=3700,y=-100,width=50,height=1500], Cube: java.awt.Rectangle[x=800,y=650,width=50,height=50], Cube: java.awt.Rectangle[x=1200,y=400,width=600,height=50], Cube: java.awt.Rectangle[x=1000,y=510,width=50,height=50], Cube: java.awt.Rectangle[x=1850,y=250,width=50,height=50], Cube: java.awt.Rectangle[x=2100,y=400,width=500,height=50], Cube: java.awt.Rectangle[x=2700,y=300,width=400,height=50], Cube: java.awt.Rectangle[x=3200,y=200,width=300,height=50], Cube: java.awt.Rectangle[x=3650,y=200,width=50,height=50]][map.enemies.Dolan@4ee285c6, map.enemies.Gooby@621be5d1][map.Sweg@573fd745, map.Sweg@15327b79, map.Sweg@4f2410ac, map.Sweg@722c41f4, map.Sweg@5b80350b, map.Sweg@5d6f64b1][map.Bigmek@32a1bec0][player.Snepbek@22927a81]
+0 550
+150 510
+250 510
+300 460
+300 460
+350 410
+400 450
+450 450
+-50 -100
+3700 -100
+800 650
+1200 400
+1000 510
+1850 250
+2100 400
+2700 300
+3200 200
+3650 200
+END_Cube
+500 500 Dolan
+1500 500 Gooby
+END_AbstractEnemy
+500 500
+550 500
+600 500
+3300 150
+3330 150
+1850 200
+END_Sweg
+3650 150
+END_Bigmek
+400 400 Snepbek
+END_AbstractHat

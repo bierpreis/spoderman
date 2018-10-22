@@ -14,11 +14,11 @@ import java.util.Scanner;
 
 public class Lvl {
 
-    private List<Cube> cubeList;
-    private List<Sweg> swegList;
-    private List<Bigmek> bigmekList;
-    private List<AbstractEnemy> enemyList;
-    private List<AbstractHat> hatList;
+    private List cubeList;
+    private List swegList;
+    private List bigmekList;
+    private List enemyList;
+    private List hatList;
 
     public Lvl(int lvlNumber) {
 
@@ -103,9 +103,9 @@ public class Lvl {
             int x = scanner.nextInt();
             int y = scanner.nextInt();
             String type = scanner.next();
-            if (type.equals("dolan"))
+            if (type.equals("Dolan"))
                 enemyList.add(new Dolan(x, y));
-            if (type.equals("gooby"))
+            if (type.equals("Gooby"))
                 enemyList.add(new Gooby(x, y));
 
         }
@@ -149,8 +149,8 @@ public class Lvl {
     }
 
     public void updateEnemies() {
-        for (AbstractEnemy enemy : enemyList) {
-            enemy.update(cubeList);
+        for (Object enemy : enemyList) {
+            ((AbstractEnemy) enemy).update(cubeList);
         }
     }
 
@@ -164,7 +164,7 @@ public class Lvl {
             return;
         }
         FileWriter fw = null;
-        BufferedWriter bw = null;
+        BufferedWriter bw;
         try {
             fw = new FileWriter(pathToFile);
         } catch (IOException ioe) {
@@ -186,16 +186,31 @@ public class Lvl {
         }
     }
 
-    private void writeGameObjects(BufferedWriter bw, List gameObjectList) {
-        try {
-            bw.write(gameObjectList.toString());
+    private void writeGameObjects(BufferedWriter bw, List<Readable> gameObjectList) {
+        for (Readable readable : gameObjectList)
+            try {
+                bw.write(readable.toText() + "\n");
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+
+        if (!gameObjectList.get(0).getClass().getSuperclass().getSimpleName().contains("Abstract")) {
+            //System.out.println(gameObjectList.get(0).getClass().getSuperclass().getSimpleName());
+            try {
+                bw.write("END_" + gameObjectList.get(0).getClass().getSimpleName() + "\n");
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        } else try {
+            bw.write("END_" + gameObjectList.get(0).getClass().getSuperclass().getSimpleName() + "\n");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
 
+
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Lvl lvl = new Lvl(1);
         lvl.writeToFile("newFile");
     }

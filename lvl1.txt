@@ -17,8 +17,8 @@
 3200 200 300 50
 3650 200 50 50
 END_Cube
-500 500 dolan
-1500 500 gooby
+500 500 Dolan
+1500 500 Gooby
 END_AbstractEnemy
 500 500
 550 500

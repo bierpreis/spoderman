@@ -41,5 +41,9 @@ public class Bigmek extends GameObject {
         look = null;
     }
 
+    public String toText(){
+        return bounding.x + " " + bounding.y;
+    }
+
 
 }

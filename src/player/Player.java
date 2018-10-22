@@ -145,6 +145,11 @@ public class Player extends GameObject implements Movable {
         }
     }
 
+    @Override
+    public String toText(){
+        return bounding.x + " " + bounding.y;
+    }
+
     private void checkBigMek() {
         for (Bigmek bigmek : lvl.getBigmekList()) {
             if (!bigmek.getCollected())

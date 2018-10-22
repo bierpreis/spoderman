@@ -12,12 +12,12 @@ public abstract class GameObject implements Readable {
     protected boolean onTop, onGround, onRightSide, onLeftSide;
 
 
-    int speed = 0;
+    private int speed = 0;
     protected Rectangle bounding;
     public Rectangle topBounding;
     protected Rectangle botBounding;
-    protected Rectangle leftBounding;
-    protected Rectangle rightBounding;
+    private Rectangle leftBounding;
+    private Rectangle rightBounding;
     protected BufferedImage look;
 
 

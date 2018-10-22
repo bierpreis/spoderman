@@ -13,7 +13,7 @@ public class FileAlreadyExistsWindow extends JDialog implements ActionListener {
         setLocation(250, 250);
 
         JPanel panel = new JPanel();
-        JLabel label = new JLabel("The specified File " + existingFileName + " already exists. Choose a new one or delete the old.");
+        JLabel label = new JLabel("<html>The specified File " + existingFileName + " already exists. <br> Choose a new one or delete the old.</html>");
         panel.add(label);
         panel.setLocation(580, 280);
 

@@ -44,5 +44,9 @@ public class Sweg extends GameObject implements Collectable {
 
     }
 
+    public String toText(){
+        return bounding.x + " " + bounding.y;
+    }
+
 
 }

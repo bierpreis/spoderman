@@ -57,5 +57,9 @@ public class AbstractHat extends GameObject implements Collectable {
         bounding.y = playerBounding.y - look.getHeight() + 10;
     }
 
+    public String toText() {
+        return bounding.y + " " + bounding.y + " " + this.getClass().getSimpleName();
+    }
+
 
 }
