@@ -195,7 +195,6 @@ public class Lvl {
             }
 
         if (!gameObjectList.get(0).getClass().getSuperclass().getSimpleName().contains("Abstract")) {
-            //System.out.println(gameObjectList.get(0).getClass().getSuperclass().getSimpleName());
             try {
                 bw.write("END_" + gameObjectList.get(0).getClass().getSimpleName() + "\n");
             } catch (IOException ioe) {

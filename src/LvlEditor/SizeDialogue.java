@@ -50,7 +50,6 @@ public class SizeDialogue extends JDialog implements ActionListener{
                 checkIfValuesOk(widthInput.getText(), heightInput.getText());
             }
         });
-        //buttonPanel.setBackground(Color.BLUE);
 
         errorLabel = new JLabel("Values are not valid!");
 
