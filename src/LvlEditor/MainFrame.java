@@ -1,8 +1,8 @@
 package LvlEditor;
 
-import LvlEditor.MapArea.MapObject;
 import LvlEditor.MapArea.MapScrollPane;
 import LvlEditor.SideMenu.MenuScrollPane;
+import map.Lvl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,15 +14,15 @@ public class MainFrame extends Frame {
     private JScrollPane mapScrollPane;
     private JSplitPane splitPane;
 
-    MapObject mapObject;
+    private Lvl lvl;
 
     public MainFrame(Dimension requestedDimension) {
         setTitle("Spoderman Lvl Editor");
 
-        mapObject = new MapObject(requestedDimension);
+        lvl = new Lvl(requestedDimension);
 
         menuPanel = new MenuScrollPane(requestedDimension.height);
-        mapScrollPane = new MapScrollPane(mapObject);
+        mapScrollPane = new MapScrollPane(lvl);
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, menuPanel, mapScrollPane);
 
         splitPane.setOneTouchExpandable(true);

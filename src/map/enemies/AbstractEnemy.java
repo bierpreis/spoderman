@@ -17,11 +17,11 @@ public abstract class AbstractEnemy extends GameObject implements Readable {
     private boolean movingRight = true;
     private boolean alive = true;
 
-    public void update(List<Cube> cubeList) {
+    public void update(Cube[][] cubeArray) {
 
 
         if (alive) {
-            checkCubeCollisions(cubeList);
+            checkCubeCollisions(cubeArray);
             walk();
         }
     }

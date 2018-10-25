@@ -13,12 +13,6 @@ public class Cube implements Readable {
         bounding = new Rectangle(x * size, y * size, size, size);
     }
 
-    Cube(int x, int y, int width, int height) {
-        bounding = new Rectangle(x, y, width, height);
-
-
-    }
-
 
     public Rectangle getBounding() {
         return bounding;

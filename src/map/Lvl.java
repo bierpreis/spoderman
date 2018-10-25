@@ -7,6 +7,7 @@ import map.enemies.Gooby;
 import player.AbstractHat;
 import player.Snepbek;
 
+import java.awt.*;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,11 +15,13 @@ import java.util.Scanner;
 
 public class Lvl {
 
-    private List cubeList;
+    private Cube[][] cubeArray;
     private List swegList;
     private List bigmekList;
     private List enemyList;
     private List hatList;
+
+    private Dimension dimension;
 
     public Lvl(int lvlNumber) {
 
@@ -40,11 +43,17 @@ public class Lvl {
         List<String> hatStringList = readFile(br, AbstractHat.class);
 
 
-        cubeList = createCubes(cubeStringList);
+        cubeArray = createCubes(cubeStringList);
         enemyList = createEnemies(enemyStringList);
         swegList = createSweg(swegStringList);
         bigmekList = createBigmek(bigmekStringList);
         hatList = createHats(hatStringList);
+
+    }
+
+    public Lvl(Dimension requestedDimension) {
+        this.dimension = requestedDimension;
+        cubeArray = createEmptyCubes(requestedDimension);
 
     }
 
@@ -80,16 +89,21 @@ public class Lvl {
     }
 
 
-    private static List<Cube> createCubes(List<String> cubeStringList) {
+    private Cube[][] createCubes(List<String> cubeStringList) {
+        Scanner scanner = new Scanner(cubeStringList.get(0));
 
-        List<Cube> cubeList = new LinkedList<>();
 
-        for (int i = 0; i < cubeStringList.size(); i++) {
-            Scanner scanner = new Scanner(cubeStringList.get(i));
-            cubeList.add(new Cube(scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt()));
+        cubeArray = new Cube[scanner.nextInt()][scanner.nextInt()];
+
+
+        for (int i = 1; i <= cubeStringList.size(); i++) {
+            scanner = new Scanner(cubeStringList.get(i));
+            int cubeX = scanner.nextInt();
+            int cubeY = scanner.nextInt();
+            cubeArray[cubeX][cubeY].setActive();
         }
 
-        return cubeList;
+        return cubeArray;
     }
 
     public List<AbstractHat> getHatList() {
@@ -122,6 +136,7 @@ public class Lvl {
         return swegList;
     }
 
+
     private static List<Bigmek> createBigmek(List<String> bigmekString) {
         List bigmekList = new LinkedList<Bigmek>();
         for (int i = 0; i < bigmekString.size(); i++) {
@@ -132,8 +147,12 @@ public class Lvl {
     }
 
     // getter
-    public List<Cube> getCubes() {
-        return cubeList;
+    public Cube[][] getCubes() {
+        return cubeArray;
+    }
+
+    public Cube getCube(int cubeX, int cubeY) {
+        return cubeArray[cubeX][cubeY];
     }
 
     public List<Sweg> getSwegList() {
@@ -150,7 +169,7 @@ public class Lvl {
 
     public void updateEnemies() {
         for (Object enemy : enemyList) {
-            ((AbstractEnemy) enemy).update(cubeList);
+            ((AbstractEnemy) enemy).update(cubeArray);
         }
     }
 
@@ -173,7 +192,7 @@ public class Lvl {
         bw = new BufferedWriter(fw);
 
 
-        writeGameObjects(bw, cubeList);
+        writeCubes(bw, cubeArray);
         writeGameObjects(bw, enemyList);
         writeGameObjects(bw, swegList);
         writeGameObjects(bw, bigmekList);
@@ -184,6 +203,33 @@ public class Lvl {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+    }
+
+    private void writeCubes(BufferedWriter bw, Cube[][] cubeArray) {
+        try {
+            bw.write(Integer.toString(cubeArray[0].length));
+            bw.write(Integer.toString(cubeArray.length));
+            bw.write("\n");
+
+
+            for (int cubeY = 0; cubeY < cubeArray.length; cubeY++) {
+                for (int cubeX = 0; cubeX < cubeArray[0].length; cubeX++) {
+                    if (cubeArray[cubeX][cubeY].isActive()) {
+                        bw.write(cubeX);
+                        bw.write(cubeY);
+                        bw.write("\n");
+                    }
+                }
+
+            }
+
+            bw.write("END_CUBES\n");
+
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
     }
 
     private void writeGameObjects(BufferedWriter bw, List<Readable> gameObjectList) {
@@ -209,9 +255,31 @@ public class Lvl {
 
     }
 
+    public Dimension getDimension() {
+        return dimension;
+    }
+
+    private Cube[][] createEmptyCubes(Dimension requestedDimension) {
+        cubeArray = new Cube[requestedDimension.width][requestedDimension.height];
+
+        for (int cubeX = 0; cubeX < requestedDimension.width; cubeX++) {
+            for (int cubeY = 0; cubeY < requestedDimension.height; cubeY++) {
+                cubeArray[cubeX][cubeY] = new Cube(cubeX, cubeY);
+            }
+
+        }
+        return cubeArray;
+    }
+
     public static void main(String[] args) {
         Lvl lvl = new Lvl(1);
         lvl.writeToFile("newFile");
+    }
+
+    public void setCubeActive(int xPixel, int yPixel) {
+        int cubeXNumber = xPixel / Cube.getSize();
+        int cubeYNumber = yPixel / Cube.getSize();
+        cubeArray[cubeXNumber][cubeYNumber].setActive();
     }
 
 

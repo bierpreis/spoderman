@@ -10,7 +10,7 @@ import helpers.*;
 import map.*;
 import map.enemies.AbstractEnemy;
 
-public class Player extends GameObject implements Movable {
+public class Player extends GameObject {
 
 
 

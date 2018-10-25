@@ -49,7 +49,7 @@ class Frame extends JFrame {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         g.translate((int) camera.getX(), (int) camera.getY());
-        drawCubes(g, lvl);
+        drawCubes(g, lvl.getCubes());
 
         drawUnits(g, player, lvl);
         g.translate(-(int) camera.getX(), -(int) camera.getY());
@@ -74,11 +74,14 @@ class Frame extends JFrame {
         g.drawString("FPS: " + fpsCounter.calcFps(), 600, 50);
     }
 
-    private void drawCubes(Graphics g, Lvl lvl) {
+    private void drawCubes(Graphics g, Cube[][] cubeArray) {
         g.setColor(Color.BLUE);
-        for (Cube cube : lvl.getCubes()) {
-            g.fillRect((int) cube.getBounding().getX(), (int) cube.getBounding().getY(), (int) cube.getBounding().getWidth(), (int) cube.getBounding().getHeight());
+        for (int cubeY = 0; cubeY < cubeArray.length; cubeY++) {
+            for (Cube cube : cubeArray[cubeY]) {
+                g.fillRect((int) cube.getBounding().getX(), (int) cube.getBounding().getY(), (int) cube.getBounding().getWidth(), (int) cube.getBounding().getHeight());
+            }
         }
+
     }
 
 
