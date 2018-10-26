@@ -1,6 +1,8 @@
 package LvlEditor.SideMenu;
 
 
+import LvlEditor.MapFileChooser;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,6 +26,7 @@ public class MenuPanel extends JPanel {
         writeFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                new MapFileChooser();
 
             }
         });
