@@ -207,7 +207,7 @@ public class Lvl {
 
     private void writeCubes(BufferedWriter bw, Cube[][] cubeArray) {
         try {
-            bw.write(Integer.toString(cubeArray[0].length));
+            bw.write(Integer.toString(cubeArray[0].length) + " ");
             bw.write(Integer.toString(cubeArray.length));
             bw.write("\n");
 
@@ -215,8 +215,7 @@ public class Lvl {
             for (int cubeY = 0; cubeY < cubeArray.length; cubeY++) {
                 for (int cubeX = 0; cubeX < cubeArray[0].length; cubeX++) {
                     if (cubeArray[cubeX][cubeY].isActive()) {
-                        bw.write(cubeX);
-                        bw.write(cubeY);
+                        bw.write(cubeArray[cubeX ][cubeY].toText());
                         bw.write("\n");
                     }
                 }
@@ -233,6 +232,9 @@ public class Lvl {
     }
 
     private void writeGameObjects(BufferedWriter bw, List<Readable> gameObjectList) {
+        //avoid null pointer exception if there are no objects of one category
+        if(gameObjectList== null)
+            return;
         for (Readable readable : gameObjectList)
             try {
                 bw.write(readable.toText() + "\n");

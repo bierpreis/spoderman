@@ -2,6 +2,7 @@ package LvlEditor.SideMenu;
 
 
 import LvlEditor.MapFileChooser;
+import map.Lvl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,8 @@ public class MenuPanel extends JPanel {
     private JLabel testLabel;
     private JButton writeFileButton;
 
-    public MenuPanel(int minYSize) {
+
+    public MenuPanel(int minYSize, Lvl lvl) {
         setSize(200, minYSize);
 
         setLayout(new FlowLayout());
@@ -26,7 +28,10 @@ public class MenuPanel extends JPanel {
         writeFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new MapFileChooser();
+                MapFileChooser fileChooser = new MapFileChooser();
+                String fileName = fileChooser.getRequestedName();
+                System.out.println(fileName);
+                lvl.writeToFile(fileName);
 
             }
         });

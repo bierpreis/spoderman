@@ -21,7 +21,7 @@ public class MainFrame extends Frame {
 
         lvl = new Lvl(requestedDimension);
 
-        menuPanel = new MenuScrollPane(requestedDimension.height);
+        menuPanel = new MenuScrollPane(requestedDimension.height, lvl);
         mapScrollPane = new MapScrollPane(lvl);
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, menuPanel, mapScrollPane);
 
