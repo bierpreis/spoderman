@@ -51,10 +51,13 @@ public class Lvl {
 
     }
 
-    public Lvl(Dimension requestedDimension) {
+    public Lvl() {
+
+    }
+
+    public void init(Dimension requestedDimension) {
         this.dimension = requestedDimension;
         cubeArray = createEmptyCubes(requestedDimension);
-
     }
 
     private List<AbstractHat> createHats(List<String> hatStringList) {
@@ -215,7 +218,7 @@ public class Lvl {
             for (int cubeY = 0; cubeY < cubeArray.length; cubeY++) {
                 for (int cubeX = 0; cubeX < cubeArray[0].length; cubeX++) {
                     if (cubeArray[cubeX][cubeY].isActive()) {
-                        bw.write(cubeArray[cubeX ][cubeY].toText());
+                        bw.write(cubeArray[cubeX][cubeY].toText());
                         bw.write("\n");
                     }
                 }
@@ -233,7 +236,7 @@ public class Lvl {
 
     private void writeGameObjects(BufferedWriter bw, List<Readable> gameObjectList) {
         //avoid null pointer exception if there are no objects of one category
-        if(gameObjectList== null)
+        if (gameObjectList == null)
             return;
         for (Readable readable : gameObjectList)
             try {

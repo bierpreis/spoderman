@@ -19,7 +19,8 @@ public class MainFrame extends Frame {
     public MainFrame(Dimension requestedDimension) {
         setTitle("Spoderman Lvl Editor");
 
-        lvl = new Lvl(requestedDimension);
+        lvl = new Lvl();
+        lvl.init(requestedDimension);
 
         menuPanel = new MenuScrollPane(requestedDimension.height, lvl);
         mapScrollPane = new MapScrollPane(lvl);
