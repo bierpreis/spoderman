@@ -11,7 +11,7 @@ public class MapFileReader extends JFileChooser {
     public MapFileReader(Lvl lvl) {
         JFileChooser fileChooser = new JFileChooser();
 
-        int rVal = fileChooser.showSaveDialog(MapFileReader.this);
+        int rVal = fileChooser.showOpenDialog(MapFileReader.this);
         if (rVal == JFileChooser.APPROVE_OPTION) {
 
             fileToLoad = fileChooser.getSelectedFile().getName();

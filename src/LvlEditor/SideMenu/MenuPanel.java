@@ -1,6 +1,7 @@
 package LvlEditor.SideMenu;
 
 
+import LvlEditor.MapFileReader;
 import LvlEditor.MapFileSaveFrame;
 import map.Lvl;
 
@@ -57,7 +58,7 @@ public class MenuPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser();
+            JFileChooser fileChooser = new MapFileReader(lvl);
             String fileName = fileChooser.getSelectedFile().getName();
             this.lvl = new Lvl(Integer.parseInt(fileName));
 
