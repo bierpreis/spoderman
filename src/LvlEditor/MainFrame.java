@@ -34,7 +34,7 @@ public class MainFrame extends Frame {
         add(menuPanel, BorderLayout.NORTH);
 
 
-        itemsScrollPane = new ItemsScrollPane(requestedDimension.height, lvl);
+        itemsScrollPane = new ItemsScrollPane(requestedDimension.height);
 
 
         mapScrollPane = new MapScrollPane(lvl);

@@ -1,66 +1,55 @@
 package LvlEditor.SideMenu;
 
 
-import LvlEditor.MapFileReader;
-import LvlEditor.MapFileSaveFrame;
+import map.Cube;
 import map.Lvl;
+import map.Readable;
+import map.Sweg;
+import map.enemies.AbstractEnemy;
+import map.enemies.Dolan;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ItemsPanel extends JPanel {
-    private JLabel testLabel;
-    private JButton writeFileButton;
-    private JButton loadFileButton;
+    private JButton cubeButton;
+    private JButton enemyButton;
+    private JButton swegButton;
 
 
-    public ItemsPanel(int minYSize, Lvl lvl) {
+    public ItemsPanel(int minYSize) {
         setSize(200, minYSize);
 
-        setLayout(new FlowLayout());
+        setLayout(new BoxLayout(this, 1));
 
-        testLabel = new JLabel("testLabel");
-        testLabel.setVisible(true);
-        add(testLabel);
+        cubeButton = new JButton(Cube.class.getSimpleName());
+        enemyButton = new JButton(AbstractEnemy.class.getSimpleName());
+        swegButton = new JButton(Sweg.class.getSimpleName());
 
-        writeFileButton = new JButton("Write to File");
-        writeFileButton.setVisible(true);
-        writeFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                MapFileSaveFrame saveFrame = new MapFileSaveFrame();
+        cubeButton.addActionListener(new ItemListener(new Cube(1, 1)));
+        enemyButton.addActionListener(new ItemListener(new Dolan(1, 1)));
+        swegButton.addActionListener(new ItemListener(new Sweg(1, 1)));
 
-                String fileName = saveFrame.getRequestedName();
-                lvl.writeToFile(fileName);
-            }
-        });
-
-
-        add(writeFileButton);
-
-
-        loadFileButton = new JButton("Load File");
-        loadFileButton.addActionListener(new LoadActionListener(lvl));
-        add(loadFileButton);
+        add(cubeButton);
+        add(enemyButton);
+        add(swegButton);
 
 
         setVisible(true);
     }
 
-    class LoadActionListener implements ActionListener {
-        private Lvl lvl;
+    class ItemListener implements ActionListener {
+        private Readable readable;
 
-        LoadActionListener(Lvl lvl) {
-            this.lvl = lvl;
+        ItemListener(Readable readable) {
+            this.readable = readable;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new MapFileReader(lvl);
-            String fileName = fileChooser.getSelectedFile().getName();
-            this.lvl = new Lvl(Integer.parseInt(fileName));
+            System.out.println(this.readable.getClass().getSimpleName());
+
 
         }
     }

@@ -3,6 +3,7 @@ package LvlEditor.TopMenu;
 
 import LvlEditor.MapFileReader;
 import LvlEditor.MapFileSaveFrame;
+import LvlEditor.SizeDialog;
 import map.Lvl;
 
 import javax.swing.*;
@@ -11,9 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuPanel extends JPanel {
-    private JLabel testLabel;
+
     private JButton writeFileButton;
     private JButton loadFileButton;
+    private JButton newMapButton;
 
 
     public MenuPanel(int minYSize, Lvl lvl) {
@@ -21,9 +23,6 @@ public class MenuPanel extends JPanel {
 
         setLayout(new FlowLayout());
 
-        testLabel = new JLabel("testLabel");
-        testLabel.setVisible(true);
-        add(testLabel);
 
         writeFileButton = new JButton("Write to File");
         writeFileButton.setVisible(true);
@@ -36,6 +35,10 @@ public class MenuPanel extends JPanel {
                 lvl.writeToFile(fileName);
             }
         });
+
+        newMapButton = new JButton("New Map");
+        newMapButton.addActionListener(new NewMapListener());
+        add(newMapButton);
 
 
         add(writeFileButton);
@@ -62,6 +65,15 @@ public class MenuPanel extends JPanel {
             String fileName = fileChooser.getSelectedFile().getName();
             this.lvl = new Lvl(Integer.parseInt(fileName));
 
+        }
+    }
+
+    class NewMapListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SizeDialog sizeDialog = new SizeDialog();
+            sizeDialog.askForDimension();
         }
     }
 

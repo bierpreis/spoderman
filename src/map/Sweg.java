@@ -10,7 +10,7 @@ public class Sweg extends GameObject implements Collectable {
 
     private boolean isCollected = false;
 
-    Sweg(int x, int y) {
+    public Sweg(int x, int y) {
         super(x, y);
 
         try {
