@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FileAlreadyExistsWindow extends JDialog implements ActionListener {
+public class FileAlreadyExistsDialog extends JDialog implements ActionListener {
     private JButton buttonOk;
 
-    public FileAlreadyExistsWindow(String existingFileName){
+    public FileAlreadyExistsDialog(String existingFileName){
         setTitle("Error");
         setSize(300, 150);
         setLocation(250, 250);

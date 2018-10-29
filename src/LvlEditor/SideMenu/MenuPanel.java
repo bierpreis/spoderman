@@ -1,20 +1,18 @@
 package LvlEditor.SideMenu;
 
 
-import LvlEditor.MapFileChooser;
+import LvlEditor.MapFileSaveFrame;
 import map.Lvl;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 
 public class MenuPanel extends JPanel {
     private JLabel testLabel;
     private JButton writeFileButton;
     private JButton loadFileButton;
-
 
 
     public MenuPanel(int minYSize, Lvl lvl) {
@@ -31,10 +29,10 @@ public class MenuPanel extends JPanel {
         writeFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                MapFileChooser fileChooser = new MapFileChooser();
-                String fileName = fileChooser.getRequestedName();
-                lvl.writeToFile(fileName);
+                MapFileSaveFrame saveFrame = new MapFileSaveFrame();
 
+                String fileName = saveFrame.getRequestedName();
+                lvl.writeToFile(fileName);
             }
         });
 

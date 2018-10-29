@@ -1,6 +1,6 @@
 package map;
 
-import LvlEditor.FileAlreadyExistsWindow;
+import LvlEditor.FileAlreadyExistsDialog;
 import map.enemies.Dolan;
 import map.enemies.AbstractEnemy;
 import map.enemies.Gooby;
@@ -182,7 +182,7 @@ public class Lvl {
 
         File f = new File(pathToFile);
         if (f.exists() && !f.isDirectory()) {
-            new FileAlreadyExistsWindow(filenName);
+            new FileAlreadyExistsDialog(filenName);
             return;
         }
         FileWriter fw = null;

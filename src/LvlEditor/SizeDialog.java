@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SizeDialogue extends JDialog implements ActionListener{
+public class SizeDialog extends JDialog implements ActionListener{
     private int requestedWidth = -1;
     private int requestedHeight = -1;
 
@@ -14,7 +14,7 @@ public class SizeDialogue extends JDialog implements ActionListener{
     JTextField widthInput;
     JTextField heightInput;
 
-    public SizeDialogue() {
+    public SizeDialog() {
 
         setSize(270, 200);
         setLocation(300, 300);

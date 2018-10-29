@@ -5,24 +5,28 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 
-public class MapFileChooser extends JFrame {
+public class MapFileSaveFrame extends JFrame {
 
     String requestedName = null;
 
 
-    public MapFileChooser() {
+    public MapFileSaveFrame() {
 
         JFileChooser fileChooser = new JFileChooser();
 
-        int rVal = fileChooser.showSaveDialog(MapFileChooser.this);
+        int rVal = fileChooser.showSaveDialog(MapFileSaveFrame.this);
         if (rVal == JFileChooser.APPROVE_OPTION) {
 
             requestedName = fileChooser.getSelectedFile().getName();
+
+
 
         }
         if (rVal == JFileChooser.CANCEL_OPTION) {
 
         }
+
+
 
     }
 

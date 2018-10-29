@@ -16,7 +16,10 @@ public class MainFrame extends Frame {
 
     private Lvl lvl;
 
-    public MainFrame(Dimension requestedDimension) {
+    public MainFrame() {
+        SizeDialog sizeDialogue = new SizeDialog();
+
+        Dimension requestedDimension = sizeDialogue.askForDimension();
         setTitle("Spoderman Lvl Editor");
 
         lvl = new Lvl();
@@ -45,6 +48,10 @@ public class MainFrame extends Frame {
             e.getWindow().dispose();
             System.exit(0);
         }
+    }
+
+    public static void main(String[] args){
+        new MainFrame();
     }
 
 }
