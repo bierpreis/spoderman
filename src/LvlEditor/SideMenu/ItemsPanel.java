@@ -10,13 +10,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuPanel extends JPanel {
+public class ItemsPanel extends JPanel {
     private JLabel testLabel;
     private JButton writeFileButton;
     private JButton loadFileButton;
 
 
-    public MenuPanel(int minYSize, Lvl lvl) {
+    public ItemsPanel(int minYSize, Lvl lvl) {
         setSize(200, minYSize);
 
         setLayout(new FlowLayout());
