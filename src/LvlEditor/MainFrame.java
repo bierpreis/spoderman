@@ -19,22 +19,19 @@ public class MainFrame extends Frame {
     private Lvl lvl;
 
     public MainFrame() {
-        SizeDialog sizeDialogue = new SizeDialog();
 
-        Dimension requestedDimension = sizeDialogue.askForDimension();
+
         setTitle("Spoderman Lvl Editor");
 
         setLayout(new BorderLayout());
 
-
         lvl = new Lvl();
-        lvl.init(requestedDimension);
 
         menuPanel = new MenuPanel(500, lvl);
         add(menuPanel, BorderLayout.NORTH);
 
-
-        itemsScrollPane = new ItemsScrollPane(requestedDimension.height);
+        //todo
+        itemsScrollPane = new ItemsScrollPane(500);
 
 
         mapScrollPane = new MapScrollPane(lvl);

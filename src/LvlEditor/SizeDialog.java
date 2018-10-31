@@ -1,20 +1,22 @@
 package LvlEditor;
 
+import map.Lvl;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SizeDialog extends JDialog implements ActionListener{
-    private int requestedWidth = -1;
-    private int requestedHeight = -1;
+public class SizeDialog extends JDialog implements ActionListener {
+    private int requestedWidth = 0;
+    private int requestedHeight = 0;
 
     private JLabel errorLabel;
 
     JTextField widthInput;
     JTextField heightInput;
 
-    public SizeDialog() {
+    public SizeDialog(Lvl lvl) {
 
         setSize(270, 200);
         setLocation(300, 300);
@@ -47,7 +49,8 @@ public class SizeDialog extends JDialog implements ActionListener{
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                checkIfValuesOk(widthInput.getText(), heightInput.getText());
+                if (checkIfValuesOk(widthInput.getText(), heightInput.getText())) ;
+                lvl.init(new Dimension(requestedWidth, requestedHeight));
             }
         });
 
@@ -64,35 +67,17 @@ public class SizeDialog extends JDialog implements ActionListener{
 
         getRootPane().setDefaultButton(okButton);
 
-
-    }
-
-
-
-    public Dimension askForDimension() {
         setVisible(true);
-
-        while (requestedWidth == -1 || requestedHeight == -1) {
-
-
-            try {
-                Thread.sleep(100);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-        dispose();
-        return new Dimension(requestedWidth, requestedHeight);
-
     }
+
 
     @Override
-    public void actionPerformed(ActionEvent ae){
+    public void actionPerformed(ActionEvent ae) {
+        //todo this
 
     }
 
-    private void checkIfValuesOk(String widthString, String heightString) {
+    private boolean checkIfValuesOk(String widthString, String heightString) {
         try {
             requestedWidth = Integer.parseInt(widthString);
             requestedHeight = Integer.parseInt(heightString);
@@ -100,12 +85,15 @@ public class SizeDialog extends JDialog implements ActionListener{
             errorLabel.setVisible(true);
         }
 
+        if (requestedHeight > 0 && requestedWidth > 0)
+            return true;
+        else return false;
+
     }
 
     public Dimension getRequestedDimension() {
         return new Dimension(requestedWidth, requestedHeight);
     }
-
 
 
 }

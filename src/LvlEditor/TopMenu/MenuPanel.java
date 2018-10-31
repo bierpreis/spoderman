@@ -37,7 +37,7 @@ public class MenuPanel extends JPanel {
         });
 
         newMapButton = new JButton("New Map");
-        newMapButton.addActionListener(new NewMapListener());
+        newMapButton.addActionListener(new NewMapListener(lvl));
         add(newMapButton);
 
 
@@ -69,11 +69,15 @@ public class MenuPanel extends JPanel {
     }
 
     class NewMapListener implements ActionListener {
+        private Lvl lvl;
+
+        NewMapListener(Lvl lvl) {
+            this.lvl = lvl;
+        }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            SizeDialog sizeDialog = new SizeDialog();
-            sizeDialog.askForDimension();
+            SizeDialog sizeDialog = new SizeDialog(lvl);
         }
     }
 

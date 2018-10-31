@@ -1,6 +1,5 @@
 package LvlEditor.MapArea;
 
-import map.Cube;
 import map.Lvl;
 
 import javax.swing.*;
@@ -14,7 +13,7 @@ public class MapPanel extends JPanel {
 
     public MapPanel(Lvl lvl) {
         this.lvl = lvl;
-        setPreferredSize(new Dimension(lvl.getDimension().width * Cube.getSize(), lvl.getDimension().height * Cube.getSize()));
+        adjustSize(lvl);
         setLayout(new FlowLayout());
 
 
@@ -35,6 +34,13 @@ public class MapPanel extends JPanel {
             }
         });
 
+    }
+
+    private void adjustSize(Lvl lvl) {
+        //todo
+        if (lvl.getDimension() == null)
+            setSize(500, 500);
+        else setSize(lvl.getDimension());
     }
 
 
