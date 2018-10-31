@@ -1,6 +1,7 @@
 package LvlEditor.TopMenu;
 
 
+import LvlEditor.MapArea.MapScrollPane;
 import LvlEditor.MapFileReader;
 import LvlEditor.MapFileSaveFrame;
 import LvlEditor.SizeDialog;
@@ -17,8 +18,11 @@ public class MenuPanel extends JPanel {
     private JButton loadFileButton;
     private JButton newMapButton;
 
+    private MapScrollPane mapScrollPane;
 
-    public MenuPanel(int minYSize, Lvl lvl) {
+
+    public MenuPanel(int minYSize, Lvl lvl, MapScrollPane mapScrollPane) {
+        this.mapScrollPane = mapScrollPane;
         setSize(200, minYSize);
 
         setLayout(new FlowLayout());
@@ -37,7 +41,7 @@ public class MenuPanel extends JPanel {
         });
 
         newMapButton = new JButton("New Map");
-        newMapButton.addActionListener(new NewMapListener(lvl));
+        newMapButton.addActionListener(new NewMapListener(lvl, mapScrollPane));
         add(newMapButton);
 
 
@@ -55,6 +59,7 @@ public class MenuPanel extends JPanel {
     class LoadActionListener implements ActionListener {
         private Lvl lvl;
 
+
         LoadActionListener(Lvl lvl) {
             this.lvl = lvl;
         }
@@ -70,14 +75,16 @@ public class MenuPanel extends JPanel {
 
     class NewMapListener implements ActionListener {
         private Lvl lvl;
+        private MapScrollPane mapScrollPane;
 
-        NewMapListener(Lvl lvl) {
+        NewMapListener(Lvl lvl, MapScrollPane mapScrollPane) {
             this.lvl = lvl;
+            this.mapScrollPane = mapScrollPane;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            SizeDialog sizeDialog = new SizeDialog(lvl);
+            new SizeDialog(lvl, mapScrollPane);
         }
     }
 

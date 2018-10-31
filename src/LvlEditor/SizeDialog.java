@@ -1,5 +1,7 @@
 package LvlEditor;
 
+import LvlEditor.MapArea.MapPanel;
+import LvlEditor.MapArea.MapScrollPane;
 import map.Lvl;
 
 import javax.swing.*;
@@ -16,7 +18,7 @@ public class SizeDialog extends JDialog implements ActionListener {
     JTextField widthInput;
     JTextField heightInput;
 
-    public SizeDialog(Lvl lvl) {
+    public SizeDialog(Lvl lvl, MapScrollPane mapScrollPane) {
 
         setSize(270, 200);
         setLocation(300, 300);
@@ -51,6 +53,8 @@ public class SizeDialog extends JDialog implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 if (checkIfValuesOk(widthInput.getText(), heightInput.getText())) ;
                 lvl.init(new Dimension(requestedWidth, requestedHeight));
+                mapScrollPane.resize();
+                dispose();
             }
         });
 

@@ -12,7 +12,7 @@ import java.awt.event.WindowEvent;
 
 public class MainFrame extends Frame {
     private JScrollPane itemsScrollPane;
-    private JScrollPane mapScrollPane;
+    private MapScrollPane mapScrollPane;
     private JSplitPane splitPane;
     private JPanel menuPanel;
 
@@ -27,14 +27,16 @@ public class MainFrame extends Frame {
 
         lvl = new Lvl();
 
-        menuPanel = new MenuPanel(500, lvl);
+        mapScrollPane = new MapScrollPane(lvl);
+
+        menuPanel = new MenuPanel(500, lvl, mapScrollPane);
         add(menuPanel, BorderLayout.NORTH);
 
         //todo
         itemsScrollPane = new ItemsScrollPane(500);
 
 
-        mapScrollPane = new MapScrollPane(lvl);
+
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, itemsScrollPane, mapScrollPane);
 
         splitPane.setOneTouchExpandable(true);

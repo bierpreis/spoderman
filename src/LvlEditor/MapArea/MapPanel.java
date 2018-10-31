@@ -61,4 +61,8 @@ public class MapPanel extends JPanel {
         }
     }
 
+    public void resize(){
+        resize(lvl.getDimension());
+    }
+
 }
