@@ -17,15 +17,13 @@ public class MapScrollPane extends JScrollPane {
 
         mapPanel = new MapPanel(lvl);
         setViewportView(mapPanel);
-        mapPanel.setVisible(true);
+        //mapPanel.setVisible(true);
         setVisible(true);
+
     }
 
     private void adjustSize(Lvl lvl) {
-        //todo
-        if (lvl.getDimension() == null)
-            setSize(500, 500);
-        else setSize(lvl.getDimension());
+        setPreferredSize(lvl.getDimension());
     }
 
     public void resize(){

@@ -52,7 +52,8 @@ public class Lvl {
     }
 
     public Lvl() {
-        dimension = new Dimension(0,0);
+        dimension = new Dimension(10,10);
+        init(dimension);
     }
 
     public void init(Dimension requestedDimension) {

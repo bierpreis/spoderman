@@ -18,8 +18,7 @@ public class ItemsPanel extends JPanel {
     private JButton swegButton;
 
 
-    public ItemsPanel(int minYSize) {
-        setSize(200, minYSize);
+    public ItemsPanel() {
 
         setLayout(new BoxLayout(this, 1));
 

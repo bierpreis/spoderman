@@ -43,10 +43,12 @@ public class MainFrame extends Frame {
         add(splitPane);
 
         splitPane.setDividerLocation(itemsScrollPane.getWidth());
+        splitPane.resetToPreferredSizes();
 
 
         addWindowListener(new MainFrameListener());
-        setSize(itemsScrollPane.getWidth() + mapScrollPane.getWidth(), itemsScrollPane.getHeight());
+
+        pack();
         setVisible(true);
 
 

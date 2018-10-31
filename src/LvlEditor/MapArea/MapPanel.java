@@ -13,7 +13,7 @@ public class MapPanel extends JPanel {
 
     public MapPanel(Lvl lvl) {
         this.lvl = lvl;
-        adjustSize(lvl);
+        //adjustSize(lvl);
         setLayout(new FlowLayout());
 
 
