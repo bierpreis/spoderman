@@ -1,5 +1,6 @@
 package LvlEditor.MapArea;
 
+import map.Cube;
 import map.Lvl;
 
 import javax.swing.*;
@@ -13,20 +14,16 @@ public class MapPanel extends JPanel {
 
     public MapPanel(Lvl lvl) {
         this.lvl = lvl;
-        //adjustSize(lvl);
         setLayout(new FlowLayout());
 
 
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
                 lvl.setCubeActive(evt.getX(), evt.getY());
-
-
             }
 
             public void mouseReleased(MouseEvent evt) {
                 repaint();
-
             }
         });
         addMouseMotionListener(new MouseMotionAdapter() {
@@ -34,13 +31,8 @@ public class MapPanel extends JPanel {
             }
         });
 
-    }
+        System.out.println(size());
 
-    private void adjustSize(Lvl lvl) {
-        //todo
-        if (lvl.getDimension() == null)
-            setSize(500, 500);
-        else setSize(lvl.getDimension());
     }
 
 
@@ -59,10 +51,11 @@ public class MapPanel extends JPanel {
             }
 
         }
+        setPreferredSize(new Dimension(lvl.getDimension().width * Cube.getSize(), lvl.getDimension().height * Cube.getSize()));
+        System.out.println("size in mapPanel: " + getSize());
     }
 
-    public void resize(){
-        resize(lvl.getDimension());
+    Dimension getActualSize() {
+        return lvl.getDimension();
     }
-
 }

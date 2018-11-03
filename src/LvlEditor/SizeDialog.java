@@ -53,7 +53,6 @@ public class SizeDialog extends JDialog implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 if (checkIfValuesOk(widthInput.getText(), heightInput.getText())) ;
                 lvl.init(new Dimension(requestedWidth, requestedHeight));
-                mapScrollPane.resize();
                 dispose();
             }
         });

@@ -1,9 +1,11 @@
 package LvlEditor.MapArea;
 
 
+import map.Cube;
 import map.Lvl;
 
 import javax.swing.*;
+import java.awt.*;
 
 
 public class MapScrollPane extends JScrollPane {
@@ -19,15 +21,12 @@ public class MapScrollPane extends JScrollPane {
         setViewportView(mapPanel);
         //mapPanel.setVisible(true);
         setVisible(true);
-
+        setPreferredSize(new Dimension(lvl.getDimension().width * Cube.getSize(), lvl.getDimension().height * Cube.getSize()));
+        System.out.println("lvl dimension: " + lvl.getDimension());
     }
 
     private void adjustSize(Lvl lvl) {
         setPreferredSize(lvl.getDimension());
-    }
-
-    public void resize(){
-        mapPanel.resize();
     }
 
 

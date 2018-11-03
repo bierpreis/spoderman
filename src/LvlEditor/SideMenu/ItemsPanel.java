@@ -53,5 +53,21 @@ public class ItemsPanel extends JPanel {
         }
     }
 
+    public int getMinWidth(){
+        int minWidth = 0;
+        if (cubeButton.getWidth()>minWidth)
+            minWidth = cubeButton.getWidth();
+
+        if (enemyButton.getWidth()>minWidth)
+            minWidth = enemyButton.getWidth();
+
+        if (enemyButton.getWidth()>minWidth)
+            minWidth = enemyButton.getWidth();
+
+        return minWidth;
+    }
+
+
+
 
 }
