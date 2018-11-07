@@ -52,7 +52,7 @@ public class Lvl {
     }
 
     public Lvl() {
-        dimension = new Dimension(10,10);
+        dimension = new Dimension(10, 10);
         init(dimension);
     }
 
@@ -285,7 +285,8 @@ public class Lvl {
     public void setCubeActive(int xPixel, int yPixel) {
         int cubeXNumber = xPixel / Cube.getSize();
         int cubeYNumber = yPixel / Cube.getSize();
-        cubeArray[cubeXNumber][cubeYNumber].setActive();
+        if (cubeArray.length > cubeXNumber && cubeArray[0].length > cubeYNumber)
+            cubeArray[cubeXNumber][cubeYNumber].setActive();
     }
 
 
