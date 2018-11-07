@@ -1,5 +1,6 @@
 package player;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -10,8 +11,7 @@ import helpers.*;
 import map.*;
 import map.enemies.AbstractEnemy;
 
-public class Player extends BasicGameObject {
-
+public class Player extends UnitGameObject {
 
 
     private boolean isLookingRight = true;
@@ -66,6 +66,10 @@ public class Player extends BasicGameObject {
         for (AbstractHat hat : lvl.getHatList())
             if (hat.checkIfCollected(bounding))
                 this.hat = hat;
+    }
+
+    public void drawHat(Graphics g) {
+        hat.draw(g);
     }
 
     private void jump() {
@@ -146,7 +150,7 @@ public class Player extends BasicGameObject {
     }
 
     @Override
-    public String toText(){
+    public String toText() {
         return bounding.x + " " + bounding.y;
     }
 

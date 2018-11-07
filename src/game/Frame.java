@@ -113,33 +113,27 @@ class Frame extends JFrame {
     }
 
     private void drawUnits(Graphics g, Player player, Lvl lvl) {
-        newDrawUnits(g, player);
-        newDrawUnits(g, player.getHat());
+
+        player.draw(g);
+        player.drawHat(g);
 
         for (Sweg sweg : lvl.getSwegList()) {
-            newDrawUnits(g, sweg);
+            sweg.draw(g);
         }
 
         for (Bigmek bigmek : lvl.getBigmekList())
-            newDrawUnits(g, bigmek);
+            bigmek.draw(g);
 
 
         for (AbstractEnemy enemy : lvl.getEnemyList()) {
-            newDrawUnits(g, enemy);
+            enemy.draw(g);
         }
         for (AbstractHat hat : lvl.getHatList()) {
-            newDrawUnits(g, hat);
+            hat.draw(g);
         }
 
     }
 
-    private void newDrawUnits(Graphics g, BasicGameObject mapObject) {
 
-        g.drawImage(mapObject.getLook(), mapObject.getX(), mapObject.getY(), null);
-        if (mapObject.getClass().equals(Player.class)) {
-            g.setColor(Color.RED);
-            g.drawRect(mapObject.topBounding.x, mapObject.topBounding.y, mapObject.topBounding.width, mapObject.topBounding.height);
-        }
-    }
 
 }

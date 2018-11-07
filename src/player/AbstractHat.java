@@ -1,14 +1,14 @@
 package player;
 
 import helpers.Collectable;
-import map.BasicGameObject;
+import map.UnitGameObject;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
-public abstract class AbstractHat extends BasicGameObject implements Collectable {
+public abstract class AbstractHat extends UnitGameObject implements Collectable {
 
     protected BufferedImage look;
 

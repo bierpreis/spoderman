@@ -1,6 +1,7 @@
 package map;
 
 import helpers.Config;
+import player.Player;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -63,6 +64,7 @@ public abstract class UnitGameObject extends BasicGameObject {
             bounding.y = bounding.y + Config.gravity;
 
     }
+
     //todo
     protected void move(List<Cube> cubes) {
 
@@ -93,6 +95,16 @@ public abstract class UnitGameObject extends BasicGameObject {
             }
         }
 
+    }
+
+    @Override
+    public void draw(Graphics g) {
+
+        g.drawImage(getLook(), getX(), getY(), null);
+        if (getClass().equals(Player.class)) {
+            g.setColor(Color.RED);
+            g.drawRect(topBounding.x, topBounding.y, topBounding.width, topBounding.height);
+        }
     }
 
 

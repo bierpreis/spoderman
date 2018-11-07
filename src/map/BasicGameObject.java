@@ -3,7 +3,7 @@ package map;
 import helpers.Config;
 
 
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -25,12 +25,15 @@ public abstract class BasicGameObject {
 
     }
 
+
     public BasicGameObject(int x, int y) {
         super();
         bounding = new Rectangle(x, y, 0, 0);
 
     }
 
+
+    public abstract void draw(Graphics g);
 
     protected void createBoundings() {
         bounding = new Rectangle(bounding.x, bounding.y, look.getWidth(), look.getHeight());

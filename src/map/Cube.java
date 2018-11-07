@@ -15,6 +15,7 @@ public class Cube extends BasicGameObject {
     }
 
 
+
     public Rectangle getBounding() {
         return bounding;
     }
@@ -36,6 +37,7 @@ public class Cube extends BasicGameObject {
         return "Cube: " + bounding;
     }
 
+    @Override
     public void draw(Graphics g) {
         g.setColor(Color.BLUE);
         if (active)
