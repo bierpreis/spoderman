@@ -31,8 +31,6 @@ public class MapPanel extends JPanel {
             }
         });
 
-        System.out.println(size());
-
     }
 
 
@@ -52,7 +50,6 @@ public class MapPanel extends JPanel {
 
         }
         setPreferredSize(new Dimension(lvl.getDimension().width * Cube.getSize(), lvl.getDimension().height * Cube.getSize()));
-        System.out.println("size in mapPanel: " + getSize());
     }
 
     Dimension getActualSize() {
