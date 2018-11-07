@@ -8,6 +8,7 @@ import map.enemies.AbstractEnemy;
 import map.enemies.Dolan;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,10 +17,11 @@ public class ItemsPanel extends JPanel {
     private JButton enemyButton;
     private JButton swegButton;
 
+    private ActiveItemPanel activePanel;
+
 
     public ItemsPanel() {
 
-        BasicGameObject activeObject;
 
         setLayout(new BoxLayout(this, 1));
 
@@ -27,13 +29,17 @@ public class ItemsPanel extends JPanel {
         enemyButton = new JButton(AbstractEnemy.class.getSimpleName());
         swegButton = new JButton(Sweg.class.getSimpleName());
 
+        activePanel = new ActiveItemPanel();
+        add(activePanel, BorderLayout.NORTH);
+
+
         cubeButton.addActionListener(new ItemListener(new Cube(1, 1)));
         enemyButton.addActionListener(new ItemListener(new Dolan(1, 1)));
         swegButton.addActionListener(new ItemListener(new Sweg(1, 1)));
 
-        add(cubeButton);
-        add(enemyButton);
-        add(swegButton);
+        add(cubeButton, BorderLayout.CENTER);
+        add(enemyButton, BorderLayout.CENTER);
+        add(swegButton, BorderLayout.CENTER);
 
 
         setVisible(true);
@@ -48,10 +54,17 @@ public class ItemsPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(this.gameObject.getClass().getSimpleName());
+            activePanel.setItem(gameObject);
+            activePanel.repaint();
 
 
         }
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        activePanel.draw(g);
     }
 
     public int getMinWidth() {
