@@ -13,7 +13,6 @@ public abstract class UnitGameObject extends BasicGameObject {
 
 
     private int speed = 0;
-    protected Rectangle bounding;
     public Rectangle topBounding;
     protected Rectangle botBounding;
     private Rectangle leftBounding;
@@ -22,9 +21,7 @@ public abstract class UnitGameObject extends BasicGameObject {
 
 
     public UnitGameObject(int x, int y) {
-
-        bounding = new Rectangle(x, y, 0, 0);
-
+        super(x,y);
     }
 
 

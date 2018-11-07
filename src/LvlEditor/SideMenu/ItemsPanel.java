@@ -23,23 +23,23 @@ public class ItemsPanel extends JPanel {
     public ItemsPanel() {
 
 
-        setLayout(new BoxLayout(this, 1));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         cubeButton = new JButton(Cube.class.getSimpleName());
         enemyButton = new JButton(AbstractEnemy.class.getSimpleName());
         swegButton = new JButton(Sweg.class.getSimpleName());
 
         activePanel = new ActiveItemPanel();
-        add(activePanel, BorderLayout.NORTH);
+        add(activePanel);
 
 
         cubeButton.addActionListener(new ItemListener(new Cube(1, 1)));
         enemyButton.addActionListener(new ItemListener(new Dolan(1, 1)));
         swegButton.addActionListener(new ItemListener(new Sweg(1, 1)));
 
-        add(cubeButton, BorderLayout.CENTER);
-        add(enemyButton, BorderLayout.CENTER);
-        add(swegButton, BorderLayout.CENTER);
+        add(cubeButton);
+        add(enemyButton);
+        add(swegButton);
 
 
         setVisible(true);

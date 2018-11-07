@@ -10,7 +10,7 @@ public class Cube extends BasicGameObject {
     private boolean active = false;
 
     public Cube(int x, int y) {
-        super();
+        super(x,y);
         bounding = new Rectangle(x * size, y * size, size, size);
     }
 
@@ -42,7 +42,6 @@ public class Cube extends BasicGameObject {
         if (active)
             g.fillRect(bounding.x, bounding.y, size, size);
         else g.drawRect(bounding.x, bounding.y, size, size);
-        System.out.println("in cube draw" + bounding);
     }
 
     @Override

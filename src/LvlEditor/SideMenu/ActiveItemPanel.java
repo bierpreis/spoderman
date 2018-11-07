@@ -22,6 +22,5 @@ public class ActiveItemPanel extends JPanel {
     public void draw(Graphics g) {
         activeObject.draw(g);
         repaint();
-        System.out.println("activepanel draw" + activeObject.getClass().getSimpleName());
     }
 }
