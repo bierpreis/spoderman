@@ -19,8 +19,9 @@ public class ActiveItemPanel extends JPanel {
         this.activeObject = gameObject;
     }
 
-    public void draw(Graphics g) {
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         activeObject.draw(g);
-        repaint();
     }
 }

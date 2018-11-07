@@ -31,17 +31,21 @@ public class ItemsPanel extends JPanel {
 
         activePanel = new ActiveItemPanel();
 
+        JPanel itemsListPanel = new JPanel();
+        itemsListPanel.setLayout(new BoxLayout(itemsListPanel, 1));
 
 
-        cubeButton.addActionListener(new ItemListener(new Cube(1, 1)));
-        enemyButton.addActionListener(new ItemListener(new Dolan(1, 1)));
-        swegButton.addActionListener(new ItemListener(new Sweg(1, 1)));
+        cubeButton.addActionListener(new ItemListener(new Cube(0, 0)));
+        enemyButton.addActionListener(new ItemListener(new Dolan(0, 0)));
+        swegButton.addActionListener(new ItemListener(new Sweg(0, 0)));
 
-        add(cubeButton);
-        add(enemyButton);
-        add(swegButton);
+        itemsListPanel.add(cubeButton);
+        itemsListPanel.add(enemyButton);
+        itemsListPanel.add(swegButton);
 
         add(activePanel);
+        add(itemsListPanel);
+
 
 
         setVisible(true);
@@ -64,25 +68,6 @@ public class ItemsPanel extends JPanel {
         }
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        activePanel.draw(g);
-    }
-
-    public int getMinWidth() {
-        int minWidth = 0;
-        if (cubeButton.getWidth() > minWidth)
-            minWidth = cubeButton.getWidth();
-
-        if (enemyButton.getWidth() > minWidth)
-            minWidth = enemyButton.getWidth();
-
-        if (enemyButton.getWidth() > minWidth)
-            minWidth = enemyButton.getWidth();
-
-        return minWidth;
-    }
 
 
 }
