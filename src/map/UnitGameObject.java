@@ -2,12 +2,11 @@ package map;
 
 import helpers.Config;
 
-
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-public abstract class GameObject implements Readable {
+public abstract class UnitGameObject extends BasicGameObject {
 
     protected boolean onTop, onGround, onRightSide, onLeftSide;
 
@@ -21,8 +20,8 @@ public abstract class GameObject implements Readable {
     protected BufferedImage look;
 
 
-    public GameObject(int x, int y) {
-        //TODO remove
+    public UnitGameObject(int x, int y) {
+
         bounding = new Rectangle(x, y, 0, 0);
 
     }
@@ -48,21 +47,8 @@ public abstract class GameObject implements Readable {
     }
 
 
-    public int getX() {
-        return bounding.x;
-    }
-
-
-    public int getY() {
-        return bounding.y;
-    }
-
     public BufferedImage getLook() {
         return look;
-    }
-
-    public Rectangle getBounding() {
-        return bounding;
     }
 
     protected void gravity(Cube[][] cubeArray) {
@@ -77,7 +63,7 @@ public abstract class GameObject implements Readable {
             bounding.y = bounding.y + Config.gravity;
 
     }
-
+    //todo
     protected void move(List<Cube> cubes) {
 
         if (speed != 0) {

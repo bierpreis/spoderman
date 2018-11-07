@@ -76,7 +76,7 @@ public class Lvl {
         return hatList;
     }
 
-    private List<String> readFile(BufferedReader reader, Class<? extends Readable> classType) {
+    private List<String> readFile(BufferedReader reader, Class<? extends BasicGameObject> classType) {
         List<String> listFromFile = new LinkedList<>();
 
         try {
@@ -235,13 +235,13 @@ public class Lvl {
 
     }
 
-    private void writeGameObjects(BufferedWriter bw, List<Readable> gameObjectList) {
+    private void writeGameObjects(BufferedWriter bw, List<BasicGameObject> gameObjectList) {
         //avoid null pointer exception if there are no objects of one category
         if (gameObjectList == null)
             return;
-        for (Readable readable : gameObjectList)
+        for (BasicGameObject gameObject : gameObjectList)
             try {
-                bw.write(readable.toText() + "\n");
+                bw.write(gameObject.toText() + "\n");
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }

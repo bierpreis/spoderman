@@ -133,7 +133,7 @@ class Frame extends JFrame {
 
     }
 
-    private void newDrawUnits(Graphics g, GameObject mapObject) {
+    private void newDrawUnits(Graphics g, BasicGameObject mapObject) {
 
         g.drawImage(mapObject.getLook(), mapObject.getX(), mapObject.getY(), null);
         if (mapObject.getClass().equals(Player.class)) {

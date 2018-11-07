@@ -4,16 +4,15 @@ package map.enemies;
 import java.awt.geom.Rectangle2D;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import helpers.Config;
-import map.GameObject;
+import map.BasicGameObject;
 import map.Cube;
-import map.Readable;
+import map.UnitGameObject;
 
-public abstract class AbstractEnemy extends GameObject implements Readable {
+public abstract class AbstractEnemy extends UnitGameObject {
     private boolean movingRight = true;
     private boolean alive = true;
 

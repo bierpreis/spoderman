@@ -2,8 +2,7 @@ package LvlEditor.SideMenu;
 
 
 import map.Cube;
-import map.Lvl;
-import map.Readable;
+import map.BasicGameObject;
 import map.Sweg;
 import map.enemies.AbstractEnemy;
 import map.enemies.Dolan;
@@ -19,6 +18,8 @@ public class ItemsPanel extends JPanel {
 
 
     public ItemsPanel() {
+
+        BasicGameObject activeObject;
 
         setLayout(new BoxLayout(this, 1));
 
@@ -39,35 +40,33 @@ public class ItemsPanel extends JPanel {
     }
 
     class ItemListener implements ActionListener {
-        private Readable readable;
+        private BasicGameObject gameObject;
 
-        ItemListener(Readable readable) {
-            this.readable = readable;
+        ItemListener(BasicGameObject gameObject) {
+            this.gameObject = gameObject;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(this.readable.getClass().getSimpleName());
+            System.out.println(this.gameObject.getClass().getSimpleName());
 
 
         }
     }
 
-    public int getMinWidth(){
+    public int getMinWidth() {
         int minWidth = 0;
-        if (cubeButton.getWidth()>minWidth)
+        if (cubeButton.getWidth() > minWidth)
             minWidth = cubeButton.getWidth();
 
-        if (enemyButton.getWidth()>minWidth)
+        if (enemyButton.getWidth() > minWidth)
             minWidth = enemyButton.getWidth();
 
-        if (enemyButton.getWidth()>minWidth)
+        if (enemyButton.getWidth() > minWidth)
             minWidth = enemyButton.getWidth();
 
         return minWidth;
     }
-
-
 
 
 }
