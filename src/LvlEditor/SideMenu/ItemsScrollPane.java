@@ -10,7 +10,7 @@ public class ItemsScrollPane extends JScrollPane {
 
     public ItemsScrollPane(int minYSize){
         //44 is a value to correct height
-        setSize(250, minYSize * Cube.getSize()+44);
+        setSize(250, 100);
         ItemsPanel itemsPanel = new ItemsPanel();
         setViewportView(itemsPanel);
 

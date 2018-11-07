@@ -30,7 +30,7 @@ public class ItemsPanel extends JPanel {
         swegButton = new JButton(Sweg.class.getSimpleName());
 
         activePanel = new ActiveItemPanel();
-        add(activePanel);
+
 
 
         cubeButton.addActionListener(new ItemListener(new Cube(1, 1)));
@@ -40,6 +40,8 @@ public class ItemsPanel extends JPanel {
         add(cubeButton);
         add(enemyButton);
         add(swegButton);
+
+        add(activePanel);
 
 
         setVisible(true);
@@ -55,7 +57,8 @@ public class ItemsPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             activePanel.setItem(gameObject);
-            activePanel.repaint();
+
+            repaint();
 
 
         }
