@@ -77,8 +77,7 @@ public class SizeDialog extends JDialog implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        //todo this
-
+        //?? what is this
     }
 
     private boolean checkIfValuesOk(String widthString, String heightString) {

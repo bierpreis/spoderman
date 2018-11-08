@@ -52,8 +52,9 @@ public class Lvl {
     }
 
     public Lvl() {
+        //todo
         swegList = new LinkedList();
-        dimension = new Dimension(10, 10);
+        dimension = new Dimension(30, 10);
         init(dimension);
     }
 

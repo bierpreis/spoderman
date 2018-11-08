@@ -31,7 +31,6 @@ public class MapPanel extends JPanel {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                //todo
             }
 
             public void mouseReleased(MouseEvent evt) {

@@ -46,8 +46,8 @@ public class MainFrame extends Frame {
         splitPane.setDividerLocation(itemsScrollPane.getWidth());
 
         //todo
-        setPreferredSize(new Dimension(800, 500));
 
+        calculatePreferredSize(lvl);
 
         addWindowListener(new MainFrameListener());
 
@@ -55,6 +55,24 @@ public class MainFrame extends Frame {
         setVisible(true);
 
 
+    }
+
+    private void calculatePreferredSize(Lvl lvl) {
+        int minXSize = 600;
+        int minYSize = 400;
+
+        int mapXSize = lvl.getDimension().width * Cube.getSize();
+        int mapYSize = lvl.getDimension().height * Cube.getSize();
+
+        int requestedXSize, requestedYSize;
+        if (mapXSize > minXSize)
+            requestedXSize = mapXSize;
+        else requestedXSize = minXSize;
+
+        if (mapXSize > minXSize)
+            requestedYSize = mapYSize;
+        else requestedYSize = minYSize;
+        setPreferredSize(new Dimension(requestedXSize, requestedYSize));
     }
 
     class MainFrameListener extends WindowAdapter {
