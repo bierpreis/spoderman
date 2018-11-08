@@ -94,6 +94,10 @@ public abstract class UnitGameObject extends BasicGameObject {
 
     }
 
+    public void update(Cube[][] cubeArray) {
+        gravity(cubeArray);
+    }
+
     @Override
     public void draw(Graphics g) {
 

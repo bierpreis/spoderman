@@ -16,8 +16,9 @@ public abstract class AbstractEnemy extends UnitGameObject {
     private boolean movingRight = true;
     private boolean alive = true;
 
-    public void update(Cube[][] cubeArray) {
 
+    public void update(Cube[][] cubeArray) {
+        super.update(cubeArray);
 
         if (alive) {
             checkCubeCollisions(cubeArray);

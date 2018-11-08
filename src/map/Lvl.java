@@ -17,13 +17,13 @@ public class Lvl {
 
     private Cube[][] cubeArray;
 
-    private List gameObjectList;
+    private List<UnitGameObject> gameObjectList;
 
     private Dimension dimension;
 
     public Lvl(int lvlNumber) {
 
-        gameObjectList = new LinkedList();
+        gameObjectList = new LinkedList<>();
         String pathToFile = "lvl" + Integer.toString(lvlNumber) + ".txt";
         FileReader fr;
         try {
@@ -90,7 +90,7 @@ public class Lvl {
 
     public void addGameObject(BasicGameObject newGameObject) {
         if (newGameObject instanceof UnitGameObject)
-            gameObjectList.add(newGameObject);
+            gameObjectList.add((UnitGameObject) newGameObject);
 
 
     }
@@ -160,11 +160,9 @@ public class Lvl {
     }
 
 
-    public void updateGameObjects
-
-    {
-        for (Object gameObject : gameObjectList) {
-            (gameObject.update(cubeArray); //cubes and gameobjects here
+    public void updateGameObjects() {
+        for (UnitGameObject gameObject : gameObjectList) {
+            gameObject.update(cubeArray); //cubes and gameobjects here
         }
     }
 
@@ -223,7 +221,7 @@ public class Lvl {
 
     }
 
-    private void writeGameObjects(BufferedWriter bw, List<BasicGameObject> gameObjectList) {
+    private void writeGameObjects(BufferedWriter bw, List<UnitGameObject> gameObjectList) {
         //avoid null pointer exception if there are no objects of one category
         if (gameObjectList == null)
             return;
