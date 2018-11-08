@@ -3,6 +3,7 @@ package LvlEditor;
 import LvlEditor.MapArea.MapScrollPane;
 import LvlEditor.SideMenu.ItemsScrollPane;
 import LvlEditor.TopMenu.MenuPanel;
+import map.Cube;
 import map.Lvl;
 
 import javax.swing.*;
@@ -20,6 +21,8 @@ public class MainFrame extends Frame {
 
     public MainFrame() {
 
+        GameObjectWrapper objectWrapper = new GameObjectWrapper();
+        objectWrapper.set(new Cube(0, 0));
 
         setTitle("Spoderman Lvl Editor");
 
@@ -27,13 +30,12 @@ public class MainFrame extends Frame {
 
         lvl = new Lvl();
 
-        mapScrollPane = new MapScrollPane(lvl);
+        mapScrollPane = new MapScrollPane(lvl, objectWrapper);
 
         menuPanel = new MenuPanel(200, lvl, mapScrollPane);
         add(menuPanel, BorderLayout.NORTH);
 
-        itemsScrollPane = new ItemsScrollPane();
-
+        itemsScrollPane = new ItemsScrollPane(objectWrapper);
 
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, itemsScrollPane, mapScrollPane);
@@ -44,7 +46,7 @@ public class MainFrame extends Frame {
         splitPane.setDividerLocation(itemsScrollPane.getWidth());
 
         //todo
-        setPreferredSize(new Dimension(800,500));
+        setPreferredSize(new Dimension(800, 500));
 
 
         addWindowListener(new MainFrameListener());

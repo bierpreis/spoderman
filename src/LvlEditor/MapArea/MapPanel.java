@@ -1,5 +1,6 @@
 package LvlEditor.MapArea;
 
+import LvlEditor.GameObjectWrapper;
 import map.Cube;
 import map.Lvl;
 
@@ -12,7 +13,7 @@ import java.awt.event.MouseMotionAdapter;
 public class MapPanel extends JPanel {
     Lvl lvl;
 
-    public MapPanel(Lvl lvl) {
+    public MapPanel(Lvl lvl, GameObjectWrapper objectWrapper) {
         this.lvl = lvl;
         setLayout(new FlowLayout());
 
@@ -20,6 +21,7 @@ public class MapPanel extends JPanel {
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
                 lvl.setCubeActive(evt.getX(), evt.getY());
+                //todo
             }
 
             public void mouseReleased(MouseEvent evt) {

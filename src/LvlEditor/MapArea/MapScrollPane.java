@@ -1,6 +1,7 @@
 package LvlEditor.MapArea;
 
 
+import LvlEditor.GameObjectWrapper;
 import map.Cube;
 import map.Lvl;
 
@@ -12,12 +13,12 @@ public class MapScrollPane extends JScrollPane {
 
     private MapPanel mapPanel;
 
-    public MapScrollPane(Lvl lvl) {
+    public MapScrollPane(Lvl lvl, GameObjectWrapper objectWrapper) {
         setLayout(new ScrollPaneLayout());
         adjustSize(lvl);
 
 
-        mapPanel = new MapPanel(lvl);
+        mapPanel = new MapPanel(lvl, objectWrapper);
         setViewportView(mapPanel);
         //mapPanel.setVisible(true);
         setVisible(true);

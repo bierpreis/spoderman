@@ -1,6 +1,7 @@
 package LvlEditor.SideMenu;
 
 
+import LvlEditor.GameObjectWrapper;
 import map.Cube;
 import map.BasicGameObject;
 import map.Sweg;
@@ -20,7 +21,7 @@ public class ItemsPanel extends JPanel {
     private ActiveItemPanel activePanel;
 
 
-    public ItemsPanel() {
+    public ItemsPanel(GameObjectWrapper objectWrapper) {
 
 
         setLayout(new BorderLayout());
@@ -29,7 +30,7 @@ public class ItemsPanel extends JPanel {
         enemyButton = new JButton(AbstractEnemy.class.getSimpleName());
         swegButton = new JButton(Sweg.class.getSimpleName());
 
-        activePanel = new ActiveItemPanel();
+        activePanel = new ActiveItemPanel(objectWrapper);
 
         JPanel itemsListPanel = new JPanel();
         itemsListPanel.setLayout(new BoxLayout(itemsListPanel, 1));
@@ -45,7 +46,6 @@ public class ItemsPanel extends JPanel {
 
         add(activePanel, BorderLayout.NORTH);
         add(itemsListPanel, BorderLayout.CENTER);
-
 
 
         setVisible(true);
@@ -67,7 +67,6 @@ public class ItemsPanel extends JPanel {
 
         }
     }
-
 
 
 }

@@ -1,31 +1,30 @@
 package LvlEditor.SideMenu;
 
+import LvlEditor.GameObjectWrapper;
 import map.BasicGameObject;
-import map.Cube;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ActiveItemPanel extends JPanel {
-    private BasicGameObject activeObject;
+    private GameObjectWrapper objectWrapper;
 
 
-    public ActiveItemPanel() {
-        activeObject = new Cube(getWidth()/2, 0);
-        setPreferredSize(new Dimension(200,80));
+    public ActiveItemPanel(GameObjectWrapper objectWrapper) {
+        this.objectWrapper = objectWrapper;
+        setPreferredSize(new Dimension(200, 80));
 
 
     }
 
     public void setItem(BasicGameObject gameObject) {
-        this.activeObject = gameObject;
+        objectWrapper.set(gameObject);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        activeObject.draw(g);
-        System.out.println("active size" + getSize());
+        objectWrapper.get().draw(g);
 
     }
 }
