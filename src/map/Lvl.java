@@ -233,9 +233,7 @@ public class Lvl {
     }
 
     private void writeGameObjects(BufferedWriter bw, List<UnitGameObject> gameObjectList) {
-        //avoid null pointer exception if there are no objects of one category
-        if (gameObjectList == null)
-            return;
+
         for (BasicGameObject gameObject : gameObjectList)
             try {
                 bw.write(gameObject.toText() + "\n");
