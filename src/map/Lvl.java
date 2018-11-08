@@ -55,6 +55,7 @@ public class Lvl {
         //todo
         dimension = new Dimension(30, 10);
         init(dimension);
+        gameObjectList = new LinkedList<>();
     }
 
 
