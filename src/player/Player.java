@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.util.List;
 
 
 import game.Sound;
@@ -52,20 +53,18 @@ public class Player extends UnitGameObject {
         hat.updateBounding(bounding);
         respawn();
         if (alive) {
-            checkSweg();
+
             checkCubeCollisions(lvl.getCubes());
-            checkEnemies();
-            checkBigMek();
-            checkHats();
+
+
             move();
             jump();
         }
     }
 
-    private void checkHats() {
-        for (AbstractHat hat : lvl.getHatList())
-            if (hat.checkIfCollected(bounding))
-                this.hat = hat;
+    private void checkHats(AbstractHat hat) {
+        if (hat.checkIfCollected(bounding))
+            this.hat = hat;
     }
 
     public void drawHat(Graphics g) {
@@ -135,18 +134,31 @@ public class Player extends UnitGameObject {
 
     }
 
-
-    private void checkSweg() {
-
-        for (Sweg sweg : lvl.getSwegList()) {
-            if (!sweg.getCollected())
-                if (bounding.intersects(sweg.getBounding())) {
-                    sweg.setCollected();
-                    createMessage("monies");
-                    swegCollected += 1;
-                    Sound.MONEY.play();
-                }
+    private void doUnitInteractions(List<UnitGameObject> gameObjectList) {
+        for (UnitGameObject gameObject : gameObjectList) {
+            if (gameObject instanceof Sweg)
+                checkSweg((Sweg) gameObject);
+            if (gameObject instanceof AbstractEnemy)
+                checkEnemies((AbstractEnemy) gameObject);
+            if (gameObject instanceof AbstractEnemy)
+                checkEnemies((AbstractEnemy) gameObject);
+            if (gameObject instanceof Bigmek)
+                checkBigMek((Bigmek) gameObject);
+            if (gameObject instanceof AbstractHat)
+                checkHats((AbstractHat) gameObject);
         }
+    }
+
+
+    private void checkSweg(Sweg sweg) {
+        if (!sweg.getCollected())
+            if (bounding.intersects(sweg.getBounding())) {
+                sweg.setCollected();
+                createMessage("monies");
+                swegCollected += 1;
+                Sound.MONEY.play();
+
+            }
     }
 
     @Override
@@ -154,51 +166,49 @@ public class Player extends UnitGameObject {
         return bounding.x + " " + bounding.y;
     }
 
-    private void checkBigMek() {
-        for (Bigmek bigmek : lvl.getBigmekList()) {
-            if (!bigmek.getCollected())
-                if (bounding.intersects(bigmek.getBounding())) {
-                    bigmek.setCollected();
-                    Sound.BIGMEK.play();
-                    createMessage("press enter to enter lvl two", true);
+    private void checkBigMek(Bigmek bigmek) {
+        if (!bigmek.getCollected())
+            if (bounding.intersects(bigmek.getBounding())) {
+                bigmek.setCollected();
+                Sound.BIGMEK.play();
+                createMessage("press enter to enter lvl two", true);
 
-                }
-        }
+
+            }
     }
 
 
-    private void checkEnemies() {
+    private void checkEnemies(AbstractEnemy enemy) {
 
-        for (AbstractEnemy enemy : lvl.getEnemyList()) {
 
-            if (enemy.getAlive()) {
+        if (enemy.getAlive()) {
 
-                // gegner töten
-                if (botBounding.intersects(enemy.getTopBounding())) {
-                    enemy.kill();
-                    createMessage("lel rekt");
-                    kills += 1;
-                    Sound.ENEMY_KILLED.play();
-                    return; //this ensures player wont be killed after he killed enemy
+            // gegner töten
+            if (botBounding.intersects(enemy.getTopBounding())) {
+                enemy.kill();
+                createMessage("lel rekt");
+                kills += 1;
+                Sound.ENEMY_KILLED.play();
+                return; //this ensures player wont be killed after he killed enemy
+            }
+
+            // feststellen ob tot
+            if (bounding.intersects(enemy.getBounding())) {
+
+                alive = false;
+                lifes -= 1;
+                if (lifes > 0) {
+                    createMessage("u got rekt 111  press spaec to respawn");
+                    Sound.PLAYER_KILLED.play();
                 }
-
-                // feststellen ob tot
-                if (bounding.intersects(enemy.getBounding())) {
-
-                    alive = false;
-                    lifes -= 1;
-                    if (lifes > 0) {
-                        createMessage("u got rekt 111  press spaec to respawn");
-                        Sound.PLAYER_KILLED.play();
-                    }
-                    if (lifes < 1) {
-                        Sound.PLAYER_KILLED.play();
-                        Sound.PLAYER_DEAD.play();
-                        createMessage("g8 nao dis is mai end");
-                    }
+                if (lifes < 1) {
+                    Sound.PLAYER_KILLED.play();
+                    Sound.PLAYER_DEAD.play();
+                    createMessage("g8 nao dis is mai end");
                 }
             }
         }
+
     }
 
 

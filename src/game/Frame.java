@@ -117,23 +117,11 @@ class Frame extends JFrame {
         player.draw(g);
         player.drawHat(g);
 
-        for (Sweg sweg : lvl.getSwegList()) {
-            sweg.draw(g);
-        }
-
-        for (Bigmek bigmek : lvl.getBigmekList())
-            bigmek.draw(g);
-
-
-        for (AbstractEnemy enemy : lvl.getEnemyList()) {
-            enemy.draw(g);
-        }
-        for (AbstractHat hat : lvl.getHatList()) {
-            hat.draw(g);
+        for (UnitGameObject gameObject : lvl.getGameObjectList()) {
+            gameObject.draw(g);
         }
 
     }
-
 
 
 }

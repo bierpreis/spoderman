@@ -21,6 +21,8 @@ public class Lvl {
 
     private Dimension dimension;
 
+    private boolean isBigmekCollected = false;
+
     public Lvl(int lvlNumber) {
 
         gameObjectList = new LinkedList<>();
@@ -43,6 +45,10 @@ public class Lvl {
 
         cubeArray = createCubes(cubeStringList);
 
+    }
+
+    public boolean isBigmekCollected() {
+        return isBigmekCollected;
     }
 
     public Lvl() {
@@ -70,6 +76,10 @@ public class Lvl {
         }
 
         return hatList;
+    }
+
+    public List<UnitGameObject> getGameObjectList() {
+        return gameObjectList;
     }
 
     private List<String> readFile(BufferedReader reader, Class<? extends BasicGameObject> classType) {
@@ -273,6 +283,11 @@ public class Lvl {
         int cubeYNumber = yPixel / Cube.getSize();
         if (cubeArray.length > cubeXNumber && cubeArray[0].length > cubeYNumber)
             cubeArray[cubeXNumber][cubeYNumber].setActive();
+    }
+
+    //todo is this rly needed or can this stay in player?
+    public void setBigmekCollected() {
+        this.isBigmekCollected = true;
     }
 
 

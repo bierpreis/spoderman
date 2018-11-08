@@ -47,7 +47,7 @@ public class Game {
 
 
             player.update();
-            lvl.updateEnemies();
+            lvl.updateGameObjects();
             frame.draw(player, lvl, camera);
             action = checkNextAction();
             camera.tick(player);
@@ -77,7 +77,7 @@ public class Game {
     private Action checkNextAction() {
 
 
-        if (lvl.getBigmekList().get(0).getCollected())
+        if (lvl.isBigmekCollected())
             if (keyHandler.getEnter())
                 return Action.LVLUP;
 
