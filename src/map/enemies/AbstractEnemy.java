@@ -82,9 +82,7 @@ public abstract class AbstractEnemy extends UnitGameObject {
         bounding.height = look.getHeight();
     }
 
-    public String toText(){
-        return bounding.x + " " + bounding.y + " " + this.getClass().getSimpleName();
-    }
+
 
 
 }

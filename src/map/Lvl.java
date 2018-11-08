@@ -213,8 +213,8 @@ public class Lvl {
             bw.write("\n");
 
 
-            for (int cubeY = 0; cubeY < cubeArray.length; cubeY++) {
-                for (int cubeX = 0; cubeX < cubeArray[0].length; cubeX++) {
+            for (int cubeX = 0; cubeX < cubeArray.length; cubeX++) {
+                for (int cubeY = 0; cubeY < cubeArray[0].length; cubeY++) {
                     if (cubeArray[cubeX][cubeY].isActive()) {
                         bw.write(cubeArray[cubeX][cubeY].toText());
                         bw.write("\n");

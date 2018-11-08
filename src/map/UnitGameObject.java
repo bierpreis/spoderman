@@ -21,7 +21,7 @@ public abstract class UnitGameObject extends BasicGameObject {
 
 
     public UnitGameObject(int x, int y) {
-        super(x,y);
+        super(x, y);
     }
 
 
@@ -106,6 +106,10 @@ public abstract class UnitGameObject extends BasicGameObject {
             g.setColor(Color.RED);
             g.drawRect(topBounding.x, topBounding.y, topBounding.width, topBounding.height);
         }
+    }
+
+    public String toText() {
+        return this.getClass().getSimpleName() + bounding.x + " " + bounding.y;
     }
 
 
