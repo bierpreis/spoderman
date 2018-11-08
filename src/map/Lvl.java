@@ -52,9 +52,11 @@ public class Lvl {
     }
 
     public Lvl() {
+        swegList = new LinkedList();
         dimension = new Dimension(10, 10);
         init(dimension);
     }
+
 
     public void init(Dimension requestedDimension) {
         this.dimension = requestedDimension;
@@ -90,6 +92,16 @@ public class Lvl {
             e.printStackTrace();
         }
         return listFromFile;
+    }
+
+    public void addGameObject(BasicGameObject newGameObject) {
+        if (newGameObject instanceof UnitGameObject) {
+            if (newGameObject instanceof AbstractEnemy)
+                enemyList.add(newGameObject);
+        }
+        if (newGameObject instanceof Sweg)
+            swegList.add(newGameObject);
+
     }
 
 

@@ -1,14 +1,17 @@
 package LvlEditor.MapArea;
 
 import LvlEditor.GameObjectWrapper;
+import map.BasicGameObject;
 import map.Cube;
 import map.Lvl;
+import map.UnitGameObject;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.lang.reflect.Constructor;
 
 public class MapPanel extends JPanel {
     Lvl lvl;
@@ -20,7 +23,14 @@ public class MapPanel extends JPanel {
 
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
-                lvl.setCubeActive(evt.getX(), evt.getY());
+                try {
+                    Constructor[] constructors = objectWrapper.get().getClass().getConstructors();
+                    BasicGameObject newObject = (BasicGameObject) constructors[0].newInstance(evt.getX(), evt.getY());
+
+                    lvl.addGameObject(newObject);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 //todo
             }
 

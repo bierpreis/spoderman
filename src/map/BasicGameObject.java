@@ -5,10 +5,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class BasicGameObject {
-    
+
 
     protected Rectangle bounding;
-    protected BufferedImage look;
 
 
     public BasicGameObject(int x, int y) {
@@ -29,9 +28,6 @@ public abstract class BasicGameObject {
         return bounding.y;
     }
 
-    public BufferedImage getLook() {
-        return look;
-    }
 
     public Rectangle getBounding() {
         return bounding;
