@@ -241,18 +241,6 @@ public class Lvl {
                 ioe.printStackTrace();
             }
 
-        if (!gameObjectList.get(0).getClass().getSuperclass().getSimpleName().contains("Abstract")) {
-            try {
-                bw.write("END_" + gameObjectList.get(0).getClass().getSimpleName() + "\n");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-        } else try {
-            bw.write("END_" + gameObjectList.get(0).getClass().getSuperclass().getSimpleName() + "\n");
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-
 
     }
 

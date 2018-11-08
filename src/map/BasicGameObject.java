@@ -2,7 +2,6 @@ package map;
 
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public abstract class BasicGameObject {
 
@@ -34,7 +33,9 @@ public abstract class BasicGameObject {
     }
 
 
-    abstract public String toText();
+    public String toText() {
+        return this.getClass().getSimpleName() + " " + bounding.x + " " + bounding.y;
+    }
 
 
 }

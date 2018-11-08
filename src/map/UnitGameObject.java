@@ -108,9 +108,4 @@ public abstract class UnitGameObject extends BasicGameObject {
         }
     }
 
-    public String toText() {
-        return this.getClass().getSimpleName() + bounding.x + " " + bounding.y;
-    }
-
-
 }

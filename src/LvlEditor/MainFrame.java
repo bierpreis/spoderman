@@ -45,8 +45,7 @@ public class MainFrame extends Frame {
 
         splitPane.setDividerLocation(itemsScrollPane.getWidth());
 
-        //todo
-
+        //todo (increase?!)
         calculatePreferredSize(lvl);
 
         addWindowListener(new MainFrameListener());

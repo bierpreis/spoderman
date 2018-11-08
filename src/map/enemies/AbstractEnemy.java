@@ -83,6 +83,4 @@ public abstract class AbstractEnemy extends UnitGameObject {
     }
 
 
-
-
 }

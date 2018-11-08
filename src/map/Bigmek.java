@@ -39,10 +39,4 @@ public class Bigmek extends UnitGameObject {
         collected = true;
         look = null;
     }
-
-    public String toText(){
-        return bounding.x + " " + bounding.y;
-    }
-
-
 }
