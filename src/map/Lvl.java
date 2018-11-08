@@ -16,16 +16,14 @@ import java.util.Scanner;
 public class Lvl {
 
     private Cube[][] cubeArray;
-    private List swegList;
-    private List bigmekList;
-    private List enemyList;
-    private List hatList;
+
+    private List gameObjectList;
 
     private Dimension dimension;
 
     public Lvl(int lvlNumber) {
 
-
+        gameObjectList = new LinkedList();
         String pathToFile = "lvl" + Integer.toString(lvlNumber) + ".txt";
         FileReader fr;
         try {
@@ -44,16 +42,11 @@ public class Lvl {
 
 
         cubeArray = createCubes(cubeStringList);
-        enemyList = createEnemies(enemyStringList);
-        swegList = createSweg(swegStringList);
-        bigmekList = createBigmek(bigmekStringList);
-        hatList = createHats(hatStringList);
 
     }
 
     public Lvl() {
         //todo
-        swegList = new LinkedList();
         dimension = new Dimension(30, 10);
         init(dimension);
     }
@@ -96,12 +89,9 @@ public class Lvl {
     }
 
     public void addGameObject(BasicGameObject newGameObject) {
-        if (newGameObject instanceof UnitGameObject) {
-            if (newGameObject instanceof AbstractEnemy)
-                enemyList.add(newGameObject);
-        }
-        if (newGameObject instanceof Sweg)
-            swegList.add(newGameObject);
+        if (newGameObject instanceof UnitGameObject)
+            gameObjectList.add(newGameObject);
+
 
     }
 
@@ -123,9 +113,6 @@ public class Lvl {
         return cubeArray;
     }
 
-    public List<AbstractHat> getHatList() {
-        return hatList;
-    }
 
     private static List<AbstractEnemy> createEnemies(List<String> enemyString) {
         List<AbstractEnemy> enemyList = new LinkedList<>();
@@ -172,21 +159,12 @@ public class Lvl {
         return cubeArray[cubeX][cubeY];
     }
 
-    public List<Sweg> getSwegList() {
-        return swegList;
-    }
 
-    public List<Bigmek> getBigmekList() {
-        return bigmekList;
-    }
+    public void updateGameObjects
 
-    public List<AbstractEnemy> getEnemyList() {
-        return enemyList;
-    }
-
-    public void updateEnemies() {
-        for (Object enemy : enemyList) {
-            ((AbstractEnemy) enemy).update(cubeArray);
+    {
+        for (Object gameObject : gameObjectList) {
+            (gameObject.update(cubeArray); //cubes and gameobjects here
         }
     }
 
@@ -210,10 +188,7 @@ public class Lvl {
 
 
         writeCubes(bw, cubeArray);
-        writeGameObjects(bw, enemyList);
-        writeGameObjects(bw, swegList);
-        writeGameObjects(bw, bigmekList);
-        writeGameObjects(bw, hatList);
+        writeGameObjects(bw, gameObjectList);
 
         try {
             bw.close();
