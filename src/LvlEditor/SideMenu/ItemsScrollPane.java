@@ -1,30 +1,22 @@
 package LvlEditor.SideMenu;
 
-import map.Cube;
 
 import javax.swing.*;
 import java.awt.*;
 
+
 public class ItemsScrollPane extends JScrollPane {
 
 
-    public ItemsScrollPane(int minYSize){
-        //44 is a value to correct height
-        setSize(250, 100);
+    public ItemsScrollPane() {
+
+        setSize(new Dimension(250,500));
         ItemsPanel itemsPanel = new ItemsPanel();
         setViewportView(itemsPanel);
 
-
+        System.out.println("size;" + getSize());
 
     }
-
-
-
-
-
-
-
-
 
 
 }

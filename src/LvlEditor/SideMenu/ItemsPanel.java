@@ -23,7 +23,7 @@ public class ItemsPanel extends JPanel {
     public ItemsPanel() {
 
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BorderLayout());
 
         cubeButton = new JButton(Cube.class.getSimpleName());
         enemyButton = new JButton(AbstractEnemy.class.getSimpleName());
@@ -43,8 +43,8 @@ public class ItemsPanel extends JPanel {
         itemsListPanel.add(enemyButton);
         itemsListPanel.add(swegButton);
 
-        add(activePanel);
-        add(itemsListPanel);
+        add(activePanel, BorderLayout.NORTH);
+        add(itemsListPanel, BorderLayout.CENTER);
 
 
 

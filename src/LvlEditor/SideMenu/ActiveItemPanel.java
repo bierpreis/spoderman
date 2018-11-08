@@ -11,7 +11,9 @@ public class ActiveItemPanel extends JPanel {
 
 
     public ActiveItemPanel() {
-        activeObject = new Cube(0, 0);
+        activeObject = new Cube(getWidth()/2, 0);
+        setPreferredSize(new Dimension(200,80));
+
 
     }
 
@@ -23,5 +25,7 @@ public class ActiveItemPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         activeObject.draw(g);
+        System.out.println("active size" + getSize());
+
     }
 }

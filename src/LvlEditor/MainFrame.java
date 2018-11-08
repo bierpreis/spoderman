@@ -29,11 +29,10 @@ public class MainFrame extends Frame {
 
         mapScrollPane = new MapScrollPane(lvl);
 
-        menuPanel = new MenuPanel(500, lvl, mapScrollPane);
+        menuPanel = new MenuPanel(200, lvl, mapScrollPane);
         add(menuPanel, BorderLayout.NORTH);
 
-        //todo
-        itemsScrollPane = new ItemsScrollPane(500);
+        itemsScrollPane = new ItemsScrollPane();
 
 
 
@@ -45,7 +44,7 @@ public class MainFrame extends Frame {
         splitPane.setDividerLocation(itemsScrollPane.getWidth());
 
         //todo
-        setPreferredSize(new Dimension(800,800));
+        setPreferredSize(new Dimension(800,500));
 
 
         addWindowListener(new MainFrameListener());
