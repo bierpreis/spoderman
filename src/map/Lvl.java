@@ -61,7 +61,7 @@ public class Lvl {
 
     public void init(Dimension requestedDimension) {
         this.dimension = requestedDimension;
-        cubeArray = createEmptyCubes(requestedDimension);
+        cubeArray = createEmptyCubes(requestedDimension.width, requestedDimension.height);
     }
 
     private List<AbstractHat> createHats(List<String> hatStringList) {
@@ -141,6 +141,7 @@ public class Lvl {
         return enemyList;
     }
 
+
     private static List<Sweg> createSweg(List<String> swegString) {
         List<Sweg> swegList = new LinkedList<>();
         for (int i = 0; i < swegString.size(); i++) {
@@ -208,12 +209,11 @@ public class Lvl {
 
     private void writeCubes(BufferedWriter bw, Cube[][] cubeArray) {
         try {
-            bw.write("CUBE_ARRAY ");
             bw.write(Integer.toString(cubeArray.length) + " ");
             bw.write(Integer.toString(cubeArray[0].length));
             bw.write("\n");
 
-
+            bw.write("BEGIN_CUBES\n");
             for (int cubeX = 0; cubeX < cubeArray.length; cubeX++) {
                 for (int cubeY = 0; cubeY < cubeArray[0].length; cubeY++) {
                     if (cubeArray[cubeX][cubeY].isActive()) {
@@ -234,14 +234,15 @@ public class Lvl {
     }
 
     private void writeGameObjects(BufferedWriter bw, List<UnitGameObject> gameObjectList) {
-
-        for (BasicGameObject gameObject : gameObjectList)
-            try {
+        try {
+            bw.write("BEGIN_UNITS\n");
+            for (BasicGameObject gameObject : gameObjectList)
                 bw.write(gameObject.toText() + "\n");
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
 
+            bw.write("END_UNITS");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
 
     }
 
@@ -249,12 +250,13 @@ public class Lvl {
         return dimension;
     }
 
-    private Cube[][] createEmptyCubes(Dimension requestedDimension) {
-        cubeArray = new Cube[requestedDimension.width][requestedDimension.height];
+    private Cube[][] createEmptyCubes(int cubeX, int cubeY) {
+        cubeArray = new Cube[cubeX][cubeY];
 
-        for (int cubeX = 0; cubeX < requestedDimension.width; cubeX++) {
-            for (int cubeY = 0; cubeY < requestedDimension.height; cubeY++) {
-                cubeArray[cubeX][cubeY] = new Cube(cubeX, cubeY);
+        for (int currentX = 0; currentX < cubeX; currentX++) {
+            for (int currentY = 0; currentY < cubeY; currentY++) {
+                cubeArray[currentX][currentY] = new Cube(currentX, currentY);
+                System.out.println(cubeArray[currentX][currentY]);
             }
 
         }
@@ -262,8 +264,12 @@ public class Lvl {
     }
 
     public static void main(String[] args) {
-        Lvl lvl = new Lvl(1);
-        lvl.writeToFile("newFile");
+        Lvl lvl = new Lvl();
+        try {
+            lvl.readLvlFile("a.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setCubeActive(int xPixel, int yPixel) {
@@ -276,6 +282,38 @@ public class Lvl {
     //todo is this rly needed or can this stay in player?
     public void setBigmekCollected() {
         this.isBigmekCollected = true;
+    }
+
+    void readLvlFile(String fileName) throws Exception {
+
+        FileReader fr;
+        try {
+            fr = new FileReader(fileName);
+        } catch (FileNotFoundException e) {
+            System.out.println("could not find lvl file");
+            return;
+        }
+
+        BufferedReader br = new BufferedReader(fr);
+        Scanner scanner = new Scanner(br.readLine());
+
+        System.out.println("map size: " + cubeArray.length + "x" + cubeArray[0].length);
+
+        if (br.readLine().equals("BEGIN_CUBES"))
+            System.out.println("begin reading cubes");
+
+        while (!br.readLine().equals("END_CUBES")) {
+            scanner = new Scanner(br.readLine());
+            int cubeX = scanner.nextInt() / Cube.getSize();
+            int cubeY = scanner.nextInt() / Cube.getSize();
+            cubeArray[cubeX][cubeY].setActive();
+        }
+        System.out.println("end reading cubes");
+
+        if (br.readLine().equals("BEGIN_UNITS"))
+            System.out.println("begin reading unit objects");
+
+
     }
 
 
