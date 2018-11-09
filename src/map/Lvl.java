@@ -208,8 +208,9 @@ public class Lvl {
 
     private void writeCubes(BufferedWriter bw, Cube[][] cubeArray) {
         try {
-            bw.write(Integer.toString(cubeArray[0].length) + " ");
-            bw.write(Integer.toString(cubeArray.length));
+            bw.write("CUBE_ARRAY ");
+            bw.write(Integer.toString(cubeArray.length) + " ");
+            bw.write(Integer.toString(cubeArray[0].length));
             bw.write("\n");
 
 

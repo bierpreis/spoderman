@@ -161,11 +161,6 @@ public class Player extends UnitGameObject {
             }
     }
 
-    @Override
-    public String toText() {
-        return bounding.x + " " + bounding.y;
-    }
-
     private void checkBigMek(Bigmek bigmek) {
         if (!bigmek.getCollected())
             if (bounding.intersects(bigmek.getBounding())) {
