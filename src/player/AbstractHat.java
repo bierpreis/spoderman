@@ -12,13 +12,6 @@ public abstract class AbstractHat extends UnitGameObject implements Collectable 
 
     protected BufferedImage look;
 
-    public AbstractHat(Rectangle playerBounding) {
-        super(playerBounding.x, playerBounding.y);
-        createLook();
-        bounding.width = look.getWidth();
-        bounding.height = look.getHeight();
-
-    }
 
     public AbstractHat(int x, int y) {
 

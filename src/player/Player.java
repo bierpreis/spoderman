@@ -46,7 +46,7 @@ public class Player extends UnitGameObject {
 
         createMessage("nao i need to find teh bikmek");
         jump = new Jump();
-        hat = new NoHat(bounding);
+        hat = new NoHat(bounding.x, bounding.y);
     }
 
     public void update() {

@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class NoHat extends AbstractHat {
 
-    public NoHat(Rectangle playerBounding) {
-        super(playerBounding);
+    public NoHat(int x, int y) {
+        super(x, y);
 
     }
 

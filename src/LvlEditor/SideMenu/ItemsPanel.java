@@ -2,11 +2,13 @@ package LvlEditor.SideMenu;
 
 
 import LvlEditor.GameObjectWrapper;
+import map.Bigmek;
 import map.Cube;
 import map.BasicGameObject;
 import map.Sweg;
-import map.enemies.AbstractEnemy;
 import map.enemies.Dolan;
+import map.enemies.Gooby;
+import player.Snepbek;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,8 +17,15 @@ import java.awt.event.ActionListener;
 
 public class ItemsPanel extends JPanel {
     private JButton cubeButton;
-    private JButton enemyButton;
+
     private JButton swegButton;
+
+    private JButton dolanButton;
+    private JButton goobyButton;
+
+    private JButton snepbekButton;
+
+    private JButton bigmekButton;
 
     private ActiveItemPanel activePanel;
 
@@ -27,8 +36,16 @@ public class ItemsPanel extends JPanel {
         setLayout(new BorderLayout());
 
         cubeButton = new JButton(Cube.class.getSimpleName());
-        enemyButton = new JButton(AbstractEnemy.class.getSimpleName());
+
         swegButton = new JButton(Sweg.class.getSimpleName());
+
+        dolanButton = new JButton(Dolan.class.getSimpleName());
+        goobyButton = new JButton(Gooby.class.getSimpleName());
+
+        snepbekButton = new JButton(Snepbek.class.getSimpleName());
+
+        bigmekButton = new JButton(Bigmek.class.getSimpleName());
+
 
         activePanel = new ActiveItemPanel(objectWrapper);
 
@@ -37,12 +54,24 @@ public class ItemsPanel extends JPanel {
 
 
         cubeButton.addActionListener(new ItemListener(new Cube(0, 0)));
-        enemyButton.addActionListener(new ItemListener(new Dolan(0, 0)));
+
         swegButton.addActionListener(new ItemListener(new Sweg(0, 0)));
 
+        dolanButton.addActionListener(new ItemListener(new Dolan(0, 0)));
+        goobyButton.addActionListener(new ItemListener(new Gooby(0, 0)));
+
+        snepbekButton.addActionListener(new ItemListener(new Snepbek(0, 0)));
+
+        bigmekButton.addActionListener(new ItemListener(new Snepbek(0, 0)));
+
         itemsListPanel.add(cubeButton);
-        itemsListPanel.add(enemyButton);
+
         itemsListPanel.add(swegButton);
+
+        itemsListPanel.add(dolanButton);
+        itemsListPanel.add(goobyButton);
+
+        itemsListPanel.add(snepbekButton);
 
         add(activePanel, BorderLayout.NORTH);
         add(itemsListPanel, BorderLayout.CENTER);
