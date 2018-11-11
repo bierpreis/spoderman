@@ -50,11 +50,24 @@ public class Lvl {
         return isBigmekCollected;
     }
 
-    public Lvl() {
-        //todo
+    public Lvl(String pathToFile) {
         dimension = new Dimension(30, 10);
         init(dimension);
         gameObjectList = new LinkedList<>();
+
+        try {
+            readLvlFile(pathToFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Lvl() {
+        dimension = new Dimension(30, 10);
+        init(dimension);
+        gameObjectList = new LinkedList<>();
+
+
     }
 
 
@@ -255,7 +268,6 @@ public class Lvl {
         for (int currentX = 0; currentX < cubeX; currentX++) {
             for (int currentY = 0; currentY < cubeY; currentY++) {
                 cubeArray[currentX][currentY] = new Cube(currentX, currentY);
-                System.out.println(cubeArray[currentX][currentY]);
             }
 
         }
@@ -263,7 +275,7 @@ public class Lvl {
     }
 
     public static void main(String[] args) {
-        Lvl lvl = new Lvl();
+        Lvl lvl = new Lvl("rrr.txt");
         try {
             lvl.readLvlFile("rrr.txt");
         } catch (Exception e) {
@@ -331,10 +343,8 @@ public class Lvl {
         while (objectMatcher.find()) {
             objectString = objectMatcher.group(0);
         }
-        System.out.println("objectString: " + objectString);
 
         String numberString = originalString.replaceAll("^[A-Z]{1}[a-z]+", "");
-        System.out.println("numberstring: " + numberString);
 
         Scanner scanner = new Scanner(numberString);
 
@@ -348,7 +358,6 @@ public class Lvl {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(gameObject.toText());
         return gameObject;
     }
 

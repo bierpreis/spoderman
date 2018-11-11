@@ -66,12 +66,14 @@ public class MenuPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             JFileChooser fileChooser = new MapFileReader(lvl);
-            //here nullpointer if dialogue closed
-            if (fileChooser.getSelectedFile() != null) {
-                String fileName = fileChooser.getSelectedFile().getName();
-                this.lvl = new Lvl(Integer.parseInt(fileName));
+            if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                lvl = new Lvl(fileChooser.getSelectedFile().getName());
+                mapScrollPane.repaint();
+                System.out.println("repainted");
             }
+
 
         }
     }
