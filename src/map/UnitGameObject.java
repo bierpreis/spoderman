@@ -53,8 +53,9 @@ public abstract class UnitGameObject extends BasicGameObject {
         boolean falling = true;
         for (int cubeX = 0; cubeX < cubeArray.length; cubeX++) {
             for (int cubeY = 0; cubeY < cubeArray[0].length; cubeY++)
-                if (botBounding.intersects(cubeArray[cubeX][cubeY].getBounding()))
-                    falling = false;
+                if (cubeArray[cubeX][cubeY].isActive())
+                    if (botBounding.intersects(cubeArray[cubeX][cubeY].getBounding()))
+                        falling = false;
         }
 
         if (falling)
