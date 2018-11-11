@@ -102,10 +102,6 @@ public abstract class UnitGameObject extends BasicGameObject {
     public void draw(Graphics g) {
 
         g.drawImage(getLook(), getX(), getY(), null);
-        if (getClass().equals(Player.class)) {
-            g.setColor(Color.RED);
-            g.drawRect(topBounding.x, topBounding.y, topBounding.width, topBounding.height);
-        }
     }
 
 }
