@@ -80,16 +80,18 @@ public abstract class UnitGameObject extends BasicGameObject {
         onLeftSide = false;
         onGround = false;
         onTop = false;
-        for (int cubeY = 0; cubeY < cubeArray.length; cubeY++) {
-            for (Cube cube : cubeArray[cubeY]) {
-                if (leftBounding.intersects(cube.getBounding()))
-                    onLeftSide = true;
-                if (rightBounding.intersects(cube.getBounding()))
-                    onRightSide = true;
-                if (topBounding.intersects(cube.getBounding()))
-                    onTop = true;
-                if (botBounding.intersects(cube.getBounding()))
-                    onGround = true;
+        for (int cubeX = 0; cubeX < cubeArray.length; cubeX++) {
+            for (Cube cube : cubeArray[cubeX]) {
+                if (cube.isActive()) {
+                    if (leftBounding.intersects(cube.getBounding()))
+                        onLeftSide = true;
+                    if (rightBounding.intersects(cube.getBounding()))
+                        onRightSide = true;
+                    if (topBounding.intersects(cube.getBounding()))
+                        onTop = true;
+                    if (botBounding.intersects(cube.getBounding()))
+                        onGround = true;
+                }
             }
         }
 
