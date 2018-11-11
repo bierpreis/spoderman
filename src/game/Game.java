@@ -20,7 +20,8 @@ public class Game {
     private Camera camera;
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
-        lvl = new Lvl(lvlNumber);
+        lvl = new Lvl();
+        lvl.createFromFile("lvl1");
         player = new Player(lvl, keyHandler);
         frame = new Frame(keyHandler);
         this.keyHandler = keyHandler;
