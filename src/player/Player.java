@@ -35,7 +35,7 @@ public class Player extends UnitGameObject {
     private Jump jump;
 
     public Player(Lvl lvl, KeyHandler keyHandler) {
-        super(300, 300);
+        super(000, 30);
         createLook();
 
         createBoundings();

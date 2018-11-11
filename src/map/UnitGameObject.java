@@ -51,11 +51,11 @@ public abstract class UnitGameObject extends BasicGameObject {
 
     protected void gravity(Cube[][] cubeArray) {
         boolean falling = true;
-        for (int cubeY = 0; cubeY < cubeArray.length; cubeY++)
-            for (Cube cube : cubeArray[cubeY]) {
-                if (botBounding.intersects(cube.getBounding()))
+        for (int cubeX = 0; cubeX < cubeArray.length; cubeX++) {
+            for (int cubeY = 0; cubeY < cubeArray[0].length; cubeY++)
+                if (botBounding.intersects(cubeArray[cubeX][cubeY].getBounding()))
                     falling = false;
-            }
+        }
 
         if (falling)
             bounding.y = bounding.y + Config.gravity;
