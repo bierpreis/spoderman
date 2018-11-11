@@ -1,9 +1,6 @@
 package map;
 
 import LvlEditor.FileAlreadyExistsDialog;
-import map.enemies.Dolan;
-import map.enemies.AbstractEnemy;
-import map.enemies.Gooby;
 import player.AbstractHat;
 import player.Snepbek;
 
@@ -12,6 +9,8 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Lvl {
 
@@ -266,7 +265,7 @@ public class Lvl {
     public static void main(String[] args) {
         Lvl lvl = new Lvl();
         try {
-            lvl.readLvlFile("a.txt");
+            lvl.readLvlFile("rrr.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -313,7 +312,47 @@ public class Lvl {
         if (br.readLine().equals("BEGIN_UNITS"))
             System.out.println("begin reading unit objects");
 
+        String nextLine = br.readLine();
+        while (!nextLine.equals("END_UNITS")) {
+            createObjectFromString(nextLine);
+            nextLine = br.readLine();
 
+        }
+
+
+    }
+
+    private UnitGameObject createObjectFromString(String originalString) {
+
+
+        Pattern objectPattern = Pattern.compile("^[A-Z]{1}[a-z]+");
+        Matcher objectMatcher = objectPattern.matcher(originalString);
+
+        String objectString = "";
+
+
+        while (objectMatcher.find()) {
+            objectString = objectMatcher.group(0);
+        }
+        System.out.println("objectString: " + objectString);
+
+        String numberString = originalString.replaceAll("^[A-Z]{1}[a-z]+", "");
+        System.out.println("numberstring: " + numberString);
+
+        Scanner scanner = new Scanner(numberString);
+
+        int x = scanner.nextInt();
+        int y = scanner.nextInt();
+
+        UnitGameObject gameObject = null;
+
+        try {
+            gameObject = (UnitGameObject) Class.forName("map." + objectString).getConstructors()[0].newInstance(x, y);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(gameObject.toText());
+        return gameObject;
     }
 
 

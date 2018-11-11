@@ -10,7 +10,7 @@ import java.util.List;
 import game.Sound;
 import helpers.*;
 import map.*;
-import map.enemies.AbstractEnemy;
+import map.AbstractEnemy;
 
 public class Player extends UnitGameObject {
 

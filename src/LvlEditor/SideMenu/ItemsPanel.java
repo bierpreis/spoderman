@@ -6,8 +6,8 @@ import map.Bigmek;
 import map.Cube;
 import map.BasicGameObject;
 import map.Sweg;
-import map.enemies.Dolan;
-import map.enemies.Gooby;
+import map.Dolan;
+import map.Gooby;
 import player.Snepbek;
 
 import javax.swing.*;

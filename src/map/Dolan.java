@@ -1,4 +1,4 @@
-package map.enemies;
+package map;
 
 
 public class Dolan extends AbstractEnemy {

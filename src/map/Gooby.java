@@ -1,4 +1,4 @@
-package map.enemies;
+package map;
 
 public class Gooby extends AbstractEnemy {
     public Gooby(int x, int y) {

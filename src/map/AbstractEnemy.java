@@ -1,4 +1,4 @@
-package map.enemies;
+package map;
 
 
 import java.awt.geom.Rectangle2D;

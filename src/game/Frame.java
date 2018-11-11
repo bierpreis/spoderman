@@ -10,8 +10,6 @@ import helpers.Config;
 import helpers.KeyHandler;
 import helpers.Message;
 import map.*;
-import map.enemies.AbstractEnemy;
-import player.AbstractHat;
 import player.Camera;
 import player.Player;
 
