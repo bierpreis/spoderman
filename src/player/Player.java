@@ -50,6 +50,7 @@ public class Player extends UnitGameObject {
     }
 
     public void update() {
+        super.update(lvl.getCubes());
         hat.updateBounding(bounding);
         respawn();
         if (alive) {

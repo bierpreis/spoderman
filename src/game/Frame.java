@@ -74,9 +74,10 @@ class Frame extends JFrame {
 
     private void drawCubes(Graphics g, Cube[][] cubeArray) {
         g.setColor(Color.BLUE);
-        for (int cubeY = 0; cubeY < cubeArray.length; cubeY++) {
-            for (Cube cube : cubeArray[cubeY]) {
-                g.fillRect((int) cube.getBounding().getX(), (int) cube.getBounding().getY(), (int) cube.getBounding().getWidth(), (int) cube.getBounding().getHeight());
+        for (int cubeX = 0; cubeX < cubeArray.length; cubeX++) {
+            for (int cubeY = 0; cubeY < cubeArray[0].length; cubeY++) {
+                cubeArray[cubeX][cubeY].draw(g);
+                System.out.println(cubeArray[cubeX][cubeY]);
             }
         }
 
