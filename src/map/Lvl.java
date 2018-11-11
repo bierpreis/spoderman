@@ -286,15 +286,6 @@ public class Lvl {
         return cubeArray;
     }
 
-    public static void main(String[] args) {
-        Lvl lvl = new Lvl("rrr.txt");
-        try {
-            lvl.readLvlFile("rrr.txt");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void setCubeActive(int xPixel, int yPixel) {
         int cubeXNumber = xPixel / Cube.getSize();
         int cubeYNumber = yPixel / Cube.getSize();
@@ -309,12 +300,11 @@ public class Lvl {
 
     void readLvlFile(String fileName) throws Exception {
 
-        FileReader fr;
+        FileReader fr = null;
         try {
             fr = new FileReader(fileName);
         } catch (FileNotFoundException e) {
-            System.out.println("could not find lvl file");
-            return;
+            e.printStackTrace();
         }
 
         BufferedReader br = new BufferedReader(fr);

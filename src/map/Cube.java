@@ -24,7 +24,7 @@ public class Cube extends BasicGameObject {
     }
 
     public void setActive() {
-        this.active = !this.active;
+        active = true;
     }
 
     public static int getSize() {

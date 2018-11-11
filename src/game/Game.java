@@ -21,7 +21,7 @@ public class Game {
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
         lvl = new Lvl();
-        lvl.createFromFile("lvl1");
+        lvl.createFromFile("lvl1.txt");
         player = new Player(lvl, keyHandler);
         frame = new Frame(keyHandler);
         this.keyHandler = keyHandler;
