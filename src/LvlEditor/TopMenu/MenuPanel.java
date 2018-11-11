@@ -2,7 +2,6 @@ package LvlEditor.TopMenu;
 
 
 import LvlEditor.MapArea.MapScrollPane;
-import LvlEditor.MapFileReader;
 import LvlEditor.MapFileSaveFrame;
 import LvlEditor.SizeDialog;
 import map.Lvl;
@@ -67,7 +66,7 @@ public class MenuPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            JFileChooser fileChooser = new MapFileReader();
+            JFileChooser fileChooser = new JFileChooser();
             if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 lvl.createFromFile(fileChooser.getSelectedFile().getName());
                 mapScrollPane.repaint();
