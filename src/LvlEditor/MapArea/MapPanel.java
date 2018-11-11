@@ -4,6 +4,7 @@ import LvlEditor.GameObjectWrapper;
 import map.BasicGameObject;
 import map.Cube;
 import map.Lvl;
+import map.UnitGameObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,8 +53,15 @@ public class MapPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawCubes(g);
+        drawUnits(g);
         System.out.println("mappanel.paintComponent()");
 
+    }
+
+    private void drawUnits(Graphics g) {
+        for (UnitGameObject gameObject : lvl.getGameObjectList()) {
+            gameObject.draw(g);
+        }
     }
 
     private void drawCubes(Graphics g) {
