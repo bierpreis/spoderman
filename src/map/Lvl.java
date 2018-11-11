@@ -312,18 +312,19 @@ public class Lvl {
 
         if (br.readLine().equals("BEGIN_CUBES"))
             System.out.println("begin reading cubes");
-
-        while (!br.readLine().equals("END_CUBES")) {
-            scanner = new Scanner(br.readLine());
+        String nextLine = br.readLine();
+        while (!nextLine.equals("END_CUBES")) {
+            scanner = new Scanner(nextLine);
             int cubeX = scanner.nextInt() / Cube.getSize();
             int cubeY = scanner.nextInt() / Cube.getSize();
             cubeArray[cubeX][cubeY].setActive();
+            nextLine = br.readLine();
         }
 
         if (br.readLine().equals("BEGIN_UNITS"))
             System.out.println("begin reading unit objects");
 
-        String nextLine = br.readLine();
+        nextLine = br.readLine();
         while (!nextLine.equals("END_UNITS")) {
             gameObjectList.add(createObjectFromString(nextLine));
             nextLine = br.readLine();
