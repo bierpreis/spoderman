@@ -296,8 +296,6 @@ public class Lvl {
         BufferedReader br = new BufferedReader(fr);
         Scanner scanner = new Scanner(br.readLine());
 
-        System.out.println("map size: " + cubeArray.length + "x" + cubeArray[0].length);
-
         if (br.readLine().equals("BEGIN_CUBES"))
             System.out.println("begin reading cubes");
 
@@ -307,18 +305,17 @@ public class Lvl {
             int cubeY = scanner.nextInt() / Cube.getSize();
             cubeArray[cubeX][cubeY].setActive();
         }
-        System.out.println("end reading cubes");
 
         if (br.readLine().equals("BEGIN_UNITS"))
             System.out.println("begin reading unit objects");
 
         String nextLine = br.readLine();
         while (!nextLine.equals("END_UNITS")) {
-            createObjectFromString(nextLine);
+            gameObjectList.add(createObjectFromString(nextLine));
             nextLine = br.readLine();
 
         }
-
+        System.out.println("finished reading map");
 
     }
 
