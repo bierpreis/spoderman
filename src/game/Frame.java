@@ -76,7 +76,8 @@ class Frame extends JFrame {
         g.setColor(Color.BLUE);
         for (int cubeX = 0; cubeX < cubeArray.length; cubeX++) {
             for (int cubeY = 0; cubeY < cubeArray[0].length; cubeY++) {
-                cubeArray[cubeX][cubeY].draw(g);
+                if (cubeArray[cubeX][cubeY].isActive())
+                    cubeArray[cubeX][cubeY].draw(g);
             }
         }
 
