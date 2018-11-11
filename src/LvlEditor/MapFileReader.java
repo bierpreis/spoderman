@@ -8,7 +8,7 @@ public class MapFileReader extends JFileChooser {
 
     String fileToLoad;
 
-    public MapFileReader(Lvl lvl) {
+    public MapFileReader() {
         JFileChooser fileChooser = new JFileChooser();
 
         int rVal = fileChooser.showOpenDialog(MapFileReader.this);

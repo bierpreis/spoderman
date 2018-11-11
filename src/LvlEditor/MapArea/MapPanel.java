@@ -52,6 +52,7 @@ public class MapPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawCubes(g);
+        System.out.println("mappanel.paintComponent()");
 
     }
 

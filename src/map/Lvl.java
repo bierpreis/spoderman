@@ -62,6 +62,18 @@ public class Lvl {
         }
     }
 
+    public void createFromFile(String pathToFile) {
+        dimension = new Dimension(30, 10);
+        init(dimension);
+        gameObjectList = new LinkedList<>();
+
+        try {
+            readLvlFile(pathToFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public Lvl() {
         dimension = new Dimension(30, 10);
         init(dimension);
