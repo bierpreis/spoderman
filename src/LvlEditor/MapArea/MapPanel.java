@@ -43,6 +43,9 @@ public class MapPanel extends JPanel {
         });
         addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent evt) {
+                if (objectWrapper.get() instanceof Cube) {
+                    lvl.setCubeActive(evt.getX(), evt.getY());
+                }
             }
         });
 
@@ -54,8 +57,6 @@ public class MapPanel extends JPanel {
         super.paintComponent(g);
         drawCubes(g);
         drawUnits(g);
-        System.out.println("mappanel.paintComponent()");
-
     }
 
     private void drawUnits(Graphics g) {
