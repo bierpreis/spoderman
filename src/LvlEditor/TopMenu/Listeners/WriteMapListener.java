@@ -6,11 +6,11 @@ import map.Lvl;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WriteActionListener implements ActionListener {
+public class WriteMapListener implements ActionListener {
     private Lvl lvl;
 
 
-    public WriteActionListener(Lvl lvl) {
+    public WriteMapListener(Lvl lvl) {
         this.lvl = lvl;
 
     }

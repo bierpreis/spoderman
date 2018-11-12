@@ -6,12 +6,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoadActionListener implements ActionListener {
+public class LoadMapListener implements ActionListener {
     private Lvl lvl;
     JScrollPane mapScrollPane;
 
 
-    public LoadActionListener(Lvl lvl, JScrollPane mapScrollPane) {
+    public LoadMapListener(Lvl lvl, JScrollPane mapScrollPane) {
         this.lvl = lvl;
         this.mapScrollPane = mapScrollPane;
     }

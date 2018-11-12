@@ -2,23 +2,21 @@ package LvlEditor.TopMenu;
 
 
 import LvlEditor.MapArea.MapScrollPane;
-import LvlEditor.MapFileSaveFrame;
-import LvlEditor.SizeDialog;
-import LvlEditor.TopMenu.Listeners.LoadActionListener;
+import LvlEditor.TopMenu.Listeners.ChangeSizeListener;
+import LvlEditor.TopMenu.Listeners.LoadMapListener;
 import LvlEditor.TopMenu.Listeners.NewMapListener;
-import LvlEditor.TopMenu.Listeners.WriteActionListener;
+import LvlEditor.TopMenu.Listeners.WriteMapListener;
 import map.Lvl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MenuPanel extends JPanel {
 
     private JButton writeFileButton;
     private JButton loadFileButton;
     private JButton newMapButton;
+    private JButton changeSizeButton;
 
     private MapScrollPane mapScrollPane;
 
@@ -31,11 +29,15 @@ public class MenuPanel extends JPanel {
 
 
         writeFileButton = new JButton("Write to File");
-        writeFileButton.setVisible(true);
-        writeFileButton.addActionListener(new WriteActionListener(lvl));
+        writeFileButton.addActionListener(new WriteMapListener(lvl));
 
         newMapButton = new JButton("New Map");
         newMapButton.addActionListener(new NewMapListener(lvl, mapScrollPane));
+
+        changeSizeButton = new JButton("Change Map Size");
+        changeSizeButton.addActionListener(new ChangeSizeListener(lvl, mapScrollPane));
+
+
         add(newMapButton);
 
 
@@ -43,8 +45,10 @@ public class MenuPanel extends JPanel {
 
 
         loadFileButton = new JButton("Load File");
-        loadFileButton.addActionListener(new LoadActionListener(lvl, mapScrollPane));
+        loadFileButton.addActionListener(new LoadMapListener(lvl, mapScrollPane));
         add(loadFileButton);
+
+        add(changeSizeButton);
 
 
         setVisible(true);
