@@ -1,6 +1,6 @@
-package LvlEditor;
+package LvlEditor.TopMenu;
 
-import LvlEditor.MapArea.MapPanel;
+import LvlEditor.AbstractSizeDialog;
 import LvlEditor.MapArea.MapScrollPane;
 import map.Lvl;
 
@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SizeDialog extends JDialog implements ActionListener {
+public class ChangeSizeDialog extends AbstractSizeDialog {
     private int requestedWidth = 0;
     private int requestedHeight = 0;
 
@@ -18,11 +18,12 @@ public class SizeDialog extends JDialog implements ActionListener {
     JTextField widthInput;
     JTextField heightInput;
 
-    public SizeDialog(Lvl lvl, MapScrollPane mapScrollPane) {
+    public ChangeSizeDialog(Lvl lvl, MapScrollPane mapScrollPane) {
+        super(lvl, mapScrollPane);
 
         setSize(270, 200);
         setLocation(300, 300);
-        setTitle("Choose Size");
+        setTitle("Choose new Size");
 
         setLayout(new FlowLayout());
 
@@ -52,7 +53,7 @@ public class SizeDialog extends JDialog implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (checkIfValuesOk(widthInput.getText(), heightInput.getText())) ;
-                lvl.init(new Dimension(requestedWidth, requestedHeight));
+                lvl.changeSize(requestedWidth, requestedHeight);
                 mapScrollPane.repaint();
                 dispose();
             }

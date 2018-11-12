@@ -1,7 +1,7 @@
 package LvlEditor.TopMenu.Listeners;
 
 import LvlEditor.MapArea.MapScrollPane;
-import LvlEditor.SizeDialog;
+import LvlEditor.CreateSizeDialog;
 import map.Lvl;
 
 import java.awt.event.ActionEvent;
@@ -18,6 +18,6 @@ public class NewMapListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new SizeDialog(lvl, mapScrollPane);
+        new CreateSizeDialog(lvl, mapScrollPane);
     }
 }

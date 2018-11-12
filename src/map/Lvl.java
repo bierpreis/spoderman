@@ -6,6 +6,7 @@ import player.Snepbek;
 
 import java.awt.*;
 import java.io.*;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -362,6 +363,18 @@ public class Lvl {
             e.printStackTrace();
         }
         return gameObject;
+    }
+
+    public void changeSize(int requestedXSize, int requestedYSize) {
+        Cube[][] newCubeArray = new Cube[requestedXSize][requestedYSize];
+
+        for (int oldCubeX = 0; oldCubeX < cubeArray.length; oldCubeX++)
+            for (int oldCubeY = 0; oldCubeY < cubeArray[0].length; oldCubeY++) {
+                newCubeArray[oldCubeX][oldCubeY] = cubeArray[oldCubeX][oldCubeY];
+
+            }
+        cubeArray = newCubeArray;
+
     }
 
 

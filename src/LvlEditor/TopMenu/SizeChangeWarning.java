@@ -1,6 +1,8 @@
 package LvlEditor.TopMenu;
 
-import jdk.nashorn.internal.scripts.JD;
+import LvlEditor.MapArea.MapScrollPane;
+import LvlEditor.CreateSizeDialog;
+import map.Lvl;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -8,9 +10,13 @@ import java.awt.event.ActionListener;
 
 public class SizeChangeWarning extends JDialog implements ActionListener {
 
-    JButton okButton;
+    private JButton okButton;
+    private MapScrollPane mapScrollPane;
+    private Lvl lvl;
 
-    public SizeChangeWarning() {
+    public SizeChangeWarning(Lvl lvl, MapScrollPane mapScrollPane) {
+        this.mapScrollPane = mapScrollPane;
+        this.lvl = lvl;
         setTitle("Warning");
         setSize(800, 120);
         setLocation(250, 250);
@@ -37,6 +43,8 @@ public class SizeChangeWarning extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == okButton) {
             dispose();
+            ChangeSizeDialog sizeDialog = new ChangeSizeDialog(lvl, mapScrollPane);
+
         }
 
     }
