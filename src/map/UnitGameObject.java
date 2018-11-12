@@ -63,18 +63,6 @@ public abstract class UnitGameObject extends BasicGameObject {
 
     }
 
-    //todo
-    protected void move(List<Cube> cubes) {
-
-        if (speed != 0) {
-            bounding.x = bounding.x + speed;
-            for (Cube cube : cubes) {
-                if (leftBounding.intersects(cube.getBounding()) || rightBounding.intersects(cube.getBounding()))
-                    speed = speed * -1;
-            }
-        }
-    }
-
     protected void checkCubeCollisions(Cube[][] cubeArray) {
         onRightSide = false;
         onLeftSide = false;
