@@ -56,7 +56,7 @@ public class Player extends UnitGameObject {
         if (alive) {
 
             checkCubeCollisions(lvl.getCubes());
-
+            doUnitInteractions(lvl.getGameObjectList());
 
             move();
             jump();
