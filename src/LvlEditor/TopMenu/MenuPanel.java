@@ -4,6 +4,9 @@ package LvlEditor.TopMenu;
 import LvlEditor.MapArea.MapScrollPane;
 import LvlEditor.MapFileSaveFrame;
 import LvlEditor.SizeDialog;
+import LvlEditor.TopMenu.Listeners.LoadActionListener;
+import LvlEditor.TopMenu.Listeners.NewMapListener;
+import LvlEditor.TopMenu.Listeners.WriteActionListener;
 import map.Lvl;
 
 import javax.swing.*;
@@ -29,15 +32,7 @@ public class MenuPanel extends JPanel {
 
         writeFileButton = new JButton("Write to File");
         writeFileButton.setVisible(true);
-        writeFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                MapFileSaveFrame saveFrame = new MapFileSaveFrame();
-
-                String fileName = saveFrame.getRequestedName();
-                lvl.writeToFile(fileName);
-            }
-        });
+        writeFileButton.addActionListener(new WriteActionListener(lvl));
 
         newMapButton = new JButton("New Map");
         newMapButton.addActionListener(new NewMapListener(lvl, mapScrollPane));
@@ -48,45 +43,11 @@ public class MenuPanel extends JPanel {
 
 
         loadFileButton = new JButton("Load File");
-        loadFileButton.addActionListener(new LoadActionListener(lvl));
+        loadFileButton.addActionListener(new LoadActionListener(lvl, mapScrollPane));
         add(loadFileButton);
 
 
         setVisible(true);
-    }
-
-    class LoadActionListener implements ActionListener {
-        private Lvl lvl;
-
-
-        LoadActionListener(Lvl lvl) {
-            this.lvl = lvl;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            JFileChooser fileChooser = new JFileChooser();
-            if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                lvl.createFromFile(fileChooser.getSelectedFile().getName());
-                mapScrollPane.repaint();
-            }
-        }
-    }
-
-    class NewMapListener implements ActionListener {
-        private Lvl lvl;
-        private MapScrollPane mapScrollPane;
-
-        NewMapListener(Lvl lvl, MapScrollPane mapScrollPane) {
-            this.lvl = lvl;
-            this.mapScrollPane = mapScrollPane;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            new SizeDialog(lvl, mapScrollPane);
-        }
     }
 
 
