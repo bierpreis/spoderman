@@ -15,7 +15,7 @@ public class MapScrollPane extends JScrollPane {
 
     public MapScrollPane(Lvl lvl, GameObjectWrapper objectWrapper) {
         setLayout(new ScrollPaneLayout());
-        adjustSize(lvl);
+        adjustSize();
 
 
         mapPanel = new MapPanel(lvl, objectWrapper);
@@ -25,8 +25,8 @@ public class MapScrollPane extends JScrollPane {
         //setPreferredSize(new Dimension(lvl.getDimension().width * Cube.getSize(), lvl.getDimension().height * Cube.getSize()));
     }
 
-    private void adjustSize(Lvl lvl) {
-        //setPreferredSize(lvl.getDimension()); todo
+    private void adjustSize() {
+        revalidate();
     }
 
 

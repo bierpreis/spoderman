@@ -74,5 +74,6 @@ public class MapPanel extends JPanel {
 
         }
         setPreferredSize(new Dimension(lvl.getCubes().length * Cube.getSize(), lvl.getCubes()[0].length * Cube.getSize()));
+        revalidate();
     }
 }

@@ -93,9 +93,5 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
 
     }
 
-    public Dimension getRequestedDimension() {
-        return new Dimension(requestedWidth, requestedHeight);
-    }
-
 
 }
