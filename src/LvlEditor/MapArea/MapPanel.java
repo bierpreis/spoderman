@@ -57,8 +57,6 @@ public class MapPanel extends JPanel {
         super.paintComponent(g);
         drawCubes(g);
         drawUnits(g);
-        System.out.println("repaint in map panel");
-        System.out.println("cube array length: " + lvl.getCubes().length);
     }
 
     private void drawUnits(Graphics g) {
@@ -75,6 +73,6 @@ public class MapPanel extends JPanel {
             }
 
         }
-        setPreferredSize(new Dimension(lvl.getDimension().width * Cube.getSize(), lvl.getDimension().height * Cube.getSize()));
+        setPreferredSize(new Dimension(lvl.getCubes().length * Cube.getSize(), lvl.getCubes()[0].length * Cube.getSize()));
     }
 }

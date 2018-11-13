@@ -22,11 +22,11 @@ public class MapScrollPane extends JScrollPane {
         setViewportView(mapPanel);
         //mapPanel.setVisible(true);
         setVisible(true);
-        setPreferredSize(new Dimension(lvl.getDimension().width * Cube.getSize(), lvl.getDimension().height * Cube.getSize()));
+        //setPreferredSize(new Dimension(lvl.getDimension().width * Cube.getSize(), lvl.getDimension().height * Cube.getSize()));
     }
 
     private void adjustSize(Lvl lvl) {
-        setPreferredSize(lvl.getDimension());
+        //setPreferredSize(lvl.getDimension()); todo
     }
 
 

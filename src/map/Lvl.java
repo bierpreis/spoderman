@@ -18,8 +18,6 @@ public class Lvl {
 
     private List<UnitGameObject> gameObjectList;
 
-    private Dimension dimension;
-
     private boolean isBigmekCollected = false;
 
     public Lvl(int lvlNumber) {
@@ -51,8 +49,7 @@ public class Lvl {
     }
 
     public Lvl(String pathToFile) {
-        dimension = new Dimension(30, 10);
-        init(dimension);
+        init(10, 10);
         gameObjectList = new LinkedList<>();
 
         try {
@@ -63,8 +60,8 @@ public class Lvl {
     }
 
     public void createFromFile(String pathToFile) {
-        dimension = new Dimension(30, 10);
-        init(dimension);
+        //todo inti do size in file
+        init(10, 10);
         gameObjectList = new LinkedList<>();
 
         try {
@@ -75,17 +72,15 @@ public class Lvl {
     }
 
     public Lvl() {
-        dimension = new Dimension(30, 10);
-        init(dimension);
+        init(10, 10);
         gameObjectList = new LinkedList<>();
 
 
     }
 
 
-    public void init(Dimension requestedDimension) {
-        this.dimension = requestedDimension;
-        cubeArray = createEmptyCubes(requestedDimension.width, requestedDimension.height);
+    public void init(int requestedXSize, int requestedYSize) {
+        cubeArray = createEmptyCubes(requestedXSize, requestedYSize);
     }
 
     private List<AbstractHat> createHats(List<String> hatStringList) {
@@ -270,10 +265,6 @@ public class Lvl {
 
     }
 
-    public Dimension getDimension() {
-        return dimension;
-    }
-
     private Cube[][] createEmptyCubes(int cubeX, int cubeY) {
         cubeArray = new Cube[cubeX][cubeY];
 
@@ -373,8 +364,6 @@ public class Lvl {
                 if (oldCubeArray[oldCubeX][oldCubeY].isActive())
                     cubeArray[oldCubeX][oldCubeY].setActive();
             }
-
-        System.out.println("cubearray in lvl after :" + cubeArray);
     }
 
 
