@@ -1,6 +1,5 @@
 package LvlEditor.TopMenu;
 
-import LvlEditor.MapArea.MapPanel;
 import LvlEditor.MapArea.MapScrollPane;
 import map.Lvl;
 
@@ -9,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CreateSizeDialog extends JDialog implements ActionListener {
+public class ChangeSizeDialog extends JDialog implements ActionListener {
     private int requestedWidth = 0;
     private int requestedHeight = 0;
 
@@ -18,11 +17,11 @@ public class CreateSizeDialog extends JDialog implements ActionListener {
     JTextField widthInput;
     JTextField heightInput;
 
-    public CreateSizeDialog(Lvl lvl, MapScrollPane mapScrollPane) {
+    public ChangeSizeDialog(Lvl lvl, MapScrollPane mapScrollPane) {
 
         setSize(270, 200);
         setLocation(300, 300);
-        setTitle("Choose Size");
+        setTitle("Choose new Size");
 
         setLayout(new FlowLayout());
 
@@ -33,13 +32,13 @@ public class CreateSizeDialog extends JDialog implements ActionListener {
         JPanel errorPanel = new JPanel();
 
 
-        JLabel label = new JLabel("Choose map width:");
+        JLabel label = new JLabel("Choose new map width:");
         widthPanel.add(label);
         widthInput = new JTextField();
         widthInput.setColumns(5);
         widthPanel.add(widthInput);
 
-        JLabel chooseHeight = new JLabel("Choose map height:");
+        JLabel chooseHeight = new JLabel("Choose new map height:");
         heightPanel.add(chooseHeight);
         heightInput = new JTextField();
         heightPanel.add(heightInput);
@@ -52,7 +51,7 @@ public class CreateSizeDialog extends JDialog implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (checkIfValuesOk(widthInput.getText(), heightInput.getText())) ;
-                lvl.init(new Dimension(requestedWidth, requestedHeight));
+                lvl.changeSize(requestedWidth, requestedHeight);
                 mapScrollPane.repaint();
                 dispose();
             }

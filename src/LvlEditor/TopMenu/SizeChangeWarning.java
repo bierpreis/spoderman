@@ -1,7 +1,6 @@
 package LvlEditor.TopMenu;
 
 import LvlEditor.MapArea.MapScrollPane;
-import LvlEditor.CreateSizeDialog;
 import map.Lvl;
 
 import javax.swing.*;
