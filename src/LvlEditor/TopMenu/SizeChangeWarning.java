@@ -42,8 +42,9 @@ public class SizeChangeWarning extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == okButton) {
+            new ChangeSizeDialog(lvl, mapScrollPane);
             dispose();
-            ChangeSizeDialog sizeDialog = new ChangeSizeDialog(lvl, mapScrollPane);
+
 
         }
 

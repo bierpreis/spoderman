@@ -57,6 +57,7 @@ public class MapPanel extends JPanel {
         super.paintComponent(g);
         drawCubes(g);
         drawUnits(g);
+        System.out.println("cubearray in mapPanel: " + lvl.getCubes());
     }
 
     private void drawUnits(Graphics g) {

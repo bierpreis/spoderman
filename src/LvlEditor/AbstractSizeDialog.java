@@ -9,13 +9,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AbstractSizeDialog extends JDialog implements ActionListener {
-    private int requestedWidth = 0;
-    private int requestedHeight = 0;
+    protected int requestedWidth = 0;
+    protected int requestedHeight = 0;
 
-    private JLabel errorLabel;
+    protected JLabel errorLabel;
 
-    JTextField widthInput;
-    JTextField heightInput;
+    protected JTextField widthInput;
+    protected JTextField heightInput;
+
+    protected JLabel widthLabel;
+    protected JLabel heightLabel;
+
+    protected JButton okButton;
 
     public AbstractSizeDialog(Lvl lvl, MapScrollPane mapScrollPane) {
 
@@ -32,20 +37,20 @@ public class AbstractSizeDialog extends JDialog implements ActionListener {
         JPanel errorPanel = new JPanel();
 
 
-        JLabel label = new JLabel("Choose map width:");
-        widthPanel.add(label);
+        widthLabel = new JLabel("Choose map width:");
+        widthPanel.add(widthLabel);
         widthInput = new JTextField();
         widthInput.setColumns(5);
         widthPanel.add(widthInput);
 
-        JLabel chooseHeight = new JLabel("Choose map height:");
-        heightPanel.add(chooseHeight);
+        heightLabel = new JLabel("Choose map height:");
+        heightPanel.add(heightLabel);
         heightInput = new JTextField();
         heightPanel.add(heightInput);
         heightInput.setColumns(5);
 
 
-        JButton okButton = new JButton("k");
+        okButton = new JButton("k");
         buttonPanel.add(okButton);
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -79,7 +84,7 @@ public class AbstractSizeDialog extends JDialog implements ActionListener {
         //?? what is this
     }
 
-    private boolean checkIfValuesOk(String widthString, String heightString) {
+    protected boolean checkIfValuesOk(String widthString, String heightString) {
         try {
             requestedWidth = Integer.parseInt(widthString);
             requestedHeight = Integer.parseInt(heightString);
