@@ -57,7 +57,8 @@ public class MapPanel extends JPanel {
         super.paintComponent(g);
         drawCubes(g);
         drawUnits(g);
-        System.out.println("cubearray in mapPanel: " + lvl.getCubes());
+        System.out.println("repaint in map panel");
+        System.out.println("cube array length: " + lvl.getCubes().length);
     }
 
     private void drawUnits(Graphics g) {
@@ -67,17 +68,13 @@ public class MapPanel extends JPanel {
     }
 
     private void drawCubes(Graphics g) {
-        for (int cubeX = 0; cubeX < lvl.getDimension().width; cubeX++) {
-            for (int cubeY = 0; cubeY < lvl.getDimension().height; cubeY++) {
+        for (int cubeX = 0; cubeX < lvl.getCubes().length; cubeX++) {
+            for (int cubeY = 0; cubeY < lvl.getCubes()[0].length; cubeY++) {
                 lvl.getCube(cubeX, cubeY).draw(g);
 
             }
 
         }
         setPreferredSize(new Dimension(lvl.getDimension().width * Cube.getSize(), lvl.getDimension().height * Cube.getSize()));
-    }
-
-    Dimension getActualSize() {
-        return lvl.getDimension();
     }
 }

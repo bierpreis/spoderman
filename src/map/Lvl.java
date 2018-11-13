@@ -370,8 +370,10 @@ public class Lvl {
 
         for (int oldCubeX = 0; oldCubeX < oldCubeArray.length; oldCubeX++)
             for (int oldCubeY = 0; oldCubeY < oldCubeArray[0].length; oldCubeY++) {
-                cubeArray[oldCubeX][oldCubeY] = oldCubeArray[oldCubeX][oldCubeY];
+                if (oldCubeArray[oldCubeX][oldCubeY].isActive())
+                    cubeArray[oldCubeX][oldCubeY].setActive();
             }
+
         System.out.println("cubearray in lvl after :" + cubeArray);
     }
 

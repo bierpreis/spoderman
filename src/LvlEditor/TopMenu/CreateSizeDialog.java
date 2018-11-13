@@ -51,8 +51,8 @@ public class CreateSizeDialog extends JDialog implements ActionListener {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkIfValuesOk(widthInput.getText(), heightInput.getText())) ;
-                lvl.init(new Dimension(requestedWidth, requestedHeight));
+                if (checkIfValuesOk(widthInput.getText(), heightInput.getText()))
+                    lvl.init(new Dimension(requestedWidth, requestedHeight));
                 mapScrollPane.repaint();
                 dispose();
             }

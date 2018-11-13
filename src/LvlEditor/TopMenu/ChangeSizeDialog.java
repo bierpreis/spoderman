@@ -50,8 +50,8 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkIfValuesOk(widthInput.getText(), heightInput.getText())) ;
-                lvl.changeSize(requestedWidth, requestedHeight);
+                if (checkIfValuesOk(widthInput.getText(), heightInput.getText()))
+                    lvl.changeSize(requestedWidth, requestedHeight);
                 mapScrollPane.repaint();
                 dispose();
             }
