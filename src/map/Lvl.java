@@ -60,8 +60,6 @@ public class Lvl {
     }
 
     public void createFromFile(String pathToFile) {
-        //todo inti do size in file
-        init(10, 10);
         gameObjectList = new LinkedList<>();
 
         try {
@@ -299,7 +297,10 @@ public class Lvl {
         }
 
         BufferedReader br = new BufferedReader(fr);
+
+        //init map size
         Scanner scanner = new Scanner(br.readLine());
+        init(scanner.nextInt(), scanner.nextInt());
 
         if (br.readLine().equals("BEGIN_CUBES"))
             System.out.println("begin reading cubes");
