@@ -42,6 +42,8 @@ public abstract class UnitGameObject extends BasicGameObject {
         leftBounding.y = bounding.y + 5;
         topBounding.x = bounding.x;
         topBounding.y = bounding.y - 10;
+        botBounding.x = bounding.x;
+        botBounding.y = bounding.y + 20;
     }
 
 
@@ -50,16 +52,21 @@ public abstract class UnitGameObject extends BasicGameObject {
     }
 
     protected void gravity(Cube[][] cubeArray) {
+
         boolean falling = true;
         for (int cubeX = 0; cubeX < cubeArray.length; cubeX++) {
             for (int cubeY = 0; cubeY < cubeArray[0].length; cubeY++)
                 if (cubeArray[cubeX][cubeY].isActive())
-                    if (botBounding.intersects(cubeArray[cubeX][cubeY].getBounding()))
+                    if (botBounding.intersects(cubeArray[cubeX][cubeY].getBounding())) {
+
                         falling = false;
+
+                    }
         }
 
-        if (falling)
+        if (falling) {
             bounding.y = bounding.y + Config.gravity;
+        }
 
     }
 
@@ -86,13 +93,20 @@ public abstract class UnitGameObject extends BasicGameObject {
     }
 
     public void update(Cube[][] cubeArray) {
+        updateHelpBoundings();
+        checkCubeCollisions(cubeArray);
         gravity(cubeArray);
+
     }
 
     @Override
     public void draw(Graphics g) {
 
         g.drawImage(getLook(), getX(), getY(), null);
+
+
     }
+
+    //todo: create look here instead of subclasses
 
 }

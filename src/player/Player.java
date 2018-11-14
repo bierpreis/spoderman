@@ -55,7 +55,6 @@ public class Player extends UnitGameObject {
         respawn();
         if (alive) {
 
-            checkCubeCollisions(lvl.getCubes());
             doUnitInteractions(lvl.getGameObjectList());
 
             move();
@@ -127,11 +126,6 @@ public class Player extends UnitGameObject {
 
         }
 
-        botBounding.x = bounding.x;
-        botBounding.y = bounding.y + 20;
-
-        updateHelpBoundings();
-
 
     }
 
@@ -163,6 +157,7 @@ public class Player extends UnitGameObject {
     }
 
     private void checkBigMek(Bigmek bigmek) {
+
         if (!bigmek.getCollected())
             if (bounding.intersects(bigmek.getBounding())) {
                 bigmek.setCollected();

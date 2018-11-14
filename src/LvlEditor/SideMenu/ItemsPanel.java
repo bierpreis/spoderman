@@ -62,7 +62,7 @@ public class ItemsPanel extends JPanel {
 
         snepbekButton.addActionListener(new ItemListener(new Snepbek(0, 0)));
 
-        bigmekButton.addActionListener(new ItemListener(new Snepbek(0, 0)));
+        bigmekButton.addActionListener(new ItemListener(new Bigmek(0, 0)));
 
         itemsListPanel.add(cubeButton);
 
@@ -72,6 +72,8 @@ public class ItemsPanel extends JPanel {
         itemsListPanel.add(goobyButton);
 
         itemsListPanel.add(snepbekButton);
+
+        itemsListPanel.add(bigmekButton);
 
         add(activePanel, BorderLayout.NORTH);
         add(itemsListPanel, BorderLayout.CENTER);

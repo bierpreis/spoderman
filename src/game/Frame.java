@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import com.sun.corba.se.impl.naming.cosnaming.InternalBindingKey;
 import helpers.Config;
 import helpers.KeyHandler;
 import helpers.Message;
@@ -57,10 +58,7 @@ class Frame extends JFrame {
 
         bufferStrategy.show();
 
-
         g.dispose();
-
-
     }
 
 

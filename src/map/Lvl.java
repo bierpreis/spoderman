@@ -4,7 +4,6 @@ import LvlEditor.FileAlreadyExistsDialog;
 import player.AbstractHat;
 import player.Snepbek;
 
-import java.awt.*;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -191,7 +190,7 @@ public class Lvl {
 
     public void updateGameObjects() {
         for (UnitGameObject gameObject : gameObjectList) {
-            gameObject.update(cubeArray); //cubes and gameobjects here
+            gameObject.update(cubeArray);
         }
     }
 
