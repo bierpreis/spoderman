@@ -35,7 +35,7 @@ public class Lvl {
         BufferedReader br = new BufferedReader(fr);
         List<String> cubeStringList = readFile(br, Cube.class);
         List<String> enemyStringList = readFile(br, AbstractEnemy.class);
-        List<String> swegStringList = readFile(br, Sweg.class);
+        List<String> swegStringList = readFile(br, Gold.class);
         List<String> bigmekStringList = readFile(br, Bigmek.class);
         List<String> hatStringList = readFile(br, AbstractHat.class);
 
@@ -159,14 +159,14 @@ public class Lvl {
     }
 
 
-    private static List<Sweg> createSweg(List<String> swegString) {
-        List<Sweg> swegList = new LinkedList<>();
+    private static List<Gold> createSweg(List<String> swegString) {
+        List<Gold> goldList = new LinkedList<>();
         for (int i = 0; i < swegString.size(); i++) {
             Scanner scanner = new Scanner(swegString.get(i));
-            swegList.add(new Sweg(scanner.nextInt(), scanner.nextInt()));
+            goldList.add(new Gold(scanner.nextInt(), scanner.nextInt()));
         }
 
-        return swegList;
+        return goldList;
     }
 
 

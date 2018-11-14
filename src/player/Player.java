@@ -80,7 +80,8 @@ public class Player extends UnitGameObject {
         return hat;
     }
 
-    private void createLook() {
+    @Override
+    protected void createLook() {
 
         try {
             lookingRight = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/spoder_right.png"));
@@ -131,8 +132,8 @@ public class Player extends UnitGameObject {
 
     private void doUnitInteractions(List<UnitGameObject> gameObjectList) {
         for (UnitGameObject gameObject : gameObjectList) {
-            if (gameObject instanceof Sweg)
-                checkSweg((Sweg) gameObject);
+            if (gameObject instanceof Gold)
+                checkSweg((Gold) gameObject);
             if (gameObject instanceof AbstractEnemy)
                 checkEnemies((AbstractEnemy) gameObject);
             if (gameObject instanceof AbstractEnemy)
@@ -145,10 +146,10 @@ public class Player extends UnitGameObject {
     }
 
 
-    private void checkSweg(Sweg sweg) {
-        if (!sweg.getCollected())
-            if (bounding.intersects(sweg.getBounding())) {
-                sweg.setCollected();
+    private void checkSweg(Gold gold) {
+        if (!gold.getCollected())
+            if (bounding.intersects(gold.getBounding())) {
+                gold.setCollected();
                 createMessage("monies");
                 swegCollected += 1;
                 Sound.MONEY.play();

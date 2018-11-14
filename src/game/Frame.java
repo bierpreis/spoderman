@@ -64,7 +64,7 @@ class Frame extends JFrame {
 
     private void writeInfo(Graphics g, Player player) {
         g.setColor(Color.BLACK);
-        g.drawString("Sweg Count:" + player.getSwegCount(), 25, 50);
+        g.drawString("Gold Count:" + player.getSwegCount(), 25, 50);
         g.drawString("Fagits rekt:" + player.getKills(), 150, 50);
         g.drawString("Sp0der Lyfez :" + player.getLifes(), 300, 50);
         g.drawString("FPS: " + fpsCounter.calcFps(), 600, 50);

@@ -18,14 +18,6 @@ public class Bigmek extends UnitGameObject {
     }
 
 
-    private void createLook() {
-        try {
-            look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/bigmek.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public boolean getCollected() {
         return collected;
     }

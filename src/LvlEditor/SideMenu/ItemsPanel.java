@@ -3,12 +3,8 @@ package LvlEditor.SideMenu;
 
 import LvlEditor.Eraser;
 import LvlEditor.GameObjectWrapper;
-import map.Bigmek;
-import map.Cube;
-import map.BasicGameObject;
-import map.Sweg;
-import map.Dolan;
-import map.Gooby;
+import map.*;
+import map.Gold;
 import player.Snepbek;
 
 import javax.swing.*;
@@ -42,7 +38,7 @@ public class ItemsPanel extends JPanel {
 
         cubeButton = new JButton(Cube.class.getSimpleName());
 
-        swegButton = new JButton(Sweg.class.getSimpleName());
+        swegButton = new JButton(Gold.class.getSimpleName());
 
         dolanButton = new JButton(Dolan.class.getSimpleName());
         goobyButton = new JButton(Gooby.class.getSimpleName());
@@ -63,7 +59,7 @@ public class ItemsPanel extends JPanel {
 
         cubeButton.addActionListener(new ItemListener(new Cube(0, 0)));
 
-        swegButton.addActionListener(new ItemListener(new Sweg(0, 0)));
+        swegButton.addActionListener(new ItemListener(new Gold(0, 0)));
 
         dolanButton.addActionListener(new ItemListener(new Dolan(0, 0)));
         goobyButton.addActionListener(new ItemListener(new Gooby(0, 0)));

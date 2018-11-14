@@ -6,18 +6,15 @@ import java.awt.*;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Sweg extends UnitGameObject implements Collectable {
+public class Gold extends UnitGameObject implements Collectable {
 
     private boolean isCollected = false;
 
-    public Sweg(int x, int y) {
+    public Gold(int x, int y) {
         super(x, y);
 
-        try {
-            look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/gold.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        createLook();
         createBoundings();
 
 

@@ -72,6 +72,7 @@ public abstract class AbstractEnemy extends UnitGameObject {
 
     String pathToImage = "img/" + this.getClass().getSimpleName() + ".png";
 
+    @Override
     protected void createLook() {
         try {
             this.look = ImageIO.read(getClass().getClassLoader().getResourceAsStream(pathToImage));

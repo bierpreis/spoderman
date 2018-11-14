@@ -3,8 +3,10 @@ package map;
 import helpers.Config;
 import player.Player;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.List;
 
 public abstract class UnitGameObject extends BasicGameObject {
@@ -105,6 +107,15 @@ public abstract class UnitGameObject extends BasicGameObject {
         g.drawImage(getLook(), getX(), getY(), null);
 
 
+    }
+
+    protected void createLook() {
+        try {
+            look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/" + this.getClass().getSimpleName() + ".png"));
+        } catch (IOException e) {
+            System.out.println("tried to get " + "img/" + this.getClass().getSimpleName() + ".png");
+            e.printStackTrace();
+        }
     }
 
     //todo: create look here instead of subclasses
