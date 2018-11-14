@@ -1,6 +1,7 @@
 package LvlEditor.SideMenu;
 
 
+import LvlEditor.Eraser;
 import LvlEditor.GameObjectWrapper;
 import map.Bigmek;
 import map.Cube;
@@ -29,8 +30,12 @@ public class ItemsPanel extends JPanel {
 
     private ActiveItemPanel activePanel;
 
+    private JButton eraserButton;
+
 
     public ItemsPanel(GameObjectWrapper objectWrapper) {
+
+        //todo: create add button method and simplyfy this
 
 
         setLayout(new BorderLayout());
@@ -46,8 +51,11 @@ public class ItemsPanel extends JPanel {
 
         bigmekButton = new JButton(Bigmek.class.getSimpleName());
 
+        eraserButton = new JButton(Eraser.class.getSimpleName());
+
 
         activePanel = new ActiveItemPanel(objectWrapper);
+
 
         JPanel itemsListPanel = new JPanel();
         itemsListPanel.setLayout(new BoxLayout(itemsListPanel, 1));
@@ -64,6 +72,10 @@ public class ItemsPanel extends JPanel {
 
         bigmekButton.addActionListener(new ItemListener(new Bigmek(0, 0)));
 
+        eraserButton.addActionListener(new ItemListener(new Eraser()));
+
+
+
         itemsListPanel.add(cubeButton);
 
         itemsListPanel.add(swegButton);
@@ -74,6 +86,8 @@ public class ItemsPanel extends JPanel {
         itemsListPanel.add(snepbekButton);
 
         itemsListPanel.add(bigmekButton);
+
+        itemsListPanel.add(eraserButton);
 
         add(activePanel, BorderLayout.NORTH);
         add(itemsListPanel, BorderLayout.CENTER);

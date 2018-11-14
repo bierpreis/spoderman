@@ -1,5 +1,6 @@
 package LvlEditor.MapArea;
 
+import LvlEditor.Eraser;
 import LvlEditor.GameObjectWrapper;
 import map.BasicGameObject;
 import map.Cube;
@@ -23,7 +24,7 @@ public class MapPanel extends JPanel {
 
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
-                if (!(objectWrapper.get() instanceof Cube)) {
+                if ((objectWrapper.get() instanceof UnitGameObject)) {
                     try {
                         Constructor[] constructors = objectWrapper.get().getClass().getConstructors();
                         BasicGameObject newObject = (BasicGameObject) constructors[0].newInstance(evt.getX(), evt.getY());
@@ -32,9 +33,15 @@ public class MapPanel extends JPanel {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
+                }
+                if (objectWrapper.get() instanceof Cube) {
                     lvl.setCubeActive(evt.getX(), evt.getY());
                 }
+                if (objectWrapper.get() instanceof Eraser) {
+                    lvl.eraseGameObjects(evt.getX(), evt.getY());
+
+                }
+
             }
 
             public void mouseReleased(MouseEvent evt) {

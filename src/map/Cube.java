@@ -10,7 +10,7 @@ public class Cube extends BasicGameObject {
     private boolean active = false;
 
     public Cube(int x, int y) {
-        super(x,y);
+        super(x, y);
         bounding = new Rectangle(x * size, y * size, size, size);
     }
 
@@ -47,5 +47,9 @@ public class Cube extends BasicGameObject {
     @Override
     public String toText() {
         return bounding.x + " " + bounding.y;
+    }
+
+    public void setInActive() {
+        active = false;
     }
 }

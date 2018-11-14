@@ -4,6 +4,7 @@ import LvlEditor.FileAlreadyExistsDialog;
 import player.AbstractHat;
 import player.Snepbek;
 
+import java.awt.*;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -364,6 +365,17 @@ public class Lvl {
                 if (oldCubeArray[oldCubeX][oldCubeY].isActive())
                     cubeArray[oldCubeX][oldCubeY].setActive();
             }
+    }
+
+    public void eraseGameObjects(int x, int y) {
+        Rectangle eraserBounding = new Rectangle(x, y, Cube.getSize(), Cube.getSize());
+        for (Cube[] cubes : cubeArray) {
+            for (Cube cube : cubes) {
+                if (eraserBounding.intersects(cube.getBounding()))
+                    cube.setInActive();
+
+            }
+        }
     }
 
 
