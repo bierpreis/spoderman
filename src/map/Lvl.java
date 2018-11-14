@@ -376,6 +376,11 @@ public class Lvl {
 
             }
         }
+
+        for (UnitGameObject gameObject : gameObjectList) {
+            if (eraserBounding.intersects(gameObject.bounding))
+                gameObjectList.remove(gameObject);
+        }
     }
 
 
