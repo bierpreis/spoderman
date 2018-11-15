@@ -117,7 +117,4 @@ public abstract class UnitGameObject extends BasicGameObject {
             e.printStackTrace();
         }
     }
-
-    //todo: create look here instead of subclasses
-
 }

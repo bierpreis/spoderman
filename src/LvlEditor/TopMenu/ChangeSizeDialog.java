@@ -25,12 +25,15 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
 
         setLayout(new FlowLayout());
 
-
+        JPanel oldSizePanel = new JPanel();
         JPanel widthPanel = new JPanel();
         JPanel heightPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
         JPanel errorPanel = new JPanel();
 
+
+        JLabel oldSizeLabel = new JLabel("Old size: " + lvl.getCubes().length + "x" + lvl.getCubes()[0].length);
+        oldSizePanel.add(oldSizeLabel);
 
         JLabel label = new JLabel("Choose new map width:");
         widthPanel.add(label);
@@ -61,7 +64,7 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
 
         errorPanel.add(errorLabel);
 
-
+        add(oldSizePanel);
         add(widthPanel);
         add(heightPanel);
         add(buttonPanel);
