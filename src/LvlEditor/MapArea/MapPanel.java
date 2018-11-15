@@ -44,7 +44,6 @@ public class MapPanel extends JPanel {
 
             }
 
-            //todo: change this to mouse pressed for live activation?
             public void mouseReleased(MouseEvent evt) {
                 repaint();
             }
@@ -54,7 +53,9 @@ public class MapPanel extends JPanel {
                 if (objectWrapper.get() instanceof Cube) {
                     lvl.setCubeActive(evt.getX(), evt.getY());
                 }
+                repaint();
             }
+
         });
 
     }
