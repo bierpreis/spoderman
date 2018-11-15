@@ -1,9 +1,6 @@
 package map;
 
 import LvlEditor.FileAlreadyExistsDialog;
-import player.AbstractHat;
-import player.Snepbek;
-
 import java.awt.*;
 import java.io.*;
 import java.util.Iterator;
@@ -35,11 +32,6 @@ public class Lvl {
 
         BufferedReader br = new BufferedReader(fr);
         List<String> cubeStringList = readFile(br, Cube.class);
-        List<String> enemyStringList = readFile(br, AbstractEnemy.class);
-        List<String> swegStringList = readFile(br, Gold.class);
-        List<String> bigmekStringList = readFile(br, Bigmek.class);
-        List<String> hatStringList = readFile(br, AbstractHat.class);
-
 
         cubeArray = createCubes(cubeStringList);
 
@@ -80,21 +72,6 @@ public class Lvl {
 
     public void init(int requestedXSize, int requestedYSize) {
         cubeArray = createEmptyCubes(requestedXSize, requestedYSize);
-    }
-
-    private List<AbstractHat> createHats(List<String> hatStringList) {
-        List<AbstractHat> hatList = new LinkedList<>();
-        for (int i = 0; i < hatStringList.size(); i++) {
-            Scanner scanner = new Scanner(hatStringList.get(i));
-            int x = scanner.nextInt();
-            int y = scanner.nextInt();
-
-            String type = scanner.next();
-            if (type.equals("Snepbek"))
-                hatList.add(new Snepbek(x, y));
-        }
-
-        return hatList;
     }
 
     public List<UnitGameObject> getGameObjectList() {
@@ -142,45 +119,6 @@ public class Lvl {
         return cubeArray;
     }
 
-
-    private static List<AbstractEnemy> createEnemies(List<String> enemyString) {
-        List<AbstractEnemy> enemyList = new LinkedList<>();
-        for (int i = 0; i < enemyString.size(); i++) {
-            Scanner scanner = new Scanner(enemyString.get(i));
-            int x = scanner.nextInt();
-            int y = scanner.nextInt();
-            String type = scanner.next();
-            if (type.equals("Dolan"))
-                enemyList.add(new Dolan(x, y));
-            if (type.equals("Gooby"))
-                enemyList.add(new Gooby(x, y));
-
-        }
-        return enemyList;
-    }
-
-
-    private static List<Gold> createSweg(List<String> swegString) {
-        List<Gold> goldList = new LinkedList<>();
-        for (int i = 0; i < swegString.size(); i++) {
-            Scanner scanner = new Scanner(swegString.get(i));
-            goldList.add(new Gold(scanner.nextInt(), scanner.nextInt()));
-        }
-
-        return goldList;
-    }
-
-
-    private static List<Bigmek> createBigmek(List<String> bigmekString) {
-        List bigmekList = new LinkedList<Bigmek>();
-        for (int i = 0; i < bigmekString.size(); i++) {
-            Scanner scanner = new Scanner(bigmekString.get(i));
-            bigmekList.add(new Bigmek(scanner.nextInt(), scanner.nextInt()));
-        }
-        return bigmekList;
-    }
-
-    // getter
     public Cube[][] getCubes() {
         return cubeArray;
     }
@@ -287,7 +225,7 @@ public class Lvl {
         this.isBigmekCollected = true;
     }
 
-    void readLvlFile(String fileName) throws Exception {
+    private void readLvlFile(String fileName) throws Exception {
 
         FileReader fr = null;
         try {
