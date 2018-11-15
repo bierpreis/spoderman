@@ -22,7 +22,7 @@ public class SizeChangeWarning extends JDialog implements ActionListener {
 
 
         JPanel panel = new JPanel();
-        JLabel label = new JLabel("Warning! Changing the size to a smaller Dimension will delete any Objects which wont fit into the new size. Careful!");
+        JLabel label = new JLabel("Warning! Changing size is only possible if size gets bigger than before");
         panel.add(label);
 
 

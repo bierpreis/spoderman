@@ -53,8 +53,9 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkIfValuesOk(widthInput.getText(), heightInput.getText()))
-                    lvl.changeSize(requestedWidth, requestedHeight);
+                if (checkIfValuesAreIntegers(widthInput.getText(), heightInput.getText()))
+                    if (checkIfResizeIsSafe(lvl, requestedWidth, requestedHeight))
+                        lvl.changeSize(requestedWidth, requestedHeight);
                 mapScrollPane.repaint();
                 dispose();
             }
@@ -82,7 +83,7 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
         //?? what is this
     }
 
-    private boolean checkIfValuesOk(String widthString, String heightString) {
+    private boolean checkIfValuesAreIntegers(String widthString, String heightString) {
         try {
             requestedWidth = Integer.parseInt(widthString);
             requestedHeight = Integer.parseInt(heightString);
@@ -93,6 +94,16 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
         if (requestedHeight > 0 && requestedWidth > 0)
             return true;
         else return false;
+
+    }
+
+    private boolean checkIfResizeIsSafe(Lvl lvl, int newX, int newY) {
+        int oldX = lvl.getCubes().length;
+        int oldY = lvl.getCubes()[0].length;
+        if (oldX <= newX && oldY <= newY)
+            return true;
+        errorLabel.setVisible(true);
+        return false;
 
     }
 

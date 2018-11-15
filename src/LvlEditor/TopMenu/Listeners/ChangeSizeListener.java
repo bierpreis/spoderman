@@ -19,7 +19,6 @@ public class ChangeSizeListener implements ActionListener {
     @Override
 
     public void actionPerformed(ActionEvent e) {
-        //todo: only show this when map gets smaller
         new SizeChangeWarning(lvl, mapPane);
 
     }
