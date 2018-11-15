@@ -20,7 +20,7 @@ public class Player extends UnitGameObject {
 
     private boolean alive = true;
 
-    private int swegCollected = 0;
+    private int goldCollected = 0;
     private int kills = 0;
     private int lifes = 3;
 
@@ -133,9 +133,7 @@ public class Player extends UnitGameObject {
     private void doUnitInteractions(List<UnitGameObject> gameObjectList) {
         for (UnitGameObject gameObject : gameObjectList) {
             if (gameObject instanceof Gold)
-                checkSweg((Gold) gameObject);
-            if (gameObject instanceof AbstractEnemy)
-                checkEnemies((AbstractEnemy) gameObject);
+                checkGold((Gold) gameObject);
             if (gameObject instanceof AbstractEnemy)
                 checkEnemies((AbstractEnemy) gameObject);
             if (gameObject instanceof Bigmek)
@@ -146,12 +144,12 @@ public class Player extends UnitGameObject {
     }
 
 
-    private void checkSweg(Gold gold) {
+    private void checkGold(Gold gold) {
         if (!gold.getCollected())
             if (bounding.intersects(gold.getBounding())) {
                 gold.setCollected();
                 createMessage("monies");
-                swegCollected += 1;
+                goldCollected += 1;
                 Sound.MONEY.play();
 
             }
@@ -164,6 +162,7 @@ public class Player extends UnitGameObject {
                 bigmek.setCollected();
                 Sound.BIGMEK.play();
                 createMessage("press enter to enter lvl two", true);
+                lvl.setBigmekCollected();
 
 
             }
@@ -217,8 +216,8 @@ public class Player extends UnitGameObject {
         return look;
     }
 
-    public int getSwegCount() {
-        return swegCollected;
+    public int getGoldCount() {
+        return goldCollected;
     }
 
     public int getKills() {

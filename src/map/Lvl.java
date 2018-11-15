@@ -282,7 +282,6 @@ public class Lvl {
             cubeArray[cubeXNumber][cubeYNumber].setActive();
     }
 
-    //todo is this rly needed or can this stay in player?
     public void setBigmekCollected() {
         this.isBigmekCollected = true;
     }

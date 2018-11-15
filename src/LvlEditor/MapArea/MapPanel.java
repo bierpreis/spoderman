@@ -21,7 +21,7 @@ public class MapPanel extends JPanel {
         this.lvl = lvl;
         setLayout(new FlowLayout());
 
-
+        //todo own class for mouse adapter
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
                 if ((objectWrapper.get() instanceof UnitGameObject)) {
@@ -44,6 +44,7 @@ public class MapPanel extends JPanel {
 
             }
 
+            //todo: change this to mouse pressed for live activation?
             public void mouseReleased(MouseEvent evt) {
                 repaint();
             }
