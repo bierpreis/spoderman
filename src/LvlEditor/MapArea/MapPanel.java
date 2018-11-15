@@ -21,7 +21,6 @@ public class MapPanel extends JPanel {
         this.lvl = lvl;
         setLayout(new FlowLayout());
 
-        //todo own class for mouse adapter
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
                 if ((objectWrapper.get() instanceof UnitGameObject)) {
@@ -52,6 +51,9 @@ public class MapPanel extends JPanel {
             public void mouseDragged(MouseEvent evt) {
                 if (objectWrapper.get() instanceof Cube) {
                     lvl.setCubeActive(evt.getX(), evt.getY());
+                }
+                if (objectWrapper.get() instanceof Eraser) {
+                    lvl.eraseGameObjects(evt.getX(), evt.getY());
                 }
                 repaint();
             }
