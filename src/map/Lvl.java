@@ -6,6 +6,7 @@ import player.Snepbek;
 
 import java.awt.*;
 import java.io.*;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -376,9 +377,11 @@ public class Lvl {
             }
         }
 
-        for (UnitGameObject gameObject : gameObjectList) {
-            if (eraserBounding.intersects(gameObject.bounding))
-                gameObjectList.remove(gameObject);
+        Iterator<UnitGameObject> iterator = gameObjectList.iterator();
+        while (iterator.hasNext()) {
+            UnitGameObject currentObject = iterator.next();
+            if (eraserBounding.intersects(currentObject.bounding))
+                iterator.remove();
         }
     }
 

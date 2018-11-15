@@ -7,8 +7,8 @@ import java.awt.*;
 
 public class Eraser extends BasicGameObject {
 
-    public Eraser() {
-        super(0, 0);
+    public Eraser(int x, int y) {
+        super(x, y);
     }
 
 
