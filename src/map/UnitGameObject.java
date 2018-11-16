@@ -43,7 +43,7 @@ public abstract class UnitGameObject extends BasicGameObject {
         topBounding.x = bounding.x;
         topBounding.y = bounding.y - 10;
         botBounding.x = bounding.x;
-        botBounding.y = bounding.y + 20;
+        botBounding.y = bounding.y + 30;
     }
 
 
