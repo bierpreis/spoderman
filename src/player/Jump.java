@@ -1,6 +1,6 @@
 package player;
 
-import helpers.Config;
+import game.Config;
 
 import java.awt.*;
 

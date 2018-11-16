@@ -1,6 +1,6 @@
 package player;
 
-import helpers.Collectable;
+import map.Collectable;
 import map.UnitGameObject;
 
 import java.awt.*;
@@ -25,11 +25,6 @@ public abstract class AbstractHat extends UnitGameObject implements Collectable 
 
     public BufferedImage getLook() {
         return look;
-    }
-
-
-    protected void createBounding(Rectangle playerBounding, BufferedImage look) {
-        this.bounding = new Rectangle(playerBounding.x, playerBounding.y - 100, look.getWidth(), look.getHeight());
     }
 
     public void updateBounding(Rectangle playerBounding) {

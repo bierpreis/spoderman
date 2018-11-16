@@ -7,10 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import helpers.Config;
-import map.BasicGameObject;
-import map.Cube;
-import map.UnitGameObject;
+import game.Config;
 
 public abstract class AbstractEnemy extends UnitGameObject {
     private boolean movingRight = true;
@@ -30,7 +27,7 @@ public abstract class AbstractEnemy extends UnitGameObject {
         super(x, y);
 
     }
-
+    //todo: this is not working
     private void setMoveDirection() {
         if (onRightSide && movingRight)
             movingRight = false;
@@ -54,7 +51,7 @@ public abstract class AbstractEnemy extends UnitGameObject {
 
     public void kill() {
         try {
-            look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/blood.png"));
+            look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("resources/img/blood.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,14 +67,14 @@ public abstract class AbstractEnemy extends UnitGameObject {
         return alive;
     }
 
-    String pathToImage = "img/" + this.getClass().getSimpleName() + ".png";
+    String pathToImage = "resources/images/" + this.getClass().getSimpleName() + ".png";
 
     @Override
     protected void createLook() {
         try {
             this.look = ImageIO.read(getClass().getClassLoader().getResourceAsStream(pathToImage));
-        } catch (IOException ioe) {
-            System.out.println(pathToImage + " not found!");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         bounding.width = look.getWidth();
         bounding.height = look.getHeight();

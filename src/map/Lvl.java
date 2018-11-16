@@ -1,6 +1,7 @@
 package map;
 
-import LvlEditor.FileAlreadyExistsDialog;
+import lvlEditor.TopMenu.FileAlreadyExistsDialog;
+
 import java.awt.*;
 import java.io.*;
 import java.util.Iterator;
@@ -52,11 +53,11 @@ public class Lvl {
         }
     }
 
-    public void createFromFile(String pathToFile) {
+    public void createFromFile(String fileName) {
         gameObjectList = new LinkedList<>();
 
         try {
-            readLvlFile(pathToFile);
+            readLvlFile(fileName);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -229,19 +230,18 @@ public class Lvl {
 
         FileReader fr = null;
         try {
-            fr = new FileReader(fileName);
+            fr = new FileReader("./src/resources/map/" + fileName + ".txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         BufferedReader br = new BufferedReader(fr);
 
-        //init map size
         Scanner scanner = new Scanner(br.readLine());
         init(scanner.nextInt(), scanner.nextInt());
 
         if (br.readLine().equals("BEGIN_CUBES"))
-            System.out.println("begin reading cubes");
+            System.out.println("reading cubes");
         String nextLine = br.readLine();
         while (!nextLine.equals("END_CUBES")) {
             scanner = new Scanner(nextLine);
@@ -252,16 +252,14 @@ public class Lvl {
         }
 
         if (br.readLine().equals("BEGIN_UNITS"))
-            System.out.println("begin reading unit objects");
+            System.out.println("reading unit objects");
 
         nextLine = br.readLine();
         while (!nextLine.equals("END_UNITS")) {
             gameObjectList.add(createObjectFromString(nextLine));
             nextLine = br.readLine();
-
         }
-        System.out.println("finished reading map");
-
+        System.out.println("finished creating map");
     }
 
     private UnitGameObject createObjectFromString(String originalString) {

@@ -7,8 +7,10 @@ import javax.imageio.ImageIO;
 import java.util.List;
 
 
+import game.Config;
+import game.KeyHandler;
 import game.Sound;
-import helpers.*;
+import graphics.Message;
 import map.*;
 import map.AbstractEnemy;
 
@@ -84,14 +86,13 @@ public class Player extends UnitGameObject {
     protected void createLook() {
 
         try {
-            lookingRight = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/spoder_right.png"));
-            lookingLeft = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/spoder_left.png"));
-            lookDead = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/blood.png"));
+            lookingRight = ImageIO.read(getClass().getClassLoader().getResourceAsStream("resources/images/spoder_right.png"));
+            lookingLeft = ImageIO.read(getClass().getClassLoader().getResourceAsStream("resources/images/spoder_left.png"));
+            lookDead = ImageIO.read(getClass().getClassLoader().getResourceAsStream("resources/images/blood.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        //to init look
         getLook();
 
     }

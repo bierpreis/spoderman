@@ -15,7 +15,7 @@ public enum Sound {
 
     Sound() {
 
-        ringSoundFile = new File("sound/" + name() + ".wav");
+        ringSoundFile = new File("./src/resources/sound/" + name() + ".wav");
     }
 
     public void play() {

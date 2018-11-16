@@ -1,12 +1,11 @@
 package game;
 
-import helpers.Action;
-import helpers.Config;
-import helpers.KeyHandler;
+import graphics.Frame;
+import map.Action;
 import map.Lvl;
-import player.Camera;
+import graphics.Camera;
 import player.Player;
-import menu.Menu;
+import mainMenu.MainMenu;
 
 public class Game {
 
@@ -21,7 +20,7 @@ public class Game {
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
         lvl = new Lvl();
-        lvl.createFromFile("lvl" + Integer.toString(lvlNumber) + ".txt");
+        lvl.createFromFile("lvl" + Integer.toString(lvlNumber));
         player = new Player(lvl, keyHandler);
         frame = new Frame(keyHandler);
         this.keyHandler = keyHandler;
@@ -31,7 +30,7 @@ public class Game {
 
     public static void main(String[] args) {
 
-        Menu menu = new Menu();
+        MainMenu menu = new MainMenu();
         menu.showMenu();
 
         menu.dispose();
