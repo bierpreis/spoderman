@@ -8,12 +8,8 @@ public class Gold extends UnitGameObject implements Collectable {
 
     public Gold(int x, int y) {
         super(x, y);
-
-
         createLook();
         createBoundings();
-
-
     }
 
 
@@ -33,7 +29,6 @@ public class Gold extends UnitGameObject implements Collectable {
     public void setCollected() {
         isCollected = true;
         look = null;
-
     }
 
 }
