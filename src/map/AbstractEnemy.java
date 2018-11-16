@@ -3,6 +3,7 @@ package map;
 
 import java.awt.geom.Rectangle2D;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -51,7 +52,7 @@ public abstract class AbstractEnemy extends UnitGameObject {
 
     public void kill() {
         try {
-            look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("resources/img/blood.png"));
+            this.look = ImageIO.read(new File("./src/resources/images/blood.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
