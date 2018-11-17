@@ -1,11 +1,12 @@
 package graphics;
 
 import game.Config;
-import graphics.Letters;
 
 import java.awt.image.BufferedImage;
 
 public class Message {
+
+    //todo: sticky message
 
     private final BufferedImage[] messagePicArray;
     private boolean isMessageFinal = false;

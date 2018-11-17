@@ -263,9 +263,10 @@ public class Lvl {
     }
 
     private UnitGameObject createObjectFromString(String originalString) {
+        String objectPatternString = "^[A-Z]{1}[a-z]+";
 
 
-        Pattern objectPattern = Pattern.compile("^[A-Z]{1}[a-z]+");
+        Pattern objectPattern = Pattern.compile(objectPatternString);
         Matcher objectMatcher = objectPattern.matcher(originalString);
 
         String objectString = "";
@@ -275,7 +276,7 @@ public class Lvl {
             objectString = objectMatcher.group(0);
         }
 
-        String numberString = originalString.replaceAll("^[A-Z]{1}[a-z]+", "");
+        String numberString = originalString.replaceAll(objectPatternString, "");
 
         Scanner scanner = new Scanner(numberString);
 

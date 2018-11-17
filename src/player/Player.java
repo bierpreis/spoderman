@@ -88,7 +88,7 @@ public class Player extends UnitGameObject {
         try {
             lookingRight = ImageIO.read(getClass().getClassLoader().getResourceAsStream("resources/images/spoder_right.png"));
             lookingLeft = ImageIO.read(getClass().getClassLoader().getResourceAsStream("resources/images/spoder_left.png"));
-            lookDead = ImageIO.read(getClass().getClassLoader().getResourceAsStream("resources/images/blood.png"));
+            lookDead = ImageIO.read(getClass().getClassLoader().getResourceAsStream("resources/images/blood.png")); //todo: this is never shown
         } catch (IOException e) {
             e.printStackTrace();
         }
