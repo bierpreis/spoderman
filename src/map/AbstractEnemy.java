@@ -14,6 +14,10 @@ public abstract class AbstractEnemy extends UnitGameObject {
     private boolean movingRight = true;
     private boolean alive = true;
 
+    String pathToImage = "resources/images/" + this.getClass().getSimpleName() + ".png";
+
+    String pathToLookDead = "./src/resources/images/blood.png";
+
 
     public void update(Cube[][] cubeArray) {
         super.update(cubeArray);
@@ -28,7 +32,7 @@ public abstract class AbstractEnemy extends UnitGameObject {
         super(x, y);
 
     }
-    //todo: this is not working
+
     private void setMoveDirection() {
         if (onRightSide && movingRight)
             movingRight = false;
@@ -52,7 +56,7 @@ public abstract class AbstractEnemy extends UnitGameObject {
 
     public void kill() {
         try {
-            this.look = ImageIO.read(new File("./src/resources/images/blood.png"));
+            this.look = ImageIO.read(new File(pathToLookDead));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,7 +72,6 @@ public abstract class AbstractEnemy extends UnitGameObject {
         return alive;
     }
 
-    String pathToImage = "resources/images/" + this.getClass().getSimpleName() + ".png";
 
     @Override
     protected void createLook() {
