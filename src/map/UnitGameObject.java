@@ -102,7 +102,7 @@ public abstract class UnitGameObject extends BasicGameObject {
     @Override
     public void draw(Graphics g) {
 
-        g.drawImage(getLook(), getX(), getY(), null);
+        g.drawImage(look, getX(), getY(), null);
 
 
     }

@@ -55,6 +55,7 @@ public class Player extends UnitGameObject {
         super.update(lvl.getCubes());
         hat.updateBounding(bounding);
         respawn();
+        updateLook();
         if (alive) {
 
             doUnitInteractions(lvl.getGameObjectList());
@@ -62,6 +63,14 @@ public class Player extends UnitGameObject {
             move();
             jump();
         }
+    }
+
+    private void updateLook() {
+        if (!alive)
+            look = lookDead;
+        else if (isLookingRight)
+            look = lookingRight;
+        else look = lookingLeft;
     }
 
     private void checkHats(AbstractHat hat) {
@@ -113,7 +122,7 @@ public class Player extends UnitGameObject {
     }
 
 
-    public void move() {
+    private void move() {
 
         gravity(lvl.getCubes());
 
@@ -172,7 +181,6 @@ public class Player extends UnitGameObject {
 
     private void checkEnemies(AbstractEnemy enemy) {
 
-
         if (enemy.getAlive()) {
 
             // gegner töten
@@ -186,10 +194,10 @@ public class Player extends UnitGameObject {
 
             // feststellen ob tot
             if (bounding.intersects(enemy.getBounding())) {
-
                 alive = false;
                 lifes -= 1;
                 if (lifes > 0) {
+
                     createMessage("u got rekt 111  press spaec to respawn");
                     Sound.PLAYER_KILLED.play();
                 }
