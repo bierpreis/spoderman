@@ -5,7 +5,7 @@ import map.Action;
 import map.Lvl;
 import graphics.Camera;
 import player.Player;
-import mainMenu.MainMenu;
+import mainmenu.MainMenu;
 
 public class Game {
 

@@ -1,6 +1,6 @@
-package lvlEditor.TopMenu;
+package lvleditor.topmenu;
 
-import lvlEditor.MapPane.MapScrollPane;
+import lvleditor.mappane.MapScrollPane;
 import map.Lvl;
 
 import javax.swing.*;
@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CreateSizeDialog extends JDialog implements ActionListener {
+public class ChangeSizeDialog extends JDialog implements ActionListener {
     private int requestedWidth = 0;
     private int requestedHeight = 0;
 
@@ -17,28 +17,31 @@ public class CreateSizeDialog extends JDialog implements ActionListener {
     JTextField widthInput;
     JTextField heightInput;
 
-    public CreateSizeDialog(Lvl lvl, MapScrollPane mapScrollPane) {
+    public ChangeSizeDialog(Lvl lvl, MapScrollPane mapScrollPane) {
 
         setSize(270, 200);
         setLocation(300, 300);
-        setTitle("Choose Size");
+        setTitle("Choose new Size");
 
         setLayout(new FlowLayout());
 
-
+        JPanel oldSizePanel = new JPanel();
         JPanel widthPanel = new JPanel();
         JPanel heightPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
         JPanel errorPanel = new JPanel();
 
 
-        JLabel label = new JLabel("Choose map width:");
+        JLabel oldSizeLabel = new JLabel("Old size: " + lvl.getCubes().length + "x" + lvl.getCubes()[0].length);
+        oldSizePanel.add(oldSizeLabel);
+
+        JLabel label = new JLabel("Choose new map width:");
         widthPanel.add(label);
         widthInput = new JTextField();
         widthInput.setColumns(5);
         widthPanel.add(widthInput);
 
-        JLabel chooseHeight = new JLabel("Choose map height:");
+        JLabel chooseHeight = new JLabel("Choose new map height:");
         heightPanel.add(chooseHeight);
         heightInput = new JTextField();
         heightPanel.add(heightInput);
@@ -50,8 +53,9 @@ public class CreateSizeDialog extends JDialog implements ActionListener {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkIfValuesOk(widthInput.getText(), heightInput.getText()))
-                    lvl.init(requestedWidth, requestedHeight);
+                if (checkIfValuesAreIntegers(widthInput.getText(), heightInput.getText()))
+                    if (checkIfResizeIsSafe(lvl, requestedWidth, requestedHeight))
+                        lvl.changeSize(requestedWidth, requestedHeight);
                 mapScrollPane.repaint();
                 dispose();
             }
@@ -61,7 +65,7 @@ public class CreateSizeDialog extends JDialog implements ActionListener {
 
         errorPanel.add(errorLabel);
 
-
+        add(oldSizePanel);
         add(widthPanel);
         add(heightPanel);
         add(buttonPanel);
@@ -79,7 +83,7 @@ public class CreateSizeDialog extends JDialog implements ActionListener {
         //?? what is this
     }
 
-    private boolean checkIfValuesOk(String widthString, String heightString) {
+    private boolean checkIfValuesAreIntegers(String widthString, String heightString) {
         try {
             requestedWidth = Integer.parseInt(widthString);
             requestedHeight = Integer.parseInt(heightString);
@@ -93,8 +97,14 @@ public class CreateSizeDialog extends JDialog implements ActionListener {
 
     }
 
-    public Dimension getRequestedDimension() {
-        return new Dimension(requestedWidth, requestedHeight);
+    private boolean checkIfResizeIsSafe(Lvl lvl, int newX, int newY) {
+        int oldX = lvl.getCubes().length;
+        int oldY = lvl.getCubes()[0].length;
+        if (oldX <= newX && oldY <= newY)
+            return true;
+        errorLabel.setVisible(true);
+        return false;
+
     }
 
 

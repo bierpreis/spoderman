@@ -1,7 +1,7 @@
-package lvlEditor.TopMenu.Listeners;
+package lvleditor.topmenu.Listeners;
 
-import lvlEditor.MapPane.MapScrollPane;
-import lvlEditor.TopMenu.CreateSizeDialog;
+import lvleditor.mappane.MapScrollPane;
+import lvleditor.topmenu.CreateSizeDialog;
 import map.Lvl;
 
 import java.awt.event.ActionEvent;

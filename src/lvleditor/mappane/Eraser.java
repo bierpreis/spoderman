@@ -1,4 +1,4 @@
-package lvlEditor.MapPane;
+package lvleditor.mappane;
 
 import map.BasicGameObject;
 import map.Cube;

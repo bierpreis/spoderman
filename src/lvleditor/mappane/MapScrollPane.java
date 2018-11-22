@@ -1,7 +1,7 @@
-package lvlEditor.MapPane;
+package lvleditor.mappane;
 
 
-import lvlEditor.SideMenu.GameObjectWrapper;
+import lvleditor.sidemenu.GameObjectWrapper;
 import map.Lvl;
 
 import javax.swing.*;

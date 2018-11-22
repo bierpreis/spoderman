@@ -1,6 +1,6 @@
-package lvlEditor.TopMenu.Listeners;
+package lvleditor.topmenu.Listeners;
 
-import lvlEditor.TopMenu.MapFileSaveFrame;
+import lvleditor.topmenu.MapFileSaveFrame;
 import map.Lvl;
 
 import java.awt.event.ActionEvent;

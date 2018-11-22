@@ -1,9 +1,9 @@
-package lvlEditor;
+package lvleditor;
 
-import lvlEditor.MapPane.MapScrollPane;
-import lvlEditor.SideMenu.GameObjectWrapper;
-import lvlEditor.SideMenu.ItemsScrollPane;
-import lvlEditor.TopMenu.MenuPanel;
+import lvleditor.mappane.MapScrollPane;
+import lvleditor.sidemenu.GameObjectWrapper;
+import lvleditor.sidemenu.ItemsScrollPane;
+import lvleditor.topmenu.MenuPanel;
 import map.Cube;
 import map.Lvl;
 

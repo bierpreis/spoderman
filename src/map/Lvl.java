@@ -1,6 +1,6 @@
 package map;
 
-import lvlEditor.TopMenu.FileAlreadyExistsDialog;
+import lvleditor.topmenu.FileAlreadyExistsDialog;
 
 import java.awt.*;
 import java.io.*;

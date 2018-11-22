@@ -1,7 +1,7 @@
-package lvlEditor.SideMenu;
+package lvleditor.sidemenu;
 
 
-import lvlEditor.MapPane.Eraser;
+import lvleditor.mappane.Eraser;
 import map.*;
 import map.Gold;
 import player.Snepbek;

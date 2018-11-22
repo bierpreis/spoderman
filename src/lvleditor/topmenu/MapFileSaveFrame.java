@@ -1,4 +1,4 @@
-package lvlEditor.TopMenu;
+package lvleditor.topmenu;
 
 
 import javax.swing.JFileChooser;

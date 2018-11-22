@@ -1,4 +1,4 @@
-package lvlEditor.SideMenu;
+package lvleditor.sidemenu;
 
 import map.BasicGameObject;
 

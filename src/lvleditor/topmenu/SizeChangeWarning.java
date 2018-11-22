@@ -1,6 +1,6 @@
-package lvlEditor.TopMenu;
+package lvleditor.topmenu;
 
-import lvlEditor.MapPane.MapScrollPane;
+import lvleditor.mappane.MapScrollPane;
 import map.Lvl;
 
 import javax.swing.*;

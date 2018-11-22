@@ -1,4 +1,4 @@
-package mainMenu;
+package mainmenu;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
