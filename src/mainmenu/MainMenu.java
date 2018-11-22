@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.Game;
-import map.Action;
+import game.Action;
 import game.Config;
 import game.KeyHandler;
 

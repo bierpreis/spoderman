@@ -1,7 +1,6 @@
 package game;
 
 import graphics.Frame;
-import map.Action;
 import map.Lvl;
 import graphics.Camera;
 import player.Player;
@@ -102,4 +101,9 @@ public class Game {
     public Action getNextAction() {
         return action;
     }
+
+    public enum Action {
+        RUNNING, LVLUP, EXIT
+    }
+
 }
