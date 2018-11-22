@@ -2,7 +2,7 @@ package map;
 
 import java.awt.*;
 
-public class Gold extends UnitGameObject implements Collectable {
+public class Gold extends UnitGameObject {
 
     private boolean isCollected = false;
 

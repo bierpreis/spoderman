@@ -1,13 +1,12 @@
 package player;
 
-import map.Collectable;
 import map.UnitGameObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
-public abstract class AbstractHat extends UnitGameObject implements Collectable {
+public abstract class AbstractHat extends UnitGameObject {
 
 
     public AbstractHat(int x, int y) {
@@ -17,7 +16,6 @@ public abstract class AbstractHat extends UnitGameObject implements Collectable 
         createBoundings();
     }
 
-    @Override
     public boolean checkIfCollected(Rectangle playerBounding) {
         return (playerBounding.intersects(bounding));
 
