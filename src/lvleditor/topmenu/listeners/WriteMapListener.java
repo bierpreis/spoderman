@@ -1,4 +1,4 @@
-package lvleditor.topmenu.Listeners;
+package lvleditor.topmenu.listeners;
 
 import lvleditor.topmenu.MapFileSaveFrame;
 import map.Lvl;

@@ -5,9 +5,6 @@ import game.Config;
 import java.awt.image.BufferedImage;
 
 public class Message {
-
-    //todo: sticky message
-
     private final BufferedImage[] messagePicArray;
     private boolean isMessageFinal = false;
 

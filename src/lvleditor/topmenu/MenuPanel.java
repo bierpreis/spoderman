@@ -2,10 +2,10 @@ package lvleditor.topmenu;
 
 
 import lvleditor.mappane.MapScrollPane;
-import lvleditor.topmenu.Listeners.ChangeSizeListener;
-import lvleditor.topmenu.Listeners.LoadMapListener;
-import lvleditor.topmenu.Listeners.NewMapListener;
-import lvleditor.topmenu.Listeners.WriteMapListener;
+import lvleditor.topmenu.listeners.ChangeSizeListener;
+import lvleditor.topmenu.listeners.LoadMapListener;
+import lvleditor.topmenu.listeners.NewMapListener;
+import lvleditor.topmenu.listeners.WriteMapListener;
 import map.Lvl;
 
 import javax.swing.*;
