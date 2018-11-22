@@ -16,7 +16,7 @@ public class Config {
     public static final int screenX = 800;
     public static final int screenY = 600;
 
-    public static final int timeJumpingUp = 180;
+    public static final int timeJumpingUp = 250;
     public static final int minTimeBetweenJumps = 600;
     public static final int escTime = 2000;
     public static final int enemyMoveSpeed = 1;
