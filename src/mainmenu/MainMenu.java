@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.Game;
-import game.Action;
 import game.Config;
 import game.KeyHandler;
 
@@ -129,11 +128,11 @@ public class MainMenu extends JFrame {
 
     private void runGame(int lvl) {
         setVisible(false);
-        Action nextAction;
+        Game.Action nextAction;
         Game game = new Game(lvl, keyHandler);
         nextAction = game.getNextAction();
         game.stop();
-        if (nextAction.equals(Action.LVLUP))
+        if (nextAction.equals(Game.Action.LVLUP))
             runGame(lvl + 1);
         setVisible(true);
     }

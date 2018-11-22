@@ -53,6 +53,7 @@ public class Game {
 
             long updateLength = System.currentTimeMillis() - startTime;
 
+            System.out.println("update length: " + updateLength + "ms");
             sleep((int) (Config.msPerFrame - updateLength));
         }
     }
