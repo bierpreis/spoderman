@@ -4,7 +4,7 @@ package lvleditor.sidemenu;
 import lvleditor.mappane.Eraser;
 import map.*;
 import map.Gold;
-import player.Snepbek;
+import map.Snepbek;
 
 import javax.swing.*;
 import java.awt.*;

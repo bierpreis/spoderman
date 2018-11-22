@@ -1,4 +1,4 @@
-package player;
+package map;
 
 
 public class Snepbek extends AbstractHat {

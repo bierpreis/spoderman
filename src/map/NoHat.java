@@ -1,4 +1,6 @@
-package player;
+package map;
+
+import map.AbstractHat;
 
 public class NoHat extends AbstractHat {
 

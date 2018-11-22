@@ -1,4 +1,4 @@
-package player;
+package map;
 
 import map.UnitGameObject;
 
@@ -26,7 +26,7 @@ public abstract class AbstractHat extends UnitGameObject {
     }
 
     public void updateBounding(Rectangle playerBounding) {
-        bounding.x = playerBounding.x;
-        bounding.y = playerBounding.y - look.getHeight() + 10;
+        bounding.x = playerBounding.x ;
+        bounding.y = playerBounding.y - look.getHeight();
     }
 }
