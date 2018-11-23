@@ -71,6 +71,7 @@ public abstract class UnitGameObject extends BasicGameObject {
     }
 
     protected void checkCubeCollisions(Cube[][] cubeArray) {
+        //todo: improve efficency
         onRightSide = false;
         onLeftSide = false;
         onGround = false;
