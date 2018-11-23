@@ -6,6 +6,10 @@ import graphics.Camera;
 import player.Player;
 import mainmenu.MainMenu;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 public class Game {
 
     private final Player player;
@@ -29,6 +33,8 @@ public class Game {
 
     public static void main(String[] args) {
 
+        //loadPropertes();
+
         MainMenu menu = new MainMenu();
         menu.showMenu();
 
@@ -37,6 +43,8 @@ public class Game {
         System.exit(0);
 
     }
+
+
 
     private void start() {
         Sound.MONEY.play();
@@ -53,7 +61,7 @@ public class Game {
 
             long updateLength = System.currentTimeMillis() - startTime;
 
-            System.out.println("update length: " + updateLength + "ms");
+            //System.out.println("update length: " + updateLength + "ms");
             sleep((int) (Config.msPerFrame - updateLength));
         }
     }

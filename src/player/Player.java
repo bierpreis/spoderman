@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.List;
+import java.util.Properties;
+import java.util.Scanner;
 
 
 import game.Config;
@@ -25,6 +27,7 @@ public class Player extends UnitGameObject {
     private int goldCollected = 0;
     private int kills = 0;
     private int lifes = 3;
+    private int moveSpeed;
 
     private int timeDead = 0;
 
@@ -42,6 +45,7 @@ public class Player extends UnitGameObject {
 
         createBoundings();
 
+        moveSpeed =  Integer.parseInt(Config.get("playerMoveSpeed"));
 
         this.lvl = lvl;
         this.keyHandler = keyHandler;
@@ -127,12 +131,12 @@ public class Player extends UnitGameObject {
         gravity(lvl.getCubes());
 
         if (keyHandler.getLeft() && !onLeftSide) {
-            bounding.x -= Config.playerMoveSpeed;
+            bounding.x -= moveSpeed;
             isLookingRight = false;
         }
 
         if (keyHandler.getRight() && !onRightSide) {
-            bounding.x += Config.playerMoveSpeed;
+            bounding.x += moveSpeed;
             isLookingRight = true;
 
         }

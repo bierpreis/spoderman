@@ -1,8 +1,25 @@
 package game;
 
 
-public class Config {
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
+public class Config {
+    private static String pathToProperties = "./src/resources/config.properties";
+
+    private static Properties properties;
+
+    static {
+        properties = new Properties();
+        try {
+            properties.load(new FileInputStream(pathToProperties));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+       // System.out.println("property: " + Integer.parseInt(properties.getProperty("playerMoveSpeed")));
+    }
 
     public static final int playerMoveSpeed = 5;
     public static final int playerRespawnTime = 2000;
@@ -27,11 +44,13 @@ public class Config {
     public static final int windowY = 200;
 
 
+    public static final int msPerFrame = 1000 / targetFps;
 
 
-    public static final int msPerFrame = 1000/targetFps;
+    public static String get(String propertyName){
+        return properties.getProperty(propertyName);
 
 
-
+    }
 
 }
