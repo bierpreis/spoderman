@@ -65,7 +65,7 @@ public abstract class UnitGameObject extends BasicGameObject {
         }
 
         if (falling) {
-            bounding.y = gravity;
+            bounding.y += gravity;
         }
 
     }
