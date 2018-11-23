@@ -13,6 +13,7 @@ import game.Config;
 public abstract class AbstractEnemy extends UnitGameObject {
     private boolean movingRight = true;
     private boolean alive = true;
+    private int enemyMoveSpeed = Integer.parseInt(Config.get("enemyMoveSpeed"));
 
     String pathToImage = "resources/images/" + this.getClass().getSimpleName() + ".png";
 
@@ -44,12 +45,12 @@ public abstract class AbstractEnemy extends UnitGameObject {
     private void walk() {
         setMoveDirection();
         if (movingRight) {
-            bounding.x += Config.enemyMoveSpeed;
-            topBounding.x += Config.enemyMoveSpeed;
+            bounding.x += enemyMoveSpeed;
+            topBounding.x += enemyMoveSpeed;
         }
         if (!movingRight) {
-            bounding.x -= Config.enemyMoveSpeed;
-            topBounding.x -= Config.enemyMoveSpeed;
+            bounding.x -= enemyMoveSpeed;
+            topBounding.x -= enemyMoveSpeed;
         }
     }
 

@@ -4,7 +4,9 @@ import game.Config;
 import player.Player;
 
 public class Camera {
-    float x, y;
+    private float x, y;
+    private int screenX = Integer.parseInt(Config.get("screenX"));
+    private int screenY = Integer.parseInt(Config.get("screenY"));
 
     public Camera(float x, float y) {
         this.x = x;
@@ -28,8 +30,8 @@ public class Camera {
     }
 
     public void tick(Player player) {
-        x = -player.getX() + Config.screenX / 2;
-        y = -player.getY() + Config.screenY / 2;
+        x = -player.getX() + screenX / 2;
+        y = -player.getY() + screenY / 2;
     }
 
 }

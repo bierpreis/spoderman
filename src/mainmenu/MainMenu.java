@@ -14,6 +14,15 @@ public class MainMenu extends JFrame {
 
     private final Button[] buttonArray;
     private boolean showingMenu = true;
+    String msString = Config.get("msPerFrame");
+    private int msPerFrame = Integer.parseInt(Config.get("msPerFrame"));
+
+    //todo: rename this variables
+    private int screenX = Integer.parseInt(Config.get("screenX"));
+    private int screenY = Integer.parseInt(Config.get("screenY"));
+
+    private int windowX = Integer.parseInt(Config.get("windowX"));
+    private int windowY = Integer.parseInt(Config.get("windowY"));
 
 
     private final Screen screen;
@@ -26,10 +35,10 @@ public class MainMenu extends JFrame {
 
         screen = new Screen();
 
-        screen.setBounds(0, 0, Config.screenX, Config.screenY);
+        screen.setBounds(0, 0, screenX, screenY);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(Config.windowX, Config.windowY, Config.screenX, Config.screenY);
+        setBounds(windowX, windowY, screenX, screenY);
         setVisible(true);
         setResizable(false);
 
@@ -146,7 +155,7 @@ public class MainMenu extends JFrame {
             doButtonActions();
 
             try {
-                Thread.sleep(Config.msPerFrame);
+                Thread.sleep(msPerFrame);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

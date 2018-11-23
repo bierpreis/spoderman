@@ -19,7 +19,9 @@ public class Game {
     private Action action = Action.RUNNING;
     private boolean showEscDialog = false;
     private int escapingTime = 0;
+    private int msPerFrame = Integer.parseInt(Config.get("msPerFrame"));
     private Camera camera;
+    private int escTime = Integer.parseInt(Config.get("msPerFrame"));
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
         lvl = new Lvl();
@@ -62,7 +64,7 @@ public class Game {
             long updateLength = System.currentTimeMillis() - startTime;
 
             //System.out.println("update length: " + updateLength + "ms");
-            sleep((int) (Config.msPerFrame - updateLength));
+            sleep((int) (msPerFrame - updateLength));
         }
     }
 
@@ -97,9 +99,9 @@ public class Game {
             if (keyHandler.getEnter())
                 return Action.EXIT;
 
-            escapingTime += Config.msPerFrame;
+            escapingTime += msPerFrame;
             if (keyHandler.getEnter()) action = Action.EXIT;
-            if (escapingTime > Config.escTime) {
+            if (escapingTime > escTime) {
                 escapingTime = 0;
                 showEscDialog = false;
             }

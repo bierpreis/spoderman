@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
 
 
 import game.Config;
@@ -21,8 +19,10 @@ public class Player extends UnitGameObject {
 
     private boolean isLookingRight = true;
     private AbstractHat hat;
+    private int msPerFrame = Integer.parseInt(Config.get("msPerFrame"));
 
     private boolean alive = true;
+    private int playerRespawnTime = Integer.parseInt(Config.get("playerRespawnTime"));
 
     private int goldCollected = 0;
     private int kills = 0;
@@ -114,9 +114,9 @@ public class Player extends UnitGameObject {
     private void respawn() {
         if (!alive && lifes > 0) {
 
-            timeDead += Config.msPerFrame;
+            timeDead += msPerFrame;
 
-            if (keyHandler.getSpace() && timeDead > Config.playerRespawnTime) {
+            if (keyHandler.getSpace() && timeDead > playerRespawnTime) {
                 alive = true;
 
                 createMessage("respawn  now am angri as fuk");

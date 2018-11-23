@@ -10,6 +10,8 @@ class Button extends Rectangle {
 
     private static boolean locked = true;
     private static int lockTimer = 0;
+    private int msPerFrame = Integer.parseInt(Config.get("msPerFrame"));
+    private int buttonLockTime = Integer.parseInt(Config.get("buttonLockTime"));
 
     private boolean focus = false;
 
@@ -51,9 +53,9 @@ class Button extends Rectangle {
 
     void update() {
         if (locked) {
-            lockTimer += Config.msPerFrame;
+            lockTimer += msPerFrame;
         }
-        if (locked && lockTimer > Config.buttonLockTime) {
+        if (locked && lockTimer > buttonLockTime) {
             lockTimer = 0;
             locked = false;
         }

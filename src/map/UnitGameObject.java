@@ -11,7 +11,7 @@ public abstract class UnitGameObject extends BasicGameObject {
 
     protected boolean onTop, onGround, onRightSide, onLeftSide;
 
-
+    private int gravity = Integer.parseInt(Config.get("gravity"));
     private int speed = 0;
     public Rectangle topBounding;
     protected Rectangle botBounding;
@@ -65,7 +65,7 @@ public abstract class UnitGameObject extends BasicGameObject {
         }
 
         if (falling) {
-            bounding.y = bounding.y + Config.gravity;
+            bounding.y = gravity;
         }
 
     }

@@ -17,6 +17,10 @@ public class Frame extends JFrame {
 
     private Message message = null;
     private final BufferStrategy bufferStrategy;
+    private int windowX = Integer.parseInt(Config.get("windowX"));
+    private int windowY = Integer.parseInt(Config.get("windowY"));
+    private int screenX = Integer.parseInt(Config.get("screenX"));
+    private int screenY = Integer.parseInt(Config.get("screenY"));
 
     public Frame(KeyHandler keyHandler) {
         super("spodermens advenshur");
@@ -24,7 +28,7 @@ public class Frame extends JFrame {
         addKeyListener(keyHandler);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(Config.windowX, Config.windowY, Config.screenX, Config.screenY);
+        setBounds(windowX, windowY, screenX, screenY);
 
         setResizable(false);
         setVisible(true);
