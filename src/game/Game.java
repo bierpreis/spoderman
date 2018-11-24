@@ -21,7 +21,7 @@ public class Game {
     private int escapingTime = 0;
     private int msPerFrame = Integer.parseInt(Config.get("msPerFrame"));
     private Camera camera;
-    private int escTime = Integer.parseInt(Config.get("msPerFrame"));
+    private int escTime = Integer.parseInt(Config.get("escTime"));
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
         lvl = new Lvl();
@@ -45,7 +45,6 @@ public class Game {
         System.exit(0);
 
     }
-
 
 
     private void start() {
@@ -85,7 +84,6 @@ public class Game {
     }
 
     private Action checkNextAction() {
-
 
         if (lvl.isBigmekCollected())
             if (keyHandler.getEnter())
