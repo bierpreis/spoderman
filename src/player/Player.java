@@ -40,7 +40,7 @@ public class Player extends UnitGameObject {
     private Jump jump;
 
     public Player(Lvl lvl, KeyHandler keyHandler) {
-        super(000, 30);
+        super(0, 30);
         createLook();
 
         createBoundings();
@@ -218,7 +218,7 @@ public class Player extends UnitGameObject {
 
     @Override
     public BufferedImage getLook() {
-
+        //todo: create eneum for this?
         if (!alive)
             look = lookDead;
 

@@ -67,7 +67,6 @@ public abstract class UnitGameObject extends BasicGameObject {
         if (falling) {
             bounding.y += gravity;
         }
-
     }
 
     protected void checkCubeCollisions(Cube[][] cubeArray) {
@@ -90,7 +89,6 @@ public abstract class UnitGameObject extends BasicGameObject {
                 }
             }
         }
-
     }
 
     public void update(Cube[][] cubeArray) {
