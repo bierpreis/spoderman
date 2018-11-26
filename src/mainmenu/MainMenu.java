@@ -14,15 +14,13 @@ public class MainMenu extends JFrame {
 
     private final Button[] buttonArray;
     private boolean showingMenu = true;
-    String msString = Config.get("msPerFrame");
     private int msPerFrame = Integer.parseInt(Config.get("msPerFrame"));
+    
+    private int frameXSize = Integer.parseInt(Config.get("screenX"));
+    private int frameYSize = Integer.parseInt(Config.get("screenY"));
 
-    //todo: rename this variables
-    private int screenX = Integer.parseInt(Config.get("screenX"));
-    private int screenY = Integer.parseInt(Config.get("screenY"));
-
-    private int windowX = Integer.parseInt(Config.get("windowX"));
-    private int windowY = Integer.parseInt(Config.get("windowY"));
+    private int frameXPoint = Integer.parseInt(Config.get("windowX"));
+    private int frameYPoint = Integer.parseInt(Config.get("windowY"));
 
 
     private final Screen screen;
@@ -35,10 +33,10 @@ public class MainMenu extends JFrame {
 
         screen = new Screen();
 
-        screen.setBounds(0, 0, screenX, screenY);
+        screen.setBounds(0, 0, frameXSize, frameYSize);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(windowX, windowY, screenX, screenY);
+        setBounds(frameXPoint, frameYPoint, frameXSize, frameYSize);
         setVisible(true);
         setResizable(false);
 
@@ -59,7 +57,7 @@ public class MainMenu extends JFrame {
     private class Screen extends JLabel {
 
         protected void paintComponent(Graphics g) {
-            // super.paintComponent(g);
+            super.paintComponent(g);
             drawButtons(g);
         }
     }

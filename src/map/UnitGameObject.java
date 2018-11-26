@@ -75,6 +75,8 @@ public abstract class UnitGameObject extends BasicGameObject {
         onLeftSide = false;
         onGround = false;
         onTop = false;
+        int niceCubeX = bounding.x *Cube.getSize() - 100;
+
         for (int cubeX = 0; cubeX < cubeArray.length; cubeX++) {
             for (Cube cube : cubeArray[cubeX]) {
                 if (cube.isActive()) {
