@@ -57,7 +57,6 @@ public class Player extends UnitGameObject {
 
     public void update() {
         super.update(lvl.getCubes());
-        System.out.println("player: " + (bounding.x /Cube.getSize() - 3));
         hat.updateBounding(bounding);
         respawn();
         updateLook();

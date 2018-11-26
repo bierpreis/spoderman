@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class LoadMapListener implements ActionListener {
     private Lvl lvl;
-    JScrollPane mapScrollPane;
+    private JScrollPane mapScrollPane;
 
 
     public LoadMapListener(Lvl lvl, JScrollPane mapScrollPane) {

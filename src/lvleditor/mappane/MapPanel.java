@@ -14,7 +14,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.lang.reflect.Constructor;
 
 public class MapPanel extends JPanel {
-    Lvl lvl;
+    private Lvl lvl;
 
     public MapPanel(Lvl lvl, GameObjectWrapper objectWrapper) {
         this.lvl = lvl;

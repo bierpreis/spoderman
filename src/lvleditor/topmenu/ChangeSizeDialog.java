@@ -14,8 +14,8 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
 
     private JLabel errorLabel;
 
-    JTextField widthInput;
-    JTextField heightInput;
+    private JTextField widthInput;
+    private JTextField heightInput;
 
     public ChangeSizeDialog(Lvl lvl, MapScrollPane mapScrollPane) {
 

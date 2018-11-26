@@ -20,7 +20,7 @@ public abstract class UnitGameObject extends BasicGameObject {
     protected BufferedImage look;
 
 
-    public UnitGameObject(int x, int y) {
+    protected UnitGameObject(int x, int y) {
         super(x, y);
     }
 

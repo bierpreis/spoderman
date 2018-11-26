@@ -15,9 +15,9 @@ public abstract class AbstractEnemy extends UnitGameObject {
     private boolean alive = true;
     private int enemyMoveSpeed = Integer.parseInt(Config.get("enemyMoveSpeed"));
 
-    String pathToImage = "resources/images/" + this.getClass().getSimpleName() + ".png";
+    private String pathToImage = "resources/images/" + this.getClass().getSimpleName() + ".png";
 
-    String pathToLookDead = "./src/resources/images/blood.png";
+    private String pathToLookDead = "./src/resources/images/blood.png";
 
 
     public void update(Cube[][] cubeArray) {

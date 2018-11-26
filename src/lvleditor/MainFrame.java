@@ -20,7 +20,7 @@ public class MainFrame extends Frame {
 
     private Lvl lvl;
 
-    public MainFrame() {
+    private MainFrame() {
 
         GameObjectWrapper objectWrapper = new GameObjectWrapper();
         objectWrapper.set(new Cube(0, 0));

@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 public class MapFileSaveFrame extends JFrame {
 
-    String requestedName = null;
+    private String requestedName = null;
 
 
     public MapFileSaveFrame() {
