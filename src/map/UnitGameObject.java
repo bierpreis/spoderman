@@ -70,14 +70,18 @@ public abstract class UnitGameObject extends BasicGameObject {
     }
 
     protected void checkCubeCollisions(Cube[][] cubeArray) {
-        //todo: improve efficency
+
         onRightSide = false;
         onLeftSide = false;
         onGround = false;
         onTop = false;
-        int niceCubeX = bounding.x *Cube.getSize() - 100;
 
-        for (int cubeX = 0; cubeX < cubeArray.length; cubeX++) {
+        //this calculates the cube from which collisions will be checked
+        //to avoid a lot of unnessecary computing
+        int niceCubeX = (bounding.x / Cube.getSize() - 3);
+        if (niceCubeX < 0) niceCubeX = 0;
+
+        for (int cubeX = niceCubeX; cubeX < niceCubeX + 6; cubeX++) {
             for (Cube cube : cubeArray[cubeX]) {
                 if (cube.isActive()) {
                     if (leftBounding.intersects(cube.getBounding()))
