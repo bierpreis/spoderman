@@ -69,13 +69,6 @@ public class Player extends UnitGameObject {
         }
     }
 
-    private void updateLook() {
-        if (!alive)
-            look = lookDead;
-        else if (isLookingRight)
-            look = lookingRight;
-        else look = lookingLeft;
-    }
 
     private void checkHats(AbstractHat hat) {
         if (hat.checkIfCollected(bounding))
@@ -105,9 +98,7 @@ public class Player extends UnitGameObject {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        getLook();
-
+        look = lookingRight;
     }
 
 
@@ -215,18 +206,12 @@ public class Player extends UnitGameObject {
 
     }
 
-
-    @Override
-    public BufferedImage getLook() {
-        //todo: create eneum for this?
+    private void updateLook() {
         if (!alive)
             look = lookDead;
-
-        if (isLookingRight)
+        else if (isLookingRight)
             look = lookingRight;
         else look = lookingLeft;
-
-        return look;
     }
 
     public int getGoldCount() {
