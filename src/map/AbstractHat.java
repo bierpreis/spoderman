@@ -1,7 +1,5 @@
 package map;
 
-import map.UnitGameObject;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

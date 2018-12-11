@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.List;
+import java.util.Optional;
 
 
 import game.Config;
@@ -18,7 +19,7 @@ public class Player extends UnitGameObject {
 
 
     private boolean isLookingRight = true;
-    private AbstractHat hat;
+    private Optional<AbstractHat> hat;
     private int msPerFrame = Integer.parseInt(Config.get("msPerFrame"));
 
     private boolean alive = true;
@@ -45,19 +46,21 @@ public class Player extends UnitGameObject {
 
         createBoundings();
 
-        moveSpeed =  Integer.parseInt(Config.get("playerMoveSpeed"));
+        moveSpeed = Integer.parseInt(Config.get("playerMoveSpeed"));
 
         this.lvl = lvl;
         this.keyHandler = keyHandler;
 
         createMessage("nao i need to find teh bikmek");
         jump = new Jump();
-        hat = new NoHat(bounding.x, bounding.y);
+        hat = Optional.empty();
     }
 
     public void update() {
         super.update(lvl.getCubes());
-        hat.updateBounding(bounding);
+        //hat.ifPresent(hat -> updateBounding(bounding)); //todo: make this lambda work
+        if (hat.isPresent())
+            hat.get().updateBounding(bounding);
         respawn();
         updateLook();
         if (alive) {
@@ -72,20 +75,16 @@ public class Player extends UnitGameObject {
 
     private void checkHats(AbstractHat hat) {
         if (hat.checkIfCollected(bounding))
-            this.hat = hat;
+            this.hat = Optional.of(hat);
     }
 
     public void drawHat(Graphics g) {
-        hat.draw(g);
+        hat.ifPresent(hat -> draw(g));
     }
 
     private void jump() {
         if (jump.checkIfJump(keyHandler.getSpace(), onGround, onTop))
             jump.performJump(bounding, onTop);
-    }
-
-    public AbstractHat getHat() {
-        return hat;
     }
 
     @Override
