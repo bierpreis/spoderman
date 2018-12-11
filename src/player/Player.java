@@ -13,7 +13,6 @@ import game.KeyHandler;
 import game.Sound;
 import graphics.Message;
 import map.*;
-import map.AbstractEnemy;
 
 public class Player extends UnitGameObject {
 

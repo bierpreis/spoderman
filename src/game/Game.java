@@ -6,10 +6,6 @@ import graphics.Camera;
 import player.Player;
 import mainmenu.MainMenu;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-
 public class Game {
 
     private final Player player;
