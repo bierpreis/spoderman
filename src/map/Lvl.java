@@ -263,7 +263,7 @@ public class Lvl {
     }
 
     private UnitGameObject createObjectFromString(String originalString) {
-        String objectPatternString = "^[A-Z]{1}[a-z]+";
+        String objectPatternString = "^[A-Z][a-z]+";
 
 
         Pattern objectPattern = Pattern.compile(objectPatternString);
