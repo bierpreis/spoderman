@@ -50,7 +50,7 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
 
         JButton okButton = new JButton("k");
         buttonPanel.add(okButton);
-        okButton.addActionListener(new ActionListener() {
+        okButton.addActionListener(new ActionListener() { //todo lambda
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (checkIfValuesAreIntegers(widthInput.getText(), heightInput.getText()))
@@ -91,9 +91,8 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
             errorLabel.setVisible(true);
         }
 
-        if (requestedHeight > 0 && requestedWidth > 0)
-            return true;
-        else return false;
+        return (requestedHeight > 0 && requestedWidth > 0);
+
 
     }
 

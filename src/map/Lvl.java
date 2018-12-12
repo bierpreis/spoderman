@@ -315,7 +315,7 @@ public class Lvl {
         }
 
         Iterator<UnitGameObject> iterator = gameObjectList.iterator();
-        while (iterator.hasNext()) {
+        while (iterator.hasNext()) {//todo this suggest
             UnitGameObject currentObject = iterator.next();
             if (eraserBounding.intersects(currentObject.bounding))
                 iterator.remove();
