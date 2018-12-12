@@ -57,9 +57,7 @@ public class Player extends UnitGameObject {
 
     public void update() {
         super.update(lvl.getCubes());
-        //hat.ifPresent(hat -> updateBounding(bounding)); //todo: make this lambda work
-        if (hat.isPresent())
-            hat.get().updateBounding(bounding);
+        hat.ifPresent(hat -> hat.updateBounding(bounding));
         respawn();
         updateLook();
         if (alive) {
