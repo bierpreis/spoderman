@@ -305,7 +305,7 @@ public class Lvl {
     }
 
     public void eraseGameObjects(int x, int y) {
-        Rectangle eraserBounding = new Rectangle(x, y, Cube.getSize(), Cube.getSize());
+        Rectangle eraserBounding = new Rectangle(x, y,1, 1);
         for (Cube[] cubes : cubeArray) {
             for (Cube cube : cubes) {
                 if (eraserBounding.intersects(cube.getBounding()))
@@ -314,12 +314,7 @@ public class Lvl {
             }
         }
 
-        Iterator<UnitGameObject> iterator = gameObjectList.iterator();
-        while (iterator.hasNext()) {//todo this suggest
-            UnitGameObject currentObject = iterator.next();
-            if (eraserBounding.intersects(currentObject.bounding))
-                iterator.remove();
-        }
+        gameObjectList.removeIf(gameObject-> eraserBounding.intersects(gameObject.bounding));
     }
 
 
