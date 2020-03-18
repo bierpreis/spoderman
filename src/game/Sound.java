@@ -7,6 +7,9 @@ import java.io.File;
 public enum Sound {
     MONEY, PLAYER_KILLED, PLAYER_DEAD, ENEMY_KILLED, BIGMEK;
 
+    //todo: all private
+
+    //todo: rename?
     File ringSoundFile;
     AudioInputStream soundStream;
     AudioFormat soundFormat;
@@ -25,6 +28,8 @@ public enum Sound {
             info = new DataLine.Info(Clip.class, soundFormat);
 
             ringSoundClip = (Clip) AudioSystem.getLine(info);
+
+            //todo: this triggeres exception. maybe on the second use? maybe close correctly?
             ringSoundClip.open(soundStream);
         } catch (Exception e) {
             e.printStackTrace();
