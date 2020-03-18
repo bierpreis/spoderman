@@ -50,15 +50,13 @@ public class ChangeSizeDialog extends JDialog implements ActionListener {
 
         JButton okButton = new JButton("k");
         buttonPanel.add(okButton);
-        okButton.addActionListener(new ActionListener() { //todo lambda
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (checkIfValuesAreIntegers(widthInput.getText(), heightInput.getText()))
-                    if (checkIfResizeIsSafe(lvl, requestedWidth, requestedHeight))
-                        lvl.changeSize(requestedWidth, requestedHeight);
-                mapScrollPane.repaint();
-                dispose();
-            }
+
+        okButton.addActionListener(actionEvent -> {
+            if (checkIfValuesAreIntegers(widthInput.getText(), heightInput.getText()))
+                if (checkIfResizeIsSafe(lvl, requestedWidth, requestedHeight))
+                    lvl.changeSize(requestedWidth, requestedHeight);
+            mapScrollPane.repaint();
+            dispose();
         });
 
         errorLabel = new JLabel("Values are not valid!");

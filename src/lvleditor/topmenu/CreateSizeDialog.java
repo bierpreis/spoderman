@@ -47,14 +47,12 @@ public class CreateSizeDialog extends JDialog implements ActionListener {
 
         JButton okButton = new JButton("k");
         buttonPanel.add(okButton);
-        okButton.addActionListener(new ActionListener() {  //todo lambda
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (checkIfValuesOk(widthInput.getText(), heightInput.getText()))
-                    lvl.init(requestedWidth, requestedHeight);
-                mapScrollPane.repaint();
-                dispose();
-            }
+
+        okButton.addActionListener(actionEvent -> {
+            if (checkIfValuesOk(widthInput.getText(), heightInput.getText()))
+                lvl.init(requestedWidth, requestedHeight);
+            mapScrollPane.repaint();
+            dispose();
         });
 
         errorLabel = new JLabel("Values are not valid!");
