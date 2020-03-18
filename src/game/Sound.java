@@ -34,7 +34,10 @@ public enum Sound {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //todo: this seems to fix problem short but takes long time
         ringSoundClip.start();
+        ringSoundClip.flush();
+        ringSoundClip.close();
     }
 
 
