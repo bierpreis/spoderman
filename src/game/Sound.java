@@ -7,7 +7,7 @@ import java.io.File;
 public enum Sound {
     MONEY, PLAYER_KILLED, PLAYER_DEAD, ENEMY_KILLED, BIGMEK;
 
-    //todo: rename?
+    //todo: rename? make stuff local. change?
     private File ringSoundFile;
     private AudioInputStream soundStream;
     private AudioFormat soundFormat;
@@ -27,7 +27,7 @@ public enum Sound {
 
             ringSoundClip = (Clip) AudioSystem.getLine(info);
 
-            //todo: this triggeres exception. maybe on the second use? maybe close correctly?
+            //todo: this triggeres exception. maybe all in constructor but this?
             ringSoundClip.open(soundStream);
         } catch (Exception e) {
             e.printStackTrace();
