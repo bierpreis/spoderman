@@ -7,14 +7,12 @@ import java.io.File;
 public enum Sound {
     MONEY, PLAYER_KILLED, PLAYER_DEAD, ENEMY_KILLED, BIGMEK;
 
-    //todo: all private
-
     //todo: rename?
-    File ringSoundFile;
-    AudioInputStream soundStream;
-    AudioFormat soundFormat;
-    DataLine.Info info;
-    Clip ringSoundClip;
+    private File ringSoundFile;
+    private AudioInputStream soundStream;
+    private AudioFormat soundFormat;
+    private DataLine.Info info;
+    private Clip ringSoundClip;
 
     Sound() {
 
