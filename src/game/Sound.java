@@ -20,6 +20,7 @@ public enum Sound {
     }
 
     public void play() {
+        long startTime = 0;
         try {
             soundStream = AudioSystem.getAudioInputStream(ringSoundFile);
             soundFormat = soundStream.getFormat();
@@ -27,17 +28,22 @@ public enum Sound {
 
             ringSoundClip = (Clip) AudioSystem.getLine(info);
 
-            //todo: this triggeres exception. maybe all in constructor but this?
+            startTime = System.currentTimeMillis();
+
+            //todo: this line takes all the time!!
             ringSoundClip.open(soundStream);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+
         ringSoundClip.start();
 
 
-        //todo: this fixes problem but takes long time
+
         ringSoundClip.close();
+        System.out.println("time: " + (System.currentTimeMillis()-startTime));
     }
 
 
