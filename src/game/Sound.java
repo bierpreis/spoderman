@@ -7,7 +7,7 @@ import java.io.File;
 public enum Sound {
     MONEY, PLAYER_KILLED, PLAYER_DEAD, ENEMY_KILLED, BIGMEK;
 
-    //todo: rename? make stuff local. change?
+    //todo: rename?
     private File ringSoundFile;
     private AudioInputStream soundStream;
     private AudioFormat soundFormat;
@@ -15,7 +15,6 @@ public enum Sound {
     private Clip ringSoundClip;
 
     Sound() {
-
         ringSoundFile = new File("./src/resources/sound/" + name() + ".wav");
     }
 
@@ -25,7 +24,6 @@ public enum Sound {
             @Override
             public void run() {
 
-
                 try {
                     soundStream = AudioSystem.getAudioInputStream(ringSoundFile);
                     soundFormat = soundStream.getFormat();
@@ -33,26 +31,14 @@ public enum Sound {
 
                     ringSoundClip = (Clip) AudioSystem.getLine(info);
 
-
-                    //todo: this line takes all the time!!
                     ringSoundClip.open(soundStream);
 
-                } catch (
-                        Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
                 ringSoundClip.start();
-
-
                 ringSoundClip.close();
-
             }
-
-        }) {
-
-
-        };
+        });
     }
 }
