@@ -20,31 +20,39 @@ public enum Sound {
     }
 
     public void play() {
-        long startTime = 0;
-        try {
-            soundStream = AudioSystem.getAudioInputStream(ringSoundFile);
-            soundFormat = soundStream.getFormat();
-            info = new DataLine.Info(Clip.class, soundFormat);
 
-            ringSoundClip = (Clip) AudioSystem.getLine(info);
-
-            startTime = System.currentTimeMillis();
-
-            //todo: this line takes all the time!!
-            ringSoundClip.open(soundStream);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
 
-        ringSoundClip.start();
+                try {
+                    soundStream = AudioSystem.getAudioInputStream(ringSoundFile);
+                    soundFormat = soundStream.getFormat();
+                    info = new DataLine.Info(Clip.class, soundFormat);
+
+                    ringSoundClip = (Clip) AudioSystem.getLine(info);
 
 
+                    //todo: this line takes all the time!!
+                    ringSoundClip.open(soundStream);
 
-        ringSoundClip.close();
-        System.out.println("time: " + (System.currentTimeMillis()-startTime));
+                } catch (
+                        Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                ringSoundClip.start();
+
+
+                ringSoundClip.close();
+
+            }
+
+        }) {
+
+
+        };
     }
-
-
 }
