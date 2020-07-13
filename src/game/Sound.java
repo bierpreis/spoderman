@@ -3,7 +3,7 @@ package game;
 import javax.sound.sampled.*;
 import java.io.File;
 
-
+//todo: split functionallity and enum for signaling
 public enum Sound {
     MONEY, PLAYER_KILLED, PLAYER_DEAD, ENEMY_KILLED, BIGMEK;
 
