@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import game.Config;
 import game.KeyHandler;
+import game.Audio;
 import game.Sound;
 import graphics.Message;
 import map.*;
@@ -151,7 +152,7 @@ public class Player extends UnitGameObject {
                 gold.setCollected();
                 createMessage("monies");
                 goldCollected += 1;
-                Sound.MONEY.play();
+                Audio.play(Sound.MONEY);
 
             }
     }
@@ -161,7 +162,7 @@ public class Player extends UnitGameObject {
         if (!bigmek.getCollected())
             if (bounding.intersects(bigmek.getBounding())) {
                 bigmek.setCollected();
-                Sound.BIGMEK.play();
+                Audio.play(Sound.BIGMEK);
                 createMessage("press enter to enter lvl two", true);
                 lvl.setBigmekCollected();
 
@@ -179,7 +180,7 @@ public class Player extends UnitGameObject {
                 enemy.kill();
                 createMessage("lel rekt");
                 kills += 1;
-                Sound.ENEMY_KILLED.play();
+                Audio.play(Sound.ENEMY_KILLED);
                 return; //this ensures player wont be killed after he killed enemy
             }
 
@@ -190,11 +191,11 @@ public class Player extends UnitGameObject {
                 if (lifes > 0) {
 
                     createMessage("u got rekt 111  press spaec to respawn");
-                    Sound.PLAYER_KILLED.play();
+                    Audio.play(Sound.PLAYER_KILLED); //todo: put this before if stuff?!
                 }
                 if (lifes < 1) {
-                    Sound.PLAYER_KILLED.play();
-                    Sound.PLAYER_DEAD.play();
+                    Audio.play(Sound.PLAYER_KILLED);
+                    Audio.play(Sound.PLAYER_DEAD);
                     createMessage("g8 nao dis is mai end");
                 }
             }
