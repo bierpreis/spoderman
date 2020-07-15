@@ -16,7 +16,7 @@ public class Audio {
             //todo: null pointer here!
             try {
                 soundMap.put(sound, new File("./src/resources/sound/" + sound.name() + ".wav"));
-            }catch(NullPointerException e){
+            } catch (NullPointerException e) {
                 System.out.println("NPE Outting " + sound + " and "
                         + new File("./src/resources/sound/" + sound.name() + ".wav") + " into map ");
                 e.printStackTrace();
@@ -26,32 +26,39 @@ public class Audio {
     }
 
     public static void play(Sound sound) {
-
+        System.out.println("playing sound " + sound.name());
         new Thread(new Runnable() {
             @Override
             public void run() {
-                AudioInputStream soundStream;
-                AudioFormat soundFormat;
-                DataLine.Info info;
-                Clip soundClip;
+                while (true) {
+                    System.out.println("playing sound " + sound.name());
+                    System.out.println("until here..");
+                    AudioInputStream soundStream;
+                    AudioFormat soundFormat;
+                    DataLine.Info info;
+                    Clip soundClip;
 
-                try {
-                    soundStream = AudioSystem.getAudioInputStream(soundMap.get(sound));
-                    soundFormat = soundStream.getFormat();
-                    info = new DataLine.Info(Clip.class, soundFormat);
+                    try {
+                        soundStream = AudioSystem.getAudioInputStream(soundMap.get(sound));
+                        soundFormat = soundStream.getFormat();
+                        info = new DataLine.Info(Clip.class, soundFormat);
 
-                    soundClip = (Clip) AudioSystem.getLine(info);
+                        soundClip = (Clip) AudioSystem.getLine(info);
 
-                    soundClip.open(soundStream);
+                        soundClip.open(soundStream);
 
 
-                    soundClip.start();
-                    soundClip.close();
+                        soundClip.start();
+                        soundClip.close();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //todo: wtf this is never shown?!
+                    System.out.println("finished sound " + sound.name());
                 }
             }
-        });
+        }).start();
+
     }
 }
