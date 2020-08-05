@@ -17,8 +17,6 @@ public class Config {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-       // System.out.println("property: " + Integer.parseInt(properties.getProperty("playerMoveSpeed")));
     }
 
 

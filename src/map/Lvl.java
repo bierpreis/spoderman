@@ -245,7 +245,7 @@ public class Lvl {
         init(scanner.nextInt(), scanner.nextInt());
 
         if (br.readLine().equals("BEGIN_CUBES"))
-            System.out.println("reading cubes");
+            LOGGER.fine("reading cubes");
         String nextLine = br.readLine();
         while (!nextLine.equals("END_CUBES")) {
             scanner = new Scanner(nextLine);
@@ -256,14 +256,14 @@ public class Lvl {
         }
 
         if (br.readLine().equals("BEGIN_UNITS"))
-            System.out.println("reading unit objects");
+            LOGGER.fine("reading unit objects");
 
         nextLine = br.readLine();
         while (!nextLine.equals("END_UNITS")) {
             gameObjectList.add(createObjectFromString(nextLine));
             nextLine = br.readLine();
         }
-        System.out.println("finished creating map");
+        LOGGER.info("finished creating map");
     }
 
     private UnitGameObject createObjectFromString(String originalString) {

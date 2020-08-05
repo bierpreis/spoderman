@@ -75,7 +75,6 @@ public class Game {
 
             long updateLength = System.currentTimeMillis() - startTime;
 
-            //System.out.println("update length: " + updateLength + "ms");
             sleep((int) (msPerFrame - updateLength));
         }
     }
@@ -86,7 +85,7 @@ public class Game {
             try {
                 Thread.sleep(sleepTime);
             } catch (InterruptedException ie) {
-                System.out.println("interrupted !");
+                LOGGER.info("sleep in game loop interrupted");
             }
 
     }

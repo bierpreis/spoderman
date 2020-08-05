@@ -52,7 +52,7 @@ public class Audio {
                     soundClip.close();
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOGGER.severe(e.toString());
                 }
 
 

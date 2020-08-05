@@ -14,7 +14,6 @@ public class ItemsScrollPane extends JScrollPane {
         ItemsPanel itemsPanel = new ItemsPanel(objectWrapper);
         setViewportView(itemsPanel);
 
-        System.out.println("size;" + getSize());
 
     }
 

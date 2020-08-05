@@ -1,15 +1,19 @@
 package map;
 
 import game.Config;
+import game.Game;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public abstract class UnitGameObject extends BasicGameObject {
 
     protected boolean onTop, onGround, onRightSide, onLeftSide;
+
+    private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
 
     private int gravity = Integer.parseInt(Config.get("gravity"));
     private int speed = 0;
@@ -116,8 +120,8 @@ public abstract class UnitGameObject extends BasicGameObject {
         try {
             look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("resources/images/" + this.getClass().getSimpleName() + ".png"));
         } catch (IOException e) {
-            System.out.println("tried to get " + "resources/images/" + this.getClass().getSimpleName() + ".png");
-            e.printStackTrace();
+            LOGGER.severe("tried to get " + "resources/images/" + this.getClass().getSimpleName() + ".png");
+            LOGGER.severe(e.toString());
         }
     }
 }

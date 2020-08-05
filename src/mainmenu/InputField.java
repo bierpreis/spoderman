@@ -15,9 +15,8 @@ class InputField extends JTextField implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         //code= getText();
-        System.out.println("KeyPressed in Inputfield");
         if (e.getKeyCode() == KeyEvent.VK_ENTER)
-            System.out.println("Es war Enter");
+            System.out.println("Es war Enter");  //todo wtf what is this?
 
     }
 
