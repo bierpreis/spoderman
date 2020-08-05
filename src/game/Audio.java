@@ -3,11 +3,14 @@ package game;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 
 public class Audio {
 
     private final static HashMap<Sound, File> soundMap;
+
+    private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
 
 
     static {
@@ -16,7 +19,7 @@ public class Audio {
             try {
                 soundMap.put(sound, new File("./src/resources/sound/" + sound.name() + ".wav"));
             } catch (NullPointerException e) {
-                System.out.println("NPE Outting " + sound + " and "
+                LOGGER.warning("NPE Outting " + sound + " and "
                         + new File("./src/resources/sound/" + sound.name() + ".wav") + " into map ");
                 e.printStackTrace();
             }
@@ -29,8 +32,7 @@ public class Audio {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("playing sound " + sound.name());
-                System.out.println("until here..");
+                LOGGER.fine("playing sound " + sound.name());
                 AudioInputStream soundStream;
                 AudioFormat soundFormat;
                 DataLine.Info info;
@@ -52,8 +54,7 @@ public class Audio {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                //todo: wtf this is never shown?!
-                System.out.println("finished sound " + sound.name());
+
 
             }
         }).start();

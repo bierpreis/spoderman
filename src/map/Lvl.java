@@ -1,5 +1,6 @@
 package map;
 
+import game.Game;
 import lvleditor.topmenu.FileAlreadyExistsDialog;
 
 import java.awt.*;
@@ -8,10 +9,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Lvl {
+
+    private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
 
     private volatile Cube[][] cubeArray;
 
@@ -27,7 +31,7 @@ public class Lvl {
         try {
             fr = new FileReader(pathToFile);
         } catch (FileNotFoundException e) {
-            System.out.println("could not find lvl file");
+            LOGGER.severe("could not find lvl file");
             return;
         }
 
@@ -49,7 +53,7 @@ public class Lvl {
         try {
             readLvlFile(pathToFile);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.severe(e.toString());
         }
     }
 
@@ -305,7 +309,7 @@ public class Lvl {
     }
 
     public void eraseGameObjects(int x, int y) {
-        Rectangle eraserBounding = new Rectangle(x, y,1, 1);
+        Rectangle eraserBounding = new Rectangle(x, y, 1, 1);
         for (Cube[] cubes : cubeArray) {
             for (Cube cube : cubes) {
                 if (eraserBounding.intersects(cube.getBounding()))
@@ -314,7 +318,7 @@ public class Lvl {
             }
         }
 
-        gameObjectList.removeIf(gameObject-> eraserBounding.intersects(gameObject.bounding));
+        gameObjectList.removeIf(gameObject -> eraserBounding.intersects(gameObject.bounding));
     }
 
 

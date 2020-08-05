@@ -24,6 +24,6 @@ public class GameLogger {
         handler.setFormatter(new SimpleFormatter());
         LOGGER.addHandler(handler);
 
-        System.out.println("!!!game logger init");
+
     }
 }
