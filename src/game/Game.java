@@ -29,13 +29,8 @@ public class Game {
 
 
     public Game(int lvlNumber, KeyHandler keyHandler) {
-        Handler handler = null;
-        try {
-            handler = new FileHandler("log.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        LOGGER.addHandler(handler);
+
+        GameLogger.init();
 
 
         lvl = new Lvl();
