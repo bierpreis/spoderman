@@ -6,6 +6,11 @@ import graphics.Camera;
 import player.Player;
 import mainmenu.MainMenu;
 
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+
 public class Game {
 
     private final Player player;
@@ -19,14 +24,31 @@ public class Game {
     private Camera camera;
     private int escTime = Integer.parseInt(Config.get("escTime"));
 
+
+    private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
+
+
     public Game(int lvlNumber, KeyHandler keyHandler) {
+        Handler handler = null;
+        try {
+            handler = new FileHandler("log.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        LOGGER.addHandler(handler);
+
+
         lvl = new Lvl();
         lvl.createFromFile("lvl" + Integer.toString(lvlNumber));
         player = new Player(lvl, keyHandler);
         frame = new Frame(keyHandler);
         this.keyHandler = keyHandler;
         camera = new Camera(0, 0);
+        LOGGER.info("game started");
         start();
+        LOGGER.info("game finished");
+
+
     }
 
     public static void main(String[] args) {
