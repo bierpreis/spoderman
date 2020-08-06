@@ -21,7 +21,7 @@ public class Audio {
             } catch (NullPointerException e) {
                 LOGGER.warning("NPE Outting " + sound + " and "
                         + new File("./src/resources/sound/" + sound.name() + ".wav") + " into map ");
-                e.printStackTrace();
+                LOGGER.warning(e.toString());
             }
 
         }
