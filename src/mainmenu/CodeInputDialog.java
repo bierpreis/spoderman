@@ -33,7 +33,7 @@ class CodeInputDialog extends JDialog implements ActionListener {
         JLabel label = new JLabel("giff coed");
         panel.add(label);
 
-        textInput = new InputField(15);
+        textInput = new JTextField(15);
         textInput.setBackground(Color.YELLOW);
         panel.add(textInput);
 
