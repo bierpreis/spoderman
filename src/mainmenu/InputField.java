@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JTextField;
 
+//todo: remove key listener? seems useless
 class InputField extends JTextField implements KeyListener {
 
     InputField(int cols) {
@@ -14,10 +15,6 @@ class InputField extends JTextField implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //code= getText();
-        if (e.getKeyCode() == KeyEvent.VK_ENTER)
-            System.out.println("Es war Enter");  //todo wtf what is this?
-
     }
 
     @Override
