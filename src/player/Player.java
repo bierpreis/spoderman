@@ -188,13 +188,11 @@ public class Player extends UnitGameObject {
             if (bounding.intersects(enemy.getBounding())) {
                 alive = false;
                 lifes -= 1;
+                Audio.play(Sound.PLAYER_KILLED);
                 if (lifes > 0) {
-
                     createMessage("u got rekt 111  press spaec to respawn");
-                    Audio.play(Sound.PLAYER_KILLED); //todo: put this before if stuff?!
                 }
                 if (lifes < 1) {
-                    Audio.play(Sound.PLAYER_KILLED);
                     Audio.play(Sound.PLAYER_DEAD);
                     createMessage("g8 nao dis is mai end");
                 }

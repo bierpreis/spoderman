@@ -20,7 +20,7 @@ public class SoundTest {
             IOException, LineUnavailableException, InterruptedException {
 
 
-
+        //todo: put this in audio thread thing?
 
         while (true) {
 
@@ -32,7 +32,7 @@ public class SoundTest {
             clip.open(ais);
             System.out.println("playing sound...");
             clip.start();
-            Thread.sleep(1000); // Duration should match length of audio file.
+            Thread.sleep(100); // Duration should match length of audio file.
             clip.close();
         }
     }
