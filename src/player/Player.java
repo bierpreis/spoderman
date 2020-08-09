@@ -59,7 +59,7 @@ public class Player extends UnitGameObject {
     public void update() {
         super.update(lvl.getCubes());
         hat.ifPresent(hat -> hat.updateBounding(bounding));
-        respawn();
+        checkIfRespawn();
         updateLook();
         if (alive) {
 
@@ -99,7 +99,7 @@ public class Player extends UnitGameObject {
     }
 
 
-    private void respawn() {
+    private void checkIfRespawn() {
         if (!alive && lifes > 0) {
 
             timeDead += msPerFrame;
