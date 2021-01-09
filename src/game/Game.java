@@ -6,11 +6,6 @@ import graphics.Camera;
 import player.Player;
 import mainmenu.MainMenu;
 
-import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
-import java.util.logging.Logger;
-
 public class Game {
 
     private final Player player;
@@ -25,12 +20,7 @@ public class Game {
     private int escTime = Integer.parseInt(Config.get("escTime"));
 
 
-    private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
-
-
     public Game(int lvlNumber, KeyHandler keyHandler) {
-
-        GameLogger.init();
 
 
         lvl = new Lvl();
@@ -39,10 +29,7 @@ public class Game {
         frame = new Frame(keyHandler);
         this.keyHandler = keyHandler;
         camera = new Camera(0, 0);
-        LOGGER.info("game started");
         start();
-        LOGGER.info("game finished");
-
 
     }
 
@@ -85,7 +72,7 @@ public class Game {
             try {
                 Thread.sleep(sleepTime);
             } catch (InterruptedException ie) {
-                LOGGER.info("sleep in game loop interrupted");
+                ie.printStackTrace();
             }
 
     }
