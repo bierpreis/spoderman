@@ -16,7 +16,6 @@ public abstract class UnitGameObject extends BasicGameObject {
     private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
 
     private int gravity = Integer.parseInt(Config.get("gravity"));
-    private int speed = 0;
     public Rectangle topBounding;
     protected Rectangle botBounding;
     private Rectangle leftBounding;

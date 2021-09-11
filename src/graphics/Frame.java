@@ -114,10 +114,8 @@ public class Frame extends JFrame {
 
         player.draw(g);
         player.drawHat(g);
-
-        for (UnitGameObject gameObject : lvl.getGameObjectList()) {
-            gameObject.draw(g);
-        }
+        
+        lvl.getGameObjectList().forEach(gameObject -> gameObject.draw(g));
 
     }
 
