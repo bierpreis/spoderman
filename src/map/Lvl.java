@@ -132,11 +132,8 @@ public class Lvl {
         return cubeArray[cubeX][cubeY];
     }
 
-
     public void updateGameObjects() {
-        for (UnitGameObject gameObject : gameObjectList) {
-            gameObject.update(cubeArray);
-        }
+        gameObjectList.forEach(gameObject -> gameObject.update(cubeArray));
     }
 
     public void writeToFile(String filenName) {

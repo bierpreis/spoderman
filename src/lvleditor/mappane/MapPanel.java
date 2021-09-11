@@ -70,9 +70,7 @@ public class MapPanel extends JPanel {
     }
 
     private void drawUnits(Graphics g) {
-        for (UnitGameObject gameObject : lvl.getGameObjectList()) {
-            gameObject.draw(g);
-        }
+        lvl.getGameObjectList().forEach(gameObject -> gameObject.draw(g));
     }
 
     private void drawCubes(Graphics g) {
